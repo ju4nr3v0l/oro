@@ -1,6 +1,6 @@
 
 # oro
-APP para administraciópn y gestión de llamadas APP SOGA S.A.S.
+APP para administración y gestión de llamadas APP SOGA S.A.S.
 Creacion de Branchs:
 
 Juan
