@@ -64,6 +64,7 @@ class Usuario implements UserInterface
      */
     private $codigoRol;
 
+    
 
     /**
      * Se implementan métodos de la clase User del core de Symfony además de los metodos de la entidad própia.
