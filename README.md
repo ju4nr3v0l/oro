@@ -7,6 +7,3 @@ juan
 alejandro
 jefe_desarrollo
 desarrollo
-
-
-//alejo
