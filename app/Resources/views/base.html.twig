@@ -3,12 +3,17 @@
     <head>
         <meta charset="UTF-8" />
         {% block metas %}{% endblock %}
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenido!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('zircosTemplate/assets/images/favicon.ico') }}" />
         {% block javascripts %}{% endblock %}
     </head>
     <body {% block bodyAtt %}{% endblock %} >
+    {% if app.user %}
+        <a href="{{ logout_path('main') }}">Salir</a>
+    {% else %}
+        <a href="{{ path('acceso') }}">Ingresar</a>
+    {% endif %}
     {% block body %}{% endblock %}
     {% block javascriptsBottom %}{% endblock %}
     </body>

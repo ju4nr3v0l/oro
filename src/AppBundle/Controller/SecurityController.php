@@ -15,7 +15,8 @@ class SecurityController extends Controller
     public function indexAction(Request $request)
     {
         $form = $this->createForm(FormTypeLogin::class, null, array(
-            'action' => $this->generateUrl("acceso")
+            'action' => $this->generateUrl("acceso"),
+
 
             )
         );
@@ -27,5 +28,12 @@ class SecurityController extends Controller
         return $this->render('AppBundle:Login:login.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/logout")
+     */
+    public function logoutAction(){
+        throw new \RuntimeException('Esta funcion jamas debe ser llamada directamente');
     }
 }
