@@ -18,9 +18,23 @@ class FormTypeLogin extends AbstractType{
     public function buildForm (FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add ('usuario', TextType::class)
-            ->add ('clave', TextType::class)
-            ->add ('Entrar', SubmitType::class)
+            ->add ('usuario', TextType::class, array(
+                'attr' => array(
+                    'id' => '_username',
+                    'name' => '_username'
+                )
+            ))
+            ->add ('clave', TextType::class,array(
+                'attr' => array(
+                    'id' => '_password',
+                    'name' => '_password'
+                )
+            ))
+            ->add ('Entrar', SubmitType::class, array(
+                'attr' => array(
+                    'class' => 'juan'
+                )
+            ))
         ;
     }
 }

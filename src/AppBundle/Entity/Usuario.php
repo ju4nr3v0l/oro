@@ -16,59 +16,70 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="usuario")
  */
-class Usuario implements UserInterface
+class Usuario implements UserInterface, \Serializable
 {
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
+     * @ORM\Id
      */
     private $codigoUsuarioPk;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $correo;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $nombres;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $apellidos;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $clave;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $verificado;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $token;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $codigoClientePk;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $codigoRol;
+
 
 
     /**
      * Se implementan métodos de la clase User del core de Symfony además de los metodos de la entidad própia.
      *
      */
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+    }
 
     public function getUsername()
     {
@@ -90,16 +101,14 @@ class Usuario implements UserInterface
 
     }
 
-
-
     public function eraseCredentials()
     {
 
     }
-
     /**
      * end métodos de la clase User del core.
      */
+
 
     /**
      * Inicio de los metodos de la clase propia Usuario
@@ -246,6 +255,23 @@ class Usuario implements UserInterface
     public function setCodigoRol($codigoRol)
     {
         $this->codigoRol = $codigoRol;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
     }
 
 

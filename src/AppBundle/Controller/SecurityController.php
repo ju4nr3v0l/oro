@@ -7,21 +7,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Forms\Type\FormTypeLogin;
 
-class DefaultController extends Controller
+class SecurityController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/acceso", name="acceso")
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(FormTypeLogin::class);
+        $form = $this->createForm(FormTypeLogin::class, null, array(
+            'action' => $this->generateUrl("acceso")
+
+            )
+        );
 
         $form->handleRequest($request);
 
 
         // replace this example code with whatever you need
         return $this->render('AppBundle:Login:login.html.twig', [
-           'form' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 }

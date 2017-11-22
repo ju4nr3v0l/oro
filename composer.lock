@@ -132,7 +132,9 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-02-24 16:22:25"
+
+            "time": "2017-02-24T16:22:25+00:00"
+
         },
         {
             "name": "doctrine/cache",
@@ -269,7 +271,11 @@
                 "collections",
                 "iterator"
             ],
+<<<<<<< HEAD
+            "time": "2017-01-03T10:49:41+00:00"
+=======
             "time": "2017-01-03 10:49:41"
+>>>>>>> 498d2c04bc23cee05f909d1382db1e61f4a5af9e
         },
         {
             "name": "doctrine/common",
@@ -342,7 +348,11 @@
                 "persistence",
                 "spl"
             ],
+<<<<<<< HEAD
+            "time": "2017-07-22T08:35:12+00:00"
+=======
             "time": "2017-07-22 08:35:12"
+>>>>>>> 498d2c04bc23cee05f909d1382db1e61f4a5af9e
         },
         {
             "name": "doctrine/dbal",
@@ -649,7 +659,11 @@
                 "singularize",
                 "string"
             ],
+<<<<<<< HEAD
+            "time": "2017-07-22T12:18:28+00:00"
+=======
             "time": "2017-07-22 12:18:28"
+>>>>>>> 498d2c04bc23cee05f909d1382db1e61f4a5af9e
         },
         {
             "name": "doctrine/instantiator",
@@ -2256,7 +2270,9 @@
             "keywords": [
                 "templating"
             ],
+
             "time": "2017-09-27 18:10:31"
+
         }
     ],
     "packages-dev": [
