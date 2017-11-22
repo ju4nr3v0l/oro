@@ -176,7 +176,7 @@ abstract class AbstractSchemaManager
     }
 
     /**
-     * Lists the indexes for a given table returning an array of Index instances.
+     * Lists the indexes for a given table returning an array of Inicio instances.
      *
      * Keys of the portable indexes list are all lower-cased.
      *

@@ -269,7 +269,7 @@ class ArrayHydrator extends AbstractHydrator
      * last seen instance of each Entity type. This is used for graph construction.
      *
      * @param array           $coll     The element.
-     * @param boolean|integer $index    Index of the element in the collection.
+     * @param boolean|integer $index    Inicio of the element in the collection.
      * @param string          $dqlAlias
      * @param boolean         $oneToOne Whether it is a single-valued association or not.
      *

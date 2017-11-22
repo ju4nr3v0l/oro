@@ -693,7 +693,7 @@ class SQLAnywherePlatform extends AbstractPlatform
      */
     public function getIndexDeclarationSQL($name, Index $index)
     {
-        // Index declaration in statements like CREATE TABLE is not supported.
+        // Inicio declaration in statements like CREATE TABLE is not supported.
         throw DBALException::notSupported(__METHOD__);
     }
 
@@ -987,7 +987,7 @@ class SQLAnywherePlatform extends AbstractPlatform
      * Obtain DBMS specific SQL code portion needed to set a primary key
      * declaration to be used in statements like ALTER TABLE.
      *
-     * @param Index  $index Index definition
+     * @param Index  $index Inicio definition
      * @param string $name  Name of the primary key
      *
      * @return string DBMS specific SQL code portion needed to set a primary key
@@ -1316,7 +1316,7 @@ class SQLAnywherePlatform extends AbstractPlatform
      * Return the INDEX query section dealing with non-standard
      * SQL Anywhere options.
      *
-     * @param Index $index Index definition
+     * @param Index $index Inicio definition
      *
      * @return string
      */
