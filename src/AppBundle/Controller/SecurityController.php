@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class SecurityController extends Controller
 {
      /**
-      * @Route("/login", name="login")
+      * @Route("/acceso", name="acceso")
       */
     public function loginAction(){
 
