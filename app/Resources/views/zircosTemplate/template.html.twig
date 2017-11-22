@@ -7,7 +7,7 @@
     {% endblock %}
 
     {% block title %}
-        zircos Template
+        Oro App
     {% endblock %}
 
     {% block stylesheets %}
@@ -19,10 +19,12 @@
         <link href="{{ asset('zircosTemplate/assets/css/menu.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('zircosTemplate/assets/css/responsive.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{ asset('zircosTemplate/plugins/switchery/switchery.min.css') }}">
+
     {% endblock %}
 
     {% block javascripts %}
         <script src="{{ asset('zircosTemplate/assets/js/modernizr.min.js') }}"></script>
+
     {% endblock %}
 
 {% block bodyAtt %}class="fixed-left"{% endblock %}
@@ -426,5 +428,5 @@
 
     <!-- App js -->
     <script src="{{ asset('zircosTemplate/assets/js/jquery.core.js') }}"></script>
-    <script src="{{ asset('zircosTemplate/assets/js/jquery.app.js') }}"></script>
+    {#<script src="{{ asset('zircosTemplate/assets/js/jquery.app.js') }}"></script>#}
 {% endblock %}
