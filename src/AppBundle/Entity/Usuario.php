@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="usuario")
  */
-class Usuario implements UserInterface
+class Usuario implements UserInterface, \Serializable
 {
 
     /**
@@ -71,6 +71,16 @@ class Usuario implements UserInterface
      * Se implementan métodos de la clase User del core de Symfony además de los metodos de la entidad própia.
      *
      */
+    public function serialize()
+    {
+        // TODO: Implement serialize() method.
+    }
+
+    public function unserialize($serialized)
+    {
+        // TODO: Implement unserialize() method.
+    }
+
     public function getUsername()
     {
         return $this->getCodigoUsuarioPk();
@@ -245,6 +255,23 @@ class Usuario implements UserInterface
     public function setCodigoRol($codigoRol)
     {
         $this->codigoRol = $codigoRol;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
     }
 
 
