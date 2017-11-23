@@ -18,7 +18,6 @@ class InicioController extends Controller
 
     public function indexAction(Request $request)
     {
-
         return $this->render('AppBundle:Inicio:inicio.html.twig', [
             'juan' => 'Hola'
         ]);
