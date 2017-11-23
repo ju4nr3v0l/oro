@@ -32,6 +32,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+
+
+
         main:
             pattern: ^/
             provider: database_users
@@ -39,7 +42,7 @@ security:
                 login_path: acceso
                 check_path: acceso
             logout: true
-
+            anonymous: ~
             http_basic: ~
             # activate different ways to authenticate
 
