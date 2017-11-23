@@ -21,7 +21,6 @@ class InicioController extends Controller
 
         return $this->render('AppBundle:Inicio:inicio.html.twig', [
             'juan' => 'Hola'
-
         ]);
     }
 
