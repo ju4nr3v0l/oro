@@ -32,18 +32,30 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-
-
-
         main:
-            pattern: ^/
-            provider: database_users
-            form_login:
-                login_path: acceso
-                check_path: acceso
-            logout: true
-            anonymous: ~
-            http_basic: ~
+              pattern:    ^/
+              http_basic: ~
+              provider: database_users
+
+              anonymous: ~
+              form_login:
+                        login_path: inicio
+                        check_path: inicio
+
+              logout:
+                      path: /logout
+                      target: /
+                      invalidate_session: true
+#        main:
+#            pattern: ^/
+#            anonymous: ~
+#            provider: database_users
+#            form_login:
+#                login_path: acceso
+#                check_path: acceso
+#            logout: true
+
+
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

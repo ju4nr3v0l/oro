@@ -12,7 +12,7 @@ class SecurityController extends Controller
     /**
      * @Route("/acceso", name="acceso")
      */
-    public function indexAction(Request $request)
+    public function accesoAction(Request $request)
     {
         $form = $this->createForm(FormTypeLogin::class, null, array(
             'action' => $this->generateUrl("acceso"),
