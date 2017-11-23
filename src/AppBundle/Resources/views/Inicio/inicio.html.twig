@@ -4,45 +4,12 @@
 
 {% block body %}
     <div id="wrapper">
-        {{ include('AppBundle:Inicio:menuEncabezado.html.twig') }}
+        {{ include('zircosTemplate/bloquesGenerales/menuEncabezado.html.twig') }}
 
-        {{ include('AppBundle:Inicio:menuIzquierdo.html.twig') }}
+        {{ include('zircosTemplate/bloquesGenerales/menuIzquierdo.html.twig') }}
 
-        {{ include('AppBundle:Inicio:encabezado.html.twig') }}
+        {{ include('zircosTemplate/bloquesGenerales/encabezado.html.twig') }}
 
-        {{ include('AppBundle:Inicio:pie.html.twig') }}
+        {{ include('zircosTemplate/bloquesGenerales/pie.html.twig') }}
     </div>
-    {#<section>#}
-        {#<div class="container-alt">#}
-            {#<div class="row">#}
-                {#<div class="col-sm-12">#}
-
-                    {#<div class="wrapper-page">#}
-
-                        {#<div class="m-t-40 account-pages">#}
-                            {#<div class="text-center account-logo-box">#}
-                                {#<h2 class="text-uppercase">#}
-                                    {#<a href="#" class="text-success">#}
-                                        {#<span><img src="{{ asset ('zircosTemplate/assets/images/logo.png') }}" alt="" height="36"></span>#}
-                                    {#</a>#}
-                                {#</h2>#}
-                            {#</div>#}
-                            {#<div class="account-content">#}
-                                {#{{ juan }} {{ app.user }}#}
-                                {#{% dump(app.user) %}#}
-                                {#<div class="clearfix"></div>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="row m-t-50">#}
-                            {#<div class="col-sm-12 text-center">#}
-                                {#<p class="text-muted">¿No tienes una cuenta? <a href="#" class="text-primary m-l-5"><b>Agregar Cuenta</b></a></p>#}
-                            {#</div>#}
-                        {#</div>#}
-
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-    {#</section>#}
-
 {% endblock %}
