@@ -73,12 +73,19 @@ class Usuario implements UserInterface, \Serializable
      */
     public function serialize()
     {
-        // TODO: Implement serialize() method.
+        return serialize(array(
+                $this->codigoUsuarioPk,
+                $this->clave
+        ));
     }
 
     public function unserialize($serialized)
     {
-        // TODO: Implement unserialize() method.
+        list(
+                $this->codigoUsuarioPk,
+                $this->clave
+
+            ) = unserialize($serialized);
     }
 
     public function getUsername()

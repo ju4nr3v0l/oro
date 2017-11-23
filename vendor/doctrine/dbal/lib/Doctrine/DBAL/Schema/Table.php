@@ -715,7 +715,7 @@ class Table extends AbstractAsset
     }
 
     /**
-     * Returns whether this table has an Index with the given name.
+     * Returns whether this table has an Inicio with the given name.
      *
      * @param string $indexName The index name.
      *
@@ -729,7 +729,7 @@ class Table extends AbstractAsset
     }
 
     /**
-     * Returns the Index with the given name.
+     * Returns the Inicio with the given name.
      *
      * @param string $indexName The index name.
      *

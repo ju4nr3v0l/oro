@@ -471,7 +471,7 @@ class DB2Platform extends AbstractPlatform
      */
     public function getIndexDeclarationSQL($name, Index $index)
     {
-        // Index declaration in statements like CREATE TABLE is not supported.
+        // Inicio declaration in statements like CREATE TABLE is not supported.
         throw DBALException::notSupported(__METHOD__);
     }
 
