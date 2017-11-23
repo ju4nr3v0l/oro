@@ -2,19 +2,48 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        {% block metas %}{% endblock %}
+        {% block metas %}
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="zircosTemplate">
+            <meta name="author" content="Alejandro Vera Carrasquilla">
+        {% endblock %}
         <title>{% block title %}Bienvenido!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('zircosTemplate/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('zircosTemplate/assets/css/core.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('zircosTemplate/assets/css/components.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('zircosTemplate/assets/css/icons.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('zircosTemplate/assets/css/pages.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('zircosTemplate/assets/css/menu.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('zircosTemplate/assets/css/responsive.css') }}" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('zircosTemplate/plugins/switchery/switchery.min.css') }}">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('zircosTemplate/assets/images/favicon.ico') }}" />
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('zircosTemplate/assets/js/modernizr.min.js') }}"></script>
+        {% endblock %}
     </head>
     <body {% block bodyAtt %}{% endblock %} >
-    {% if app.user %}
-        <a href="{{ logout_path('main') }}">Salir</a>
-    {% else %}
-        <a href="{{ path('acceso') }}">Ingresar</a>
-    {% endif %}
+
     {% block body %}{% endblock %}
-    {% block javascriptsBottom %}{% endblock %}
+    {% block javascriptsBottom %}
+        <script>
+            var resizefunc = [];
+        </script>
+        <!-- jQuery  -->
+        <script src="{{ asset('zircosTemplate/assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/detect.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/fastclick.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/jquery.blockUI.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/waves.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/jquery.slimscroll.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/jquery.scrollTo.min.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/plugins/switchery/switchery.min.js') }}"></script>
+
+        <!-- App js -->
+        <script src="{{ asset('zircosTemplate/assets/js/jquery.core.js') }}"></script>
+        <script src="{{ asset('zircosTemplate/assets/js/jquery.app.js') }}"></script>
+    {% endblock %}
     </body>
 </html>
