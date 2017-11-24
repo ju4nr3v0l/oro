@@ -42,5 +42,10 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
     </include_path>
   </component>
+  <component name="PhpInterpreters">
+    <interpreters>
+      <interpreter home="$USER_HOME$/.PhpStorm2017.2/system/plugins/idea-php-latest-plugin/php-v7.1.11/php.sh" id="28a3d75b-dc51-4877-a7e0-3ff9c90dd40f" name="PHP latest" debugger_id="php.debugger.XDebug" />
+    </interpreters>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />
 </project>
