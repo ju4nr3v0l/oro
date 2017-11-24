@@ -18,7 +18,7 @@ class SecurityController extends Controller
     {
 
 
-        $request;
+
         $authenticationUtils = $this->get('security.authentication_utils');
 
         // get the login error if there is one
