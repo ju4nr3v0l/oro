@@ -253,7 +253,7 @@ class Usuario implements UserInterface, \Serializable
      */
     public function getCodigoRol()
     {
-        return $this->codigoRol;
+        return array($this->roles);
     }
 
     /**
@@ -321,6 +321,7 @@ class Usuario implements UserInterface, \Serializable
      */
     public function getUsuariosRol()
     {
-        return $this->usuariosRol;
+        return array($this->roles);
+        //return $this->usuariosRol;
     }
 }
