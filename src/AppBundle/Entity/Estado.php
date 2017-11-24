@@ -35,6 +35,13 @@ class Estado
      */
     private $descripcion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasEstado")
+     * @ORM\JoinColumn(name="codigoEstadoLlamadaFk", referencedColumnName="codigoEstadoLlamadaPk")
+     */
+
+    private $estadoRel;
+
 
     /**
      * Get id
@@ -116,5 +123,29 @@ class Estado
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set estadoRel
+     *
+     * @param \AppBundle\Entity\Llamada $estadoRel
+     *
+     * @return Estado
+     */
+    public function setEstadoRel(\AppBundle\Entity\Llamada $estadoRel = null)
+    {
+        $this->estadoRel = $estadoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoRel
+     *
+     * @return \AppBundle\Entity\Llamada
+     */
+    public function getEstadoRel()
+    {
+        return $this->estadoRel;
     }
 }

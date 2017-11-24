@@ -29,6 +29,13 @@ class Rol
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="UsuariosRol")
+     * @ORM\JoinColumn(name="codigoRolFk", referencedColumnName="codigoRolPk")
+     */
+
+    private $rolRel;
+
+    /**
      * Get id
      *
      * @return int
@@ -84,5 +91,29 @@ class Rol
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set rolRel
+     *
+     * @param \AppBundle\Entity\Usuario $rolRel
+     *
+     * @return Rol
+     */
+    public function setRolRel(\AppBundle\Entity\Usuario $rolRel = null)
+    {
+        $this->rolRel = $rolRel;
+
+        return $this;
+    }
+
+    /**
+     * Get rolRel
+     *
+     * @return \AppBundle\Entity\Usuario
+     */
+    public function getRolRel()
+    {
+        return $this->rolRel;
     }
 }

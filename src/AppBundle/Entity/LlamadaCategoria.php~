@@ -35,6 +35,13 @@ class LlamadaCategoria
      */
     private $descripcion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasCategoria")
+     * @ORM\JoinColumn(name="codigoCategoriaLlamadaFk", referencedColumnName="codigoCategoriaLlamadaPk")
+     */
+
+    private $llamadasCategoriaRel;
+
 
     /**
      * Get id

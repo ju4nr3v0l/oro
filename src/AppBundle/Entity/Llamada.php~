@@ -114,6 +114,21 @@ class Llamada
 
 
     /**
+     * @ORM\OneToMany(targetEntity="Cliente", mappedBy="LlamadasRel")
+     */
+    private $llamadasCliente;
+
+    /**
+     * @ORM\OneToMany(targetEntity="LlamadaCategoria", mappedBy="LlamadaCategoriaRel")
+     */
+    private $llamadasCategoria;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Estado", mappedBy="estadoRel")
+     */
+    private $llamadasEstado;
+
+    /**
      * Get id
      *
      * @return int

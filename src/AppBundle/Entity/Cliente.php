@@ -43,9 +43,19 @@ class Cliente
     private $nombreComercial;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasCliente")
+     * @ORM\JoinColumn(name="codigoClienteFk", referencedColumnName="codigoClientePk")
+     */
+
+    private $llamadasRel;
+
+
+    /**
      * @ORM\OneToMany(targetEntity="Contacto", mappedBy="clienteRel")
      */
     private $contactosCliente;
+
+
 
     /**
      * Get id
@@ -192,5 +202,29 @@ class Cliente
     public function getContactosCliente()
     {
         return $this->contactosCliente;
+    }
+
+    /**
+     * Set llamadasRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasRel
+     *
+     * @return Cliente
+     */
+    public function setLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel = null)
+    {
+        $this->llamadasRel = $llamadasRel;
+
+        return $this;
+    }
+
+    /**
+     * Get llamadasRel
+     *
+     * @return \AppBundle\Entity\Llamada
+     */
+    public function getLlamadasRel()
+    {
+        return $this->llamadasRel;
     }
 }

@@ -282,45 +282,4 @@ class Usuario implements UserInterface, \Serializable
     }
 
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->usuariosRol = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add usuariosRol
-     *
-     * @param \AppBundle\Entity\Rol $usuariosRol
-     *
-     * @return Usuario
-     */
-    public function addUsuariosRol(\AppBundle\Entity\Rol $usuariosRol)
-    {
-        $this->usuariosRol[] = $usuariosRol;
-
-        return $this;
-    }
-
-    /**
-     * Remove usuariosRol
-     *
-     * @param \AppBundle\Entity\Rol $usuariosRol
-     */
-    public function removeUsuariosRol(\AppBundle\Entity\Rol $usuariosRol)
-    {
-        $this->usuariosRol->removeElement($usuariosRol);
-    }
-
-    /**
-     * Get usuariosRol
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsuariosRol()
-    {
-        return $this->usuariosRol;
-    }
 }

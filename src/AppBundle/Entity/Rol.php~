@@ -29,6 +29,13 @@ class Rol
 
 
     /**
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="UsuariosRol")
+     * @ORM\JoinColumn(name="codigoRolFk", referencedColumnName="codigoRolPk")
+     */
+
+    private $rolRel;
+
+    /**
      * Get id
      *
      * @return int

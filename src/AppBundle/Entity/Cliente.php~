@@ -43,9 +43,19 @@ class Cliente
     private $nombreComercial;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasCliente")
+     * @ORM\JoinColumn(name="codigoClienteFk", referencedColumnName="codigoClientePk")
+     */
+
+    private $llamadasRel;
+
+
+    /**
      * @ORM\OneToMany(targetEntity="Contacto", mappedBy="clienteRel")
      */
     private $contactosCliente;
+
+
 
     /**
      * Get id

@@ -35,6 +35,13 @@ class LlamadaCategoria
      */
     private $descripcion;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasCategoria")
+     * @ORM\JoinColumn(name="codigoCategoriaLlamadaFk", referencedColumnName="codigoCategoriaLlamadaPk")
+     */
+
+    private $llamadasCategoriaRel;
+
 
     /**
      * Get id
@@ -116,5 +123,29 @@ class LlamadaCategoria
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set llamadasCategoriaRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
+     *
+     * @return LlamadaCategoria
+     */
+    public function setLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel = null)
+    {
+        $this->llamadasCategoriaRel = $llamadasCategoriaRel;
+
+        return $this;
+    }
+
+    /**
+     * Get llamadasCategoriaRel
+     *
+     * @return \AppBundle\Entity\Llamada
+     */
+    public function getLlamadasCategoriaRel()
+    {
+        return $this->llamadasCategoriaRel;
     }
 }
