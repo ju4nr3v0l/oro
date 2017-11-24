@@ -16,8 +16,6 @@ class SecurityController extends Controller
     {
         $form = $this->createForm(FormTypeLogin::class, null, array(
             'action' => $this->generateUrl("acceso"),
-
-
             )
         );
 
