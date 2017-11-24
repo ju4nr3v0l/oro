@@ -16,13 +16,10 @@ class SecurityController extends Controller
     {
         $form = $this->createForm(FormTypeLogin::class, null, array(
             'action' => $this->generateUrl("acceso"),
-
-
             )
         );
 
         $form->handleRequest($request);
-
 
         // replace this example code with whatever you need
         return $this->render('AppBundle:Login:login.html.twig', [

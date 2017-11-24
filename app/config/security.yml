@@ -1,65 +1,127 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
 security:
-
     encoders:
-        AppBundle\Entity\Usuario:
-                    algorithm: bcrypt
+          AppBundle\Entity\Usuario: bcrypt
 
-#            Symfony\Component\Security\Core\User\User:
-#                algorithm: bcrypt
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
 
-
-
-
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-
-          database_users:
-              entity:
-                  class: AppBundle:Usuario
-                  property: codigoUsuarioPk
-#        in_memory:
-#            memory:
-#                users:
-#                    admin:
-#                        password: $2y$13$ot7BsQh7TNO3nemYhTefV.pGjnevUttJ7vHtFHOpQOzErC4nu2y/a
-#                        roles: 'ROLE_ADMIN'
+        database_users:
+            entity:
+                class: AppBundle:Usuario
+                property: codigoUsuarioPk
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
         main:
-              pattern:    ^/
-              http_basic: ~
-              provider: database_users
-
-              anonymous: ~
-              form_login:
-                        login_path: inicio
-                        check_path: inicio
-
-              logout:
-                      path: /logout
-                      target: /
-                      invalidate_session: true
-#        main:
 #            pattern: ^/
+            form_login:
+                login_path: acceso
+                check_path: acceso
+                provider: database_users
+                #csrf_token_generator: security.csrf.token_manager
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+
+            logout:       true
+            anonymous:    true
+
+#    access_control:
+#        - { path: ^/, role: ROLE_ADMIN }
+#        - { path: ^/acceso, role: ROLE_USER }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## To get started with security, check out the documentation:
+## https://symfony.com/doc/current/security.html
+#security:
+#
+#    encoders:
+#        AppBundle\Entity\Usuario:
+#                    algorithm: bcrypt
+#
+##            Symfony\Component\Security\Core\User\User:
+##                algorithm: bcrypt
+#
+#
+#
+#
+#    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+#    providers:
+#
+#          database_users:
+#              entity:
+#                  class: AppBundle:Usuario
+#                  property: codigoUsuarioPk
+##        in_memory:
+##            memory:
+##                users:
+##                    admin:
+##                        password: $2y$13$ot7BsQh7TNO3nemYhTefV.pGjnevUttJ7vHtFHOpQOzErC4nu2y/a
+##                        roles: 'ROLE_ADMIN'
+#
+##    access_control:
+##                     - { path: ^/acceso, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+##                     - { path: ^/, roles: ROLE_ADMIN }
+#    firewalls:
+#          dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#
+#          main:
+##            pattern:    ^/
 #            anonymous: ~
+##            http_basic: ~
 #            provider: database_users
 #            form_login:
-#                login_path: acceso
-#                check_path: acceso
-#            logout: true
-
-
-            # activate different ways to authenticate
-
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+#                      login_path: acceso
+#                      check_path: inicio
+#            logout:
+#                      path: /logout
+#                      target: /
+#                      invalidate_session: true
+#
+#
+##    firewalls:
+##        # disables authentication for assets and the profiler, adapt it according to your needs
+##        dev:
+##            pattern: ^/(_(profiler|wdt)|css|images|js)/
+##            security: false
+##
+##
+##        main:
+##            pattern: ^/
+##            http_basic: ~
+##            provider: database_users
+##            form_login:
+##                login_path: acceso
+##                check_path: acceso
+##            logout: true
+##        login:
+##            pattern: ^/acceso
+##            anonymous: ~
+#
+#            # activate different ways to authenticate
+#
+#            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+#            #http_basic: ~
+#
+#            # https://symfony.com/doc/current/security/form_login_setup.html
+#            #form_login: ~
