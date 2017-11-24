@@ -16,7 +16,7 @@ class Llamada
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoLlamadaPk", type="integer", unique=true)
      */
     private $codigoLlamadaPk;
@@ -87,14 +87,14 @@ class Llamada
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioRecibeFk", type="integer")
+     * @ORM\Column(name="codigoUsuarioRecibeFk", type="string", length=255)
      */
     private $codigoUsuarioRecibeFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioAtiendeFk", type="integer")
+     * @ORM\Column(name="codigoUsuarioAtiendeFk", type="string", length=255)
      */
     private $codigoUsuarioAtiendeFk;
 
@@ -472,5 +472,116 @@ class Llamada
     public function getCodigoClienteFk()
     {
         return $this->codigoClienteFk;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->llamadasCliente = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->llamadasCategoria = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->llamadasEstado = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add llamadasCliente
+     *
+     * @param \AppBundle\Entity\Cliente $llamadasCliente
+     *
+     * @return Llamada
+     */
+    public function addLlamadasCliente(\AppBundle\Entity\Cliente $llamadasCliente)
+    {
+        $this->llamadasCliente[] = $llamadasCliente;
+
+        return $this;
+    }
+
+    /**
+     * Remove llamadasCliente
+     *
+     * @param \AppBundle\Entity\Cliente $llamadasCliente
+     */
+    public function removeLlamadasCliente(\AppBundle\Entity\Cliente $llamadasCliente)
+    {
+        $this->llamadasCliente->removeElement($llamadasCliente);
+    }
+
+    /**
+     * Get llamadasCliente
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLlamadasCliente()
+    {
+        return $this->llamadasCliente;
+    }
+
+    /**
+     * Add llamadasCategorium
+     *
+     * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategorium
+     *
+     * @return Llamada
+     */
+    public function addLlamadasCategorium(\AppBundle\Entity\LlamadaCategoria $llamadasCategorium)
+    {
+        $this->llamadasCategoria[] = $llamadasCategorium;
+
+        return $this;
+    }
+
+    /**
+     * Remove llamadasCategorium
+     *
+     * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategorium
+     */
+    public function removeLlamadasCategorium(\AppBundle\Entity\LlamadaCategoria $llamadasCategorium)
+    {
+        $this->llamadasCategoria->removeElement($llamadasCategorium);
+    }
+
+    /**
+     * Get llamadasCategoria
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLlamadasCategoria()
+    {
+        return $this->llamadasCategoria;
+    }
+
+    /**
+     * Add llamadasEstado
+     *
+     * @param \AppBundle\Entity\Estado $llamadasEstado
+     *
+     * @return Llamada
+     */
+    public function addLlamadasEstado(\AppBundle\Entity\Estado $llamadasEstado)
+    {
+        $this->llamadasEstado[] = $llamadasEstado;
+
+        return $this;
+    }
+
+    /**
+     * Remove llamadasEstado
+     *
+     * @param \AppBundle\Entity\Estado $llamadasEstado
+     */
+    public function removeLlamadasEstado(\AppBundle\Entity\Estado $llamadasEstado)
+    {
+        $this->llamadasEstado->removeElement($llamadasEstado);
+    }
+
+    /**
+     * Get llamadasEstado
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLlamadasEstado()
+    {
+        return $this->llamadasEstado;
     }
 }

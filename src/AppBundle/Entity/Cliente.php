@@ -16,7 +16,7 @@ class Cliente
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoClientePk", type="integer", unique=true)
      */
     private $codigoClientePk;
@@ -44,7 +44,7 @@ class Cliente
 
     /**
      * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasCliente")
-     * @ORM\JoinColumn(name="codigoClienteFk", referencedColumnName="codigoClientePk")
+     * @ORM\JoinColumn(name="codigoClientePk", referencedColumnName="codigoClienteFk")
      */
 
     private $llamadasRel;

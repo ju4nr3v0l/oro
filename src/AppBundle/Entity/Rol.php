@@ -15,7 +15,7 @@ class Rol
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoRolPk", type="integer", unique=true)
      */
     private $codigoRolPk;
@@ -30,20 +30,12 @@ class Rol
 
     /**
      * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="UsuariosRol")
-     * @ORM\JoinColumn(name="codigoRolFk", referencedColumnName="codigoRolPk")
+     * @ORM\JoinColumn(name="codigoRolpk", referencedColumnName="codigoRol")
      */
 
     private $rolRel;
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+   
 
     /**
      * Set codigoRolPk

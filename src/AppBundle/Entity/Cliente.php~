@@ -16,7 +16,7 @@ class Cliente
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoClientePk", type="integer", unique=true)
      */
     private $codigoClientePk;
@@ -202,5 +202,29 @@ class Cliente
     public function getContactosCliente()
     {
         return $this->contactosCliente;
+    }
+
+    /**
+     * Set llamadasRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasRel
+     *
+     * @return Cliente
+     */
+    public function setLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel = null)
+    {
+        $this->llamadasRel = $llamadasRel;
+
+        return $this;
+    }
+
+    /**
+     * Get llamadasRel
+     *
+     * @return \AppBundle\Entity\Llamada
+     */
+    public function getLlamadasRel()
+    {
+        return $this->llamadasRel;
     }
 }

@@ -17,7 +17,7 @@ class Contacto
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoContactoPk", type="integer", unique=true)
      */
     private $codigoContactoPk;

@@ -16,7 +16,7 @@ class LlamadaCategoria
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoCategoriaLlamadaPk", type="integer", unique=true)
      */
     private $codigoCategoriaLlamadaPk;
@@ -123,5 +123,29 @@ class LlamadaCategoria
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set llamadasCategoriaRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
+     *
+     * @return LlamadaCategoria
+     */
+    public function setLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel = null)
+    {
+        $this->llamadasCategoriaRel = $llamadasCategoriaRel;
+
+        return $this;
+    }
+
+    /**
+     * Get llamadasCategoriaRel
+     *
+     * @return \AppBundle\Entity\Llamada
+     */
+    public function getLlamadasCategoriaRel()
+    {
+        return $this->llamadasCategoriaRel;
     }
 }

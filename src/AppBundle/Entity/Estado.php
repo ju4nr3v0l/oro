@@ -16,7 +16,7 @@ class Estado
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoEstadoLlamadaPk", type="integer")
      */
     private $codigoEstadoLlamadaPk;
@@ -37,7 +37,7 @@ class Estado
 
     /**
      * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasEstado")
-     * @ORM\JoinColumn(name="codigoEstadoLlamadaFk", referencedColumnName="codigoEstadoLlamadaPk")
+     * @ORM\JoinColumn(name="codigoEstadoLlamadaPk", referencedColumnName="codigoEstadoLlamadaFk")
      */
 
     private $estadoRel;

@@ -1,52 +1,89 @@
 security:
     encoders:
-          AppBundle\Entity\Usuario: bcrypt
+        AppBundle\Entity\User:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN: [ROLE_USER]
 
     providers:
-        database_users:
-            entity:
-                class: AppBundle:Usuario
-                property: codigoUsuarioPk
+        user_db:
+            entity: { class: AppBundle\Entity\User, property: codigoUsuarioPk }
 
     firewalls:
         main:
-#            pattern: ^/
+            pattern: /.*
+            provider: user_db
             form_login:
-                login_path: acceso
-                check_path: acceso
-                provider: database_users
-                #csrf_token_generator: security.csrf.token_manager
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
+                login_path: /acceso
+                check_path: /acceso
+                remember_me: false
+            logout:
+                path: /logout
+                target: /
+            security: true
+            anonymous: true
 
-            logout:       true
-            anonymous:    true
+    access_control:
+        - { path: /acceso, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /.*, roles: ROLE_USER }
+        - { path: /.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
+
+
+#security:
+#    encoders:
+#          AppBundle\Entity\Usuario: bcrypt
+#
+#
+#    role_hierarchy:
+#        ROLE_ADMIN:       ROLE_USER
+#        ROLE_SUPER_ADMIN: ROLE_ADMIN
+#
+#    providers:
+#        database:
+#            entity:
+#                class: AppBundle:Usuario
+#                property: codigoUsuarioPk
+#
+#
+#
+#
+#    firewalls:
+#        dev:
+#            pattern: ^/(_(profiler|wdt)|css|images|js)/
+#            security: false
+#        main:
+#            pattern: ^/
+#            provider: database
+#            anonymous: ~
+#            form_login:
+#                login_path: /acceso
+#                check_path: /acceso
+#
 #    access_control:
-#        - { path: ^/, role: ROLE_ADMIN }
-#        - { path: ^/acceso, role: ROLE_USER }
+#        - { path: ^/acceso, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/, roles: ROLE_ADMIN }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#    firewalls:
+#        main:
+##            pattern: ^/
+#            form_login:
+#                login_path: acceso
+#                check_path: acceso
+#                provider: database_users
+#                #csrf_token_generator: security.csrf.token_manager
+#                # if you are using Symfony < 2.8, use the following config instead:
+#                # csrf_provider: form.csrf_provider
+#
+#            logout:       true
+#            anonymous:    true
+#
+##    access_control:
+##        - { path: ^/, role: ROLE_ADMIN }
+##        - { path: ^/acceso, role: ROLE_USER }
 
 
 ## To get started with security, check out the documentation:

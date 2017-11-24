@@ -105,7 +105,7 @@ class Usuario implements UserInterface, \Serializable
 
     public function getSalt()
     {
-
+        return null;
     }
 
     public function eraseCredentials()

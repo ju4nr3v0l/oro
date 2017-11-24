@@ -16,7 +16,7 @@ class Llamada
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoLlamadaPk", type="integer", unique=true)
      */
     private $codigoLlamadaPk;
@@ -87,14 +87,14 @@ class Llamada
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioRecibeFk", type="integer")
+     * @ORM\Column(name="codigoUsuarioRecibeFk", type="string", length=255)
      */
     private $codigoUsuarioRecibeFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioAtiendeFk", type="integer")
+     * @ORM\Column(name="codigoUsuarioAtiendeFk", type="string", length=255)
      */
     private $codigoUsuarioAtiendeFk;
 
@@ -119,7 +119,7 @@ class Llamada
     private $llamadasCliente;
 
     /**
-     * @ORM\OneToMany(targetEntity="LlamadaCategoria", mappedBy="LlamadaCategoriaRel")
+     * @ORM\OneToMany(targetEntity="LlamadaCategoria", mappedBy="LlamadasCategoriaRel")
      */
     private $llamadasCategoria;
 

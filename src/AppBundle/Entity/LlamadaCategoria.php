@@ -16,7 +16,7 @@ class LlamadaCategoria
 
     /**
      * @var int
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigoCategoriaLlamadaPk", type="integer", unique=true)
      */
     private $codigoCategoriaLlamadaPk;
@@ -37,7 +37,7 @@ class LlamadaCategoria
 
     /**
      * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasCategoria")
-     * @ORM\JoinColumn(name="codigoCategoriaLlamadaFk", referencedColumnName="codigoCategoriaLlamadaPk")
+     * @ORM\JoinColumn(name="codigoCategoriaLlamadaPk", referencedColumnName="codigoCategoriaLlamadaFk")
      */
 
     private $llamadasCategoriaRel;
