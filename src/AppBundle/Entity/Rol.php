@@ -29,7 +29,7 @@ class Rol
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="UsuariosRol")
+     * 
      * @ORM\JoinColumn(name="codigoRolpk", referencedColumnName="codigoRol")
      */
 

@@ -37,7 +37,7 @@ class Contacto
     private $codigoClientePk;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="contactosCliente")
+     *
      * @ORM\JoinColumn(name="codigoClienteFk", referencedColumnName="codigoClientePk")
      */
 
