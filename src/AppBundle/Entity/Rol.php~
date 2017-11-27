@@ -30,7 +30,7 @@ class Rol
 
     /**
      * 
-     * @ORM\JoinColumn(name="codigoRolpk", referencedColumnName="codigoRol")
+     * ORM\OneToMany(targetEntity="Usuario", mappedBy="usuariosRol")
      */
 
     private $rolRel;

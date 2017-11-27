@@ -44,16 +44,13 @@ class Cliente
 
     /**
      *
-     * @ORM\JoinColumn(name="codigoClientePk", referencedColumnName="codigoClienteFk")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasCliente")
      */
 
     private $llamadasRel;
 
 
-    /**
-     * @ORM\OneToMany(targetEntity="Contacto", mappedBy="clienteRel")
-     */
-    private $contactosCliente;
+
 
 
 
@@ -226,5 +223,29 @@ class Cliente
     public function getLlamadasRel()
     {
         return $this->llamadasRel;
+    }
+
+    /**
+     * Add llamadasRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasRel
+     *
+     * @return Cliente
+     */
+    public function addLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel)
+    {
+        $this->llamadasRel[] = $llamadasRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove llamadasRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasRel
+     */
+    public function removeLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel)
+    {
+        $this->llamadasRel->removeElement($llamadasRel);
     }
 }
