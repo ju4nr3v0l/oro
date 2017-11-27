@@ -58,8 +58,7 @@ class FormTypeLlamada extends AbstractType{
             ->add ('fechaRegistro', DateTimeType::class,array(
                 'attr' => array(
                     'id' => '_extension',
-                    'name' => '_extension',
-                    'class' => 'form-control'
+                    'name' => '_extension'
                 )
             ))
             ->add ('fechaGestion', DateTimeType::class,array(
@@ -71,8 +70,7 @@ class FormTypeLlamada extends AbstractType{
             ->add ('fechaSolucion', DateTimeType::class,array(
                 'attr' => array(
                     'id' => '_extension',
-                    'name' => '_extension',
-                    'class' => 'form-control'
+                    'name' => '_extension'
                 )
             ))
             ->add ('codigoContacto', TextType::class,array(
