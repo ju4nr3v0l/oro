@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\AppBundle;
 use AppBundle\Forms\Type\FormTypeLlamada;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +26,7 @@ class LlamadaController extends Controller
     {
         $fechaActual = date("Y-m-d H:i:s");
 
-        $llamada = new Llamada; //instance class
+        $llamada = new Llamada(); //instance class
         $form = $this->createForm(FormTypeLlamada::class, $llamada); //create form
         $form->handleRequest($request);
 

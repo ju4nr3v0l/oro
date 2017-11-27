@@ -11,6 +11,7 @@ namespace AppBundle\Forms\Type;
 use Doctrine\DBAL\Types\IntegerType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -55,12 +56,19 @@ class FormTypeLlamada extends AbstractType{
                     'class' => 'form-control'
                 )
             ))
-            ->add ('codigoContactoFk', TextType::class,array(
+            ->add ('nombreContacto', TextType::class,array(
                 'attr' => array(
-                    'id' => '_codigoContacto',
-                    'name' => '_codigoContacto'
+                    'id' => '_nombreContacto',
+                    'name' => '_nombreContacto'
                 )
             ))
+            ->add('llamadasCategoria', EntityType::class, array(
+                'class' => 'AppBundle:LlamadaCategoria',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.nombre', 'ASC');},
+                'choice_label' => 'nombre',
+                'required' => true))
 //            ->add ('codigoCategoriaLlamadaFk', IntegerType::class,array(
 //                'attr' => array(
 //                    'id' => '_codigoCategoriaLlamadaFk',

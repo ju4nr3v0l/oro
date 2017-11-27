@@ -132,34 +132,11 @@ class Llamada
      */
     private $llamadasEstado;
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set codigoLlamadaPk
-     *
-     * @param integer $codigoLlamadaPk
-     *
-     * @return Llamada
-     */
-    public function setCodigoLlamadaPk($codigoLlamadaPk)
-    {
-        $this->codigoLlamadaPk = $codigoLlamadaPk;
-
-        return $this;
-    }
 
     /**
      * Get codigoLlamadaPk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoLlamadaPk()
     {
@@ -191,27 +168,27 @@ class Llamada
     }
 
     /**
-     * Set codigoContactoFk
+     * Set nombreContacto
      *
-     * @param integer $codigoContactoFk
+     * @param string $nombreContacto
      *
      * @return Llamada
      */
-    public function setCodigoContactoFk($codigoContactoFk)
+    public function setNombreContacto($nombreContacto)
     {
-        $this->codigoContactoFk = $codigoContactoFk;
+        $this->nombreContacto = $nombreContacto;
 
         return $this;
     }
 
     /**
-     * Get codigoContactoFk
+     * Get nombreContacto
      *
-     * @return int
+     * @return string
      */
-    public function getCodigoContactoFk()
+    public function getNombreContacto()
     {
-        return $this->codigoContactoFk;
+        return $this->nombreContacto;
     }
 
     /**
@@ -313,7 +290,7 @@ class Llamada
     /**
      * Set fechaGestion
      *
-     * @param string $fechaGestion
+     * @param \DateTime $fechaGestion
      *
      * @return Llamada
      */
@@ -327,7 +304,7 @@ class Llamada
     /**
      * Get fechaGestion
      *
-     * @return string
+     * @return \DateTime
      */
     public function getFechaGestion()
     {
@@ -337,7 +314,7 @@ class Llamada
     /**
      * Set fechaSolucion
      *
-     * @param string $fechaSolucion
+     * @param \DateTime $fechaSolucion
      *
      * @return Llamada
      */
@@ -351,7 +328,7 @@ class Llamada
     /**
      * Get fechaSolucion
      *
-     * @return string
+     * @return \DateTime
      */
     public function getFechaSolucion()
     {
@@ -361,7 +338,7 @@ class Llamada
     /**
      * Set codigoCategoriaLlamadaFk
      *
-     * @param string $codigoCategoriaLlamadaFk
+     * @param integer $codigoCategoriaLlamadaFk
      *
      * @return Llamada
      */
@@ -375,7 +352,7 @@ class Llamada
     /**
      * Get codigoCategoriaLlamadaFk
      *
-     * @return string
+     * @return integer
      */
     public function getCodigoCategoriaLlamadaFk()
     {
@@ -385,7 +362,7 @@ class Llamada
     /**
      * Set codigoUsuarioRecibeFk
      *
-     * @param integer $codigoUsuarioRecibeFk
+     * @param string $codigoUsuarioRecibeFk
      *
      * @return Llamada
      */
@@ -399,7 +376,7 @@ class Llamada
     /**
      * Get codigoUsuarioRecibeFk
      *
-     * @return int
+     * @return string
      */
     public function getCodigoUsuarioRecibeFk()
     {
@@ -409,7 +386,7 @@ class Llamada
     /**
      * Set codigoUsuarioAtiendeFk
      *
-     * @param integer $codigoUsuarioAtiendeFk
+     * @param string $codigoUsuarioAtiendeFk
      *
      * @return Llamada
      */
@@ -423,7 +400,7 @@ class Llamada
     /**
      * Get codigoUsuarioAtiendeFk
      *
-     * @return int
+     * @return string
      */
     public function getCodigoUsuarioAtiendeFk()
     {
@@ -433,7 +410,7 @@ class Llamada
     /**
      * Set codigoEstadoLlamadaFk
      *
-     * @param string $codigoEstadoLlamadaFk
+     * @param integer $codigoEstadoLlamadaFk
      *
      * @return Llamada
      */
@@ -447,7 +424,7 @@ class Llamada
     /**
      * Get codigoEstadoLlamadaFk
      *
-     * @return string
+     * @return integer
      */
     public function getCodigoEstadoLlamadaFk()
     {
@@ -471,146 +448,11 @@ class Llamada
     /**
      * Get codigoClienteFk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoClienteFk()
     {
         return $this->codigoClienteFk;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->llamadasCliente = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->llamadasCategoria = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->llamadasEstado = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add llamadasCliente
-     *
-     * @param \AppBundle\Entity\Cliente $llamadasCliente
-     *
-     * @return Llamada
-     */
-    public function addLlamadasCliente(\AppBundle\Entity\Cliente $llamadasCliente)
-    {
-        $this->llamadasCliente[] = $llamadasCliente;
-
-        return $this;
-    }
-
-    /**
-     * Remove llamadasCliente
-     *
-     * @param \AppBundle\Entity\Cliente $llamadasCliente
-     */
-    public function removeLlamadasCliente(\AppBundle\Entity\Cliente $llamadasCliente)
-    {
-        $this->llamadasCliente->removeElement($llamadasCliente);
-    }
-
-    /**
-     * Get llamadasCliente
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLlamadasCliente()
-    {
-        return $this->llamadasCliente;
-    }
-
-    /**
-     * Add llamadasCategorium
-     *
-     * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategorium
-     *
-     * @return Llamada
-     */
-    public function addLlamadasCategorium(\AppBundle\Entity\LlamadaCategoria $llamadasCategorium)
-    {
-        $this->llamadasCategoria[] = $llamadasCategorium;
-
-        return $this;
-    }
-
-    /**
-     * Remove llamadasCategorium
-     *
-     * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategorium
-     */
-    public function removeLlamadasCategorium(\AppBundle\Entity\LlamadaCategoria $llamadasCategorium)
-    {
-        $this->llamadasCategoria->removeElement($llamadasCategorium);
-    }
-
-    /**
-     * Get llamadasCategoria
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLlamadasCategoria()
-    {
-        return $this->llamadasCategoria;
-    }
-
-    /**
-     * Add llamadasEstado
-     *
-     * @param \AppBundle\Entity\Estado $llamadasEstado
-     *
-     * @return Llamada
-     */
-    public function addLlamadasEstado(\AppBundle\Entity\Estado $llamadasEstado)
-    {
-        $this->llamadasEstado[] = $llamadasEstado;
-
-        return $this;
-    }
-
-    /**
-     * Remove llamadasEstado
-     *
-     * @param \AppBundle\Entity\Estado $llamadasEstado
-     */
-    public function removeLlamadasEstado(\AppBundle\Entity\Estado $llamadasEstado)
-    {
-        $this->llamadasEstado->removeElement($llamadasEstado);
-    }
-
-    /**
-     * Get llamadasEstado
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLlamadasEstado()
-    {
-        return $this->llamadasEstado;
-    }
-
-    /**
-     * Set nombreContacto
-     *
-     * @param string $nombreContacto
-     *
-     * @return Llamada
-     */
-    public function setNombreContacto($nombreContacto)
-    {
-        $this->nombreContacto = $nombreContacto;
-
-        return $this;
-    }
-
-    /**
-     * Get nombreContacto
-     *
-     * @return string
-     */
-    public function getNombreContacto()
-    {
-        return $this->nombreContacto;
     }
 
     /**
@@ -628,6 +470,16 @@ class Llamada
     }
 
     /**
+     * Get llamadasCliente
+     *
+     * @return \AppBundle\Entity\Cliente
+     */
+    public function getLlamadasCliente()
+    {
+        return $this->llamadasCliente;
+    }
+
+    /**
      * Set llamadasCategoria
      *
      * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategoria
@@ -642,6 +494,16 @@ class Llamada
     }
 
     /**
+     * Get llamadasCategoria
+     *
+     * @return \AppBundle\Entity\LlamadaCategoria
+     */
+    public function getLlamadasCategoria()
+    {
+        return $this->llamadasCategoria;
+    }
+
+    /**
      * Set llamadasEstado
      *
      * @param \AppBundle\Entity\Estado $llamadasEstado
@@ -653,5 +515,15 @@ class Llamada
         $this->llamadasEstado = $llamadasEstado;
 
         return $this;
+    }
+
+    /**
+     * Get llamadasEstado
+     *
+     * @return \AppBundle\Entity\Estado
+     */
+    public function getLlamadasEstado()
+    {
+        return $this->llamadasEstado;
     }
 }
