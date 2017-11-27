@@ -36,7 +36,7 @@ class Estado
     private $descripcion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Llamada", inversedBy="llamadasEstado")
+     *
      * @ORM\JoinColumn(name="codigoEstadoLlamadaPk", referencedColumnName="codigoEstadoLlamadaFk")
      */
 

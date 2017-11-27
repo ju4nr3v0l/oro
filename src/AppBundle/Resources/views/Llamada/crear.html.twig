@@ -16,198 +16,90 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title"><i class="mdi mdi-phone-incoming"></i> Gestión de Llamadas</h4>
+                                    <h4 class="page-title"><i class="mdi mdi-phone-in-talk"></i> Crear Llamada</h4>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
-
-                            <div class="col-md-2">
+                            <div class="col-sm-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-account-multiple"></i> Contactos</h4>
-                                    <div class="form-group">
-                                        <label class="control-label text-muted">Buscar Cliente | Contacto</label>
-                                        <p class="text-muted m-b-15 font-13">
-                                            Escriba el nombre del contacto. (Se agrupará por Cliente).
-                                        </p>
-                                        <input type="text" name="country" id="autocomplete" class="form-control" autocomplete="on">
+                                    <h4 class="m-t-0 header-title"><b>Datos de la llamada</b></h4>
+                                    <h5>Fecha: {{ "now"|date("m/d/Y") }}</h5>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label" for="_telefono">Teléfono de Contacto</label>
+
+                                                    <div class="col-md-5">
+                                                        <input type="text"
+                                                               id="_telefono"
+                                                               name="_telefono"
+                                                               class="form-control"
+                                                               data-mask="(999) 999-9999"
+                                                               required=""
+                                                               autofocus=""
+                                                               autocomplete="off">
+                                                    </div>
+                                                    <label class="col-md-2 control-label" for="_telefono">Extensión</label>
+                                                    <div class="col-md-3">
+                                                        <input type="text"
+                                                               id="_extension"
+                                                               name="_extension"
+                                                               class="form-control"
+                                                               data-mask="(9999)"
+                                                               required=""
+                                                               autofocus=""
+                                                               autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label" for="_telefono">Descripción</label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" rows="5"
+                                                                  id="_descripcion"
+                                                                  name="_descripcion"
+                                                                  class="form-control"
+                                                                  required=""
+                                                                  autofocus=""
+                                                                  autocomplete="off">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Tema de la llamada</label>
+                                                    <div class="col-md-10">
+                                                        <textarea class="form-control" rows="5"
+                                                               id="_tema"
+                                                               name="_tema"
+                                                               class="form-control"
+                                                               required=""
+                                                               autofocus=""
+                                                               autocomplete="off">
+                                                        </textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Contacto</label>
+                                                    <div class="col-md-10">
+                                                        <input type="text"
+                                                               id="_extension"
+                                                               name="_extension"
+                                                               class="form-control"
+                                                               required=""
+                                                               autofocus=""
+                                                               autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">
-                                        <div class="inbox-widget slimscroll-alt" style="min-height: 302px; overflow: hidden; width: auto; height: 250px;">
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-1.jpg') }}" class="img-circle" alt=""></div>
-                                                <p class="inbox-item-author">Juan Jose Berrio</p>
-                                                <p class="inbox-item-text"><span class="label label-info">Segurcol</span></p>
-                                            </div>
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-2.jpg') }}" class="img-circle" alt=""></div>
-                                                <p class="inbox-item-author">Alejandro Vera Carrasquilla</p>
-                                                <p class="inbox-item-text"><span class="label label-info">Segurcol</span></p>
-                                            </div>
-                                            <div class="inbox-item">
-                                                <div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-3.jpg') }}" class="img-circle" alt=""></div>
-                                                <p class="inbox-item-author">Estaban Padilla</p>
-                                                <p class="inbox-item-text"><span class="label label-info">Atlas</span></p>
-                                            </div>
-                                        </div>
-                                        <div class="slimScrollBar" style="background: rgb(152, 166, 173); width: 5px; position: absolute; top: 131px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 170.794px;">
-
-                                        </div>
-                                        <div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
-
-                                        </div>
-                                    </div>
-
-                                </div> <!-- end card -->
+                                </div>
                             </div>
-                            <!-- end col -->
-
-                            <div class="col-md-10">
-                                <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Registro de Llamadas</h4>
-
-                                    <div class="table-responsive">
-                                        <table class="table table table-hover m-0">
-                                            <thead>
-                                            <tr>
-                                                <th>Tema</th>
-                                                <th>Contacto</th>
-                                                <th>Teléfono</th>
-                                                <th>Extensión</th>
-                                                <th>Descripción</th>
-                                                <th>Categoría</th>
-                                                <th>Estado</th>
-                                                <th>Recibe</th>
-                                                <th>Fecha | Registro</th>
-                                                <th>Gestiona</th>
-                                                <th>Fecha | Gestión</th>
-                                                <th>Fecha | Solución</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    Soporte sobre Nomina.
-                                                </td>
-                                                <td>
-                                                    <h5 class="m-0">SEGURCOL</h5>
-                                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                                </td>
-                                                <td>304 559 9915</td>
-                                                <td>157</td>
-                                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                                <td><span class="label label-info">SOPORTE</span></td>
-                                                <td><span class="label label-success">PENDIENTE</span></td>
-                                                <td>Karina ni idea</td>
-                                                <td>22/11/2017</td>
-                                                <td>Sebastian</td>
-                                                <td>23/11/2017</td>
-                                                <td>23/11/2017</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Soporte sobre Nomina.
-                                                </td>
-                                                <td>
-                                                    <h5 class="m-0">SEGURCOL</h5>
-                                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                                </td>
-                                                <td>304 559 9915</td>
-                                                <td>157</td>
-                                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                                <td><span class="label label-info">SOPORTE</span></td>
-                                                <td><span class="label label-success">PENDIENTE</span></td>
-                                                <td>Karina ni idea</td>
-                                                <td>22/11/2017</td>
-                                                <td>Sebastian</td>
-                                                <td>23/11/2017</td>
-                                                <td>23/11/2017</td>
-                                            </tr><tr>
-                                                <td>
-                                                    Soporte sobre Nomina.
-                                                </td>
-                                                <td>
-                                                    <h5 class="m-0">SEGURCOL</h5>
-                                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                                </td>
-                                                <td>304 559 9915</td>
-                                                <td>157</td>
-                                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                                <td><span class="label label-info">SOPORTE</span></td>
-                                                <td><span class="label label-success">PENDIENTE</span></td>
-                                                <td>Karina ni idea</td>
-                                                <td>22/11/2017</td>
-                                                <td>Sebastian</td>
-                                                <td>23/11/2017</td>
-                                                <td>23/11/2017</td>
-                                            </tr><tr>
-                                                <td>
-                                                    Soporte sobre Nomina.
-                                                </td>
-                                                <td>
-                                                    <h5 class="m-0">SEGURCOL</h5>
-                                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                                </td>
-                                                <td>304 559 9915</td>
-                                                <td>157</td>
-                                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                                <td><span class="label label-info">SOPORTE</span></td>
-                                                <td><span class="label label-success">PENDIENTE</span></td>
-                                                <td>Karina ni idea</td>
-                                                <td>22/11/2017</td>
-                                                <td>Sebastian</td>
-                                                <td>23/11/2017</td>
-                                                <td>23/11/2017</td>
-                                            </tr><tr>
-                                                <td>
-                                                    Soporte sobre Nomina.
-                                                </td>
-                                                <td>
-                                                    <h5 class="m-0">SEGURCOL</h5>
-                                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                                </td>
-                                                <td>304 559 9915</td>
-                                                <td>157</td>
-                                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                                <td><span class="label label-info">SOPORTE</span></td>
-                                                <td><span class="label label-success">PENDIENTE</span></td>
-                                                <td>Karina ni idea</td>
-                                                <td>22/11/2017</td>
-                                                <td>Sebastian</td>
-                                                <td>23/11/2017</td>
-                                                <td>23/11/2017</td>
-                                            </tr><tr>
-                                                <td>
-                                                    Soporte sobre Nomina.
-                                                </td>
-                                                <td>
-                                                    <h5 class="m-0">SEGURCOL</h5>
-                                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                                </td>
-                                                <td>304 559 9915</td>
-                                                <td>157</td>
-                                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                                <td><span class="label label-info">SOPORTE</span></td>
-                                                <td><span class="label label-success">PENDIENTE</span></td>
-                                                <td>Karina ni idea</td>
-                                                <td>22/11/2017</td>
-                                                <td>Sebastian</td>
-                                                <td>23/11/2017</td>
-                                                <td>23/11/2017</td>
-                                            </tr>
-
-                                            </tbody>
-                                        </table>
-
-                                    </div> <!-- table-responsive -->
-                                </div> <!-- end card -->
-                            </div>
-                            <!-- end col -->
-
                         </div>
-
                     {% endblock content %}
                 </div> <!-- container -->
             </div> <!-- content -->

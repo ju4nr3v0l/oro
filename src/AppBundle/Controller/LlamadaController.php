@@ -2,25 +2,34 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use AppBundle\Forms\Type\FormTypeLlamada;
-use Symfony\Component\HttpFoundation\Request;
+use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Llamada;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
+
 class LlamadaController extends Controller
 {
 
     /**
      * @Route("/llamada", name="llamada")
      */
-    public function nuevoLlamada(Request $request)
-    {
-        $llamada = new Llamada; //instance class
-        $form = $this->createForm($llamada); //create form recordar que usamos formTypes
 
+    public function insertLlamada(Request $request)
+    {
+        $fechaActual = DateTime::class;
+        $llamada = new Llamada; //instance class
+        $form = $this->createForm(FormTypeLlamada::class); //create form
         $form->handleRequest($request);
+
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $call = $form->getData();
 
@@ -33,6 +42,9 @@ class LlamadaController extends Controller
         return $this->render('AppBundle:Llamada:crear.html.twig',
             array(
                 'form' => $form->createView(),
+
+                'date' => $fechaActual
+
             ));
     }
 }
