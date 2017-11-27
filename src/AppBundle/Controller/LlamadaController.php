@@ -20,7 +20,8 @@ class LlamadaController extends Controller
      */
     public function insertLlamada(Request $request)
     {
-        $fechaActual = DateTime::class;
+        $fecha = new DateTime('now');
+
         $llamada = new Llamada; //instance class
         $form = $this->createForm(FormTypeLlamada::class); //create form
         $form->handleRequest($request);
@@ -38,7 +39,7 @@ class LlamadaController extends Controller
         return $this->render('AppBundle:Llamada:crear.html.twig',
             array(
                 'form' => $form->createView(),
-                'date' => $fechaActual
+                'fecha' => $fecha
             ));
     }
 }
