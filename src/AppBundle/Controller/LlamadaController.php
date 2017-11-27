@@ -23,8 +23,6 @@ class LlamadaController extends Controller
 
     public function insertarLlamada(Request $request)
     {
-
-
         $fechaActual = date("Y-m-d H:i:s");
 
         $llamada = new Llamada; //instance class
@@ -58,7 +56,6 @@ class LlamadaController extends Controller
 
     public function listarLlamada(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('AppBundle:Llamada');
         $llamadas = $repository->findAll();

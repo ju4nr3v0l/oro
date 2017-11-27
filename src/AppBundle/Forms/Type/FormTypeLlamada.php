@@ -55,24 +55,6 @@ class FormTypeLlamada extends AbstractType{
                     'class' => 'form-control'
                 )
             ))
-            ->add ('fechaRegistro', DateTimeType::class,array(
-                'attr' => array(
-                    'id' => '_extension',
-                    'name' => '_extension'
-                )
-            ))
-            ->add ('fechaGestion', DateTimeType::class,array(
-                'attr' => array(
-                    'id' => '_extension',
-                    'name' => '_extension'
-                )
-            ))
-            ->add ('fechaSolucion', DateTimeType::class,array(
-                'attr' => array(
-                    'id' => '_extension',
-                    'name' => '_extension'
-                )
-            ))
             ->add ('codigoContactoFk', TextType::class,array(
                 'attr' => array(
                     'id' => '_codigoContacto',
