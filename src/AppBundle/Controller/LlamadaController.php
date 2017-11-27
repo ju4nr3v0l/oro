@@ -18,10 +18,10 @@ class LlamadaController extends Controller
 {
 
     /**
-     * @Route("/llamada", name="llamada")
+     * @Route("/Registarllamada", name="Registrarllamada")
      */
 
-    public function insertLlamada(Request $request)
+    public function insertarLlamada(Request $request)
     {
 
 
@@ -41,7 +41,7 @@ class LlamadaController extends Controller
 
 
             $em->flush();
-            $url = $this->generateUrl('inicio');
+            $url = $this->generateUrl('listadoLlamadas');
             return $this->redirect($url);
         }
 
@@ -50,5 +50,22 @@ class LlamadaController extends Controller
                 'form' => $form->createView(),
                 'fecha' => $fechaActual
             ));
+    }
+
+    /**
+     * @Route('/listadoLlamadas' name='listadoLlamadas')
+     */
+
+    public function listarLlamada(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('AppBundle:Llamada');
+        $llamadas = $repository->findAll();
+
+        // en index pagina con datos generales de la app
+        return $this->render('AppBundle:Llamada:listar.html.twig', [
+            'llamadas' => $llamadas
+        ]);
     }
 }
