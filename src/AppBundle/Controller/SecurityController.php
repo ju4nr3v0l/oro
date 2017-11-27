@@ -14,9 +14,7 @@ class SecurityController extends Controller
     /**
      * @Route("/acceso", name="acceso")
      */
-    public function accesoAction(Request $request)
-    {
-
+    public function accesoAction(Request $request){
 
 
         $authenticationUtils = $this->get('security.authentication_utils');

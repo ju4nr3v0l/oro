@@ -24,16 +24,17 @@
         {% endblock %}
     </head>
     <body {% block bodyAtt %}{% endblock %} >
-        {#<div class="content-page">#}
-            {#<!-- Start content -->#}
-            {#<div class="content">#}
-                {#<div class="container">#}
 
-                    {% block body %}{% endblock %}
 
-                {#</div> <!-- container -->#}
-            {#</div> <!-- content -->#}
-        {#</div>#}
+        {% block body %}
+
+            {% block content %}
+
+            {% endblock %}
+
+        {% endblock %}
+
+
         {% block javascriptsBottom %}
             <script>
                 var resizefunc = [];
