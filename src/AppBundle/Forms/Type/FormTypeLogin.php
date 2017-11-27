@@ -32,7 +32,7 @@ class FormTypeLogin extends AbstractType{
             ))
             ->add ('Entrar', SubmitType::class, array(
                 'attr' => array(
-                    'class' => 'juan'
+
                 )
             ))
         ;
