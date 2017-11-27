@@ -23,7 +23,8 @@ class LlamadaController extends Controller
 
     public function insertLlamada(Request $request)
     {
-        $fechaActual = DateTime::class;
+
+        $fechaActual = date("Y-m-d H:i:s");
         $llamada = new Llamada; //instance class
         $form = $this->createForm(FormTypeLlamada::class); //create form
         $form->handleRequest($request);
