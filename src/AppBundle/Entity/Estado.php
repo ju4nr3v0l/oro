@@ -144,6 +144,7 @@ class Estado
      *
      * @return \AppBundle\Entity\Llamada
      */
+
     public function getEstadoRel()
     {
         return $this->estadoRel;
