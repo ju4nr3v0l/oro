@@ -37,7 +37,7 @@ class Estado
 
     /**
      *
-     * @ORM\JoinColumn(name="codigoEstadoLlamadaPk", referencedColumnName="codigoEstadoLlamadaFk")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasEstado")
      */
 
     private $estadoRel;
@@ -147,5 +147,36 @@ class Estado
     public function getEstadoRel()
     {
         return $this->estadoRel;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->estadoRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add estadoRel
+     *
+     * @param \AppBundle\Entity\Llamada $estadoRel
+     *
+     * @return Estado
+     */
+    public function addEstadoRel(\AppBundle\Entity\Llamada $estadoRel)
+    {
+        $this->estadoRel[] = $estadoRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove estadoRel
+     *
+     * @param \AppBundle\Entity\Llamada $estadoRel
+     */
+    public function removeEstadoRel(\AppBundle\Entity\Llamada $estadoRel)
+    {
+        $this->estadoRel->removeElement($estadoRel);
     }
 }

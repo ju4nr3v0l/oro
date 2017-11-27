@@ -60,8 +60,11 @@ class Usuario implements UserInterface, \Serializable
      */
     private $codigoRol;
 
+
+
     /**
-     * @ORM\OneToMany(targetEntity="Rol", mappedBy="rolRel")
+     * @ORM\ManyToOne(targetEntity="Rol", inversedBy="rolRel")
+     * @ORM\JoinColumn(name="codigoRol", referencedColumnName="codigoRolPk")
      */
     private $usuariosRol;
 
@@ -323,5 +326,19 @@ class Usuario implements UserInterface, \Serializable
     {
         return array($this->roles);
         //return $this->usuariosRol;
+    }
+
+    /**
+     * Set usuariosRol
+     *
+     * @param \AppBundle\Entity\Rol $usuariosRol
+     *
+     * @return Usuario
+     */
+    public function setUsuariosRol(\AppBundle\Entity\Rol $usuariosRol = null)
+    {
+        $this->usuariosRol = $usuariosRol;
+
+        return $this;
     }
 }

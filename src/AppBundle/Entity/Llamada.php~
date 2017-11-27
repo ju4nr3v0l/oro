@@ -30,11 +30,11 @@ class Llamada
     private $tema;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="codigoContactoFk", type="integer" , nullable= TRUE)
+     * @ORM\Column(name="nombreContacto", type="string" ,length=255, nullable= TRUE)
      */
-    private $codigoContactoFk;
+    private $nombreContacto;
 
     /**
      * @var string
@@ -115,17 +115,20 @@ class Llamada
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Cliente", mappedBy="LlamadasRel")
+     * @ORM\ManytoOne(targetEntity="Cliente", inversedBy="LlamadasRel")
+     * @ORM\JoinColumn(name="codigoClienteFk", referencedColumnName="codigoClientePk")
      */
     private $llamadasCliente;
 
     /**
-     * @ORM\OneToMany(targetEntity="LlamadaCategoria", mappedBy="LlamadasCategoriaRel")
+     * @ORM\ManytoOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
+     * @ORM\JoinColumn(name="codigoCategoriaLlamadaFk", referencedColumnName="codigoCategoriaLlamadaPk")
      */
     private $llamadasCategoria;
 
     /**
-     * @ORM\OneToMany(targetEntity="Estado", mappedBy="estadoRel")
+     * @ORM\ManytoOne(targetEntity="Estado", inversedBy="estadoRel")
+     * @ORM\JoinColumn(name="codigoEstadoLlamadaFk", referencedColumnName="codigoEstadoLlamadaPk")
      */
     private $llamadasEstado;
 
@@ -584,5 +587,29 @@ class Llamada
     public function getLlamadasEstado()
     {
         return $this->llamadasEstado;
+    }
+
+    /**
+     * Set nombreContacto
+     *
+     * @param string $nombreContacto
+     *
+     * @return Llamada
+     */
+    public function setNombreContacto($nombreContacto)
+    {
+        $this->nombreContacto = $nombreContacto;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreContacto
+     *
+     * @return string
+     */
+    public function getNombreContacto()
+    {
+        return $this->nombreContacto;
     }
 }

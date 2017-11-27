@@ -36,12 +36,7 @@ class Contacto
      */
     private $codigoClientePk;
 
-    /**
-     *
-     * @ORM\JoinColumn(name="codigoClienteFk", referencedColumnName="codigoClientePk")
-     */
 
-    private $clienteRel;
 
     /**
      * Get id

@@ -37,7 +37,7 @@ class LlamadaCategoria
 
     /**
      *
-     * @ORM\JoinColumn(name="codigoCategoriaLlamadaPk", referencedColumnName="codigoCategoriaLlamadaFk")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasCategoria")
      */
 
     private $llamadasCategoriaRel;

@@ -37,7 +37,7 @@ class LlamadaCategoria
 
     /**
      *
-     * @ORM\JoinColumn(name="codigoCategoriaLlamadaPk", referencedColumnName="codigoCategoriaLlamadaFk")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasCategoria")
      */
 
     private $llamadasCategoriaRel;
@@ -147,5 +147,36 @@ class LlamadaCategoria
     public function getLlamadasCategoriaRel()
     {
         return $this->llamadasCategoriaRel;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->llamadasCategoriaRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add llamadasCategoriaRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
+     *
+     * @return LlamadaCategoria
+     */
+    public function addLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel)
+    {
+        $this->llamadasCategoriaRel[] = $llamadasCategoriaRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove llamadasCategoriaRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
+     */
+    public function removeLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel)
+    {
+        $this->llamadasCategoriaRel->removeElement($llamadasCategoriaRel);
     }
 }
