@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Doctrine\ORM\EntityRepository;
 
 class FormTypeLlamada extends AbstractType{
 
@@ -65,6 +66,13 @@ class FormTypeLlamada extends AbstractType{
             ))
             ->add('llamadasCategoria', EntityType::class, array(
                 'class' => 'AppBundle:LlamadaCategoria',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.nombre', 'ASC');},
+                'choice_label' => 'nombre',
+                'required' => true))
+            ->add('llamadasEstado', EntityType::class, array(
+                'class' => 'AppBundle:Estado',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.nombre', 'ASC');},
