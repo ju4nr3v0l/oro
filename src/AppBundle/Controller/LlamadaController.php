@@ -23,28 +23,32 @@ class LlamadaController extends Controller
 
     public function insertLlamada(Request $request)
     {
-        $fechaActual = DateTime::class;
+
+
+        $fechaActual = date("Y-m-d H:i:s");
+
         $llamada = new Llamada; //instance class
-        $form = $this->createForm(FormTypeLlamada::class); //create form
+        $form = $this->createForm(FormTypeLlamada::class, $llamada); //create form
         $form->handleRequest($request);
 
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $call = $form->getData();
+            //$call = $form->getData();
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($call);
+            $em->persist($llamada);
+
+
             $em->flush();
-            return $this->redirect('/');
+            $url = $this->generateUrl('inicio');
+            return $this->redirect($url);
         }
 
         return $this->render('AppBundle:Llamada:crear.html.twig',
             array(
                 'form' => $form->createView(),
-
-                'date' => $fechaActual
-
+                'fecha' => $fechaActual
             ));
     }
 }
