@@ -119,7 +119,7 @@ class Llamada
     private $llamadasCliente;
 
     /**
-     * @ORM\OneToMany(targetEntity="LlamadaCategoria", mappedBy="LlamadaCategoriaRel")
+     * @ORM\OneToMany(targetEntity="LlamadaCategoria", mappedBy="LlamadasCategoriaRel")
      */
     private $llamadasCategoria;
 
