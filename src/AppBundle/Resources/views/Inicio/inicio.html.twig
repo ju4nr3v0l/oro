@@ -110,17 +110,17 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {% if llamada.codigoCategoriaLlamadaFk == 0 or llamada.codigoCategoriaLlamadaFk == null %}
-                                            <span class="label label-danger">SIN CATEGORIZAR</span>
+                                        {% if llamada.codigoEstadoLlamadaFk == 0 or llamada.codigoEstadoLlamadaFk == null %}
+                                            <span class="label label-danger">SIN ATENDER</span>
                                         {% elseif llamada.codigoCategoriaLlamadaFk >= 1 %}
-                                            <span class="label label-success">SOPORTE</span>
+                                            <span class="label label-success">ATENDIDA</span>
                                         {% endif %}
                                     </td>
                                     <td> Recibe ({{ llamada.codigoUsuarioRecibeFk }})</td>
-                                    <td>22/11/2017</td>
+                                    <td>{{ llamada.fechaRegistro|date('Y-m-d H:i:s') }}</td>
                                     <td> Atendió ({{ llamada.codigoUsuarioAtiendeFk }})</td>
-                                    <td>23/11/2017</td>
-                                    <td>23/11/2017</td>
+                                    <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
+                                    <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
                                 </tr>
                             {% endfor %}
 
