@@ -73,10 +73,10 @@ class FormTypeLlamada extends AbstractType{
                     'name' => '_extension'
                 )
             ))
-            ->add ('codigoContactoFk', TextType::class,array(
+            ->add ('nombreContacto', TextType::class,array(
                 'attr' => array(
-                    'id' => '_codigoContacto',
-                    'name' => '_codigoContacto'
+                    'id' => '_nombreContacto',
+                    'name' => '_nombreContacto'
                 )
             ))
 //            ->add ('codigoCategoriaLlamadaFk', IntegerType::class,array(

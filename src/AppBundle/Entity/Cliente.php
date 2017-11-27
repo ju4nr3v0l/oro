@@ -44,24 +44,19 @@ class Cliente
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasCliente")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="clienteRel")
      */
 
-    private $llamadasRel;
-
-
-
+    private $llamadasClienteRel;
 
 
 
     /**
-     * Get id
-     *
-     * @return int
+     * Constructor
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->llamadasClienteRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -81,7 +76,7 @@ class Cliente
     /**
      * Get codigoClientePk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoClientePk()
     {
@@ -159,93 +154,38 @@ class Cliente
     {
         return $this->nombreComercial;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->contactosCliente = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add contactosCliente
+     * Add llamadasClienteRel
      *
-     * @param \AppBundle\Entity\Contacto $contactosCliente
+     * @param \AppBundle\Entity\Llamada $llamadasClienteRel
      *
      * @return Cliente
      */
-    public function addContactosCliente(\AppBundle\Entity\Contacto $contactosCliente)
+    public function addLlamadasClienteRel(\AppBundle\Entity\Llamada $llamadasClienteRel)
     {
-        $this->contactosCliente[] = $contactosCliente;
+        $this->llamadasClienteRel[] = $llamadasClienteRel;
 
         return $this;
     }
 
     /**
-     * Remove contactosCliente
+     * Remove llamadasClienteRel
      *
-     * @param \AppBundle\Entity\Contacto $contactosCliente
+     * @param \AppBundle\Entity\Llamada $llamadasClienteRel
      */
-    public function removeContactosCliente(\AppBundle\Entity\Contacto $contactosCliente)
+    public function removeLlamadasClienteRel(\AppBundle\Entity\Llamada $llamadasClienteRel)
     {
-        $this->contactosCliente->removeElement($contactosCliente);
+        $this->llamadasClienteRel->removeElement($llamadasClienteRel);
     }
 
     /**
-     * Get contactosCliente
+     * Get llamadasClienteRel
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContactosCliente()
+    public function getLlamadasClienteRel()
     {
-        return $this->contactosCliente;
-    }
-
-    /**
-     * Set llamadasRel
-     *
-     * @param \AppBundle\Entity\Llamada $llamadasRel
-     *
-     * @return Cliente
-     */
-    public function setLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel = null)
-    {
-        $this->llamadasRel = $llamadasRel;
-
-        return $this;
-    }
-
-    /**
-     * Get llamadasRel
-     *
-     * @return \AppBundle\Entity\Llamada
-     */
-    public function getLlamadasRel()
-    {
-        return $this->llamadasRel;
-    }
-
-    /**
-     * Add llamadasRel
-     *
-     * @param \AppBundle\Entity\Llamada $llamadasRel
-     *
-     * @return Cliente
-     */
-    public function addLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel)
-    {
-        $this->llamadasRel[] = $llamadasRel;
-
-        return $this;
-    }
-
-    /**
-     * Remove llamadasRel
-     *
-     * @param \AppBundle\Entity\Llamada $llamadasRel
-     */
-    public function removeLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel)
-    {
-        $this->llamadasRel->removeElement($llamadasRel);
+        return $this->llamadasClienteRel;
     }
 }
