@@ -16,8 +16,10 @@ class InicioController extends Controller
      * @Route("/", name="inicio")
      */
 
-    public function indexAction(Request $request)
+    public function Action(Request $request)
     {
+
+        // en index pagina con datos generales de la app
         return $this->render('AppBundle:Inicio:inicio.html.twig', [
 
         ]);
