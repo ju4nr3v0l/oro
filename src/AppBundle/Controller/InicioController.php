@@ -25,7 +25,7 @@ class InicioController extends Controller
 
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Inicio:inicio.html.twig', [
-                    'llamadas' => $llamadas
+            'llamadas' => $llamadas
         ]);
     }
 
