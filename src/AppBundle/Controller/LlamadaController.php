@@ -58,12 +58,13 @@ class LlamadaController extends Controller
     public function listarLlamada(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('AppBundle:Llamada');
-        $llamadas = $repository->findAll();
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findAll();
+
 
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Llamada:listar.html.twig', [
-            'llamadas' => $llamadas
+            'llamadas' => $arLlamadas,
+
         ]);
     }
 }

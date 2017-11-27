@@ -58,6 +58,7 @@ class FormTypeLlamada extends AbstractType{
             ))
             ->add ('nombreContacto', TextType::class,array(
                 'attr' => array(
+
                     'id' => '_nombreContacto',
                     'name' => '_nombreContacto'
                 )
