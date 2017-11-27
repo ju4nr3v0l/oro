@@ -126,6 +126,7 @@ class Llamada
      */
     private $llamadasCategoria;
 
+
     /**
      * @ORM\ManytoOne(targetEntity="Estado", inversedBy="estadoRel")
      * @ORM\JoinColumn(name="codigoEstadoLlamadaFk", referencedColumnName="codigoEstadoLlamadaPk")

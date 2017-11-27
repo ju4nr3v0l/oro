@@ -121,6 +121,7 @@ class LlamadaCategoria
      * @return string
      */
 
+    
     public function getDescripcion()
     {
         return $this->descripcion;

@@ -139,6 +139,7 @@ class Estado
         return $this;
     }
 
+
     /**
      * Get estadoRel
      *
