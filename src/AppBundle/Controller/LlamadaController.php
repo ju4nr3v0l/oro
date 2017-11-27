@@ -18,7 +18,7 @@ class LlamadaController extends Controller
 {
 
     /**
-     * @Route("/Registarllamada", name="Registrarllamada")
+     * @Route("/registrarLlamada", name="registrarLlamada")
      */
 
     public function insertarLlamada(Request $request)
@@ -53,7 +53,7 @@ class LlamadaController extends Controller
     }
 
     /**
-     * @Route('/listadoLlamadas' name='listadoLlamadas')
+     * @Route("/listadoLlamadas", name="listadoLlamadas")
      */
 
     public function listarLlamada(Request $request)
