@@ -183,7 +183,10 @@
                                                                                    data-animation="makeway"
                                                                                    data-plugin="custommodal"
                                                                                    data-overlayspeed="100"
-                                                                                   data-overlaycolor="#36404a"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i></a>
+                                                                                   data-overlaycolor="#36404a">
+                                                                                    <i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
+                                                                                </a>
+                                                                                {#<button onclick="showModal({{ set idLlamada = llamada.codigoLlamadaPk }})"></button>#}
                                                                             </td>
                                                                         </tr>
                                                                         {% set cont= cont + 1 %}
@@ -195,6 +198,11 @@
                                                     </div> <!-- end card -->
                                                 </div>
                                                 <!-- end col -->
+                                                {#<script type="application/javascript">#}
+                                                    {#function showModal(var idLlamada){#}
+                                                        {#$(document).id("#custom-modal").showModal();#}
+                                                    {#}#}
+                                                {#</script>#}
                                                 <!-- Modal -->
                                                 <div id="custom-modal" class="modal-demo">
                                                     <button type="button" class="close" onclick="Custombox.close();">
