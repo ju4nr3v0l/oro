@@ -146,6 +146,7 @@
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
                                                                     {% if  llamada.llamadasEstado is not null %}
+                                                                        {% set cont = 1 %}
                                                                         <tr>
                                                                             <td>
                                                                                 {{ llamada.tema }}
@@ -188,6 +189,7 @@
                                                                                 {#<button onclick="showModal({{ set idLlamada = llamada.codigoLlamadaPk }})"></button>#}
                                                                             </td>
                                                                         </tr>
+                                                                        {% set cont= cont + 1 %}
                                                                     {% endif %}
                                                                 {% endfor %}
                                                                 </tbody>
