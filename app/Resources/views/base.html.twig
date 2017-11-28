@@ -23,6 +23,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('zircosTemplate/assets/images/favicon.ico') }}" />
         {% block javascripts %}
             <script src="{{ asset('zircosTemplate/assets/js/modernizr.min.js') }}"></script>
+            <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+
         {% endblock %}
     </head>
     <body {% block bodyAtt %}{% endblock %} >
@@ -42,6 +44,7 @@
                 var resizefunc = [];
             </script>
             <!-- jQuery  -->
+
             <script src="{{ asset('zircosTemplate/assets/js/jquery.min.js') }}"></script>
             <script src="{{ asset('zircosTemplate/assets/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('zircosTemplate/assets/js/detect.js') }}"></script>
@@ -60,7 +63,6 @@
             <!-- App js -->
             <script src="{{ asset('zircosTemplate/assets/js/jquery.core.js') }}"></script>
             <script src="{{ asset('zircosTemplate/assets/js/jquery.app.js') }}"></script>
-
         {% endblock %}
     </body>
 </html>
