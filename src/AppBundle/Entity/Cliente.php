@@ -17,7 +17,8 @@ class Cliente
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigoClientePk", type="integer", unique=true)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_cliente_pk", type="integer", unique=true)
      */
     private $codigoClientePk;
 
@@ -31,14 +32,14 @@ class Cliente
     /**
      * @var string
      *
-     * @ORM\Column(name="razonSocial", type="string", length=255, nullable=true)
+     * @ORM\Column(name="razon_social", type="string", length=255, nullable=true)
      */
     private $razonSocial;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombreComercial", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nombre_comercial", type="string", length=255, nullable=true)
      */
     private $nombreComercial;
 
@@ -49,10 +50,7 @@ class Cliente
 
     private $llamadasClienteRel;
 
-
-
-
-        /**
+    /**
      * Constructor
      */
     public function __construct()

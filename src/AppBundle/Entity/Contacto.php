@@ -18,7 +18,8 @@ class Contacto
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigoContactoPk", type="integer", unique=true)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_contacto_pk", type="integer", unique=true)
      */
     private $codigoContactoPk;
 
@@ -32,7 +33,7 @@ class Contacto
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoClientePk", type="integer")
+     * @ORM\Column(name="codigo_cliente_pk", type="integer")
      */
     private $codigoClientePk;
 

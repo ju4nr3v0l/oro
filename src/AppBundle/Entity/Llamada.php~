@@ -18,7 +18,7 @@ class Llamada
      * @var int
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="codigoLlamadaPk", type="integer", unique=true, )
+     * @ORM\Column(name="codigo_llamada_pk", type="integer", unique=true, )
      */
     private $codigoLlamadaPk;
 
@@ -32,7 +32,7 @@ class Llamada
     /**
      * @var string
      *
-     * @ORM\Column(name="nombreContacto", type="string" ,length=255, nullable= TRUE)
+     * @ORM\Column(name="nombre_contacto", type="string" ,length=255, nullable= TRUE)
      */
     private $nombreContacto;
 
@@ -60,56 +60,56 @@ class Llamada
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaRegistro", type="datetime", nullable= TRUE)
+     * @ORM\Column(name="fecha_registro", type="datetime", nullable= TRUE)
      */
     private $fechaRegistro;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaGestion", type="datetime" ,nullable= TRUE)
+     * @ORM\Column(name="fecha_gestion", type="datetime" ,nullable= TRUE)
      */
     private $fechaGestion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaSolucion", type="datetime" ,nullable= TRUE)
+     * @ORM\Column(name="fecha_solucion", type="datetime" ,nullable= TRUE)
      */
     private $fechaSolucion;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoCategoriaLlamadaFk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="codigo_categoria_llamada_fk", type="integer" ,nullable= TRUE)
      */
     private $codigoCategoriaLlamadaFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioRecibeFk", type="string", length=255 ,nullable= TRUE)
+     * @ORM\Column(name="codigo_usuario_recibe_fk", type="string", length=255 ,nullable= TRUE)
      */
     private $codigoUsuarioRecibeFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioAtiendeFk", type="string", length=255, nullable= TRUE)
+     * @ORM\Column(name="codigo_usuario_atiende_fk", type="string", length=255, nullable= TRUE)
      */
     private $codigoUsuarioAtiendeFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoEstadoLlamadaFk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="codigo_estado_llamada_fk", type="integer" ,nullable= TRUE)
      */
     private $codigoEstadoLlamadaFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoClienteFk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="codigo_cliente_fk", type="integer" ,nullable= TRUE)
      */
     private $codigoClienteFk;
 
