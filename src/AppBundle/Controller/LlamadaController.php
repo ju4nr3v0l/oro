@@ -33,6 +33,17 @@ class LlamadaController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Get our Token (representing the currently logged in user)
+            // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
+            $token = $this->get('security.token_storage')->getToken();
+            # e.g: $token->getUser();
+            # e.g: $token->isAuthenticated();
+            # [Careful]            ^ "Anonymous users are technically authenticated"
+            // Get our user from that token
+            $user = $token->getUser();
+            $id =  $user->getCodigoUsuarioPk();
+            $llamada->setCodigoUsuarioRecibeFk($id);
+            $llamada->setFechaRegistro($fechaActual);
             $em = $this->getDoctrine()->getManager();
             $em->persist($llamada);
             $em->flush();
@@ -53,6 +64,7 @@ class LlamadaController extends Controller
 
     public function listarLlamada(Request $request)
     {
+
         $em = $this->getDoctrine()->getManager();
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findAll();
 
@@ -77,9 +89,15 @@ class LlamadaController extends Controller
         # [Careful]            ^ "Anonymous users are technically authenticated"
         // Get our user from that token
                 $user = $token->getUser();
+                $id =  $user->getCodigoUsuarioPk();
         // en index pagina con datos generales de la app
+
+        $em = $this->getDoctrine()->getManager();
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioRecibeFk' => $id));
+
+
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
-            'data' => $user
+            'llamadas' => $arLlamadas
 
         ]);
 
