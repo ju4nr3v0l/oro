@@ -31,7 +31,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30">Registro de Llamadas para el usuario: {{ llamadas[0].nombreContacto }} </h4>
+                                    <h4 class="header-title m-t-0 m-b-30">Registro de Llamadas para el usuario:
+                                        {% if usuario is not null %}
+                                            {{ "USER" }}
+                                        {% endif %}</h4>
 
                                     <div class="tabs-vertical-env">
                                         <ul class="nav tabs-vertical">
@@ -109,8 +112,12 @@
                                                                             <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
                                                                             <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
                                                                             <td><a href="#">Cambiar estado</a><a href="#">Cambiar estado</a></td>
-                                                                            <td><
-                                                                                <a href="#" class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i></a>
+                                                                            <td>
+                                                                                <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                                                   class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                </a>
+
+                                                                                editarLlamada
                                                                                 <a href="{{ path('actualizarEstadoLlamadaUsuario', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
                                                                                 class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
                                                                                 </a>

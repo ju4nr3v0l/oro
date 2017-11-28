@@ -103,7 +103,7 @@ class LlamadaController extends Controller
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
             'llamadas' => $arLlamadas,
-            'usuario'  => $user
+            'usuario'  => $token
         ]);
 
 
@@ -183,11 +183,9 @@ class LlamadaController extends Controller
             throw $this->createNotFoundException("No Existe esa factura");
         } else {
             /** acá instancias form */
-            $form = 'juan';
 
-
-
-
+            $form = $this->createForm(FormTypeLlamada::class, $arLlamada); //create form
+            $form->handleRequest($request);
 
             /** fin instancia form */
 
