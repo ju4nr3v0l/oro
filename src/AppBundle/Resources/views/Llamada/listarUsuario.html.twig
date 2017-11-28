@@ -180,14 +180,13 @@
                                                                                 <a href="#" class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i></a>
                                                                                 <a href="#custom-modal"
                                                                                    class="btn btn-default waves-effect waves-light btn-xs m-b-5"
+                                                                                   data-whatever="{{ cont }}"
                                                                                    data-animation="makeway"
                                                                                    data-plugin="custommodal"
                                                                                    data-overlayspeed="100"
                                                                                    data-overlaycolor="#36404a">
                                                                                     <i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
-                                                                                </a>
-                                                                                {#<button onclick="showModal({{ set idLlamada = llamada.codigoLlamadaPk }})"></button>#}
-                                                                            </td>
+                                                                                </a>                                                                           </td>
                                                                         </tr>
                                                                         {% set cont= cont + 1 %}
                                                                     {% endif %}
@@ -198,11 +197,6 @@
                                                     </div> <!-- end card -->
                                                 </div>
                                                 <!-- end col -->
-                                                {#<script type="application/javascript">#}
-                                                    {#function showModal(var idLlamada){#}
-                                                        {#$(document).id("#custom-modal").showModal();#}
-                                                    {#}#}
-                                                {#</script>#}
                                                 <!-- Modal -->
                                                 <div id="custom-modal" class="modal-demo">
                                                     <button type="button" class="close" onclick="Custombox.close();">
@@ -225,4 +219,11 @@
         </div>
         {{ include('zircosTemplate/bloquesGenerales/pie.html.twig') }}
     </div>
+{% endblock %}
+{% block javascriptsBottom%}
+    <script>
+        jQuery(document).ready(function($){
+
+        })
+    </script>
 {% endblock %}
