@@ -136,7 +136,7 @@ class LlamadaController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $llamada = new Llamada();
+
             $em = $this->getDoctrine()->getManager();
             // Get our Token (representing the currently logged in user)
             // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
@@ -145,13 +145,14 @@ class LlamadaController extends Controller
             # e.g: $token->isAuthenticated();
             # [Careful]            ^ "Anonymous users are technically authenticated"
             // Get our user from that token
-            $estado = $em->getRepository('AppBundle:Estado')->find(1);
+
             $user = $token->getUser();
             $id =  $user->getCodigoUsuarioPk();
-            $llamada->setCodigoUsuarioAtiendeFk($id);
-            $llamada->setFechaGestion(new \DateTime('now'));
+            $arLlamadas->setCodigoUsuarioAtiendeFk($id);
+            $arLlamadas->setFechaGestion(new \DateTime('now'));
+
             $em = $this->getDoctrine()->getManager();
-            $em->persist($llamada);
+            $em->persist($arLlamadas);
             $em->flush();
             $url = $this->generateUrl('listadoLlamadasUsuario');
             return $this->redirect($url);
@@ -162,6 +163,7 @@ class LlamadaController extends Controller
             'llamadas' => $arLlamadas,
             'usuario'  => $user,
             'form' => $form->createView ()
+
         ]);
 
 
