@@ -157,7 +157,7 @@ class LlamadaController extends Controller
         }
 
 
-        return $this->render('AppBundle:Llamada:actualizarEstadoLlamada.html.twig', [
+        return $this->render('AppBundle:Llamada:actualizarEstado.html.twig', [
             'llamadas' => $arLlamadas,
             'usuario'  => $user,
             'form' => $form->createView ()
@@ -165,6 +165,40 @@ class LlamadaController extends Controller
         ]);
 
 
+
+
+
+    }
+
+    /**
+     * @Route("/editarLlamada/{codigoLlamadaPk}", requirements={"codigoLlamadaPk":"\d+"}, name="editarLlamada")
+     */
+
+    public function editarLlamada(Request $request, $codigoLlamadaPk)
+    {
+
+
+        $arLlamada = $this->getDoctrine()->getManager()->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
+        if(!$arLlamada){
+            throw $this->createNotFoundException("No Existe esa factura");
+        } else {
+            /** acá isntancias form */
+            $form = 'juan';
+
+
+
+
+
+            /** fin instancia form */
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $url = $this->generateUrl('listadoLlamadasUsuario');
+                return $this->redirect($url);
+            }
+        }
 
 
 
