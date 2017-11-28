@@ -31,7 +31,6 @@ class FormTypeLlamada extends AbstractType{
         $builder
             ->add ('nombreContacto', TextType::class,array(
                 'attr' => array(
-
                     'id' => '_nombreContacto',
                     'name' => '_nombreContacto'
                 )
@@ -71,13 +70,13 @@ class FormTypeLlamada extends AbstractType{
                     'class' => 'form-control'
                 )
             ))
-//            ->add('llamadasEstado', EntityType::class, array(
-//                'class' => 'AppBundle:Estado',
-//                'query_builder' => function (EntityRepository $er) {
-//                    return $er->createQueryBuilder('c')
-//                        ->orderBy('c.nombre', 'ASC');},
-//                'choice_label' => 'nombre',
-//                'required' => true))
+            ->add('llamadasEstado', EntityType::class, array(
+                'class' => 'AppBundle:Estado',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.nombre', 'ASC');},
+                'choice_label' => 'nombre',
+                'required' => true))
             ->add('clienteRel', EntityType::class, array(
                 'class' => 'AppBundle:Cliente',
                 'query_builder' => function (EntityRepository $er) {

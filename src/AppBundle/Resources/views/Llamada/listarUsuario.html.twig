@@ -104,9 +104,9 @@
                                                                             <td><a href="#">Cambiar estado</a><a href="#">Cambiar estado</a></td>
                                                                             <td><
                                                                                 <a href="#" class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i></a>
-                                                                                {#<a href="{{ path('#', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"#}
-                                                                                {#class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>#}
-                                                                                {#</a>#}
+                                                                                <a href="{{ path('actualizarEstadoLlamadaUsuario', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                                                class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
+                                                                                </a>
                                                                             </td>
                                                                         </tr>
                                                                     {% endif %}
@@ -177,9 +177,9 @@
                                                                             <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
                                                                                 <a href="#" class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i></a>
-                                                                                {#<a href="{{ path('#', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"#}
-                                                                                   {#class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>#}
-                                                                                {#</a>#}
+                                                                                <a href="{{ path('actualizarEstadoLlamadaUsuario', { 'codigoLlamadaPk': llamada.codigoLlamadaPk }) }}"
+                                                                                   class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
+                                                                                </a>
 
                                                                                 {#<a href="#custom-modal{{ llamada.codigoLlamadaPk }}"#}
                                                                                    {#class="btn btn-default waves-effect waves-light btn-xs m-b-5"#}
