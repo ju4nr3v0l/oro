@@ -63,4 +63,26 @@ class LlamadaController extends Controller
 
         ]);
     }
+
+    /**
+     * @Route("/listadoLlamadasUsuario", name="listadoLlamadasUsuario")
+     */
+
+    public function listarLlamadaUsuario(Request $request){
+        // Get our Token (representing the currently logged in user)
+        // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
+                $token = $this->get('security.token_storage')->getToken();
+        # e.g: $token->getUser();
+        # e.g: $token->isAuthenticated();
+        # [Careful]            ^ "Anonymous users are technically authenticated"
+        // Get our user from that token
+                $user = $token->getUser();
+        // en index pagina con datos generales de la app
+        return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
+            'data' => $user
+
+        ]);
+
+
+    }
 }

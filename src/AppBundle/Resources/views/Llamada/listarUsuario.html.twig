@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyAtt %}class="fixed-left"{% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+        {{ include('zircosTemplate/bloquesGenerales/menuEncabezado.html.twig') }}
+
+        {{ include('zircosTemplate/bloquesGenerales/menuIzquierdo.html.twig') }}
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container">
+                    {% block content %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title"><i class="mdi mdi-phone-incoming"></i> Registro de Llamadas </h4>
+                                    <a href="{{ path('registrarLlamada') }}">
+                                        <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Agregar Llamada</button>
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {{ dump(data) }}
+                        <div class="row">
+
+
+
+                        </div>
+
+                    {% endblock content %}
+                </div> <!-- container -->
+            </div> <!-- content -->
+        </div>
+        {{ include('zircosTemplate/bloquesGenerales/pie.html.twig') }}
+    </div>
+{% endblock %}
