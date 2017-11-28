@@ -33,12 +33,8 @@ class LlamadaController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$call = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($llamada);
-
-
             $em->flush();
             $url = $this->generateUrl('listadoLlamadas');
             return $this->redirect($url);

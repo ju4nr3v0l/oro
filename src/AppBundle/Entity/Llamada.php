@@ -115,10 +115,10 @@ class Llamada
 
 
     /**
-     * @ORM\ManytoOne(targetEntity="Cliente", inversedBy="LlamadasRel")
+     * @ORM\ManytoOne(targetEntity="Cliente", inversedBy="llamadasClienteRel")
      * @ORM\JoinColumn(name="codigoClienteFk", referencedColumnName="codigoClientePk")
      */
-    private $llamadasCliente;
+    private $clienteRel;
 
     /**
      * @ORM\ManytoOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
@@ -457,27 +457,27 @@ class Llamada
     }
 
     /**
-     * Set llamadasCliente
+     * Set clienteRel
      *
-     * @param \AppBundle\Entity\Cliente $llamadasCliente
+     * @param \AppBundle\Entity\Cliente $clienteRel
      *
      * @return Llamada
      */
-    public function setLlamadasCliente(\AppBundle\Entity\Cliente $llamadasCliente = null)
+    public function setClienteRel(\AppBundle\Entity\Cliente $clienteRel = null)
     {
-        $this->llamadasCliente = $llamadasCliente;
+        $this->clienteRel = $clienteRel;
 
         return $this;
     }
 
     /**
-     * Get llamadasCliente
+     * Get clienteRel
      *
      * @return \AppBundle\Entity\Cliente
      */
-    public function getLlamadasCliente()
+    public function getClienteRel()
     {
-        return $this->llamadasCliente;
+        return $this->clienteRel;
     }
 
     /**
