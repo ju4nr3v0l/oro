@@ -48,7 +48,7 @@ class LlamadaController extends Controller
             $id =  $user->getCodigoUsuarioPk();
             $llamada->setCodigoUsuarioRecibeFk($id);
             $llamada->setFechaRegistro(new \DateTime('now'));
-            $llamada->setllamadasEstado($estado);
+            $llamada->setEstadoRel($estado);
             $em = $this->getDoctrine()->getManager();
             $em->persist($llamada);
             $em->flush();

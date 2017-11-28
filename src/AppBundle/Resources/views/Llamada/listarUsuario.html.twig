@@ -24,7 +24,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{ dump(llamadas) }}
                         <div class="row">
 
                         </div>
@@ -71,7 +70,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
-                                                                    {% if llamada.llamadasEstado == null %}
+                                                                    {% if llamada.estadoRel == 1 %}
                                                                         <tr>
                                                                             <td>
                                                                                 {{ llamada.tema }}
@@ -83,17 +82,25 @@
                                                                             <td>{{ llamada.extension }}</td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>
-                                                                                {% if llamada.codigoCategoriaLlamadaFk == 0 or llamada.codigoCategoriaLlamadaFk == null %}
+                                                                                {% if llamada.codigoCategoriaLlamadaFk == 0 %}
                                                                                     <span class="label label-danger">SIN CATEGORIZAR</span>
-                                                                                {% elseif llamada.codigoCategoriaLlamadaFk >= 1 %}
-                                                                                    <span class="label label-success">SOPORTE</span>
+                                                                                {% elseif llamada.codigoCategoriaLlamadaFk == 1 %}
+                                                                                    <span class="label label-default">SOPORTE</span>
+                                                                                {% elseif llamada.codigoCategoriaLlamadaFk == 2 %}
+                                                                                    <span class="label label-info">CAPACITACIÓN</span>
+                                                                                {% elseif llamada.codigoCategoriaLlamadaFk == 3 %}
+                                                                                    <span class="label label-orange">BUGS</span>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
                                                                                 {% if llamada.codigoEstadoLlamadaFk == 0 or llamada.codigoEstadoLlamadaFk == null %}
                                                                                     <span class="label label-danger">SIN ATENDER</span>
-                                                                                {% elseif llamada.codigoCategoriaLlamadaFk >= 1 %}
-                                                                                    <span class="label label-success">ATENDIDA</span>
+                                                                                {% elseif llamada.codigoEstadoLlamadaFk == 1 %}
+                                                                                    <span class="label label-orange">PENDIENTE</span>
+                                                                                {% elseif llamada.codigoEstadoLlamadaFk == 2 %}
+                                                                                    <span class="label label-info">ATENDIDA</span>
+                                                                                {% elseif llamada.codigoEstadoLlamadaFk == 3 %}
+                                                                                    <span class="label label-success">SOLUCIONADA</span>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td> Recibe ({{ llamada.codigoUsuarioRecibeFk }})</td>
@@ -145,7 +152,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
-                                                                    {% if  llamada.llamadasEstado is not null %}
+                                                                    {% if  llamada.estadoRel > 1 %}
                                                                         <tr>
                                                                             <td>
                                                                                 {{ llamada.tema }}
@@ -157,17 +164,25 @@
                                                                             <td>{{ llamada.extension }}</td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>
-                                                                                {% if llamada.codigoCategoriaLlamadaFk == 0 or llamada.codigoCategoriaLlamadaFk == null %}
+                                                                                {% if llamada.codigoCategoriaLlamadaFk == 0 %}
                                                                                     <span class="label label-danger">SIN CATEGORIZAR</span>
-                                                                                {% elseif llamada.codigoCategoriaLlamadaFk >= 1 %}
-                                                                                    <span class="label label-success">SOPORTE</span>
+                                                                                {% elseif llamada.codigoCategoriaLlamadaFk == 1 %}
+                                                                                    <span class="label label-default">SOPORTE</span>
+                                                                                {% elseif llamada.codigoCategoriaLlamadaFk == 2 %}
+                                                                                    <span class="label label-info">CAPACITACIÓN</span>
+                                                                                {% elseif llamada.codigoCategoriaLlamadaFk == 3 %}
+                                                                                    <span class="label label-orange">BUGS</span>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
                                                                                 {% if llamada.codigoEstadoLlamadaFk == 0 or llamada.codigoEstadoLlamadaFk == null %}
                                                                                     <span class="label label-danger">SIN ATENDER</span>
-                                                                                {% elseif llamada.codigoCategoriaLlamadaFk >= 1 %}
-                                                                                    <span class="label label-success">ATENDIDA</span>
+                                                                                {% elseif llamada.codigoEstadoLlamadaFk == 1 %}
+                                                                                    <span class="label label-orange">PENDIENTE</span>
+                                                                                {% elseif llamada.codigoEstadoLlamadaFk == 2 %}
+                                                                                    <span class="label label-info">ATENDIDA</span>
+                                                                                {% elseif llamada.codigoEstadoLlamadaFk == 3 %}
+                                                                                    <span class="label label-success">SOLUCIONADA</span>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td> Recibe ({{ llamada.codigoUsuarioRecibeFk }})</td>
@@ -225,6 +240,8 @@
                                 </div>
                             </div> <!-- end col -->
                         </div>
+
+                        {{ dump(llamadas) }}
                     {% endblock content %}
                 </div> <!-- container -->
             </div> <!-- content -->
