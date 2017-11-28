@@ -29,6 +29,20 @@ class FormTypeLlamada extends AbstractType{
     public function buildForm (FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add ('nombreContacto', TextType::class,array(
+                'attr' => array(
+
+                    'id' => '_nombreContacto',
+                    'name' => '_nombreContacto'
+                )
+            ))
+            ->add('llamadasCategoria', EntityType::class, array(
+                'class' => 'AppBundle:LlamadaCategoria',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.nombre', 'ASC');},
+                'choice_label' => 'nombre',
+                'required' => true))
             ->add ('tema', TextareaType::class, array(
                 'attr' => array(
                     'id' => '_tema',
@@ -57,26 +71,19 @@ class FormTypeLlamada extends AbstractType{
                     'class' => 'form-control'
                 )
             ))
-            ->add ('nombreContacto', TextType::class,array(
-                'attr' => array(
-
-                    'id' => '_nombreContacto',
-                    'name' => '_nombreContacto'
-                )
-            ))
-            ->add('llamadasCategoria', EntityType::class, array(
-                'class' => 'AppBundle:LlamadaCategoria',
+//            ->add('llamadasEstado', EntityType::class, array(
+//                'class' => 'AppBundle:Estado',
+//                'query_builder' => function (EntityRepository $er) {
+//                    return $er->createQueryBuilder('c')
+//                        ->orderBy('c.nombre', 'ASC');},
+//                'choice_label' => 'nombre',
+//                'required' => true))
+            ->add('llamadasCliente', EntityType::class, array(
+                'class' => 'AppBundle:Cliente',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->orderBy('c.nombre', 'ASC');},
-                'choice_label' => 'nombre',
-                'required' => true))
-            ->add('llamadasEstado', EntityType::class, array(
-                'class' => 'AppBundle:Estado',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.nombre', 'ASC');},
-                'choice_label' => 'nombre',
+                        ->orderBy('c.nombreComercial', 'ASC');},
+                'choice_label' => 'nombreComercial',
                 'required' => true))
 //            ->add ('codigoCategoriaLlamadaFk', IntegerType::class,array(
 //                'attr' => array(
