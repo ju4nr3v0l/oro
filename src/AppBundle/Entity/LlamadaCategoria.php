@@ -17,7 +17,8 @@ class LlamadaCategoria
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigoCategoriaLlamadaPk", type="integer", unique=true)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_categoria_llamada_pk", type="integer", unique=true)
      */
     private $codigoCategoriaLlamadaPk;
 
@@ -42,7 +43,7 @@ class LlamadaCategoria
 
     private $llamadasCategoriaRel;
 
-    /**
+       /**
      * Constructor
      */
     public function __construct()

@@ -17,7 +17,8 @@ class Estado
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigoEstadoLlamadaPk", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_estado_llamada_pk", type="integer")
      */
     private $codigoEstadoLlamadaPk;
 
@@ -41,7 +42,6 @@ class Estado
      */
 
     private $estadoRel;
-
     /**
      * Constructor
      */
