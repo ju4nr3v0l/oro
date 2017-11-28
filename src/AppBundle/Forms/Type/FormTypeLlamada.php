@@ -78,7 +78,7 @@ class FormTypeLlamada extends AbstractType{
 //                        ->orderBy('c.nombre', 'ASC');},
 //                'choice_label' => 'nombre',
 //                'required' => true))
-            ->add('llamadasCliente', EntityType::class, array(
+            ->add('clienteRel', EntityType::class, array(
                 'class' => 'AppBundle:Cliente',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
