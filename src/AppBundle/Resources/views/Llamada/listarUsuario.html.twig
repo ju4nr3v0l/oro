@@ -146,6 +146,7 @@
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
                                                                     {% if  llamada.llamadasEstado is not null %}
+                                                                        {% set cont = 1 %}
                                                                         <tr>
                                                                             <td>
                                                                                 {{ llamada.tema }}
@@ -185,6 +186,7 @@
                                                                                    data-overlaycolor="#36404a"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i></a>
                                                                             </td>
                                                                         </tr>
+                                                                        {% set cont= cont + 1 %}
                                                                     {% endif %}
                                                                 {% endfor %}
                                                                 </tbody>
