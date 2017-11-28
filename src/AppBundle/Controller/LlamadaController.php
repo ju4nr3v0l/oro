@@ -9,6 +9,7 @@ use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Llamada;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -97,13 +98,76 @@ class LlamadaController extends Controller
         // en index pagina con datos generales de la app
 
         $em = $this->getDoctrine()->getManager();
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioRecibeFk' => $id));
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->find(array('codigoUsuarioRecibeFk' => $id));
 
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
-            'llamadas' => $arLlamadas
+            'llamadas' => $arLlamadas,
+            'usuario'  => $user
         ]);
 
 
     }
+
+
+    /**
+     * @Route("/actualizarEstadoLlamadaUsuario", name="actualizarEstadoLlamadaUsuario")
+     */
+
+    public function setContainer(Request $request, $codigoLlamadaPk)
+    {
+
+        $form = array('juan');
+        $token = $this->get('security.token_storage')->getToken();
+        # e.g: $token->getUser();
+        # e.g: $token->isAuthenticated();
+        # [Careful]            ^ "Anonymous users are technically authenticated"
+        // Get our user from that token
+        $user = $token->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk));
+
+        /** aca instancia el form */
+
+
+
+
+
+        /** fin instancia del form */
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $llamada = new Llamada();
+            $em = $this->getDoctrine()->getManager();
+            // Get our Token (representing the currently logged in user)
+            // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
+            $token = $this->get('security.token_storage')->getToken();
+            # e.g: $token->getUser();
+            # e.g: $token->isAuthenticated();
+            # [Careful]            ^ "Anonymous users are technically authenticated"
+            // Get our user from that token
+            $estado = $em->getRepository('AppBundle:Estado')->find(1);
+            $user = $token->getUser();
+            $id =  $user->getCodigoUsuarioPk();
+            $llamada->setCodigoUsuarioAtiendeFk($id);
+            $llamada->setFechaGestion(new \DateTime('now'));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($llamada);
+            $em->flush();
+            $url = $this->generateUrl('listadoLlamadasUsuario');
+            return $this->redirect($url);
+        }
+
+
+        return $this->render('AppBundle:Llamada:actualizarEstadoLlamada.html.twig', [
+            'llamadas' => $arLlamadas,
+            'usuario'  => $user
+        ]);
+
+
+
+
+
+    }
+
 }
