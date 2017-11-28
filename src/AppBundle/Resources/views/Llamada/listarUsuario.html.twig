@@ -198,15 +198,15 @@
                                                 </div>
                                                 <!-- end col -->
                                                 <!-- Modal -->
-                                                <div id="custom-modal" class="modal-demo">
-                                                    <button type="button" class="close" onclick="Custombox.close();">
-                                                        <span>&times;</span><span class="sr-only">Close</span>
-                                                    </button>
-                                                    <h4 class="custom-modal-title">Llamada: {{ llamadas[1].codigoUsuarioRecibeFk }}</h4>
-                                                    <div class="custom-modal-text">
-                                                        {{ llamadas[1].nombreContacto }}
-                                                    </div>
-                                                </div>
+                                                {#<div id="custom-modal" class="modal-demo">#}
+                                                    {#<button type="button" class="close" onclick="Custombox.close();">#}
+                                                        {#<span>&times;</span><span class="sr-only">Close</span>#}
+                                                    {#</button>#}
+                                                    {#<h4 class="custom-modal-title">Llamada: {{ llamadas[1].codigoUsuarioRecibeFk }}</h4>#}
+                                                    {#<div class="custom-modal-text">#}
+                                                        {#{{ llamadas[1].nombreContacto }}#}
+                                                    {#</div>#}
+                                                {#</div>#}
                                             </div>
                                         </div>
                                     </div>
@@ -221,9 +221,9 @@
     </div>
 {% endblock %}
 {% block javascriptsBottom%}
-    <script>
-        jQuery(document).ready(function($){
-
-        })
-    </script>
+    {#<script>#}
+        {#jQuery(document).ready(function($){#}
+            {#console.log('ejecute jquery');#}
+        {#})#}
+    {#</script>#}
 {% endblock %}
