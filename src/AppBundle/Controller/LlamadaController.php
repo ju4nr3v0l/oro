@@ -24,7 +24,8 @@ class LlamadaController extends Controller
 
     public function insertarLlamada(Request $request)
     {
-        $fechaActual = date("Y-m-d H:i:s");
+        $fechaActual = new DateTime();
+        $fechaActual = $fechaActual->format('Y-m-d H:i:s');
 
         $llamada = new Llamada(); //instance class
         $form = $this->createForm(FormTypeLlamada::class, $llamada); //create form
@@ -33,6 +34,7 @@ class LlamadaController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             // Get our Token (representing the currently logged in user)
             // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
             $token = $this->get('security.token_storage')->getToken();
@@ -40,10 +42,12 @@ class LlamadaController extends Controller
             # e.g: $token->isAuthenticated();
             # [Careful]            ^ "Anonymous users are technically authenticated"
             // Get our user from that token
+            $estado = $em->getRepository('AppBundle:Estado')->find(1);
             $user = $token->getUser();
             $id =  $user->getCodigoUsuarioPk();
             $llamada->setCodigoUsuarioRecibeFk($id);
-            $llamada->setFechaRegistro($fechaActual);
+            $llamada->setFechaRegistro(new \DateTime('now'));
+            $llamada->setllamadasEstado($estado);
             $em = $this->getDoctrine()->getManager();
             $em->persist($llamada);
             $em->flush();
