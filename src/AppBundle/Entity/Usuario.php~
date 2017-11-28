@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 
+
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Role\Role;
 use Doctrine\ORM\Mapping as ORM;
