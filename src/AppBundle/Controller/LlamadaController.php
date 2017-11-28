@@ -125,7 +125,7 @@ class LlamadaController extends Controller
         // Get our user from that token
         $user = $token->getUser();
         $em = $this->getDoctrine()->getManager();
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk));
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
 
         /** aca instancia el form */
 
@@ -151,16 +151,6 @@ class LlamadaController extends Controller
             $id =  $user->getCodigoUsuarioPk();
             $llamada->setCodigoUsuarioAtiendeFk($id);
             $llamada->setFechaGestion(new \DateTime('now'));
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($llamada);
-            $em->flush();
-            $url = $this->generateUrl('listadoLlamadasUsuario');
-            return $this->redirect($url);
-        }
-
-
-        return $this->render('AppBundle:Llamada:actualizarEstadoLlamada.html.twig', [
-            'llamadas' => $arLlamadas,
             'usuario'  => $user
         ]);
 
