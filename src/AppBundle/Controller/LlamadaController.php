@@ -102,7 +102,6 @@ class LlamadaController extends Controller
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
             'llamadas' => $arLlamadas
-
         ]);
 
 
