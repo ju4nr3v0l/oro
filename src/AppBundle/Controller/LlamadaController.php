@@ -150,8 +150,6 @@ class LlamadaController extends Controller
             $id =  $user->getCodigoUsuarioPk();
             $arLlamadas->setCodigoUsuarioAtiendeFk($id);
             $arLlamadas->setFechaGestion(new \DateTime('now'));
-
-            $em = $this->getDoctrine()->getManager();
             $em->persist($arLlamadas);
             $em->flush();
             $url = $this->generateUrl('listadoLlamadasUsuario');

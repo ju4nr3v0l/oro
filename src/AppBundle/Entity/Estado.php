@@ -37,20 +37,17 @@ class Estado
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasEstado")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasEstadoRel")
      */
 
     private $estadoRel;
 
-
     /**
-     * Get id
-     *
-     * @return int
+     * Constructor
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->estadoRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -70,7 +67,7 @@ class Estado
     /**
      * Get codigoEstadoLlamadaPk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoEstadoLlamadaPk()
     {
@@ -126,39 +123,6 @@ class Estado
     }
 
     /**
-     * Set estadoRel
-     *
-     * @param \AppBundle\Entity\Llamada $estadoRel
-     *
-     * @return Estado
-     */
-    public function setEstadoRel(\AppBundle\Entity\Llamada $estadoRel = null)
-    {
-        $this->estadoRel = $estadoRel;
-
-        return $this;
-    }
-
-
-    /**
-     * Get estadoRel
-     *
-     * @return \AppBundle\Entity\Llamada
-     */
-
-    public function getEstadoRel()
-    {
-        return $this->estadoRel;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->estadoRel = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Add estadoRel
      *
      * @param \AppBundle\Entity\Llamada $estadoRel
@@ -180,5 +144,15 @@ class Estado
     public function removeEstadoRel(\AppBundle\Entity\Llamada $estadoRel)
     {
         $this->estadoRel->removeElement($estadoRel);
+    }
+
+    /**
+     * Get estadoRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEstadoRel()
+    {
+        return $this->estadoRel;
     }
 }

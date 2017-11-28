@@ -37,20 +37,17 @@ class LlamadaCategoria
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasCategoria")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="categoriaRel")
      */
 
     private $llamadasCategoriaRel;
 
-
     /**
-     * Get id
-     *
-     * @return int
+     * Constructor
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->llamadasCategoriaRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -70,7 +67,7 @@ class LlamadaCategoria
     /**
      * Get codigoCategoriaLlamadaPk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoCategoriaLlamadaPk()
     {
@@ -120,42 +117,9 @@ class LlamadaCategoria
      *
      * @return string
      */
-
-    
     public function getDescripcion()
     {
         return $this->descripcion;
-    }
-
-    /**
-     * Set llamadasCategoriaRel
-     *
-     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
-     *
-     * @return LlamadaCategoria
-     */
-    public function setLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel = null)
-    {
-        $this->llamadasCategoriaRel = $llamadasCategoriaRel;
-
-        return $this;
-    }
-
-    /**
-     * Get llamadasCategoriaRel
-     *
-     * @return \AppBundle\Entity\Llamada
-     */
-    public function getLlamadasCategoriaRel()
-    {
-        return $this->llamadasCategoriaRel;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->llamadasCategoriaRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -180,5 +144,15 @@ class LlamadaCategoria
     public function removeLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel)
     {
         $this->llamadasCategoriaRel->removeElement($llamadasCategoriaRel);
+    }
+
+    /**
+     * Get llamadasCategoriaRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLlamadasCategoriaRel()
+    {
+        return $this->llamadasCategoriaRel;
     }
 }

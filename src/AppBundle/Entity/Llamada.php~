@@ -124,13 +124,13 @@ class Llamada
      * @ORM\ManytoOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
      * @ORM\JoinColumn(name="codigoCategoriaLlamadaFk", referencedColumnName="codigoCategoriaLlamadaPk")
      */
-    private $llamadasCategoria;
+    private $categoriaRel;
 
 
     /**
-     * @ORM\ManytoOne(targetEntity="Estado", inversedBy="estadoRel")
+     * @ORM\ManytoOne(targetEntity="Estado", inversedBy="llamadasEstadoRel")
      * @ORM\JoinColumn(name="codigoEstadoLlamadaFk", referencedColumnName="codigoEstadoLlamadaPk")
      */
-    private $llamadasEstado;
+    private $estadoRel;
 
 }

@@ -124,14 +124,14 @@ class Llamada
      * @ORM\ManytoOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
      * @ORM\JoinColumn(name="codigoCategoriaLlamadaFk", referencedColumnName="codigoCategoriaLlamadaPk")
      */
-    private $llamadasCategoria;
+    private $categoriaRel;
 
 
     /**
-     * @ORM\ManytoOne(targetEntity="Estado", inversedBy="estadoRel")
+     * @ORM\ManytoOne(targetEntity="Estado", inversedBy="llamadasEstadoRel")
      * @ORM\JoinColumn(name="codigoEstadoLlamadaFk", referencedColumnName="codigoEstadoLlamadaPk")
      */
-    private $llamadasEstado;
+    private $estadoRel;
 
 
     /**
@@ -481,50 +481,50 @@ class Llamada
     }
 
     /**
-     * Set llamadasCategoria
+     * Set categoriaRel
      *
-     * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategoria
+     * @param \AppBundle\Entity\LlamadaCategoria $categoriaRel
      *
      * @return Llamada
      */
-    public function setLlamadasCategoria(\AppBundle\Entity\LlamadaCategoria $llamadasCategoria = null)
+    public function setCategoriaRel(\AppBundle\Entity\LlamadaCategoria $categoriaRel = null)
     {
-        $this->llamadasCategoria = $llamadasCategoria;
+        $this->categoriaRel = $categoriaRel;
 
         return $this;
     }
 
     /**
-     * Get llamadasCategoria
+     * Get categoriaRel
      *
      * @return \AppBundle\Entity\LlamadaCategoria
      */
-    public function getLlamadasCategoria()
+    public function getCategoriaRel()
     {
-        return $this->llamadasCategoria;
+        return $this->categoriaRel;
     }
 
     /**
-     * Set llamadasEstado
+     * Set estadoRel
      *
-     * @param \AppBundle\Entity\Estado $llamadasEstado
+     * @param \AppBundle\Entity\Estado $estadoRel
      *
      * @return Llamada
      */
-    public function setLlamadasEstado(\AppBundle\Entity\Estado $llamadasEstado = null)
+    public function setEstadoRel(\AppBundle\Entity\Estado $estadoRel = null)
     {
-        $this->llamadasEstado = $llamadasEstado;
+        $this->estadoRel = $estadoRel;
 
         return $this;
     }
 
     /**
-     * Get llamadasEstado
+     * Get estadoRel
      *
      * @return \AppBundle\Entity\Estado
      */
-    public function getLlamadasEstado()
+    public function getEstadoRel()
     {
-        return $this->llamadasEstado;
+        return $this->estadoRel;
     }
 }
