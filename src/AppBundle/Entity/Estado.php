@@ -43,7 +43,6 @@ class Estado
 
 
     private $llamadasEstadoRel;
-
     /**
      * Constructor
      */
