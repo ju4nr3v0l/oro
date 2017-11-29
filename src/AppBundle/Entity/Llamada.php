@@ -68,30 +68,37 @@ class Llamada
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_gestion", type="datetime", nullable= TRUE )
+     * @ORM\Column(name="fecha_gestion", type="datetime" ,nullable= TRUE)
      */
     private $fechaGestion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_solucion", type="datetime" ,nullable= TRUE )
+     * @ORM\Column(name="fecha_solucion", type="datetime" ,nullable= TRUE)
      */
     private $fechaSolucion;
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="atendida", type="boolean", nullable= TRUE)
+     * @ORM\Column(name="codigo_categoria_llamada_fk", type="integer" ,nullable= TRUE)
      */
-    private $atendida;
+    private $codigoCategoriaLlamadaFk;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="solucionada", type="boolean", nullable= TRUE)
+     * @ORM\Column(name="estado_atendido", type="boolean" ,nullable= TRUE)
      */
-    private $solucionada;
+    private $estadoAtendido;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado_solucionado", type="boolean" ,nullable= TRUE)
+     */
+    private $estadoSolucionado;
 
     /**
      * @var int
@@ -129,10 +136,12 @@ class Llamada
     private $clienteRel;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Estado", inversedBy="llamadasEstadoRel")
-     * @ORM\JoinColumn(name="codigo_estado_llamada_fk", referencedColumnName="codigo_estado_llamada_pk")
+     * @ORM\ManyToOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
+     * @ORM\JoinColumn(name="codigo_categoria_llamada_fk", referencedColumnName="codigo_categoria_llamada_pk")
      */
-    private $estadoRel;
+    private $categoriaRel;
+
+
 
     /**
      * Get codigoLlamadaPk
@@ -337,51 +346,75 @@ class Llamada
     }
 
     /**
-     * Set atendida
+     * Set codigoCategoriaLlamadaFk
      *
-     * @param boolean $atendida
+     * @param integer $codigoCategoriaLlamadaFk
      *
      * @return Llamada
      */
-    public function setAtendida($atendida)
+    public function setCodigoCategoriaLlamadaFk($codigoCategoriaLlamadaFk)
     {
-        $this->atendida = $atendida;
+        $this->codigoCategoriaLlamadaFk = $codigoCategoriaLlamadaFk;
 
         return $this;
     }
 
     /**
-     * Get atendida
+     * Get codigoCategoriaLlamadaFk
      *
-     * @return boolean
+     * @return integer
      */
-    public function getAtendida()
+    public function getCodigoCategoriaLlamadaFk()
     {
-        return $this->atendida;
+        return $this->codigoCategoriaLlamadaFk;
     }
 
     /**
-     * Set solucionada
+     * Set estadoAtendido
      *
-     * @param boolean $solucionada
+     * @param boolean $estadoAtendido
      *
      * @return Llamada
      */
-    public function setSolucionada($solucionada)
+    public function setEstadoAtendido($estadoAtendido)
     {
-        $this->solucionada = $solucionada;
+        $this->estadoAtendido = $estadoAtendido;
 
         return $this;
     }
 
     /**
-     * Get solucionada
+     * Get estadoAtendido
      *
      * @return boolean
      */
-    public function getSolucionada()
+    public function getEstadoAtendido()
     {
-        return $this->solucionada;
+        return $this->estadoAtendido;
+    }
+
+    /**
+     * Set estadoSolucionado
+     *
+     * @param boolean $estadoSolucionado
+     *
+     * @return Llamada
+     */
+    public function setEstadoSolucionado($estadoSolucionado)
+    {
+        $this->estadoSolucionado = $estadoSolucionado;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoSolucionado
+     *
+     * @return boolean
+     */
+    public function getEstadoSolucionado()
+    {
+        return $this->estadoSolucionado;
     }
 
     /**
@@ -505,26 +538,26 @@ class Llamada
     }
 
     /**
-     * Set estadoRel
+     * Set categoriaRel
      *
-     * @param \AppBundle\Entity\Estado $estadoRel
+     * @param \AppBundle\Entity\LlamadaCategoria $categoriaRel
      *
      * @return Llamada
      */
-    public function setEstadoRel(\AppBundle\Entity\Estado $estadoRel = null)
+    public function setCategoriaRel(\AppBundle\Entity\LlamadaCategoria $categoriaRel = null)
     {
-        $this->estadoRel = $estadoRel;
+        $this->categoriaRel = $categoriaRel;
 
         return $this;
     }
 
     /**
-     * Get estadoRel
+     * Get categoriaRel
      *
-     * @return \AppBundle\Entity\Estado
+     * @return \AppBundle\Entity\LlamadaCategoria
      */
-    public function getEstadoRel()
+    public function getCategoriaRel()
     {
-        return $this->estadoRel;
+        return $this->categoriaRel;
     }
 }
