@@ -43,12 +43,12 @@ class LlamadaController extends Controller
             # e.g: $token->isAuthenticated();
             # [Careful]            ^ "Anonymous users are technically authenticated"
             // Get our user from that token
-            $estado = $em->getRepository('AppBundle:Estado')->find(1);
             $user = $token->getUser();
             $id =  $user->getCodigoUsuarioPk();
             $llamada->setCodigoUsuarioRecibeFk($id);
             $llamada->setFechaRegistro(new \DateTime('now'));
-            $llamada->setEstadoRel($estado);
+            $llamada->setAtendida(false);
+            $llamada->setSolucionada(false);
             $em = $this->getDoctrine()->getManager();
             $em->persist($llamada);
             dump ($llamada);
@@ -141,6 +141,7 @@ class LlamadaController extends Controller
             $id =  $user->getCodigoUsuarioPk();
             $arLlamadas->setCodigoUsuarioAtiendeFk($id);
             $arLlamadas->setFechaGestion(new \DateTime('now'));
+            $arLlamadas->setAtendida(true);
             $em->persist($arLlamadas);
             $em->flush();
             $url = $this->generateUrl('listadoLlamadasUsuario');
