@@ -68,23 +68,30 @@ class Llamada
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_gestion", type="datetime" ,nullable= TRUE)
+     * @ORM\Column(name="fecha_gestion", type="datetime", nullable= TRUE )
      */
     private $fechaGestion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_solucion", type="datetime" ,nullable= TRUE)
+     * @ORM\Column(name="fecha_solucion", type="datetime" ,nullable= TRUE )
      */
     private $fechaSolucion;
 
     /**
-     * @var int
+     * @var boolean
      *
-     * @ORM\Column(name="codigo_categoria_llamada_fk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="atendida", type="boolean", nullable= TRUE)
      */
-    private $codigoCategoriaLlamadaFk;
+    private $atendida;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="solucionada", type="boolean", nullable= TRUE)
+     */
+    private $solucionada;
 
     /**
      * @var int
@@ -122,18 +129,10 @@ class Llamada
     private $clienteRel;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
-     * @ORM\JoinColumn(name="codigo_categoria_llamada_fk", referencedColumnName="codigo_categoria_llamada_pk")
-     */
-    private $categoriaRel;
-
-
-    /**
      * @ORM\ManyToOne(targetEntity="Estado", inversedBy="llamadasEstadoRel")
      * @ORM\JoinColumn(name="codigo_estado_llamada_fk", referencedColumnName="codigo_estado_llamada_pk")
      */
     private $estadoRel;
-
 
     /**
      * Get codigoLlamadaPk
@@ -338,27 +337,51 @@ class Llamada
     }
 
     /**
-     * Set codigoCategoriaLlamadaFk
+     * Set atendida
      *
-     * @param integer $codigoCategoriaLlamadaFk
+     * @param boolean $atendida
      *
      * @return Llamada
      */
-    public function setCodigoCategoriaLlamadaFk($codigoCategoriaLlamadaFk)
+    public function setAtendida($atendida)
     {
-        $this->codigoCategoriaLlamadaFk = $codigoCategoriaLlamadaFk;
+        $this->atendida = $atendida;
 
         return $this;
     }
 
     /**
-     * Get codigoCategoriaLlamadaFk
+     * Get atendida
      *
-     * @return integer
+     * @return boolean
      */
-    public function getCodigoCategoriaLlamadaFk()
+    public function getAtendida()
     {
-        return $this->codigoCategoriaLlamadaFk;
+        return $this->atendida;
+    }
+
+    /**
+     * Set solucionada
+     *
+     * @param boolean $solucionada
+     *
+     * @return Llamada
+     */
+    public function setSolucionada($solucionada)
+    {
+        $this->solucionada = $solucionada;
+
+        return $this;
+    }
+
+    /**
+     * Get solucionada
+     *
+     * @return boolean
+     */
+    public function getSolucionada()
+    {
+        return $this->solucionada;
     }
 
     /**
@@ -479,30 +502,6 @@ class Llamada
     public function getClienteRel()
     {
         return $this->clienteRel;
-    }
-
-    /**
-     * Set categoriaRel
-     *
-     * @param \AppBundle\Entity\LlamadaCategoria $categoriaRel
-     *
-     * @return Llamada
-     */
-    public function setCategoriaRel(\AppBundle\Entity\LlamadaCategoria $categoriaRel = null)
-    {
-        $this->categoriaRel = $categoriaRel;
-
-        return $this;
-    }
-
-    /**
-     * Get categoriaRel
-     *
-     * @return \AppBundle\Entity\LlamadaCategoria
-     */
-    public function getCategoriaRel()
-    {
-        return $this->categoriaRel;
     }
 
     /**

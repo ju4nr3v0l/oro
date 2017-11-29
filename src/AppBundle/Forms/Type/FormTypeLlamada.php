@@ -37,13 +37,6 @@ class FormTypeLlamada extends AbstractType{
                     'name' => '_nombreContacto'
                 )
             ))
-            ->add('categoriaRel', EntityType::class, array(
-                'class' => 'AppBundle:LlamadaCategoria',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.nombre', 'ASC');},
-                'choice_label' => 'nombre',
-                'required' => true))
             ->add ('tema', TextareaType::class, array(
                 'attr' => array(
                     'id' => '_tema',
