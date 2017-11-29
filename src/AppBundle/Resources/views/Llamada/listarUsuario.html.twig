@@ -18,7 +18,7 @@
                                 <div class="page-title-box">
                                     <h4 class="page-title"><i class="mdi mdi-phone-classic"></i> Mis Llamadas </h4>
                                     <a href="{{ path('registrarLlamada') }}">
-                                        <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Agregar Llamada</button>
+                                        <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Nueva </button>
                                     </a>
                                     <div class="clearfix"></div>
                                 </div>
@@ -40,10 +40,10 @@
                                     <div class="tabs-vertical-env">
                                         <ul class="nav tabs-vertical">
                                             <li class="">
-                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">Pendientes</a>
+                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">Pendientes: {% set pendientes = 0 %}</a>
                                             </li>
                                             <li class="">
-                                                <a href="#v-atendidas" data-toggle="tab" aria-expanded="false">Atendidas</a>
+                                                <a href="#v-atendidas" data-toggle="tab" aria-expanded="false">Atendidas: {% set atendidas = 5 %}</a>
                                             </li>
                                         </ul>
 
@@ -57,18 +57,19 @@
                                                             <table class="table table table-hover m-0">
                                                                 <thead>
                                                                 <tr>
+                                                                    <th>Fecha</th>
+                                                                    <th>Cliente</th>
+                                                                    <th>Contacto</th>
+                                                                    <th>Categoría</th>
                                                                     <th>Tema</th>
-                                                                    <th>Cliente | Contacto</th>
                                                                     <th>Teléfono</th>
                                                                     <th>Extensión</th>
                                                                     <th>Descripción</th>
-                                                                    <th>Categoría</th>
-                                                                    <th>Estado</th>
                                                                     <th>Recibe</th>
-                                                                    <th>Fecha | Registro</th>
                                                                     <th>Gestiona</th>
-                                                                    <th>Fecha | Gestión</th>
-                                                                    <th>Fecha | Solución</th>
+                                                                    <th>Gestión</th>
+                                                                    <th>Solución</th>
+                                                                    <th>Estado</th>
                                                                     <th>Acción</th>
                                                                 </tr>
                                                                 </thead>
@@ -76,16 +77,13 @@
                                                                 {% for llamada in llamadas %}
                                                                     {% if llamada.codigoEstadoLlamadaFk == 1 %}
                                                                         <tr>
-                                                                            <td>
-                                                                                {{ llamada.tema }}
-                                                                            </td>
+                                                                            <td>{{ llamada.fechaRegistro|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
                                                                                 <h5 class="m-0">{{ llamada.clienteRel.nombreComercial }}</h5>
-                                                                                <p class="m-0 text-muted font-13"><small>{{ llamada.nombreContacto }}</small></p>
                                                                             </td>
-                                                                            <td>{{ llamada.telefono }}</td>
-                                                                            <td>{{ llamada.extension }}</td>
-                                                                            <td>{{ llamada.descripcion }}</td>
+                                                                            <td>
+                                                                                {{ llamada.nombreContacto }}
+                                                                            </td>
                                                                             <td>
                                                                                 {% if llamada.codigoCategoriaLlamadaFk == 0 %}
                                                                                     <span class="label label-danger">SIN CATEGORÍA</span>
@@ -98,6 +96,16 @@
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
+                                                                                {{ llamada.tema }}
+                                                                            </td>
+                                                                            <td>{{ llamada.telefono }}</td>
+                                                                            <td>{{ llamada.extension }}</td>
+                                                                            <td>{{ llamada.descripcion }}</td>
+                                                                            <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
+                                                                            <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
+                                                                            <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
+                                                                            <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
+                                                                            <td>
                                                                                 {% if llamada.codigoEstadoLlamadaFk == 0 or llamada.codigoEstadoLlamadaFk == null %}
                                                                                     <span class="label label-danger">SIN CATEGORÍA</span>
                                                                                 {% elseif llamada.codigoEstadoLlamadaFk == 1 %}
@@ -108,11 +116,6 @@
                                                                                     <span class="label label-success">{{ llamada.estadoRel.nombre }}</span>
                                                                                 {% endif %}
                                                                             </td>
-                                                                            <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
-                                                                            <td>{{ llamada.fechaRegistro|date('Y-m-d H:i:s') }}</td>
-                                                                            <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
-                                                                            <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
-                                                                            <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
                                                                                 <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
                                                                                    class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
@@ -141,35 +144,33 @@
                                                             <table class="table table table-hover m-0">
                                                                 <thead>
                                                                 <tr>
+                                                                    <th>Fecha</th>
+                                                                    <th>Cliente</th>
+                                                                    <th>Contacto</th>
+                                                                    <th>Categoría</th>
                                                                     <th>Tema</th>
-                                                                    <th>Cliente | Contacto</th>
                                                                     <th>Teléfono</th>
                                                                     <th>Extensión</th>
                                                                     <th>Descripción</th>
-                                                                    <th>Categoría</th>
-                                                                    <th>Estado</th>
                                                                     <th>Recibe</th>
-                                                                    <th>Fecha | Registro</th>
                                                                     <th>Gestiona</th>
-                                                                    <th>Fecha | Gestión</th>
-                                                                    <th>Fecha | Solución</th>
+                                                                    <th>Gestión</th>
+                                                                    <th>Solución</th>
+                                                                    <th>Estado</th>
                                                                     <th>Acción</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
-                                                                    {% if  llamada.codigoEstadoLlamadaFk > 1 %}
+                                                                    {% if llamada.codigoEstadoLlamadaFk > 1 %}
                                                                         <tr>
-                                                                            <td>
-                                                                                {{ llamada.tema }}
-                                                                            </td>
+                                                                            <td>{{ llamada.fechaRegistro|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
                                                                                 <h5 class="m-0">{{ llamada.clienteRel.nombreComercial }}</h5>
-                                                                                <p class="m-0 text-muted font-13"><small>{{ llamada.nombreContacto }}</small></p>
                                                                             </td>
-                                                                            <td>{{ llamada.telefono }}</td>
-                                                                            <td>{{ llamada.extension }}</td>
-                                                                            <td>{{ llamada.descripcion }}</td>
+                                                                            <td>
+                                                                                {{ llamada.nombreContacto }}
+                                                                            </td>
                                                                             <td>
                                                                                 {% if llamada.codigoCategoriaLlamadaFk == 0 %}
                                                                                     <span class="label label-danger">SIN CATEGORÍA</span>
@@ -182,6 +183,16 @@
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
+                                                                                {{ llamada.tema }}
+                                                                            </td>
+                                                                            <td>{{ llamada.telefono }}</td>
+                                                                            <td>{{ llamada.extension }}</td>
+                                                                            <td>{{ llamada.descripcion }}</td>
+                                                                            <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
+                                                                            <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
+                                                                            <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
+                                                                            <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
+                                                                            <td>
                                                                                 {% if llamada.codigoEstadoLlamadaFk == 0 or llamada.codigoEstadoLlamadaFk == null %}
                                                                                     <span class="label label-danger">SIN CATEGORÍA</span>
                                                                                 {% elseif llamada.codigoEstadoLlamadaFk == 1 %}
@@ -192,11 +203,6 @@
                                                                                     <span class="label label-success">{{ llamada.estadoRel.nombre }}</span>
                                                                                 {% endif %}
                                                                             </td>
-                                                                            <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
-                                                                            <td>{{ llamada.fechaRegistro|date('Y-m-d H:i:s') }}</td>
-                                                                            <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
-                                                                            <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
-                                                                            <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
                                                                                 <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
                                                                                    class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>

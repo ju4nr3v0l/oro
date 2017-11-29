@@ -140,16 +140,6 @@ class LlamadaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-            // Get our Token (representing the currently logged in user)
-            // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
-            $token = $this->get('security.token_storage')->getToken();
-            # e.g: $token->getUser();
-            # e.g: $token->isAuthenticated();
-            # [Careful]            ^ "Anonymous users are technically authenticated"
-            // Get our user from that token
-
-            $user = $token->getUser();
             $id =  $user->getCodigoUsuarioPk();
             $arLlamadas->setCodigoUsuarioAtiendeFk($id);
             $arLlamadas->setFechaGestion(new \DateTime('now'));
