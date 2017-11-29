@@ -44,6 +44,8 @@ class LlamadaController extends Controller
             # [Careful]            ^ "Anonymous users are technically authenticated"
             // Get our user from that token
             $estado = $em->getRepository('AppBundle:Estado')->find(1);
+            dump($estado);
+            exit();
             $user = $token->getUser();
             $id =  $user->getCodigoUsuarioPk();
             $llamada->setCodigoUsuarioRecibeFk($id);
@@ -51,6 +53,7 @@ class LlamadaController extends Controller
             $llamada->setEstadoRel($estado);
             $em = $this->getDoctrine()->getManager();
             $em->persist($llamada);
+            dump ($llamada);
             $em->flush();
             $url = $this->generateUrl('listadoLlamadas');
             return $this->redirect($url);
@@ -157,7 +160,7 @@ class LlamadaController extends Controller
         }
 
 
-        return $this->render('AppBundle:Llamada:actualizarEstado.html.twig', [
+        return $this->render('AppBundle:Llamada:actualizarEstadoLlamada.html.twig', [
             'llamadas' => $arLlamadas,
             'usuario'  => $user,
             'form' => $form->createView ()
@@ -180,7 +183,7 @@ class LlamadaController extends Controller
 
         $arLlamada = $this->getDoctrine()->getManager()->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
         if(!$arLlamada){
-            throw $this->createNotFoundException("No Existe esa factura");
+            throw $this->createNotFoundException("No Existe esa llamada");
         } else {
             /** acá instancias form */
 
@@ -196,10 +199,15 @@ class LlamadaController extends Controller
                 $url = $this->generateUrl('listadoLlamadasUsuario');
                 return $this->redirect($url);
             }
+
+            $strEstado = $arLlamada->getEstadoRel()->getNombre();
+
+            return $this->render('AppBundle:Llamada:editar.html.twig', [
+                'llamadas' => $arLlamada,
+                'estado' => $strEstado,
+                'form' => $form->createView ()
+            ]);
         }
-
-
-
     }
 
 }

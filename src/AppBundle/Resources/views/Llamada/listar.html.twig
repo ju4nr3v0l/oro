@@ -75,7 +75,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Tema</th>
-                                                <th>Contacto</th>
+                                                <th>Cliente | Contacto</th>
                                                 <th>Teléfono</th>
                                                 <th>Extensión</th>
                                                 <th>Descripción</th>
@@ -96,7 +96,7 @@
                                                         {{ llamada.tema }}
                                                     </td>
                                                     <td>
-                                                        <h5 class="m-0">{{ llamada.codigoClienteFk }}</h5>
+                                                        <h5 class="m-0">{{ llamada.clienteRel.nombreComercial }}</h5>
                                                         <p class="m-0 text-muted font-13"><small>{{ llamada.nombreContacto }}</small></p>
                                                     </td>
                                                     <td>{{ llamada.telefono }}</td>
