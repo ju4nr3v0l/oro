@@ -38,31 +38,17 @@ class Estado
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="llamadasEstadoRel")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="estadoRel")
      */
 
 
-    private $estadoRel;
+    private $llamadasEstadoRel;
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->estadoRel = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set codigoEstadoLlamadaPk
-     *
-     * @param integer $codigoEstadoLlamadaPk
-     *
-     * @return Estado
-     */
-    public function setCodigoEstadoLlamadaPk($codigoEstadoLlamadaPk)
-    {
-        $this->codigoEstadoLlamadaPk = $codigoEstadoLlamadaPk;
-
-        return $this;
+        $this->llamadasEstadoRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -124,36 +110,36 @@ class Estado
     }
 
     /**
-     * Add estadoRel
+     * Add llamadasEstadoRel
      *
-     * @param \AppBundle\Entity\Llamada $estadoRel
+     * @param \AppBundle\Entity\Llamada $llamadasEstadoRel
      *
      * @return Estado
      */
-    public function addEstadoRel(\AppBundle\Entity\Llamada $estadoRel)
+    public function addLlamadasEstadoRel(\AppBundle\Entity\Llamada $llamadasEstadoRel)
     {
-        $this->estadoRel[] = $estadoRel;
+        $this->llamadasEstadoRel[] = $llamadasEstadoRel;
 
         return $this;
     }
 
     /**
-     * Remove estadoRel
+     * Remove llamadasEstadoRel
      *
-     * @param \AppBundle\Entity\Llamada $estadoRel
+     * @param \AppBundle\Entity\Llamada $llamadasEstadoRel
      */
-    public function removeEstadoRel(\AppBundle\Entity\Llamada $estadoRel)
+    public function removeLlamadasEstadoRel(\AppBundle\Entity\Llamada $llamadasEstadoRel)
     {
-        $this->estadoRel->removeElement($estadoRel);
+        $this->llamadasEstadoRel->removeElement($llamadasEstadoRel);
     }
 
     /**
-     * Get estadoRel
+     * Get llamadasEstadoRel
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getEstadoRel()
+    public function getLlamadasEstadoRel()
     {
-        return $this->estadoRel;
+        return $this->llamadasEstadoRel;
     }
 }

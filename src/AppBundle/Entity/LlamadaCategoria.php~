@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class LlamadaCategoria
 {
 
-
     /**
      * @var int
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(name="codigo_categoria_llamada_pk", type="integer", unique=true)
      */
     private $codigoCategoriaLlamadaPk;
@@ -42,117 +42,4 @@ class LlamadaCategoria
 
     private $llamadasCategoriaRel;
 
-       /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->llamadasCategoriaRel = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set codigoCategoriaLlamadaPk
-     *
-     * @param integer $codigoCategoriaLlamadaPk
-     *
-     * @return LlamadaCategoria
-     */
-    public function setCodigoCategoriaLlamadaPk($codigoCategoriaLlamadaPk)
-    {
-        $this->codigoCategoriaLlamadaPk = $codigoCategoriaLlamadaPk;
-
-        return $this;
-    }
-
-    /**
-     * Get codigoCategoriaLlamadaPk
-     *
-     * @return integer
-     */
-    public function getCodigoCategoriaLlamadaPk()
-    {
-        return $this->codigoCategoriaLlamadaPk;
-    }
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     *
-     * @return LlamadaCategoria
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set descripcion
-     *
-     * @param string $descripcion
-     *
-     * @return LlamadaCategoria
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcion
-     *
-     * @return string
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * Add llamadasCategoriaRel
-     *
-     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
-     *
-     * @return LlamadaCategoria
-     */
-    public function addLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel)
-    {
-        $this->llamadasCategoriaRel[] = $llamadasCategoriaRel;
-
-        return $this;
-    }
-
-    /**
-     * Remove llamadasCategoriaRel
-     *
-     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
-     */
-    public function removeLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel)
-    {
-        $this->llamadasCategoriaRel->removeElement($llamadasCategoriaRel);
-    }
-
-    /**
-     * Get llamadasCategoriaRel
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLlamadasCategoriaRel()
-    {
-        return $this->llamadasCategoriaRel;
-    }
 }

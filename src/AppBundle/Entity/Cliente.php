@@ -49,27 +49,12 @@ class Cliente
      */
 
     private $llamadasClienteRel;
-
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->llamadasClienteRel = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set codigoClientePk
-     *
-     * @param integer $codigoClientePk
-     *
-     * @return Cliente
-     */
-    public function setCodigoClientePk($codigoClientePk)
-    {
-        $this->codigoClientePk = $codigoClientePk;
-
-        return $this;
     }
 
     /**
@@ -81,7 +66,6 @@ class Cliente
     {
         return $this->codigoClientePk;
     }
-
 
     /**
      * Set nit
