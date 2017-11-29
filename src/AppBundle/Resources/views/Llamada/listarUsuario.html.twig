@@ -73,7 +73,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
-                                                                    {% if llamada.estadoRel == 1 %}
+                                                                    {% if llamada.codigoCategoriaLlamadaFk == 1 %}
                                                                         <tr>
                                                                             <td>
                                                                                 {{ llamada.tema }}
@@ -159,7 +159,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
-                                                                    {% if  llamada.estadoRel > 1 %}
+                                                                    {% if  llamada.codigoCategoriaLlamadaFk > 1 %}
                                                                         <tr>
                                                                             <td>
                                                                                 {{ llamada.tema }}
