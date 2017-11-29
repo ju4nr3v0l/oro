@@ -86,6 +86,7 @@
                                                 <th>Gestiona</th>
                                                 <th>Fecha | Gestión</th>
                                                 <th>Fecha | Solución</th>
+                                                <th>Acción</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -129,6 +130,11 @@
                                                     <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
                                                     <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
                                                     <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
+                                                    <td>
+                                                        <a href="{{ path('actualizarEstadoLlamadaUsuario', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                           class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
 
