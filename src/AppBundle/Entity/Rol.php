@@ -36,8 +36,20 @@ class Rol
 //
 //    private $rolRel;
 
-   
-   
+    /**
+     * Set codigoRolPk
+     *
+     * @param integer $codigoRolPk
+     *
+     * @return Rol
+     */
+    public function setCodigoRolPk($codigoRolPk)
+    {
+        $this->codigoRolPk = $codigoRolPk;
+
+        return $this;
+    }
+
     /**
      * Get codigoRolPk
      *

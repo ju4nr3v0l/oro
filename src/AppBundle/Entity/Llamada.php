@@ -22,6 +22,7 @@ class Llamada
      */
     private $codigoLlamadaPk;
 
+
     /**
      * @var string
      *
