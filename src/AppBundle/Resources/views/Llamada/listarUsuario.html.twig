@@ -204,25 +204,6 @@
                                                                                 <a href="{{ path('actualizarEstadoLlamadaUsuario', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
                                                                                    class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
                                                                                 </a>
-
-                                                                                {#<a href="#custom-modal{{ llamada.codigoLlamadaPk }}"#}
-                                                                                   {#class="btn btn-default waves-effect waves-light btn-xs m-b-5"#}
-                                                                                   {#data-modalCont="{{ cont }}"#}
-                                                                                   {#data-animation="makeway"#}
-                                                                                   {#data-plugin="custommodal"#}
-                                                                                   {#data-overlayspeed="100"#}
-                                                                                   {#data-overlaycolor="#36404a">#}
-                                                                                    {#<i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>#}
-                                                                                {#</a>#}
-                                                                                {#<div id="custom-modal{{ llamada.codigoLlamadaPk }}" class="modal-demo">#}
-                                                                                    {#<button type="button" class="close" onclick="Custombox.close();">#}
-                                                                                        {#<span>&times;</span><span class="sr-only">Close</span>#}
-                                                                                    {#</button>#}
-                                                                                    {#<h4 class="custom-modal-title">Llamada: </h4>#}
-                                                                                    {#<div class="custom-modal-text">#}
-                                                                                        {#{{ llamada.tema }}#}
-                                                                                    {#</div>#}
-                                                                                {#</div>#}
                                                                             </td>
                                                                         </tr>
                                                                     {% endif %}
@@ -233,23 +214,12 @@
                                                     </div> <!-- end card -->
                                                 </div>
                                                 <!-- end col -->
-                                                <!-- Modal -->
-                                                {#<div id="custom-modal" class="modal-demo">#}
-                                                    {#<button type="button" class="close" onclick="Custombox.close();">#}
-                                                        {#<span>&times;</span><span class="sr-only">Close</span>#}
-                                                    {#</button>#}
-                                                    {#<h4 class="custom-modal-title">Llamada: {{ llamadas[1].codigoUsuarioRecibeFk }}</h4>#}
-                                                    {#<div class="custom-modal-text">#}
-                                                        {#{{ llamadas[1].nombreContacto }}#}
-                                                    {#</div>#}
-                                                {#</div>#}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div> <!-- end col -->
                         </div>
-
 
                     {% endblock content %}
                 </div> <!-- container -->
