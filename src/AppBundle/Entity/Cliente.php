@@ -82,6 +82,7 @@ class Cliente
         return $this->codigoClientePk;
     }
 
+
     /**
      * Set nit
      *

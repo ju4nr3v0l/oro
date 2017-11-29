@@ -51,6 +51,7 @@ class Rol
         return $this;
     }
 
+
     /**
      * Get codigoRolPk
      *

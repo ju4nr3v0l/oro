@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Usuario implements UserInterface, \Serializable
 {
 
+
     /**
      * @ORM\Column(type="string")
      * @ORM\Id
