@@ -17,5 +17,6 @@
 /nbproject/*
 .idea/
 /composer.lock/
-/vendor/
+.idea/workspace.xml
+vendor/
 
