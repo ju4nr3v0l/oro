@@ -59,20 +59,6 @@ class Cliente
     }
 
     /**
-     * Set codigoClientePk
-     *
-     * @param integer $codigoClientePk
-     *
-     * @return Cliente
-     */
-    public function setCodigoClientePk($codigoClientePk)
-    {
-        $this->codigoClientePk = $codigoClientePk;
-
-        return $this;
-    }
-
-    /**
      * Get codigoClientePk
      *
      * @return integer
