@@ -207,7 +207,7 @@ class LlamadaController extends Controller
                 $url = $this->generateUrl('listadoLlamadasUsuario');
                 return $this->redirect($url);
             }
-D
+
             return $this->render('AppBundle:Llamada:editar.html.twig', [
                 'form' => $form->createView(),
                 'llamadas' => $arLlamadas,
