@@ -200,11 +200,8 @@ class LlamadaController extends Controller
                 return $this->redirect($url);
             }
 
-            $strEstado = $arLlamada->getEstadoRel()->getNombre();
-
             return $this->render('AppBundle:Llamada:editar.html.twig', [
                 'llamadas' => $arLlamada,
-                'estado' => $strEstado,
                 'form' => $form->createView ()
             ]);
         }
