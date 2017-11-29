@@ -29,12 +29,58 @@ class Rol
     private $nombre;
 
 
+//    /**
+//     *
+//     * ORM\OneToMany(targetEntity="Usuario", mappedBy="usuariosRol")
+//     */
+//
+//    private $rolRel;
+
     /**
+     * Set codigoRolPk
      *
-     * ORM\OneToMany(targetEntity="Usuario", mappedBy="usuariosRol")
+     * @param integer $codigoRolPk
+     *
+     * @return Rol
      */
+    public function setCodigoRolPk($codigoRolPk)
+    {
+        $this->codigoRolPk = $codigoRolPk;
 
-    private $rolRel;
+        return $this;
+    }
 
-   
-   }
+    /**
+     * Get codigoRolPk
+     *
+     * @return integer
+     */
+    public function getCodigoRolPk()
+    {
+        return $this->codigoRolPk;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     *
+     * @return Rol
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+}

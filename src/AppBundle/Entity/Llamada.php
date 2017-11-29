@@ -116,20 +116,20 @@ class Llamada
 
 
     /**
-     * @ORM\ManytoOne(targetEntity="Cliente", inversedBy="llamadasClienteRel")
+     * @ORM\ManyToOne(targetEntity="Cliente", inversedBy="llamadasClienteRel")
      * @ORM\JoinColumn(name="codigo_cliente_fk", referencedColumnName="codigo_cliente_pk")
      */
     private $clienteRel;
 
     /**
-     * @ORM\ManytoOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
+     * @ORM\ManyToOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
      * @ORM\JoinColumn(name="codigo_categoria_llamada_fk", referencedColumnName="codigo_categoria_llamada_pk")
      */
     private $categoriaRel;
 
 
     /**
-     * @ORM\ManytoOne(targetEntity="Estado", inversedBy="llamadasEstadoRel")
+     * @ORM\ManyToOne(targetEntity="Estado", inversedBy="llamadasEstadoRel")
      * @ORM\JoinColumn(name="codigo_estado_llamada_fk", referencedColumnName="codigo_estado_llamada_pk")
      */
     private $estadoRel;

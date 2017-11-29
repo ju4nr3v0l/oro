@@ -49,7 +49,6 @@ class Cliente
      */
 
     private $llamadasClienteRel;
-
     /**
      * Constructor
      */
@@ -67,7 +66,6 @@ class Cliente
     {
         return $this->codigoClientePk;
     }
-
 
     /**
      * Set nit

@@ -106,7 +106,7 @@ class LlamadaController extends Controller
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
             'llamadas' => $arLlamadas,
-            'usuario'  => $token
+            'usuario'  => $user
         ]);
 
 
@@ -159,11 +159,11 @@ class LlamadaController extends Controller
             return $this->redirect($url);
         }
 
-        return $this->render('AppBundle:Llamada:actualizarEstadoLlamada.html.twig', [
-
+        return $this->render('AppBundle:Llamada:actualizarEstado.html.twig', [
+            'form' => $form->createView(),
             'llamadas' => $arLlamadas,
             'usuario'  => $user,
-            'form' => $form->createView()
+
 
 
         ]);

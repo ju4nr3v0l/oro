@@ -86,6 +86,7 @@
                                                 <th>Gestiona</th>
                                                 <th>Fecha | Gestión</th>
                                                 <th>Fecha | Solución</th>
+                                                <th>Acción</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -104,24 +105,24 @@
                                                     <td>{{ llamada.descripcion }}</td>
                                                     <td>
                                                         {% if llamada.codigoCategoriaLlamadaFk == 0 %}
-                                                            <span class="label label-danger">SIN CATEGORIZAR</span>
+                                                            <span class="label label-danger">SIN CATEGORÍA</span>
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 1 %}
-                                                            <span class="label label-default">SOPORTE</span>
+                                                            <span class="label label-default">{{ llamada.categoriaRel.nombre }}</span>
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 2 %}
-                                                            <span class="label label-info">CAPACITACIÓN</span>
+                                                            <span class="label label-info">{{ llamada.categoriaRel.nombre }}</span>
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 3 %}
-                                                            <span class="label label-orange">BUGS</span>
+                                                            <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
                                                         {% endif %}
                                                     </td>
                                                     <td>
                                                         {% if llamada.codigoEstadoLlamadaFk == 0 or llamada.codigoEstadoLlamadaFk == null %}
-                                                            <span class="label label-danger">SIN ATENDER</span>
+                                                            <span class="label label-danger">SIN CATEGORÍA</span>
                                                         {% elseif llamada.codigoEstadoLlamadaFk == 1 %}
-                                                            <span class="label label-orange">PENDIENTE</span>
+                                                            <span class="label label-orange">{{ llamada.estadoRel.nombre }}</span>
                                                         {% elseif llamada.codigoEstadoLlamadaFk == 2 %}
-                                                            <span class="label label-info">ATENDIDA</span>
+                                                            <span class="label label-info">{{ llamada.estadoRel.nombre }}</span>
                                                         {% elseif llamada.codigoEstadoLlamadaFk == 3 %}
-                                                            <span class="label label-success">SOLUCIONADA</span>
+                                                            <span class="label label-success">{{ llamada.estadoRel.nombre }}</span>
                                                         {% endif %}
                                                     </td>
                                                     <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
@@ -129,6 +130,11 @@
                                                     <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
                                                     <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
                                                     <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
+                                                    <td>
+                                                        <a href="{{ path('actualizarEstadoLlamadaUsuario', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                           class="btn btn-default waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-transfer" style="padding: 3px;"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             {% endfor %}
 
