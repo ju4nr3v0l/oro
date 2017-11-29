@@ -76,7 +76,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
-                                                                    {% if llamada.codigoEstadoLlamadaFk == 1 %}
+                                                                    {% if llamada.estadoAtendido %}
                                                                         <tr>
                                                                             <td>{{ llamada.fechaRegistro|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
@@ -108,16 +108,20 @@
                                                                             <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
                                                                                 {% if llamada.estadoAtendido %}
-                                                                                    <span class="label label-success"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" value="{{ llamada.codigoLlamadaPk }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% else %}
-                                                                                    <span class="label label-danger"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" enabled="false" value="{{ llamada.codigoLlamadaPk }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
                                                                                 {% if llamada.estadoSolucionado %}
-                                                                                    <span class="label label-success"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" value="{{ llamada.estadoSolucionado }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% else %}
-                                                                                    <span class="label label-danger"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaSolucionar" enabled="false" value="{{ llamada.estadoSolucionado }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
@@ -167,7 +171,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                 {% for llamada in llamadas %}
-                                                                    {% if llamada.codigoEstadoLlamadaFk > 1 %}
+                                                                    {% if llamada.estadoSolucionado %}
                                                                         <tr>
                                                                             <td>{{ llamada.fechaRegistro|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
@@ -198,17 +202,22 @@
                                                                             <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
                                                                             <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
                                                                             <td>
+                                                                            <td>
                                                                                 {% if llamada.estadoAtendido %}
-                                                                                    <span class="label label-success"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" value="{{ llamada.codigoLlamadaPk }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% else %}
-                                                                                    <span class="label label-danger"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" enabled="false" value="{{ llamada.codigoLlamadaPk }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
                                                                                 {% if llamada.estadoSolucionado %}
-                                                                                    <span class="label label-success"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" value="{{ llamada.estadoSolucionado }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% else %}
-                                                                                    <span class="label label-danger"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaSolucionar" enabled="false" value="{{ llamada.estadoSolucionado }}">
+                                                                                        <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
