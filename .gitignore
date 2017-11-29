@@ -17,3 +17,5 @@
 /web/bundles/
 /composer.lock
 /nbproject/*
+.idea/
+.idea/workspace.xml
