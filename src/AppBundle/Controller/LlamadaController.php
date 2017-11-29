@@ -44,8 +44,7 @@ class LlamadaController extends Controller
             # [Careful]            ^ "Anonymous users are technically authenticated"
             // Get our user from that token
             $estado = $em->getRepository('AppBundle:Estado')->find(1);
-            dump($estado);
-            exit();
+;
             $user = $token->getUser();
             $id =  $user->getCodigoUsuarioPk();
             $llamada->setCodigoUsuarioRecibeFk($id);
