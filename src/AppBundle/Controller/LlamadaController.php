@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Llamada;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -71,13 +72,28 @@ class LlamadaController extends Controller
     public function listarLlamada(Request $request)
     {
 
+        $form = Forms::createFormBuilder();
+
+        $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findAll();
 
+        if($form->isSubmitted() && $form->isValid()){
+            if($request->request->get('llamadaAtender')) {
+                $idLlamadaAtender = $request->request->get('llamadaAtender');
+
+                // acciones para actualizar el estado atender de esa llamada
+            }
+            if($request->request->get('llamadaSolucionar')) {
+                $idLlamadaSolucionar = $request->request->get('llamadaSolucionar');
+                // acciones para actualizar el estado solucionar de esa llamada
+            }
+        }
 
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Llamada:listar.html.twig', [
             'llamadas' => $arLlamadas,
+            'form' => $form
 
         ]);
     }
@@ -128,34 +144,15 @@ class LlamadaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
 
-        /** aca instancia el form */
+        $id =  $user->getCodigoUsuarioPk();
+        $arLlamadas->setCodigoUsuarioAtiendeFk($id);
+        $arLlamadas->setFechaGestion(new \DateTime('now'));
+        $arLlamadas->setEstadoAtendido(true);
+        $em->persist($arLlamadas);
+        $em->flush();
+        $url = $this->generateUrl('listadoLlamadasUsuario');
+        return $this->redirect($url);
 
-        $form = $this->createForm(FormTypeLlamada::class, $arLlamadas); //create form
-        $form->handleRequest($request);
-
-        /** fin instancia del form */
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $id =  $user->getCodigoUsuarioPk();
-            $arLlamadas->setCodigoUsuarioAtiendeFk($id);
-            $arLlamadas->setFechaGestion(new \DateTime('now'));
-            $arLlamadas->setAtendida(true);
-            $em->persist($arLlamadas);
-            $em->flush();
-            $url = $this->generateUrl('listadoLlamadasUsuario');
-            return $this->redirect($url);
-        }
-
-        return $this->render('AppBundle:Llamada:actualizarEstado.html.twig', [
-            'form' => $form->createView(),
-            'llamadas' => $arLlamadas,
-            'usuario'  => $user,
-
-
-
-        ]);
 
 
 
