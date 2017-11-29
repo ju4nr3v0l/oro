@@ -16,7 +16,8 @@ class Rol
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigoRolPk", type="integer", unique=true)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_rol_pk", type="integer", unique=true)
      */
     private $codigoRolPk;
 
@@ -28,15 +29,14 @@ class Rol
     private $nombre;
 
 
-    /**
-     * 
-     * @ORM\JoinColumn(name="codigoRolpk", referencedColumnName="codigoRol")
-     */
-
-    private $rolRel;
+//    /**
+//     *
+//     * ORM\OneToMany(targetEntity="Usuario", mappedBy="usuariosRol")
+//     */
+//
+//    private $rolRel;
 
    
-
     /**
      * Set codigoRolPk
      *
@@ -51,10 +51,11 @@ class Rol
         return $this;
     }
 
+
     /**
      * Get codigoRolPk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoRolPk()
     {
@@ -83,29 +84,5 @@ class Rol
     public function getNombre()
     {
         return $this->nombre;
-    }
-
-    /**
-     * Set rolRel
-     *
-     * @param \AppBundle\Entity\Usuario $rolRel
-     *
-     * @return Rol
-     */
-    public function setRolRel(\AppBundle\Entity\Usuario $rolRel = null)
-    {
-        $this->rolRel = $rolRel;
-
-        return $this;
-    }
-
-    /**
-     * Get rolRel
-     *
-     * @return \AppBundle\Entity\Usuario
-     */
-    public function getRolRel()
-    {
-        return $this->rolRel;
     }
 }

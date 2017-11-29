@@ -18,9 +18,10 @@ class Llamada
      * @var int
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="codigoLlamadaPk", type="integer", unique=true, )
+     * @ORM\Column(name="codigo_llamada_pk", type="integer", unique=true, )
      */
     private $codigoLlamadaPk;
+
 
     /**
      * @var string
@@ -30,11 +31,11 @@ class Llamada
     private $tema;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="codigoContactoFk", type="integer" , nullable= TRUE)
+     * @ORM\Column(name="nombre_contacto", type="string" ,length=255, nullable= TRUE)
      */
-    private $codigoContactoFk;
+    private $nombreContacto;
 
     /**
      * @var string
@@ -60,103 +61,84 @@ class Llamada
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaRegistro", type="datetime", nullable= TRUE)
+     * @ORM\Column(name="fecha_registro", type="datetime", nullable= TRUE)
      */
     private $fechaRegistro;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaGestion", type="datetime" ,nullable= TRUE)
+     * @ORM\Column(name="fecha_gestion", type="datetime" ,nullable= TRUE)
      */
     private $fechaGestion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechaSolucion", type="datetime" ,nullable= TRUE)
+     * @ORM\Column(name="fecha_solucion", type="datetime" ,nullable= TRUE)
      */
     private $fechaSolucion;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoCategoriaLlamadaFk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="codigo_categoria_llamada_fk", type="integer" ,nullable= TRUE)
      */
     private $codigoCategoriaLlamadaFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioRecibeFk", type="string", length=255 ,nullable= TRUE)
+     * @ORM\Column(name="codigo_usuario_recibe_fk", type="string", length=255 ,nullable= TRUE)
      */
     private $codigoUsuarioRecibeFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoUsuarioAtiendeFk", type="string", length=255, nullable= TRUE)
+     * @ORM\Column(name="codigo_usuario_atiende_fk", type="string", length=255, nullable= TRUE)
      */
     private $codigoUsuarioAtiendeFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoEstadoLlamadaFk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="codigo_estado_llamada_fk", type="integer" ,nullable= TRUE)
      */
     private $codigoEstadoLlamadaFk;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="codigoClienteFk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="codigo_cliente_fk", type="integer" ,nullable= TRUE)
      */
     private $codigoClienteFk;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Cliente", mappedBy="LlamadasRel")
+     * @ORM\ManytoOne(targetEntity="Cliente", inversedBy="llamadasClienteRel")
+     * @ORM\JoinColumn(name="codigo_cliente_fk", referencedColumnName="codigo_cliente_pk")
      */
-    private $llamadasCliente;
+    private $clienteRel;
 
     /**
-     * @ORM\OneToMany(targetEntity="LlamadaCategoria", mappedBy="LlamadasCategoriaRel")
+     * @ORM\ManytoOne(targetEntity="LlamadaCategoria", inversedBy="llamadasCategoriaRel")
+     * @ORM\JoinColumn(name="codigo_categoria_llamada_fk", referencedColumnName="codigo_categoria_llamada_pk")
      */
-    private $llamadasCategoria;
+    private $categoriaRel;
+
 
     /**
-     * @ORM\OneToMany(targetEntity="Estado", mappedBy="estadoRel")
+     * @ORM\ManytoOne(targetEntity="Estado", inversedBy="llamadasEstadoRel")
+     * @ORM\JoinColumn(name="codigo_estado_llamada_fk", referencedColumnName="codigo_estado_llamada_pk")
      */
-    private $llamadasEstado;
+    private $estadoRel;
 
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set codigoLlamadaPk
-     *
-     * @param integer $codigoLlamadaPk
-     *
-     * @return Llamada
-     */
-    public function setCodigoLlamadaPk($codigoLlamadaPk)
-    {
-        $this->codigoLlamadaPk = $codigoLlamadaPk;
-
-        return $this;
-    }
 
     /**
      * Get codigoLlamadaPk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoLlamadaPk()
     {
@@ -188,27 +170,27 @@ class Llamada
     }
 
     /**
-     * Set codigoContactoFk
+     * Set nombreContacto
      *
-     * @param integer $codigoContactoFk
+     * @param string $nombreContacto
      *
      * @return Llamada
      */
-    public function setCodigoContactoFk($codigoContactoFk)
+    public function setNombreContacto($nombreContacto)
     {
-        $this->codigoContactoFk = $codigoContactoFk;
+        $this->nombreContacto = $nombreContacto;
 
         return $this;
     }
 
     /**
-     * Get codigoContactoFk
+     * Get nombreContacto
      *
-     * @return int
+     * @return string
      */
-    public function getCodigoContactoFk()
+    public function getNombreContacto()
     {
-        return $this->codigoContactoFk;
+        return $this->nombreContacto;
     }
 
     /**
@@ -310,7 +292,7 @@ class Llamada
     /**
      * Set fechaGestion
      *
-     * @param string $fechaGestion
+     * @param \DateTime $fechaGestion
      *
      * @return Llamada
      */
@@ -324,7 +306,7 @@ class Llamada
     /**
      * Get fechaGestion
      *
-     * @return string
+     * @return \DateTime
      */
     public function getFechaGestion()
     {
@@ -334,7 +316,7 @@ class Llamada
     /**
      * Set fechaSolucion
      *
-     * @param string $fechaSolucion
+     * @param \DateTime $fechaSolucion
      *
      * @return Llamada
      */
@@ -348,7 +330,7 @@ class Llamada
     /**
      * Get fechaSolucion
      *
-     * @return string
+     * @return \DateTime
      */
     public function getFechaSolucion()
     {
@@ -358,7 +340,7 @@ class Llamada
     /**
      * Set codigoCategoriaLlamadaFk
      *
-     * @param string $codigoCategoriaLlamadaFk
+     * @param integer $codigoCategoriaLlamadaFk
      *
      * @return Llamada
      */
@@ -372,7 +354,7 @@ class Llamada
     /**
      * Get codigoCategoriaLlamadaFk
      *
-     * @return string
+     * @return integer
      */
     public function getCodigoCategoriaLlamadaFk()
     {
@@ -382,7 +364,7 @@ class Llamada
     /**
      * Set codigoUsuarioRecibeFk
      *
-     * @param integer $codigoUsuarioRecibeFk
+     * @param string $codigoUsuarioRecibeFk
      *
      * @return Llamada
      */
@@ -396,7 +378,7 @@ class Llamada
     /**
      * Get codigoUsuarioRecibeFk
      *
-     * @return int
+     * @return string
      */
     public function getCodigoUsuarioRecibeFk()
     {
@@ -406,7 +388,7 @@ class Llamada
     /**
      * Set codigoUsuarioAtiendeFk
      *
-     * @param integer $codigoUsuarioAtiendeFk
+     * @param string $codigoUsuarioAtiendeFk
      *
      * @return Llamada
      */
@@ -420,7 +402,7 @@ class Llamada
     /**
      * Get codigoUsuarioAtiendeFk
      *
-     * @return int
+     * @return string
      */
     public function getCodigoUsuarioAtiendeFk()
     {
@@ -430,7 +412,7 @@ class Llamada
     /**
      * Set codigoEstadoLlamadaFk
      *
-     * @param string $codigoEstadoLlamadaFk
+     * @param integer $codigoEstadoLlamadaFk
      *
      * @return Llamada
      */
@@ -444,7 +426,7 @@ class Llamada
     /**
      * Get codigoEstadoLlamadaFk
      *
-     * @return string
+     * @return integer
      */
     public function getCodigoEstadoLlamadaFk()
     {
@@ -468,121 +450,82 @@ class Llamada
     /**
      * Get codigoClienteFk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoClienteFk()
     {
         return $this->codigoClienteFk;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->llamadasCliente = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->llamadasCategoria = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->llamadasEstado = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add llamadasCliente
+     * Set clienteRel
      *
-     * @param \AppBundle\Entity\Cliente $llamadasCliente
+     * @param \AppBundle\Entity\Cliente $clienteRel
      *
      * @return Llamada
      */
-    public function addLlamadasCliente(\AppBundle\Entity\Cliente $llamadasCliente)
+    public function setClienteRel(\AppBundle\Entity\Cliente $clienteRel = null)
     {
-        $this->llamadasCliente[] = $llamadasCliente;
+        $this->clienteRel = $clienteRel;
 
         return $this;
     }
 
     /**
-     * Remove llamadasCliente
+     * Get clienteRel
      *
-     * @param \AppBundle\Entity\Cliente $llamadasCliente
+     * @return \AppBundle\Entity\Cliente
      */
-    public function removeLlamadasCliente(\AppBundle\Entity\Cliente $llamadasCliente)
+    public function getClienteRel()
     {
-        $this->llamadasCliente->removeElement($llamadasCliente);
+        return $this->clienteRel;
     }
 
     /**
-     * Get llamadasCliente
+     * Set categoriaRel
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLlamadasCliente()
-    {
-        return $this->llamadasCliente;
-    }
-
-    /**
-     * Add llamadasCategorium
-     *
-     * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategorium
+     * @param \AppBundle\Entity\LlamadaCategoria $categoriaRel
      *
      * @return Llamada
      */
-    public function addLlamadasCategorium(\AppBundle\Entity\LlamadaCategoria $llamadasCategorium)
+    public function setCategoriaRel(\AppBundle\Entity\LlamadaCategoria $categoriaRel = null)
     {
-        $this->llamadasCategoria[] = $llamadasCategorium;
+        $this->categoriaRel = $categoriaRel;
 
         return $this;
     }
 
     /**
-     * Remove llamadasCategorium
+     * Get categoriaRel
      *
-     * @param \AppBundle\Entity\LlamadaCategoria $llamadasCategorium
+     * @return \AppBundle\Entity\LlamadaCategoria
      */
-    public function removeLlamadasCategorium(\AppBundle\Entity\LlamadaCategoria $llamadasCategorium)
+    public function getCategoriaRel()
     {
-        $this->llamadasCategoria->removeElement($llamadasCategorium);
+        return $this->categoriaRel;
     }
 
     /**
-     * Get llamadasCategoria
+     * Set estadoRel
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLlamadasCategoria()
-    {
-        return $this->llamadasCategoria;
-    }
-
-    /**
-     * Add llamadasEstado
-     *
-     * @param \AppBundle\Entity\Estado $llamadasEstado
+     * @param \AppBundle\Entity\Estado $estadoRel
      *
      * @return Llamada
      */
-    public function addLlamadasEstado(\AppBundle\Entity\Estado $llamadasEstado)
+    public function setEstadoRel(\AppBundle\Entity\Estado $estadoRel = null)
     {
-        $this->llamadasEstado[] = $llamadasEstado;
+        $this->estadoRel = $estadoRel;
 
         return $this;
     }
 
     /**
-     * Remove llamadasEstado
+     * Get estadoRel
      *
-     * @param \AppBundle\Entity\Estado $llamadasEstado
+     * @return \AppBundle\Entity\Estado
      */
-    public function removeLlamadasEstado(\AppBundle\Entity\Estado $llamadasEstado)
+    public function getEstadoRel()
     {
-        $this->llamadasEstado->removeElement($llamadasEstado);
-    }
-
-    /**
-     * Get llamadasEstado
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLlamadasEstado()
-    {
-        return $this->llamadasEstado;
+        return $this->estadoRel;
     }
 }

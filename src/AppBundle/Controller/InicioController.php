@@ -16,16 +16,14 @@ class InicioController extends Controller
      * @Route("/", name="inicio")
      */
 
-    public function Action(Request $request)
+    public function inicioAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('AppBundle:Llamada');
-        $llamadas = $repository->findAll();
+
 
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Inicio:inicio.html.twig', [
-                    'llamadas' => $llamadas
+
         ]);
     }
 

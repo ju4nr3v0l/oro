@@ -17,7 +17,7 @@ class LlamadaCategoria
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigoCategoriaLlamadaPk", type="integer", unique=true)
+     * @ORM\Column(name="codigo_categoria_llamada_pk", type="integer", unique=true)
      */
     private $codigoCategoriaLlamadaPk;
 
@@ -37,20 +37,17 @@ class LlamadaCategoria
 
     /**
      *
-     * @ORM\JoinColumn(name="codigoCategoriaLlamadaPk", referencedColumnName="codigoCategoriaLlamadaFk")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="categoriaRel")
      */
 
     private $llamadasCategoriaRel;
 
-
-    /**
-     * Get id
-     *
-     * @return int
+       /**
+     * Constructor
      */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->llamadasCategoriaRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -70,7 +67,7 @@ class LlamadaCategoria
     /**
      * Get codigoCategoriaLlamadaPk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoCategoriaLlamadaPk()
     {
@@ -126,23 +123,33 @@ class LlamadaCategoria
     }
 
     /**
-     * Set llamadasCategoriaRel
+     * Add llamadasCategoriaRel
      *
      * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
      *
      * @return LlamadaCategoria
      */
-    public function setLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel = null)
+    public function addLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel)
     {
-        $this->llamadasCategoriaRel = $llamadasCategoriaRel;
+        $this->llamadasCategoriaRel[] = $llamadasCategoriaRel;
 
         return $this;
     }
 
     /**
+     * Remove llamadasCategoriaRel
+     *
+     * @param \AppBundle\Entity\Llamada $llamadasCategoriaRel
+     */
+    public function removeLlamadasCategoriaRel(\AppBundle\Entity\Llamada $llamadasCategoriaRel)
+    {
+        $this->llamadasCategoriaRel->removeElement($llamadasCategoriaRel);
+    }
+
+    /**
      * Get llamadasCategoriaRel
      *
-     * @return \AppBundle\Entity\Llamada
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLlamadasCategoriaRel()
     {

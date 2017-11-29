@@ -7,12 +7,34 @@
             <ul>
                 <li class="menu-title">Principal</li>
 
+
+
                 <li class="has_sub">
-                    <a href="{{ path('llamada') }}" class="waves-effect">
-                        <i class="mdi mdi-phone-incoming"></i>
-                        {#<span class="label label-success pull-right">2</span>#}
-                        <span> Gestión de Llamadas </span>
-                    </a>
+                    <a href="javascript:void(0);" class="waves-effect active"><i class="mdi mdi-invert-colors"></i> <span> Gestión Llamadas </span> <span class="menu-arrow"></span></a>
+                    <ul class="list-unstyled" style="display: none;">
+
+                        <li class="has_sub">
+                            <a href="{{ path('listadoLlamadas') }}" class="waves-effect">
+                                <i class="mdi mdi-view-list"></i>
+                                {#<span class="label label-success pull-right">2</span>#}
+                                <span> Listar Llamadas</span>
+                            </a>
+                        </li>
+                        <li class="has_sub">
+                            <a href="{{ path('registrarLlamada') }}" class="waves-effect">
+                                <i class="mdi mdi-phone-incoming"></i>
+                                {#<span class="label label-success pull-right">2</span>#}
+                                <span> Registrar Llamada</span>
+                            </a>
+                        </li>
+                        <li class="has_sub">
+                            <a href="{{ path('listadoLlamadasUsuario') }}" class="waves-effect">
+                                <i class="mdi mdi-phone-classic"></i>
+                                {#<span class="label label-success pull-right">2</span>#}
+                                <span> Mis Llamadas</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 {#<li class="has_sub">#}

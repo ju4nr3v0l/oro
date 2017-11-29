@@ -17,7 +17,8 @@ class Cliente
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigoClientePk", type="integer", unique=true)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_cliente_pk", type="integer", unique=true)
      */
     private $codigoClientePk;
 
@@ -31,40 +32,30 @@ class Cliente
     /**
      * @var string
      *
-     * @ORM\Column(name="razonSocial", type="string", length=255, nullable=true)
+     * @ORM\Column(name="razon_social", type="string", length=255, nullable=true)
      */
     private $razonSocial;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombreComercial", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nombre_comercial", type="string", length=255, nullable=true)
      */
     private $nombreComercial;
 
     /**
      *
-     * @ORM\JoinColumn(name="codigoClientePk", referencedColumnName="codigoClienteFk")
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="clienteRel")
      */
 
-    private $llamadasRel;
-
+    private $llamadasClienteRel;
 
     /**
-     * @ORM\OneToMany(targetEntity="Contacto", mappedBy="clienteRel")
+     * Constructor
      */
-    private $contactosCliente;
-
-
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        $this->llamadasClienteRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -84,12 +75,13 @@ class Cliente
     /**
      * Get codigoClientePk
      *
-     * @return int
+     * @return integer
      */
     public function getCodigoClientePk()
     {
         return $this->codigoClientePk;
     }
+
 
     /**
      * Set nit
@@ -162,69 +154,38 @@ class Cliente
     {
         return $this->nombreComercial;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->contactosCliente = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add contactosCliente
+     * Add llamadasClienteRel
      *
-     * @param \AppBundle\Entity\Contacto $contactosCliente
+     * @param \AppBundle\Entity\Llamada $llamadasClienteRel
      *
      * @return Cliente
      */
-    public function addContactosCliente(\AppBundle\Entity\Contacto $contactosCliente)
+    public function addLlamadasClienteRel(\AppBundle\Entity\Llamada $llamadasClienteRel)
     {
-        $this->contactosCliente[] = $contactosCliente;
+        $this->llamadasClienteRel[] = $llamadasClienteRel;
 
         return $this;
     }
 
     /**
-     * Remove contactosCliente
+     * Remove llamadasClienteRel
      *
-     * @param \AppBundle\Entity\Contacto $contactosCliente
+     * @param \AppBundle\Entity\Llamada $llamadasClienteRel
      */
-    public function removeContactosCliente(\AppBundle\Entity\Contacto $contactosCliente)
+    public function removeLlamadasClienteRel(\AppBundle\Entity\Llamada $llamadasClienteRel)
     {
-        $this->contactosCliente->removeElement($contactosCliente);
+        $this->llamadasClienteRel->removeElement($llamadasClienteRel);
     }
 
     /**
-     * Get contactosCliente
+     * Get llamadasClienteRel
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getContactosCliente()
+    public function getLlamadasClienteRel()
     {
-        return $this->contactosCliente;
-    }
-
-    /**
-     * Set llamadasRel
-     *
-     * @param \AppBundle\Entity\Llamada $llamadasRel
-     *
-     * @return Cliente
-     */
-    public function setLlamadasRel(\AppBundle\Entity\Llamada $llamadasRel = null)
-    {
-        $this->llamadasRel = $llamadasRel;
-
-        return $this;
-    }
-
-    /**
-     * Get llamadasRel
-     *
-     * @return \AppBundle\Entity\Llamada
-     */
-    public function getLlamadasRel()
-    {
-        return $this->llamadasRel;
+        return $this->llamadasClienteRel;
     }
 }

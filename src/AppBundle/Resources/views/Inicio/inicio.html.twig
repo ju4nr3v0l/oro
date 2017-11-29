@@ -17,194 +17,25 @@
             <div class="col-xs-12">
                 <div class="page-title-box">
                     <h4 class="page-title"><i class="mdi mdi-phone-incoming"></i> Registro de Llamadas </h4>
-                    <a href="{{ path('llamada') }}">
+                    <a href="{{ path('registrarLlamada') }}">
                         <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Agregar Llamada</button>
                     </a>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-        {{ dump(llamadas) }}
+
         <div class="row">
 
-            <div class="col-md-2">
-                <div class="card-box">
-                    <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-account-multiple"></i> Contactos</h4>
-                    <div class="form-group">
-                        <label class="control-label text-muted">Buscar Cliente | Contacto</label>
-                        <p class="text-muted m-b-15 font-13">
-                            Escriba el nombre del contacto. (Se agrupará por Cliente).
-                        </p>
-                        <input type="text" name="country" id="autocomplete" class="form-control" autocomplete="on">
-                    </div>
-                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">
-                        <div class="inbox-widget slimscroll-alt" style="min-height: 302px; overflow: hidden; width: auto; height: 250px;">
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-1.jpg') }}" class="img-circle" alt=""></div>
-                                <p class="inbox-item-author">Juan Jose Berrio</p>
-                                <p class="inbox-item-text"><span class="label label-info">Segurcol</span></p>
-                            </div>
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-2.jpg') }}" class="img-circle" alt=""></div>
-                                <p class="inbox-item-author">Alejandro Vera Carrasquilla</p>
-                                <p class="inbox-item-text"><span class="label label-info">Segurcol</span></p>
-                            </div>
-                            <div class="inbox-item">
-                                <div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-3.jpg') }}" class="img-circle" alt=""></div>
-                                <p class="inbox-item-author">Estaban Padilla</p>
-                                <p class="inbox-item-text"><span class="label label-info">Atlas</span></p>
-                            </div>
-                        </div>
-                        <div class="slimScrollBar" style="background: rgb(152, 166, 173); width: 5px; position: absolute; top: 131px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 170.794px;">
-
-                        </div>
-                        <div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
-
-                        </div>
-                    </div>
-
-                </div> <!-- end card -->
+            <div class="card-box">
+                Novedades
             </div>
             <!-- end col -->
 
             <div class="col-md-10">
                 <div class="card-box">
-                    <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Registro de Llamadas</h4>
+                    <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Gráficas</h4>
 
-                    <div class="table-responsive">
-                        <table class="table table table-hover m-0">
-                            <thead>
-                            <tr>
-                                <th>Tema</th>
-                                <th>Contacto</th>
-                                <th>Teléfono</th>
-                                <th>Extensión</th>
-                                <th>Descripción</th>
-                                <th>Categoría</th>
-                                <th>Estado</th>
-                                <th>Recibe</th>
-                                <th>Fecha | Registro</th>
-                                <th>Gestiona</th>
-                                <th>Fecha | Gestión</th>
-                                <th>Fecha | Solución</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    Soporte sobre Nomina.
-                                </td>
-                                <td>
-                                    <h5 class="m-0">SEGURCOL</h5>
-                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                </td>
-                                <td>304 559 9915</td>
-                                <td>157</td>
-                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                <td><span class="label label-info">SOPORTE</span></td>
-                                <td><span class="label label-success">PENDIENTE</span></td>
-                                <td>Karina ni idea</td>
-                                <td>22/11/2017</td>
-                                <td>Sebastian</td>
-                                <td>23/11/2017</td>
-                                <td>23/11/2017</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Soporte sobre Nomina.
-                                </td>
-                                <td>
-                                    <h5 class="m-0">SEGURCOL</h5>
-                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                </td>
-                                <td>304 559 9915</td>
-                                <td>157</td>
-                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                <td><span class="label label-info">SOPORTE</span></td>
-                                <td><span class="label label-success">PENDIENTE</span></td>
-                                <td>Karina ni idea</td>
-                                <td>22/11/2017</td>
-                                <td>Sebastian</td>
-                                <td>23/11/2017</td>
-                                <td>23/11/2017</td>
-                            </tr><tr>
-                                <td>
-                                    Soporte sobre Nomina.
-                                </td>
-                                <td>
-                                    <h5 class="m-0">SEGURCOL</h5>
-                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                </td>
-                                <td>304 559 9915</td>
-                                <td>157</td>
-                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                <td><span class="label label-info">SOPORTE</span></td>
-                                <td><span class="label label-success">PENDIENTE</span></td>
-                                <td>Karina ni idea</td>
-                                <td>22/11/2017</td>
-                                <td>Sebastian</td>
-                                <td>23/11/2017</td>
-                                <td>23/11/2017</td>
-                            </tr><tr>
-                                <td>
-                                    Soporte sobre Nomina.
-                                </td>
-                                <td>
-                                    <h5 class="m-0">SEGURCOL</h5>
-                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                </td>
-                                <td>304 559 9915</td>
-                                <td>157</td>
-                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                <td><span class="label label-info">SOPORTE</span></td>
-                                <td><span class="label label-success">PENDIENTE</span></td>
-                                <td>Karina ni idea</td>
-                                <td>22/11/2017</td>
-                                <td>Sebastian</td>
-                                <td>23/11/2017</td>
-                                <td>23/11/2017</td>
-                            </tr><tr>
-                                <td>
-                                    Soporte sobre Nomina.
-                                </td>
-                                <td>
-                                    <h5 class="m-0">SEGURCOL</h5>
-                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                </td>
-                                <td>304 559 9915</td>
-                                <td>157</td>
-                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                <td><span class="label label-info">SOPORTE</span></td>
-                                <td><span class="label label-success">PENDIENTE</span></td>
-                                <td>Karina ni idea</td>
-                                <td>22/11/2017</td>
-                                <td>Sebastian</td>
-                                <td>23/11/2017</td>
-                                <td>23/11/2017</td>
-                            </tr><tr>
-                                <td>
-                                    Soporte sobre Nomina.
-                                </td>
-                                <td>
-                                    <h5 class="m-0">SEGURCOL</h5>
-                                    <p class="m-0 text-muted font-13"><small>Juan Jose Berrio</small></p>
-                                </td>
-                                <td>304 559 9915</td>
-                                <td>157</td>
-                                <td>Se deshabilitó un plugin que contenía nomina y permitía la cancelación de pagos</td>
-                                <td><span class="label label-info">SOPORTE</span></td>
-                                <td><span class="label label-success">PENDIENTE</span></td>
-                                <td>Karina ni idea</td>
-                                <td>22/11/2017</td>
-                                <td>Sebastian</td>
-                                <td>23/11/2017</td>
-                                <td>23/11/2017</td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-
-                    </div> <!-- table-responsive -->
                 </div> <!-- end card -->
             </div>
             <!-- end col -->

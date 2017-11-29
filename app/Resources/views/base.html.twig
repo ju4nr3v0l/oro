@@ -9,6 +9,8 @@
         {% endblock %}
         <title>{% block title %}Bienvenido!{% endblock %}</title>
         {% block stylesheets %}
+            <!-- Custom box css -->
+            <link href="{{ asset('zircosTemplate/plugins/custombox/css/custombox.min.css') }}" rel="stylesheet">
             <link href="{{ asset('zircosTemplate/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('zircosTemplate/assets/css/core.css') }}" rel="stylesheet" type="text/css" />
             <link href="{{ asset('zircosTemplate/assets/css/components.css') }}" rel="stylesheet" type="text/css" />
@@ -21,6 +23,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('zircosTemplate/assets/images/favicon.ico') }}" />
         {% block javascripts %}
             <script src="{{ asset('zircosTemplate/assets/js/modernizr.min.js') }}"></script>
+
+
         {% endblock %}
     </head>
     <body {% block bodyAtt %}{% endblock %} >
@@ -40,6 +44,7 @@
                 var resizefunc = [];
             </script>
             <!-- jQuery  -->
+
             <script src="{{ asset('zircosTemplate/assets/js/jquery.min.js') }}"></script>
             <script src="{{ asset('zircosTemplate/assets/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('zircosTemplate/assets/js/detect.js') }}"></script>
@@ -50,6 +55,10 @@
             <script src="{{ asset('zircosTemplate/assets/js/jquery.scrollTo.min.js') }}"></script>
             <script src="{{ asset('zircosTemplate/plugins/switchery/switchery.min.js') }}"></script>
             <script src="{{ asset('zircosTemplate/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js') }}" type="text/javascript"></script>
+
+            <!-- Modal-Effect -->
+            <script src="{{ asset('zircosTemplate/plugins/custombox/js/custombox.min.js') }}"></script>
+            <script src="{{ asset('zircosTemplate/plugins/custombox/js/legacy.min.js') }}"></script>
 
             <!-- App js -->
             <script src="{{ asset('zircosTemplate/assets/js/jquery.core.js') }}"></script>
