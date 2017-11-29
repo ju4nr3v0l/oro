@@ -32,8 +32,9 @@
                             <div class="col-md-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-30">Registro de Llamadas para el usuario:
-                                        {% if usuario is not null %}
-                                            {{ "USER" }}
+
+                                        {% if usuario is defined %}
+                                            <span class="label label-info">{{ usuario.nombres }} {{ usuario.apellidos }}</span>
                                         {% endif %}</h4>
 
                                     <div class="tabs-vertical-env">
