@@ -75,6 +75,7 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                {{ form_start(form) }}
                                                                 {% for llamada in llamadas %}
                                                                     {% if llamada.estadoAtendido %}
                                                                         <tr>
@@ -135,6 +136,7 @@
                                                                         </tr>
                                                                     {% endif %}
                                                                 {% endfor %}
+                                                                {{ form_end(form) }}
                                                                 </tbody>
                                                             </table>
                                                         </div> <!-- table-responsive -->
@@ -170,6 +172,7 @@
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                {{ form_start(form) }}
                                                                 {% for llamada in llamadas %}
                                                                     {% if llamada.estadoSolucionado %}
                                                                         <tr>
@@ -231,6 +234,7 @@
                                                                         </tr>
                                                                     {% endif %}
                                                                 {% endfor %}
+                                                                {{ form_end(form) }}
                                                                 </tbody>
                                                             </table>
                                                         </div> <!-- table-responsive -->
