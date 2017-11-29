@@ -42,26 +42,12 @@ class LlamadaCategoria
 
     private $llamadasCategoriaRel;
 
-       /**
+        /**
      * Constructor
      */
     public function __construct()
     {
         $this->llamadasCategoriaRel = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set codigoCategoriaLlamadaPk
-     *
-     * @param integer $codigoCategoriaLlamadaPk
-     *
-     * @return LlamadaCategoria
-     */
-    public function setCodigoCategoriaLlamadaPk($codigoCategoriaLlamadaPk)
-    {
-        $this->codigoCategoriaLlamadaPk = $codigoCategoriaLlamadaPk;
-
-        return $this;
     }
 
     /**

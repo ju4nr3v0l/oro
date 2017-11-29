@@ -36,7 +36,6 @@ class Rol
 //
 //    private $rolRel;
 
-   
     /**
      * Set codigoRolPk
      *
@@ -50,7 +49,6 @@ class Rol
 
         return $this;
     }
-
 
     /**
      * Get codigoRolPk

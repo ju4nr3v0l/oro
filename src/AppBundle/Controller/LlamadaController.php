@@ -159,11 +159,12 @@ class LlamadaController extends Controller
             return $this->redirect($url);
         }
 
-
         return $this->render('AppBundle:Llamada:actualizarEstadoLlamada.html.twig', [
+
             'llamadas' => $arLlamadas,
             'usuario'  => $user,
-            'form' => $form->createView ()
+            'form' => $form->createView()
+
 
         ]);
 
@@ -180,14 +181,21 @@ class LlamadaController extends Controller
     public function editarLlamada(Request $request, $codigoLlamadaPk)
     {
 
+        $token = $this->get('security.token_storage')->getToken();
+        # e.g: $token->getUser();
+        # e.g: $token->isAuthenticated();
+        # [Careful]            ^ "Anonymous users are technically authenticated"
+        // Get our user from that token
+        $user = $token->getUser();
 
-        $arLlamada = $this->getDoctrine()->getManager()->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
-        if(!$arLlamada){
+        $arLlamadas = $this->getDoctrine()->getManager()->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
+        if(!$arLlamadas){
             throw $this->createNotFoundException("No Existe esa llamada");
+
         } else {
             /** acá instancias form */
 
-            $form = $this->createForm(FormTypeLlamada::class, $arLlamada); //create form
+            $form = $this->createForm(FormTypeLlamada::class, $arLlamadas); //create form
             $form->handleRequest($request);
 
             /** fin instancia form */
@@ -200,14 +208,16 @@ class LlamadaController extends Controller
                 return $this->redirect($url);
             }
 
-            $strEstado = $arLlamada->getEstadoRel()->getNombre();
-
             return $this->render('AppBundle:Llamada:editar.html.twig', [
-                'llamadas' => $arLlamada,
-                'estado' => $strEstado,
-                'form' => $form->createView ()
+                'form' => $form->createView(),
+                'llamadas' => $arLlamadas,
+                'usuario'  => $user,
+
+
             ]);
+
         }
+
     }
 
 }

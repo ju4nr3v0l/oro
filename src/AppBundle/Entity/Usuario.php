@@ -63,7 +63,7 @@ class Usuario implements UserInterface, \Serializable
     private $codigoRol;
 
 
-//
+
 //    /**
 //     * @ORM\ManyToOne(targetEntity="Rol", inversedBy="rolRel")
 //     * @ORM\JoinColumn(name="codigoRol", referencedColumnName="codigoRolPk")

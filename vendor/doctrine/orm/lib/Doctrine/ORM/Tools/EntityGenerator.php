@@ -1073,7 +1073,7 @@ public function __construct(<params>)
         }
 
         if (isset($metadata->table['indexes']) && $metadata->table['indexes']) {
-            $constraints = $this->generateTableConstraints('Inicio', $metadata->table['indexes']);
+            $constraints = $this->generateTableConstraints('Index', $metadata->table['indexes']);
             $table[] = 'indexes={' . $constraints . '}';
         }
 

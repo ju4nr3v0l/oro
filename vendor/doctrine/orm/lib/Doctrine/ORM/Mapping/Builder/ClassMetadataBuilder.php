@@ -141,7 +141,7 @@ class ClassMetadataBuilder
     }
 
     /**
-     * Adds Inicio.
+     * Adds Index.
      *
      * @param array  $columns
      * @param string $name
