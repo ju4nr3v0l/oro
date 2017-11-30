@@ -143,7 +143,6 @@ class Llamada
     private $categoriaRel;
 
 
-
     /**
      * Get codigoLlamadaPk
      *

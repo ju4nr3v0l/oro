@@ -84,15 +84,18 @@ class LlamadaController extends Controller
 
       
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy([],array('fechaRegistro' => 'DESC'));
+
         $countLlamadasAtendidas = 0;
         $countLlamadasSolucionadas = 0;
         $countLlamadasPendientes = 0;
         foreach ($arLlamadas as $key => $value) {
             $llamadaAc = new Llamada;
             $llamadaAc = $value;
+
             $arLlamadasNorm[$key]=$value;
             if($llamadaAc->getCodigoUsuarioAtiendeFk() != null){
                 $usuarioAtiende = $em->getRepository('AppBundle:Usuario')->find($llamadaAc->getCodigoUsuarioAtiendeFk());
+
                 $arLlamadasNorm[$key]->usuarioAtiende=$usuarioAtiende;
             }
             if($llamadaAc->getCodigoUsuarioSolucionaFk() != null){
@@ -112,7 +115,6 @@ class LlamadaController extends Controller
         }
 
         $contadores = array('contLlamadasAtendidas'=> $countLlamadasAtendidas,'contLlamadasSolucionadas' => $countLlamadasSolucionadas,'contLlamadasPendientes' => $countLlamadasPendientes);
-
 
 
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las

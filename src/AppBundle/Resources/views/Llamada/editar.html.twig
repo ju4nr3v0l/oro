@@ -53,11 +53,11 @@
                                                 <label class="col-md-2 control-label" for="_telefono">Teléfono:</label>
 
                                                 <div class="col-md-5">
-                                                    {{ form_widget(form.telefono,{'attr': {'data-mask':'(999) 999-9999'}} ) }}
+                                                    {{ form_widget(form.telefono) }}
                                                 </div>
                                                 <label class="col-md-2 control-label" for="_telefono">Extensión:</label>
                                                 <div class="col-md-3">
-                                                    {{ form_widget(form.extension,{'attr': {'data-mask':'(9999)'}}  ) }}
+                                                    {{ form_widget(form.extension  ) }}
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -71,14 +71,6 @@
                                                 <div class="col-md-10">
                                                     {{ form_widget(form.descripcion,{'attr': {'rows':'5'}}  ) }}
 
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label">Estado:</label>
-                                                <div class="col-md-10">
-                                                    {#{{ form_widget(form.estadoRel,{'attr':{'class':'hidden'}}) }}#}
-
-                                                    {#<label class="label label-info">{{ llamadas.estadoRel.nombre }}</label>#}
                                                 </div>
                                             </div>
                                             <hr>

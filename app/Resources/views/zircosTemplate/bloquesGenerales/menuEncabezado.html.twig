@@ -163,13 +163,9 @@
                     <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
                         <li>
                             <h5>Usuario:
-
-                            {#{% if app.user %}#}
-                                {#<strong>{{ app.user }}</strong>#}
-                            {#{% else %}#}
-                                {#<strong>Visitante</strong>#}
-                            {#{% endif %}#}
-
+                                {% if usuario is defined %}
+                                    {{ usuario.nombres }} {{ usuario.apellidos }}
+                                {% endif %}
                             </h5>
                         </li>
                         {#<li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>#}
