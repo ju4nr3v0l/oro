@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Form;
+
 
 
 class LlamadaController extends Controller
@@ -70,22 +72,42 @@ class LlamadaController extends Controller
      */
 
     public function listarLlamada(Request $request)
-    {
+    {   
 
-        $form = Forms::createFormBuilder();
+        $form = $this::createFormBuilder()->getForm();
 
         $form->handleRequest($request);
+
         $em = $this->getDoctrine()->getManager();
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findAll();
 
-        if($form->isSubmitted() && $form->isValid()){
-            if($request->request->get('llamadaAtender')) {
+        if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las
+            
+            if($request->request->has('llamadaAtender')) {
                 $idLlamadaAtender = $request->request->get('llamadaAtender');
+                $arLlamadaActualizar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaAtender);
+                $arLlamadaActualizar->setEstadoAtendido(true);
+                $em->flush();
+                return $this->render('AppBundle:Llamada:listar.html.twig', [
+                    'llamadas' => $arLlamadas,
+                    'form' => $form->createView()
 
+                ]);
+               
                 // acciones para actualizar el estado atender de esa llamada
             }
-            if($request->request->get('llamadaSolucionar')) {
+            if($request->request->has('llamadaSolucionar')) {
                 $idLlamadaSolucionar = $request->request->get('llamadaSolucionar');
+                
+                $arLlamadaSolucionar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaSolucionar);
+                $arLlamadaSolucionar->setEstadoSolucionado(true);
+                $em->flush();
+                return $this->render('AppBundle:Llamada:listar.html.twig', [
+                    'llamadas' => $arLlamadas,
+                    'form' => $form->createView()
+
+                ]);    
+               
                 // acciones para actualizar el estado solucionar de esa llamada
             }
         }
@@ -93,7 +115,7 @@ class LlamadaController extends Controller
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Llamada:listar.html.twig', [
             'llamadas' => $arLlamadas,
-            'form' => $form
+            'form' => $form->createView()
 
         ]);
     }
@@ -103,6 +125,9 @@ class LlamadaController extends Controller
      */
 
     public function listarLlamadaUsuario(Request $request){
+        $form = $this::createFormBuilder()->getForm();
+
+        $form->handleRequest($request);
         // Get our Token (representing the currently logged in user)
         // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
                 $token = $this->get('security.token_storage')->getToken();
@@ -120,7 +145,8 @@ class LlamadaController extends Controller
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
             'llamadas' => $arLlamadas,
-            'usuario'  => $user
+            'usuario'  => $user,
+             'form' => $form->createView()
         ]);
 
 
