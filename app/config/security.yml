@@ -26,8 +26,8 @@ security:
 
     access_control:
         - { path: /acceso, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /.*, roles: ROLE_USER }
-        - { path: /.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /.*, roles: IS_AUTHENTICATED_FULLY }
+#        - { path: /.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 
 
