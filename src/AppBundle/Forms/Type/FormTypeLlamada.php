@@ -55,10 +55,11 @@ class FormTypeLlamada extends AbstractType{
             ->add ('telefono', IntegerType::class,array(
                 'attr' => array(
                     'id' => '_telefono',
-                    'name' => '_telefono'
+                    'name' => '_telefono',
+                    'required' => 'true'
                 )
             ))
-            ->add ('extension', IntegerType::class,array(
+            ->add ('extension', TextType::class,array(
                 'attr' => array(
                     'id' => '_extension',
                     'name' => '_extension',

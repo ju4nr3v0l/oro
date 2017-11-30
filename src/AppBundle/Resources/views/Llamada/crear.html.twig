@@ -32,7 +32,7 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {{ form_start(form, { 'attr': {'class': 'form-horizontal','novalidate':'novalidate'} }) }}
+                                            {{ form_start(form, { 'attr': {'id':'form','class': 'form-horizontal','data-parsley-validate':'true','novalidate':'novalidate'} }) }}
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label" for="_telefono">Cliente: </label>
                                                     <div class="col-md-5">
@@ -57,19 +57,20 @@
                                                     </div>
                                                     <label class="col-md-2 control-label" for="_telefono">Extensión:</label>
                                                     <div class="col-md-3">
-                                                        {{ form_widget(form.extension) }}
+                                                        {{ form_widget(form.extension,{'attr':{'data-parsley-type':'number','data-parsley-maxlength':'6','data-parsley-id':'69'}}) }}
+                                                        <ul class="parsley-errors-list filled" id="parsley-id-69"><li class="parsley-type">This value should be a valid number.</li></ul>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label" for="_telefono">Tema</label>
                                                     <div class="col-md-10">
-                                                        {{ form_widget(form.tema,{'attr': {'rows':'5'}}  ) }}
+                                                        {{ form_widget(form.tema,{'attr':{'rows':'5'}}) }}
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label">Descripción:</label>
                                                     <div class="col-md-10">
-                                                        {{ form_widget(form.descripcion,{'attr': {'rows':'5'}}  ) }}
+                                                        {{ form_widget(form.descripcion,{'attr': {'rows':'5'}}) }}
                                                     </div>
                                                 </div>
                                             <hr>
@@ -93,3 +94,20 @@
         {{ include('zircosTemplate/bloquesGenerales/pie.html.twig') }}
     </div>
 {% endblock %}
+{#{% block javascriptsBottom %}#}
+    {#<script type="text/javascript">#}
+
+            {#$('form').parsley();#}
+
+        {#$(function () {#}
+            {#$('#form').parsley().on('field:validated', function () {#}
+                {#var ok = $('.parsley-error').length === 0;#}
+                {#$('.alert-info').toggleClass('hidden', !ok);#}
+                {#$('.alert-warning').toggleClass('hidden', ok);#}
+            {#})#}
+            {#.on('form:submit', function () {#}
+                {#return false; // Don't submit form for this demo#}
+            {#});#}
+        {#});#}
+    {#</script>#}
+{#{% endblock %}#}

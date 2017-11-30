@@ -157,7 +157,7 @@
                                                     {% endif %}
                                                 </td>
                                                     <td>
-                                                        {% if llamada.estadoSolucionado == false %}
+                                                        {% if llamada.estadoSolucionado == false and llamada.estadoAtendido == false %}
                                                             <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
                                                                class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                             </a>
