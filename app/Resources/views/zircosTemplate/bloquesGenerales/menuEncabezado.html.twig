@@ -163,8 +163,8 @@
                     <ul class="dropdown-menu dropdown-menu-right arrow-dropdown-menu arrow-menu-right user-list notify-list">
                         <li>
                             <h5>Usuario:
-                                {% if usuario is defined %}
-                                    {{ usuario.nombres }} {{ usuario.apellidos }}
+                                {% if app.user is defined or app.user is not null %}
+                                    {{ app.user.nombres }}
                                 {% endif %}
                             </h5>
                         </li>
