@@ -35,7 +35,9 @@
 
                                         {% if usuario is defined %}
                                             <span class="label label-info">{{ usuario.nombres }} {{ usuario.apellidos }}</span>
-                                        {% endif %}</h4>
+                                        {% endif %}
+
+                                    </h4>
 
                                     <div class="tabs-vertical-env">
                                         <ul class="nav tabs-vertical">
@@ -136,14 +138,15 @@
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
-                                                                                
+                                                                                {% if llamada.estadoSolucionado == false %}
                                                                                     <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
                                                                                        class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                                                     </a>
-                                                                                
-                                                                                
-                                                                                   
-                                                                               
+                                                                                {% else %}
+                                                                                    <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""
+                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                    </a>
+                                                                                {% endif %}
                                                                             </td>
                                                                         </tr>
                                                                     {% endif %}
@@ -245,10 +248,15 @@
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>
-                                                                                <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
-                                                                                   class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
-                                                                                </a>
-                                                                                
+                                                                                {% if llamada.estadoSolucionado == false %}
+                                                                                    <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                    </a>
+                                                                                {% else %}
+                                                                                    <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""
+                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                    </a>
+                                                                                {% endif %}
                                                                             </td>
                                                                         </tr>
                                                                     {% endif %}
