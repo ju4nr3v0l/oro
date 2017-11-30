@@ -114,13 +114,14 @@ class Llamada
      */
     private $codigoUsuarioAtiendeFk;
 
-    /**
+     /**
      * @var int
      *
-     * @ORM\Column(name="codigo_estado_llamada_fk", type="integer" ,nullable= TRUE)
+     * @ORM\Column(name="codigo_usuario_soluciona_fk", type="string", length=255, nullable= TRUE)
      */
-    private $codigoEstadoLlamadaFk;
+    private $codigoUsuarioSolucionaFk;
 
+    
     /**
      * @var int
      *
@@ -466,27 +467,27 @@ class Llamada
     }
 
     /**
-     * Set codigoEstadoLlamadaFk
+     * Set codigoUsuarioSolucionaFk
      *
-     * @param integer $codigoEstadoLlamadaFk
+     * @param string $codigoUsuarioSolucionaFk
      *
      * @return Llamada
      */
-    public function setCodigoEstadoLlamadaFk($codigoEstadoLlamadaFk)
+    public function setCodigoUsuarioSolucionaFk($codigoUsuarioSolucionaFk)
     {
-        $this->codigoEstadoLlamadaFk = $codigoEstadoLlamadaFk;
+        $this->codigoUsuarioSolucionaFk = $codigoUsuarioSolucionaFk;
 
         return $this;
     }
 
     /**
-     * Get codigoEstadoLlamadaFk
+     * Get codigoUsuarioSolucionaFk
      *
-     * @return integer
+     * @return string
      */
-    public function getCodigoEstadoLlamadaFk()
+    public function getCodigoUsuarioSolucionaFk()
     {
-        return $this->codigoEstadoLlamadaFk;
+        return $this->codigoUsuarioSolucionaFk;
     }
 
     /**

@@ -23,7 +23,7 @@ class LlamadaController extends Controller
 {
 
     /**
-     * @Route("/registrarLlamada", name="registrarLlamada")
+     * @Route("/llamada/nueva", name="registrarLlamada")
      */
 
     public function insertarLlamada(Request $request)
@@ -54,7 +54,7 @@ class LlamadaController extends Controller
             $llamada->setEstadoSolucionado(false);
             $em = $this->getDoctrine()->getManager();
             $em->persist($llamada);
-            dump ($llamada);
+           
             $em->flush();
             $url = $this->generateUrl('listadoLlamadas');
             return $this->redirect($url);
@@ -68,45 +68,68 @@ class LlamadaController extends Controller
     }
 
     /**
-     * @Route("/listadoLlamadas", name="listadoLlamadas")
+     * @Route("/llamada/lista", name="listadoLlamadas")
      */
 
     public function listarLlamada(Request $request)
     {   
+        $arLlamadasNorm = array();
+        $em = $this->getDoctrine()->getManager();
+            // Get our Token (representing the currently logged in user)
+            // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
+            $token = $this->get('security.token_storage')->getToken();
+            # e.g: $token->getUser();
+            # e.g: $token->isAuthenticated();
+            # [Careful]            ^ "Anonymous users are technically authenticated"
+            // Get our user from that token
+            $user = $token->getUser();
+            $id =  $user->getCodigoUsuarioPk();
 
         $form = $this::createFormBuilder()->getForm();
 
         $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
+      
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findAll();
+        foreach ($arLlamadas as $key => $value) {
+            $llamadaAc = new Llamada;
+            $llamadaAc = $value;
+            $arLlamadasNorm[$key]=$value;
+            if($llamadaAc->getCodigoUsuarioSolucionaFk() != null){
+                $usuarioSoluciona = $em->getRepository('AppBundle:Usuario')->find($llamadaAc->getCodigoUsuarioSolucionaFk());
+                $arLlamadasNorm[$key]->usuarioSoluciona=$usuarioSoluciona;
+            };
+            
+        }
+       
 
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las
             
             if($request->request->has('llamadaAtender')) {
+                
                 $idLlamadaAtender = $request->request->get('llamadaAtender');
-                $arLlamadaActualizar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaAtender);
-                $arLlamadaActualizar->setEstadoAtendido(true);
+                $arLlamadaAtender = $em->getRepository('AppBundle:Llamada')->find($idLlamadaAtender);
+                $arLlamadaAtender->setEstadoAtendido(true);
+                $arLlamadaAtender->setCodigoUsuarioAtiendeFk($id);
+                $arLlamadaAtender->setFechaGestion(new \DateTime('now'));
                 $em->flush();
-                return $this->render('AppBundle:Llamada:listar.html.twig', [
-                    'llamadas' => $arLlamadas,
-                    'form' => $form->createView()
-
-                ]);
-               
-                // acciones para actualizar el estado atender de esa llamada
+                $url = $this->generateUrl('listadoLlamadas');
+                return $this->redirect($url);
+                   
+                    // acciones para actualizar el estado atender de esa llamada
             }
             if($request->request->has('llamadaSolucionar')) {
                 $idLlamadaSolucionar = $request->request->get('llamadaSolucionar');
-                
+
                 $arLlamadaSolucionar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaSolucionar);
                 $arLlamadaSolucionar->setEstadoSolucionado(true);
+                $arLlamadaSolucionar->setCodigoUsuarioSolucionaFk($id);
+                $arLlamadaSolucionar->setFechaSolucion(new \DateTime('now'));
                 $em->flush();
-                return $this->render('AppBundle:Llamada:listar.html.twig', [
-                    'llamadas' => $arLlamadas,
-                    'form' => $form->createView()
+                $url = $this->generateUrl('listadoLlamadas');
+                return $this->redirect($url);
 
-                ]);    
+                   
                
                 // acciones para actualizar el estado solucionar de esa llamada
             }
@@ -114,14 +137,15 @@ class LlamadaController extends Controller
 
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Llamada:listar.html.twig', [
-            'llamadas' => $arLlamadas,
-            'form' => $form->createView()
+            'llamadas' => $arLlamadasNorm,
+            'form' => $form->createView(),
+            'usuario' => $user
 
         ]);
     }
 
     /**
-     * @Route("/listadoLlamadasUsuario", name="listadoLlamadasUsuario")
+     * @Route("/llamada/lista/usuario", name="listadoLlamadasUsuario")
      */
 
     public function listarLlamadaUsuario(Request $request){
@@ -140,7 +164,24 @@ class LlamadaController extends Controller
         // en index pagina con datos generales de la app
 
         $em = $this->getDoctrine()->getManager();
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioRecibeFk' => $id));
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioAtiendeFk' => $id));
+        if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las
+            
+            
+            if($request->request->has('llamadaSolucionar')) {
+                $idLlamadaSolucionar = $request->request->get('llamadaSolucionar');
+                
+                $arLlamadaSolucionar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaSolucionar);
+                $arLlamadaSolucionar->setEstadoSolucionado(true);
+                $arLlamadaSolucionar->setCodigoUsuarioSolucionaFk($id);
+
+                $em->flush();
+                $url = $this->generateUrl('listadoLlamadas');
+                return $this->redirect($url);   
+               
+                // acciones para actualizar el estado solucionar de esa llamada
+            }
+        }
 
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
@@ -153,41 +194,10 @@ class LlamadaController extends Controller
     }
 
 
-    /**
-     * @Route("/actualizarEstadoLlamadaUsuario/{codigoLlamadaPk}", requirements={"codigoLlamadaPk":"\d+"}, name="actualizarEstadoLlamadaUsuario")
-     */
-
-    public function actualizarEstadoLlamadaUsuario(Request $request, $codigoLlamadaPk)
-    {
-
-        $form = array('juan');
-        $token = $this->get('security.token_storage')->getToken();
-        # e.g: $token->getUser();
-        # e.g: $token->isAuthenticated();
-        # [Careful]            ^ "Anonymous users are technically authenticated"
-        // Get our user from that token
-        $user = $token->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
-
-        $id =  $user->getCodigoUsuarioPk();
-        $arLlamadas->setCodigoUsuarioAtiendeFk($id);
-        $arLlamadas->setFechaGestion(new \DateTime('now'));
-        $arLlamadas->setEstadoAtendido(true);
-        $em->persist($arLlamadas);
-        $em->flush();
-        $url = $this->generateUrl('listadoLlamadasUsuario');
-        return $this->redirect($url);
-
-
-
-
-
-
-    }
+   
 
     /**
-     * @Route("/editarLlamada/{codigoLlamadaPk}", requirements={"codigoLlamadaPk":"\d+"}, name="editarLlamada")
+     * @Route("/llamada/nueva/{codigoLlamadaPk}", requirements={"codigoLlamadaPk":"\d+"}, name="editarLlamada")
      */
 
     public function editarLlamada(Request $request, $codigoLlamadaPk)
@@ -216,7 +226,7 @@ class LlamadaController extends Controller
 
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
-                $url = $this->generateUrl('listadoLlamadasUsuario');
+                $url = $this->generateUrl('listadoLlamadas');
                 return $this->redirect($url);
             }
 
