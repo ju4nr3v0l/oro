@@ -42,10 +42,10 @@
                                     <div class="tabs-vertical-env">
                                         <ul class="nav tabs-vertical">
                                             <li class="active">
-                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">Pendientes: {% set pendientes = 0 %}</a>
+                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">Pendientes:  <label class="label label-success">{{ contadores.contLlamadasPendientes }}</label></a>
                                             </li>
                                             <li class="">
-                                                <a href="#v-atendidas" data-toggle="tab" aria-expanded="false">Solucionadas: {% set atendidas = 5 %}</a>
+                                                <a href="#v-atendidas" data-toggle="tab" aria-expanded="false">Solucionadas:  <label class="label label-success">{{ contadores.contLlamadasSolucionadas }}</label></a>
                                             </li>
                                         </ul>
 
