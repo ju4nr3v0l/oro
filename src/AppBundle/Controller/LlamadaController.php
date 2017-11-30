@@ -86,6 +86,10 @@ class LlamadaController extends Controller
             $llamadaAc = new Llamada;
             $llamadaAc = $value;
             $arLlamadasNorm[$key]=$value;
+            if($llamadaAc->getCodigoUsuarioAtiendeFk() != null){
+                $usuarioAtiende = $em->getRepository('AppBundle:Usuario')->find($llamadaAc->getCodigoUsuarioAtiendeFk());
+                $arLlamadasNorm[$key]->usuarioAtiende=$usuarioAtiende;
+            };
             if($llamadaAc->getCodigoUsuarioSolucionaFk() != null){
                 $usuarioSoluciona = $em->getRepository('AppBundle:Usuario')->find($llamadaAc->getCodigoUsuarioSolucionaFk());
                 $arLlamadasNorm[$key]->usuarioSoluciona=$usuarioSoluciona;

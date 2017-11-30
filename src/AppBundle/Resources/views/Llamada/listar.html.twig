@@ -129,7 +129,7 @@
                                                     {% if llamada.estadoAtendido %}
                                                     
                                                      
-                                                        <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" disabled value="{{ llamada.codigoLlamadaPk }}" title="{{usuario.nombres}} {{usuario.apellidos}}">
+                                                        <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" disabled value="{{ llamada.codigoLlamadaPk }}" title="{{ llamada.usuarioAtiende.nombres}} {{llamada.usuarioAtiende.apellidos}}">
                                                             <i class="glyphicon glyphicon-thumbs-up"></i></button>
                                                            
                                                     {% else %}
