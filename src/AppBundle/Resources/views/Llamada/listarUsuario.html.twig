@@ -42,10 +42,10 @@
                                     <div class="tabs-vertical-env">
                                         <ul class="nav tabs-vertical">
                                             <li class="active">
-                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">Pendientes: <span class="badge badge-primary">{{ contadores.contLlamadasPendientes }}</span></a>
+                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">Pendientes:  <label class="label label-success">{{ contadores.contLlamadasPendientes }}</label></a>
                                             </li>
                                             <li class="">
-                                                <a href="#v-atendidas" data-toggle="tab" aria-expanded="false">Solucionadas:  <span class="badge badge-success">{{ contadores.contLlamadasSolucionadas }}</span></a>
+                                                <a href="#v-atendidas" data-toggle="tab" aria-expanded="false">Solucionadas:  <label class="label label-success">{{ contadores.contLlamadasSolucionadas }}</label></a>
                                             </li>
                                         </ul>
 
@@ -73,7 +73,7 @@
                                                                     <th>Solución</th>
                                                                     <th>Atendido</th>
                                                                     <th>Solucionado</th>
-                                                                    {#<th>Acción</th>#}
+                                                                    <th>Acción</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -137,17 +137,17 @@
                                                                                
                                                                                 {% endif %}
                                                                             </td>
-                                                                            {#<td>#}
-                                                                                {#{% if llamada.estadoSolucionado == false %}#}
-                                                                                    {#<a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"#}
-                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
-                                                                                    {#</a>#}
-                                                                                {#{% else %}#}
-                                                                                    {#<a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""#}
-                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
-                                                                                    {#</a>#}
-                                                                                {#{% endif %}#}
-                                                                            {#</td>#}
+                                                                            <td>
+                                                                                {% if llamada.estadoSolucionado == false %}
+                                                                                    <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                    </a>
+                                                                                {% else %}
+                                                                                    <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""
+                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                    </a>
+                                                                                {% endif %}
+                                                                            </td>
                                                                         </tr>
                                                                     {% endif %}
                                                                 {% endfor %}
@@ -183,7 +183,7 @@
                                                                     <th>Solución</th>
                                                                     <th>Atendido</th>
                                                                     <th>Solucionado</th>
-                                                                    {#<th>Acción</th>#}
+                                                                    <th>Acción</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -247,17 +247,17 @@
                                                                                
                                                                                 {% endif %}
                                                                             </td>
-                                                                            {#<td>#}
-                                                                                {#{% if llamada.estadoSolucionado == false %}#}
-                                                                                    {#<a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"#}
-                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
-                                                                                    {#</a>#}
-                                                                                {#{% else %}#}
-                                                                                    {#<a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""#}
-                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
-                                                                                    {#</a>#}
-                                                                                {#{% endif %}#}
-                                                                            {#</td>#}
+                                                                            <td>
+                                                                                {% if llamada.estadoSolucionado == false %}
+                                                                                    <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                    </a>
+                                                                                {% else %}
+                                                                                    <a href="{{ path('editarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""
+                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                                                    </a>
+                                                                                {% endif %}
+                                                                            </td>
                                                                         </tr>
                                                                     {% endif %}
                                                                 {% endfor %}
