@@ -112,7 +112,7 @@ class LlamadaController extends Controller
         }
 
         $contadores = array('contLlamadasAtendidas'=> $countLlamadasAtendidas,'contLlamadasSolucionadas' => $countLlamadasSolucionadas,'contLlamadasPendientes' => $countLlamadasPendientes);
-        
+
 
 
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las
@@ -173,6 +173,25 @@ class LlamadaController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioAtiendeFk' => $id),array('fechaGestion' => 'DESC'));
+        $countLlamadasAtendidas = 0;
+        $countLlamadasSolucionadas = 0;
+        $countLlamadasPendientes = 0;
+        foreach ($arLlamadas as $key => $value) {
+            $llamadaAc = new Llamada;
+            $llamadaAc = $value;
+            if($llamadaAc->getEstadoAtendido()){
+                $countLlamadasAtendidas++;
+            }
+            if($llamadaAc->getEstadoSolucionado()){
+                $countLlamadasSolucionadas++;
+            }
+            if(!$llamadaAc->getEstadoAtendido() && !$llamadaAc->getEstadoSolucionado()){
+                $countLlamadasPendientes++;
+            }
+
+
+        }
+        $contadores = array('contLlamadasAtendidas'=> $countLlamadasAtendidas,'contLlamadasSolucionadas' => $countLlamadasSolucionadas,'contLlamadasPendientes' => $countLlamadasPendientes);
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las
             
             
@@ -195,7 +214,8 @@ class LlamadaController extends Controller
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
             'llamadas' => $arLlamadas,
             'usuario'  => $user,
-             'form' => $form->createView()
+             'form' => $form->createView(),
+            'contadores' => $contadores
         ]);
 
 
