@@ -90,7 +90,7 @@ class LlamadaController extends Controller
         $form->handleRequest($request);
 
       
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findAll();
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy([],array('fechaRegistro' => 'DESC'));
         foreach ($arLlamadas as $key => $value) {
             $llamadaAc = new Llamada;
             $llamadaAc = $value;
@@ -164,7 +164,7 @@ class LlamadaController extends Controller
         // en index pagina con datos generales de la app
 
         $em = $this->getDoctrine()->getManager();
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioAtiendeFk' => $id));
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioAtiendeFk' => $id),array('fechaGestion' => 'DESC'));
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las
             
             
