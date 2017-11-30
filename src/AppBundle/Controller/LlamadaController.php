@@ -39,14 +39,8 @@ class LlamadaController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            // Get our Token (representing the currently logged in user)
-            // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
-            $token = $this->get('security.token_storage')->getToken();
-            # e.g: $token->getUser();
-            # e.g: $token->isAuthenticated();
-            # [Careful]            ^ "Anonymous users are technically authenticated"
-            // Get our user from that token
-            $user = $token->getUser();
+            
+            $user = $this->getUser();
             $id =  $user->getCodigoUsuarioPk();
             $llamada->setCodigoUsuarioRecibeFk($id);
             $llamada->setFechaRegistro(new \DateTime('now'));
@@ -75,15 +69,9 @@ class LlamadaController extends Controller
     {   
         $arLlamadasNorm = array();
         $em = $this->getDoctrine()->getManager();
-            // Get our Token (representing the currently logged in user)
-            // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
-            $token = $this->get('security.token_storage')->getToken();
-            # e.g: $token->getUser();
-            # e.g: $token->isAuthenticated();
-            # [Careful]            ^ "Anonymous users are technically authenticated"
-            // Get our user from that token
-            $user = $token->getUser();
-            $id =  $user->getCodigoUsuarioPk();
+           
+        $user = $this->getUser();
+        $id =  $user->getCodigoUsuarioPk();
 
         $form = $this::createFormBuilder()->getForm();
 
@@ -152,15 +140,9 @@ class LlamadaController extends Controller
         $form = $this::createFormBuilder()->getForm();
 
         $form->handleRequest($request);
-        // Get our Token (representing the currently logged in user)
-        // [New 3.0] Get the `token_storage` object (instead of calling upon `security.context`)
-                $token = $this->get('security.token_storage')->getToken();
-        # e.g: $token->getUser();
-        # e.g: $token->isAuthenticated();
-        # [Careful]            ^ "Anonymous users are technically authenticated"
-        // Get our user from that token
-                $user = $token->getUser();
-                $id =  $user->getCodigoUsuarioPk();
+        
+        $user = $this->getUser();
+        $id =  $user->getCodigoUsuarioPk();
         // en index pagina con datos generales de la app
 
         $em = $this->getDoctrine()->getManager();
@@ -203,12 +185,7 @@ class LlamadaController extends Controller
     public function editarLlamada(Request $request, $codigoLlamadaPk)
     {
 
-        $token = $this->get('security.token_storage')->getToken();
-        # e.g: $token->getUser();
-        # e.g: $token->isAuthenticated();
-        # [Careful]            ^ "Anonymous users are technically authenticated"
-        // Get our user from that token
-        $user = $token->getUser();
+        $user = $this->getUser();
 
         $arLlamadas = $this->getDoctrine()->getManager()->getRepository('AppBundle:Llamada')->find($codigoLlamadaPk);
         if(!$arLlamadas){
@@ -239,6 +216,19 @@ class LlamadaController extends Controller
             ]);
 
         }
+
+    }
+
+    public function getUser(){
+
+        $token = $this->get('security.token_storage')->getToken();
+        # e.g: $token->getUser();
+        # e.g: $token->isAuthenticated();
+        # [Careful]            ^ "Anonymous users are technically authenticated"
+        // Get our user from that token
+        $user = $token->getUser();
+
+        return $user;  
 
     }
 
