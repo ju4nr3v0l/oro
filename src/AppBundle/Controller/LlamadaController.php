@@ -66,10 +66,12 @@ class LlamadaController extends Controller
      */
 
     public function listarLlamada(Request $request)
-    {   
+    {
+
+
         $arLlamadasNorm = array();
         $em = $this->getDoctrine()->getManager();
-           
+
         $user = $this->getUser();
         $id =  $user->getCodigoUsuarioPk();
 
@@ -82,6 +84,9 @@ class LlamadaController extends Controller
 
       
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy([],array('fechaRegistro' => 'DESC'));
+        $countLlamadasAtendidas = 0;
+        $countLlamadasSolucionadas = 0;
+        $countLlamadasPendientes = 0;
         foreach ($arLlamadas as $key => $value) {
             $llamadaAc = new Llamada;
             $llamadaAc = $value;
@@ -89,14 +94,26 @@ class LlamadaController extends Controller
             if($llamadaAc->getCodigoUsuarioAtiendeFk() != null){
                 $usuarioAtiende = $em->getRepository('AppBundle:Usuario')->find($llamadaAc->getCodigoUsuarioAtiendeFk());
                 $arLlamadasNorm[$key]->usuarioAtiende=$usuarioAtiende;
-            };
+            }
             if($llamadaAc->getCodigoUsuarioSolucionaFk() != null){
                 $usuarioSoluciona = $em->getRepository('AppBundle:Usuario')->find($llamadaAc->getCodigoUsuarioSolucionaFk());
                 $arLlamadasNorm[$key]->usuarioSoluciona=$usuarioSoluciona;
-            };
-            
+            }
+            if($llamadaAc->getEstadoAtendido()){
+                $countLlamadasAtendidas++;
+            }
+            if($llamadaAc->getEstadoSolucionado()){
+                $countLlamadasSolucionadas++;
+            }
+            if(!$llamadaAc->getEstadoAtendido() && !$llamadaAc->getEstadoSolucionado()){
+                $countLlamadasPendientes++;
+            }
+
         }
-       
+
+        $contadores = array('contLlamadasAtendidas'=> $countLlamadasAtendidas,'contLlamadasSolucionadas' => $countLlamadasSolucionadas,'contLlamadasPendientes' => $countLlamadasPendientes);
+        
+
 
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las
             
@@ -135,7 +152,8 @@ class LlamadaController extends Controller
         return $this->render('AppBundle:Llamada:listar.html.twig', [
             'llamadas' => $arLlamadasNorm,
             'form' => $form->createView(),
-            'usuario' => $user
+            'usuario' => $user,
+            'contadores' => $contadores
 
         ]);
     }
