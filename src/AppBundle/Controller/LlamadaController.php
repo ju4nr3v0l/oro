@@ -54,7 +54,6 @@ class LlamadaController extends Controller
 
                 return $this->render('AppBundle:Llamada:editar.html.twig', [
                     'llamadas' => $arLlamada,
-                    'usuario'  => $user,
                     'form' => $form->createView()
                 ]);
             }
@@ -158,7 +157,6 @@ class LlamadaController extends Controller
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Llamada:listar.html.twig', [
             'llamadas' => $arLlamadas,
-            'usuario' => $user,
             'contadores' => $contadores,
             'form' => $form->createView(),
 
@@ -218,7 +216,6 @@ class LlamadaController extends Controller
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
             'llamadas' => $arLlamadas,
-            'usuario'  => $user,
             'contadores' => $contadores,
             'form' => $form->createView(),
         ]);
