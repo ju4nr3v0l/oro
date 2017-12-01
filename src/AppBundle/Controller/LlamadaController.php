@@ -105,7 +105,7 @@ class LlamadaController extends Controller
 
         foreach ($arLlamadas as $key => $value) { // cuenta las llamadas dependiendo de su estado
 
-            if($value->getEstadoAtendido()){
+            if($value->getEstadoAtendido() && !$value->getEstadoSolucionado()){
                 $countLlamadasAtendidas++;
             }
 
@@ -182,7 +182,7 @@ class LlamadaController extends Controller
 
         foreach ($arLlamadas as $key => $value) {
 
-            if($value->getEstadoAtendido()){
+            if($value->getEstadoAtendido() && !$value->getEstadoSolucionado()){
                 $countLlamadasAtendidas++;
             }
             if($value->getEstadoSolucionado()){
