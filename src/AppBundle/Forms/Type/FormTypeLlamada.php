@@ -44,14 +44,14 @@ class FormTypeLlamada extends AbstractType{
                         ->orderBy('c.nombre', 'ASC');},
                 'choice_label' => 'nombre',
                 'required' => true))
-            ->add ('tema', TextareaType::class, array(
-                'attr' => array(
-                    'id' => '_tema',
-                    'name' => '_tema',
-                    'class' => 'form-control',
-                    'required' => false
-                )
-            ))
+//            ->add ('tema', TextareaType::class, array(
+//                'attr' => array(
+//                    'id' => '_tema',
+//                    'name' => '_tema',
+//                    'class' => 'form-control',
+//                    'required' => false
+//                )
+//            ))
             ->add ('telefono', IntegerType::class,array(
                 'attr' => array(
                     'id' => '_telefono',

@@ -16,7 +16,7 @@ use Symfony\Component\Form\Form;
 class LlamadaController extends Controller {
     
     /**
-     * @Route("/llamada/nuevo/{codigoLlamadaPk}", requirements={"codigoLlamadaPk":"\d+"}, name="registrarLlamada")
+     * @Route("/llamada/nuevo/{codigoLlamada}", requirements={"codigoLlamada":"\d+"}, name="registrarLlamada")
      */
     public function nuevo(Request $request, $codigoLlamada = null) {
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
