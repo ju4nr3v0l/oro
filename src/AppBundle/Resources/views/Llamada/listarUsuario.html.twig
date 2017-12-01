@@ -16,9 +16,9 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title"><i class="mdi mdi-phone-classic"></i> Mis Llamadas </h4>
+                                    <h4 class="page-title"><i class="mdi mdi-phone-classic"></i> Mis Llamadas  </h4>
                                     {#<span class="label label-danger">Pendientes: {{ pendientes }}</span>#}
-                                    {#<span class="label label-info">Atendidas Pendientes: {{ atendidas }}</span>#}
+                                    <span class="label label-success"> Atendidas Pendientes: {{ atendidas }}</span>
                                     <a href="{{ path('registrarLlamada') }}">
                                         <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Nueva </button>
                                     </a>
@@ -45,10 +45,7 @@
                                         <ul class="nav tabs-vertical">
 
                                             <li class="active">
-                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">PENDIENTES</a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#v-atendidas" data-toggle="tab" aria-expanded="false">ATENDIDAS</a>
+                                                <a href="#v-pendientes" data-toggle="tab" aria-expanded="true">PENDIENTES: <span class="badge badge-info">{{ atendidas }}</span></a>
                                             </li>
                                         </ul>
 
@@ -99,7 +96,7 @@
                                                                                     <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
                                                                                 {% endif %}
                                                                             </td>
-                                                                            <td>{% if llamada.moduloRel is defined %}{{ llamada.moduloRel.codigoModuloPk }}{% endif %}</td>
+                                                                            <td>{{ llamada.codigoModuloFk }}</td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>
                                                                                 {{ llamada.nombreContacto }}

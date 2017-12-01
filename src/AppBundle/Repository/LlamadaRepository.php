@@ -42,8 +42,6 @@ class LlamadaRepository extends \Doctrine\ORM\EntityRepository
         $dql = "SELECT COUNT(l.codigoLlamadaPk) AS atendidasPendientesUsuario FROM AppBundle:Llamada l WHERE l.estadoAtendido = 1 AND l.estadoSolucionado = 0 AND l.codigoUsuarioAtiendeFk = '" . $codigoUsuarioAtiende."'";
         $query = $em->createQuery($dql);
         $arrLlamadas = $query->getSingleResult();
-        dump($arrLlamadas);
-        die();
         if ($arrLlamadas) {
             $atendidasPendientesUsuario = $arrLlamadas['atendidasPendientesUsuario'];
         }
