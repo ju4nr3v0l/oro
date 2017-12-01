@@ -44,9 +44,15 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label" for="_telefono">Contacto:</label>
-                                                <div class="col-md-10">
-                                                    {{ form_widget(form.nombreContacto) }}
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label" for="_telefono">Contacto:</label>
+                                                    <div class="col-md-5">
+                                                        {{ form_widget(form.nombreContacto) }}
+                                                    </div>
+                                                    <label class="col-md-2 control-label" for="_telefono">Módulo:</label>
+                                                    <div class="col-md-3">
+                                                        {{ form_widget(form.moduloRel) }}
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -58,12 +64,6 @@
                                                 <label class="col-md-2 control-label" for="_telefono">Extensión:</label>
                                                 <div class="col-md-3">
                                                     {{ form_widget(form.extension  ) }}
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-2 control-label" for="_telefono">Tema:</label>
-                                                <div class="col-md-10">
-                                                    {{ form_widget(form.tema,{'attr': {'rows':'5'}}  ) }}
                                                 </div>
                                             </div>
                                             <div class="form-group">
