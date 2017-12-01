@@ -8,10 +8,12 @@ use AppBundle\Entity\LlamadaCategoria;
 use AppBundle\Forms\Type\FormTypeUsuario;
 use AppBundle\Forms\Type\FormTypeCliente;
 use AppBundle\Forms\Type\FormTypeCategoria;
+use AppBundle\Forms\Type\FormTypeModulo;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Usuario;
 use AppBundle\Entity\Cliente;
+use AppBundle\Entity\Modulo;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -237,7 +239,6 @@ class AdminController extends Controller
     /**
      * @Route("/admin/categoria/lista", name="listaCategoria")
      */
-
     public function listaCategoria(Request $request)
     {
 
@@ -249,5 +250,55 @@ class AdminController extends Controller
         ]);
     }
    /** end categorias */
+
+
+
+
+   /** modulo */
+
+
+    /**
+     * @Route("/admin/modulo/nuevo/{codigoModulo}", requirements={"codigoModulo":"\d+"}, name="registrarModulo")
+     */
+    public function nuevo(Request $request, $codigoModulo = null) {
+        $em = $this->getDoctrine()->getManager(); // instancia el entity manager
+        $user = $this->getUser(); // trae el usuario actual
+        $arModulo= new Modulo(); //instance class
+        if($codigoModulo) {
+            $arModulo= $em->getRepository('AppBundle:Modulo')->find($codigoModulo);
+        }
+        $form = $this->createForm(FormTypeModulo::class, $arModulo); //create form
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            $em->persist($arModulo);
+            $em->flush();
+            return $this->redirect($this->generateUrl('listaModulo'));
+        }
+
+        return $this->render('AppBundle:Admin:crearModulo.html.twig',
+            array(
+                'form' => $form->createView(),
+            ));
+    }
+
+
+
+    /**
+     * @Route("/admin/modulo/lista", name="listaModulo")
+     */
+    public function listaModulo(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $arModulos = $em->getRepository('AppBundle:Modulo')->findAll(); // consulta todas las llamdas por fecha descendente
+        // en index pagina con datos generales de la app
+        return $this->render('AppBundle:Admin:listaModulo.html.twig', [
+            'modulos' => $arModulos,
+        ]);
+    }
+
+   /** end modulo*/
 
 }

@@ -68,28 +68,28 @@
 
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30"> Listado de categorias</h4>
+                                    <h4 class="header-title m-t-0 m-b-30"> Listado de modulos</h4>
 
                                     <div class="table-responsive">
                                         <table class="table table table-hover m-0">
                                             <thead>
                                             <tr>
+                                                <th>Abreviatura</th>
                                                 <th>Nombre</th>
-                                                <th>Descripcion</th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            {% for categoria in categorias %}
+                                            {% for modulo in modulos %}
 
                                                 <tr>
 
                                                     <td>
-                                                        {{ categoria.nombre }}
+                                                        {{ modulo.codigoModuloPk}}
                                                     </td>
 
                                                     <td>
-                                                        {{ categoria.descripcion}}
+                                                        {{ modulo.nombre}}
                                                     </td>
 
                                                 </tr>
