@@ -125,8 +125,8 @@
                                                     <td>{{ llamada.descripcion }}</td>
                                                     <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
                                                     <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
-                                                    <td>{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}</td>
-                                                    <td>{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}</td>
+                                                    <td>{% if llamada.fechaGestion != null %}{{ llamada.fechaGestion|date('Y-m-d H:i:s') }}{%  endif %}</td>
+                                                    <td>{% if llamada.fechaSolucion!= null %}{{ llamada.fechaSolucion|date('Y-m-d H:i:s') }}{%  endif %}</td>
                                                     <td>
 
                                                     {% if llamada.estadoAtendido %}
