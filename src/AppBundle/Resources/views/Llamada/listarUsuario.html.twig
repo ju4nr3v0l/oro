@@ -99,7 +99,7 @@
                                                                                     <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
                                                                                 {% endif %}
                                                                             </td>
-                                                                            <td>{{ llamada.moduloRel.codigoModuloPk }}</td>
+                                                                            <td>{% if llamada.moduloRel is defined %}{{ llamada.moduloRel.codigoModuloPk }}{% endif %}</td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>
                                                                                 {{ llamada.nombreContacto }}
@@ -205,7 +205,7 @@
                                                                                     <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
                                                                                 {% endif %}
                                                                             </td>
-                                                                            <td>{{ llamada.moduloRel.codigoModuloPk }}</td>
+                                                                            <td>{% if llamada.moduloRel is defined %}{{ llamada.moduloRel.codigoModuloPk }}{% endif %}</td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>{{ llamada.nombreContacto }}</td>
                                                                             <td>{{ llamada.telefono }}</td>
