@@ -187,7 +187,7 @@ class LlamadaController extends Controller
             if($value->getEstadoSolucionado()){
                 $countLlamadasSolucionadas++;
             }
-            if(!$value->getEstadoAtendido() && !$value->getEstadoSolucionado()){
+            if($value->getEstadoAtendido() && !$value->getEstadoSolucionado()){
                 $countLlamadasPendientes++;
             }
 
