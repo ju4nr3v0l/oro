@@ -32,5 +32,19 @@ class LlamadaRepository extends \Doctrine\ORM\EntityRepository
             $atendidasPendientes = $arrLlamadas['atendidasPendientes'];
         }
         return $atendidasPendientes;
-    }      
+    }
+
+
+    public function getAtendidasPendientesUsuario($codigoUsuarioAtiende)
+    {
+        $em = $this->getEntityManager();
+        $atendidasPendientesusuario = 0;
+        $dql = "SELECT COUNT(l.codigoLlamadaPk) AS atendidasPendientes FROM AppBundle:Llamada l WHERE l.estadoAtendido = 1 AND l.estadoSolucionado = 0 AND l.codigoUsuarioAtiendeFk == " . $codigoUsuarioAtiende;
+        $query = $em->createQuery($dql);
+        $arrLlamadas = $query->getSingleResult();
+        if ($arrLlamadas) {
+            $atendidasPendientesUsuario = $arrLlamadas['atendidasPendientes'];
+        }
+        return $atendidasPendientesUsuario;
+    }
 }

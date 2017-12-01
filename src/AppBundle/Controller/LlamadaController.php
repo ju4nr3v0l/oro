@@ -16,7 +16,7 @@ use Symfony\Component\Form\Form;
 class LlamadaController extends Controller {
     
     /**
-     * @Route("/llamada/nuevo/{codigoLlamadaPk}", requirements={"codigoLlamadaPk":"\d+"}, name="registrarLlamada")
+     * @Route("/llamada/nuevo/{codigoLlamada}", requirements={"codigoLlamada":"\d+"}, name="registrarLlamada")
      */
     public function nuevo(Request $request, $codigoLlamada = null) {
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
@@ -54,7 +54,7 @@ class LlamadaController extends Controller {
         $em = $this->getDoctrine()->getManager();
         /** declara variables auxiliares para organizar el objeto final a devolver*/
         $atendidasPendientes = $em->getRepository('AppBundle:Llamada')->getAtendidasPendientes(); // contador de llamadas atendidas        
-        $pendientes = $em->getRepository('AppBundle:Llamada')->getPendientes(); // contador de llamadas pendientes por usar        
+        $pendientes = $em->getRepository('AppBundle:Llamada')->getPendientes(); // contador de llamadas pendientes
         /** end variables auxiliares */
         $user = $this->getUser();                       
         $form = $this::createFormBuilder()->getForm();//form para manejar los cambios de estado
@@ -84,7 +84,7 @@ class LlamadaController extends Controller {
             $em->flush();
             return $this->redirect($this->generateUrl('listadoLlamadas'));
         }        
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array(), array('fechaRegistro' => 'DESC'));// consulta llamadas por usuario logueado
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array(), array('fechaRegistro' => 'DESC'));// consulta llamadas por
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Llamada:listar.html.twig', [
             'llamadas' => $arLlamadas,
@@ -97,47 +97,23 @@ class LlamadaController extends Controller {
     /**
      * @Route("/llamada/lista/usuario", name="listadoLlamadasUsuario")
      */
-
     public function listaUsuario(Request $request){
 
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $id =  $user->getCodigoUsuarioPk();
-        // contadores para informe de estado de llamadas
-        $countLlamadasAtendidas = 0;
-        $countLlamadasSolucionadas = 0;
-        $countLlamadasPendientes = 0;
-
-        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioAtiendeFk' => $id),array('fechaGestion' => 'DESC'));// consulta llamadas por usuario logueado
-
-        foreach ($arLlamadas as $key => $value) {
-
-            if($value->getEstadoAtendido() && !$value->getEstadoSolucionado()){
-                $countLlamadasAtendidas++;
-            }
-            if($value->getEstadoSolucionado()){
-                $countLlamadasSolucionadas++;
-            }
-            if($value->getEstadoAtendido() && !$value->getEstadoSolucionado()){
-                $countLlamadasPendientes++;
-            }
-
-        }
-
-        $contadores = array('contLlamadasAtendidas'=> $countLlamadasAtendidas,'contLlamadasSolucionadas' => $countLlamadasSolucionadas,'contLlamadasPendientes' => $countLlamadasPendientes);// contadores de los estados de las llamadas
-
+        $atendidasPendientes = $em->getRepository('AppBundle:Llamada')->getAtendidasPendientesUsuario();
+        $arLlamada = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioAtiendeFk' => $id, 'estadoAtendido' => 1, 'estadoSolucionado' => 0 ),array('fechaGestion' => 'DESC'));// consulta llamadas por usuario logueado
         $form = $this::createFormBuilder()->getForm(); // form para manejar actualizacion de estado de llamadas
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las llamadas
-            
-            
             if($request->request->has('llamadaSolucionar')) {
-                $idLlamadaSolucionar = $request->request->get('llamadaSolucionar');
-                $arLlamadaSolucionar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaSolucionar);
-                if(!$arLlamadaSolucionar->getCodigoUsuarioSolucionaFk()){
-                    $arLlamadaSolucionar->setEstadoSolucionado(true);
-                    $arLlamadaSolucionar->setCodigoUsuarioSolucionaFk($id);
-                    $em->persist($arLlamadaSolucionar);
+                $codigoLlamada = $request->request->get('llamadaSolucionar');
+                $arLlamada = $em->getRepository('AppBundle:Llamada')->find($codigoLlamada);
+                if(!$arLlamada->getCodigoUsuarioSolucionaFk()){
+                    $arLlamada->setEstadoSolucionado(true);
+                    $arLlamada->setCodigoUsuarioSolucionaFk($id);
+                    $em->persist($arLlamada);
                     $em->flush();
                     return $this->redirect($this->generateUrl('listadoLlamadasUsuario'));
                 }
@@ -146,8 +122,8 @@ class LlamadaController extends Controller {
 
 
         return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
-            'llamadas' => $arLlamadas,
-            'contadores' => $contadores,
+            'llamadas' => $arLlamada,
+            'atendidas' => $atendidasPendientes,
             'form' => $form->createView(),
         ]);
 

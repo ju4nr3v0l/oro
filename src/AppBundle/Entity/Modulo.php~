@@ -1,0 +1,37 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Modulo
+ *
+ * @ORM\Table(name="modulo")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ModuloRepository")
+ */
+class Modulo
+{
+
+    /**
+     * @var string
+     * @ORM\Id
+     * @ORM\Column(name="codigo_modulo_pk", type="string", length=255, unique=true)
+     */
+    private $codigoModuloPk;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
+     */
+    private $nombre;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Llamada", mappedBy="moduloRel")
+     */
+
+    private $llamadasModuloRel;
+
+}
