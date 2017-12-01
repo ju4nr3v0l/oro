@@ -9,5 +9,28 @@ namespace AppBundle\Repository;
  * repository methods below.
  */
 class LlamadaRepository extends \Doctrine\ORM\EntityRepository
-{
+{    
+    public function getPendientes() {
+        $em = $this->getEntityManager();
+        $pendientes = 0;
+        $dql   = "SELECT COUNT(l.codigoLlamadaPk) AS pendientes FROM AppBundle:Llamada l WHERE l.estadoAtendido = 0 AND l.estadoSolucionado = 0";
+        $query = $em->createQuery($dql);
+        $arrLlamadas = $query->getSingleResult();
+        if($arrLlamadas) {
+            $pendientes = $arrLlamadas['pendientes'];
+        }
+        return $pendientes;
+    }  
+    
+    public function getAtendidasPendientes() {
+        $em = $this->getEntityManager();
+        $atendidasPendientes = 0;
+        $dql   = "SELECT COUNT(l.codigoLlamadaPk) AS atendidasPendientes FROM AppBundle:Llamada l WHERE l.estadoAtendido = 1 AND l.estadoSolucionado = 0";
+        $query = $em->createQuery($dql);
+        $arrLlamadas = $query->getSingleResult();
+        if($arrLlamadas) {
+            $atendidasPendientes = $arrLlamadas['atendidasPendientes'];
+        }
+        return $atendidasPendientes;
+    }      
 }
