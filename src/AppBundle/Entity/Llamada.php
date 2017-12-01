@@ -121,6 +121,12 @@ class Llamada
      */
     private $codigoUsuarioSolucionaFk;
 
+    /**
+     * @var string
+     * @ORM\Column(name="codigo_modulo_fk", type="string", length=255, nullable= TRUE)
+     */
+    private $codigoModuloFk;
+
     
     /**
      * @var int
@@ -142,6 +148,11 @@ class Llamada
      */
     private $categoriaRel;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Modulo", inversedBy="llamadasModuloRel")
+     * @ORM\JoinColumn(name="codigo_modulo_fk", referencedColumnName="codigo_modulo_pk")
+     */
+    private $moduloRel;
 
     /**
      * Get codigoLlamadaPk
@@ -490,6 +501,30 @@ class Llamada
     }
 
     /**
+     * Set codigoModuloFk
+     *
+     * @param string $codigoModuloFk
+     *
+     * @return Llamada
+     */
+    public function setCodigoModuloFk($codigoModuloFk)
+    {
+        $this->codigoModuloFk = $codigoModuloFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoModuloFk
+     *
+     * @return string
+     */
+    public function getCodigoModuloFk()
+    {
+        return $this->codigoModuloFk;
+    }
+
+    /**
      * Set codigoClienteFk
      *
      * @param integer $codigoClienteFk
@@ -559,5 +594,29 @@ class Llamada
     public function getCategoriaRel()
     {
         return $this->categoriaRel;
+    }
+
+    /**
+     * Set moduloRel
+     *
+     * @param \AppBundle\Entity\Modulo $moduloRel
+     *
+     * @return Llamada
+     */
+    public function setModuloRel(\AppBundle\Entity\Modulo $moduloRel = null)
+    {
+        $this->moduloRel = $moduloRel;
+
+        return $this;
+    }
+
+    /**
+     * Get moduloRel
+     *
+     * @return \AppBundle\Entity\Modulo
+     */
+    public function getModuloRel()
+    {
+        return $this->moduloRel;
     }
 }

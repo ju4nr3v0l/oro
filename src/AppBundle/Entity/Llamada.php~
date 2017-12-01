@@ -121,6 +121,12 @@ class Llamada
      */
     private $codigoUsuarioSolucionaFk;
 
+    /**
+     * @var string
+     * @ORM\Column(name="codigo_modulo_fk", type="string", length=255, nullable= TRUE)
+     */
+    private $codigoModuloFk;
+
     
     /**
      * @var int
@@ -142,4 +148,9 @@ class Llamada
      */
     private $categoriaRel;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Modulo", inversedBy="llamadasModuloRel")
+     * @ORM\JoinColumn(name="codigo_modulo_fk", referencedColumnName="codigo_modulo_pk")
+     */
+    private $moduloRel;
 }
