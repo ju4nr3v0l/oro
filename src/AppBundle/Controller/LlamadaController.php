@@ -102,7 +102,7 @@ class LlamadaController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $id =  $user->getCodigoUsuarioPk();
-        $atendidasPendientes = $em->getRepository('AppBundle:Llamada')->getAtendidasPendientesUsuario();
+        $atendidasPendientes = $em->getRepository('AppBundle:Llamada')->getAtendidasPendientesUsuario($id);
         $arLlamada = $em->getRepository('AppBundle:Llamada')->findBy(array('codigoUsuarioAtiendeFk' => $id, 'estadoAtendido' => 1, 'estadoSolucionado' => 0 ),array('fechaGestion' => 'DESC'));// consulta llamadas por usuario logueado
         $form = $this::createFormBuilder()->getForm(); // form para manejar actualizacion de estado de llamadas
         $form->handleRequest($request);
