@@ -86,6 +86,8 @@ class LlamadaController extends Controller {
         }        
         $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array(), array('fechaRegistro' => 'DESC'));// consulta llamadas por
         // en index pagina con datos generales de la app
+//        dump ($arLlamadas);
+//        die();
         return $this->render('AppBundle:Llamada:listar.html.twig', [
             'llamadas' => $arLlamadas,
             'atendidasPendientes' => $atendidasPendientes,

@@ -113,7 +113,7 @@
                                                             <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
                                                         {% endif %}
                                                     </td>
-                                                    <td>Módulo</td>
+                                                    <td>{{ llamada.moduloRel.codigoModuloPk }}</td>
                                                     <td>{{ llamada.descripcion }}</td>
                                                     <td>
                                                         {{ llamada.nombreContacto }}
@@ -145,7 +145,7 @@
                                                 </td>
                                                     <td>
                                                         {% if llamada.estadoSolucionado == false and llamada.estadoAtendido == false%}
-                                                            <a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
+                                                            <a href="{{ path('registrarLlamada', { 'codigoLlamada':  llamada.codigoLlamadaPk }) }}"
                                                                class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                             </a>
                                                         {% else %}

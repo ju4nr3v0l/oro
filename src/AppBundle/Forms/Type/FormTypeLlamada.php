@@ -59,7 +59,7 @@ class FormTypeLlamada extends AbstractType{
                     'required' => 'true'
                 )
             ))
-            ->add ('extension', TextType::class,array(
+            ->add ('extension', IntegerType::class,array(
                 'attr' => array(
                     'id' => '_extension',
                     'name' => '_extension',
@@ -80,6 +80,13 @@ class FormTypeLlamada extends AbstractType{
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.nombreComercial', 'ASC');},
                 'choice_label' => 'nombreComercial',
+                'required' => true))
+            ->add('moduloRel', EntityType::class, array(
+                'class' => 'AppBundle:Modulo',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.codigoModuloPk', 'ASC');},
+                'choice_label' => 'codigoModuloPk',
                 'required' => true))
 //            Botón Guardar
             ->add ('btnGuardar', SubmitType::class, array(
