@@ -139,7 +139,8 @@ class LlamadaController extends Controller
 
             if($request->request->has('llamadaSolucionar')) {
                 $idLlamadaSolucionar = $request->request->get('llamadaSolucionar');
-                if(!$idLlamadaSolucionar->getEstadoSolucionado()){
+                $arLlamadaSolucionar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaSolucionar);
+                if(!$arLlamadaSolucionar->getEstadoSolucionado()){
                     $arLlamadaSolucionar = $em->getRepository('AppBundle:Llamada')->find($idLlamadaSolucionar);
                     $arLlamadaSolucionar->setEstadoSolucionado(true);
                     $arLlamadaSolucionar->setCodigoUsuarioSolucionaFk($id);
