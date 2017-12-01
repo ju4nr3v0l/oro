@@ -38,7 +38,7 @@ class AdminController extends Controller
 
             if(!$arUsuario){
 
-                throw $this->createNotFoundException("No Existe esa Usuario");
+                throw $this->createNotFoundException("No Existe ese Usuario");
 
             } else {
                 /** acá instancias form tipo Usuario */
