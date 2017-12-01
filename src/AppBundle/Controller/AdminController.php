@@ -88,19 +88,10 @@ class AdminController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        
-
         $arUsuarios = $em->getRepository('AppBundle:Usuario')->findAll(); // consulta todas las llamdas por fecha descendente
-
-
-       
-
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Admin:listaUsuario.html.twig', [
             'usuarios' => $arUsuarios,
-            
-            
-
         ]);
     }
     /** end usuarios */
@@ -175,19 +166,10 @@ class AdminController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-
-
         $arClientes = $em->getRepository('AppBundle:Cliente')->findAll(); // consulta todas las llamdas por fecha descendente
-
-
-
-
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Admin:listaCliente.html.twig', [
             'clientes' => $arClientes,
-
-
-
         ]);
     }
 
@@ -260,19 +242,10 @@ class AdminController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-
-
         $arCategorias = $em->getRepository('AppBundle:LlamadaCategoria')->findAll(); // consulta todas las llamdas por fecha descendente
-
-
-
-
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Admin:listaCategoria.html.twig', [
             'categorias' => $arCategorias,
-
-
-
         ]);
     }
    /** end categorias */
