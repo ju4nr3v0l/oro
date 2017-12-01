@@ -59,7 +59,7 @@
                                                     <label class="col-md-2 control-label" for="_telefono">Teléfono:</label>
 
                                                     <div class="col-md-5">
-                                                        {{ form_widget(form.telefono,{'attr':{'data-parsley-type':'s','data-parsley-maxlength':'15'}}) }}
+                                                        {{ form_widget(form.telefono,{'attr':{'data-parsley-type':'number','data-parsley-maxlength':'15'}}) }}
                                                     </div>
                                                     <label class="col-md-2 control-label" for="_telefono">Extensión:</label>
                                                     <div class="col-md-3">
@@ -78,6 +78,23 @@
                                                         {{ form_widget(form.descripcion,{'attr': {'rows':'5'}}) }}
                                                     </div>
                                                 </div>
+                                            <div data-color-format="rgb" data-color="rgb(255, 146, 180)" class="colorpicker-default input-group colorpicker-element">
+                                                <input type="text" id="txt" readonly="readonly" value="#cccccc" class="form-control">
+                                                <span class="input-group-btn add-on">
+                                                    <button class="btn btn-white" type="button">
+                                                        <i style="background-color: rgb(166,157,201); margin-top: 2px;"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" maxlength="25" name="placement" id="placement">SD
+                                            <div class="form-group">
+                                                <label>Default</label>
+                                                <input type="text" class="colorpicker-default form-control colorpicker-element" value="#8fff00">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>RGBA</label>
+                                                <input type="text" class="colorpicker-rgba form-control colorpicker-element" value="rgb(0,194,255,0.78)" data-color-format="rgba">
+                                            </div>
                                             <hr>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
