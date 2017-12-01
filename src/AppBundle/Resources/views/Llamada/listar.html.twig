@@ -113,6 +113,7 @@
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 3 %}
                                                             <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
                                                         {% endif %}
+                                                        
                                                     </td>
                                                     <td>{% if llamada.moduloRel != null %}{{ llamada.moduloRel.codigoModuloPk }}{% endif %}</td>
                                                     <td>{{ llamada.descripcion }}</td>
