@@ -33,8 +33,8 @@
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-30">Registro de Llamadas para el usuario:
 
-                                        {% if usuario is defined %}
-                                            <span class="label label-info">{{ usuario.nombres }} {{ usuario.apellidos }}</span>
+                                        {% if app.user is defined or app.user is not null %}
+                                            <span class="label label-info">{{ app.user.nombres }} {{ app.user.apellidos }}</span>
                                         {% endif %}
 
                                     </h4>
@@ -73,7 +73,7 @@
                                                                     <th>Solución</th>
                                                                     <th>Atendido</th>
                                                                     <th>Solucionado</th>
-                                                                    <th>Acción</th>
+                                                                    {#<th>Acción</th>#}
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -137,17 +137,17 @@
                                                                                
                                                                                 {% endif %}
                                                                             </td>
-                                                                            <td>
-                                                                                {% if llamada.estadoSolucionado == false and llamada.estadoAtendido == false %}
-                                                                                    <a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
-                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
-                                                                                    </a>
-                                                                                {% else %}
-                                                                                    <a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""
-                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
-                                                                                    </a>
-                                                                                {% endif %}
-                                                                            </td>
+                                                                            {#<td>#}
+                                                                                {#{% if llamada.estadoSolucionado == false and llamada.estadoAtendido == false %}#}
+                                                                                    {#<a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"#}
+                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
+                                                                                    {#</a>#}
+                                                                                {#{% else %}#}
+                                                                                    {#<a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""#}
+                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
+                                                                                    {#</a>#}
+                                                                                {#{% endif %}#}
+                                                                            {#</td>#}
                                                                         </tr>
                                                                     {% endif %}
                                                                 {% endfor %}
@@ -183,7 +183,7 @@
                                                                     <th>Solución</th>
                                                                     <th>Atendido</th>
                                                                     <th>Solucionado</th>
-                                                                    <th>Acción</th>
+                                                                    {#<th>Acción</th>#}
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -247,17 +247,17 @@
                                                                                
                                                                                 {% endif %}
                                                                             </td>
-                                                                            <td>
-                                                                                {% if llamada.estadoSolucionado == false %}
-                                                                                    <a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"
-                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
-                                                                                    </a>
-                                                                                {% else %}
-                                                                                    <a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""
-                                                                                       class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
-                                                                                    </a>
-                                                                                {% endif %}
-                                                                            </td>
+                                                                            {#<td>#}
+                                                                                {#{% if llamada.estadoSolucionado == false %}#}
+                                                                                    {#<a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}"#}
+                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
+                                                                                    {#</a>#}
+                                                                                {#{% else %}#}
+                                                                                    {#<a href="{{ path('registrarLlamada', { 'codigoLlamadaPk':  llamada.codigoLlamadaPk }) }}" onclick="return false" disabled=""#}
+                                                                                       {#class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>#}
+                                                                                    {#</a>#}
+                                                                                {#{% endif %}#}
+                                                                            {#</td>#}
                                                                         </tr>
                                                                     {% endif %}
                                                                 {% endfor %}
