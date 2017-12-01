@@ -36,6 +36,29 @@ class LlamadaCategoria
     private $descripcion;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="string", length=255)
+     */
+    private $color;
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
+
+    /**
      *
      * @ORM\OneToMany(targetEntity="Llamada", mappedBy="categoriaRel")
      */
