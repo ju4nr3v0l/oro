@@ -1,0 +1,41 @@
+<?php
+/**
+ * Created by Juan David Marulanda V.
+ * User: @ju4nr3v0l
+ * appSoga developers Team.
+ */
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TareaTipo
+ *
+ * @ORM\Table(name="tarea_tipo")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TareaTipoRepository")
+ */
+
+class TareaTipo
+{
+    /**
+     * @var string
+     * @ORM\Id
+     * @ORM\Column(name="codigo_tarea_tipo_pk")
+     */
+    private $codigoTareaTipoPk;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
+     */
+    private $nombre;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Tarea", mappedBy="tareaTipoRel")
+     */
+
+    private $tareasTareaTipoRel;
+ }
