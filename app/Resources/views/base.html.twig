@@ -7,7 +7,7 @@
             <meta name="description" content="zircosTemplate">
             <meta name="author" content="Alejandro Vera Carrasquilla">
         {% endblock %}
-        <title>{% block title %}Oro{% if app.user is defined %} - {{ app.user.nombres }} {{ app.user.apellidos }} {% endif %}{% endblock %}</title>
+        <title>{% block title %}Oro{% if app.user is not null %} - {{ app.user.nombres }} {{ app.user.apellidos }} {% endif %}{% endblock %}</title>
         {% block stylesheets %}
             <!-- Custom box css -->
             <link href="{{ asset('zircosTemplate/plugins/custombox/css/custombox.min.css') }}" rel="stylesheet">
@@ -20,6 +20,7 @@
             <link href="{{ asset('zircosTemplate/assets/css/responsive.css') }}" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="{{ asset('zircosTemplate/plugins/switchery/switchery.min.css') }}">
             <link href="{{ asset('zircosTemplate/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}" rel="stylesheet" type="text/css" >
+            <link href="{{ asset('css/oro.css') }}" rel="stylesheet" type="text/css" />
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('zircosTemplate/assets/images/favicon.ico') }}" />
         {% block javascripts %}

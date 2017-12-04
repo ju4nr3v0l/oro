@@ -56,14 +56,14 @@
                                                         <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Registro de Llamadas</h4>
 
                                                         <div class="table-responsive">
-                                                            <table class="table table table-hover m-0">
+                                                            <table class="table table table-hover m-0 table-oro">
                                                                 <thead>
                                                                 <tr>
                                                                     <th>Fecha</th>
                                                                     <th>Cliente</th>
                                                                     <th>Categoría</th>
                                                                     <th>Módulo</th>
-                                                                    <th>Descripción</th>
+                                                                    {#<th>Descripción</th>#}
                                                                     <th>Contacto</th>
                                                                     <th>Teléfono</th>
                                                                     <th>Ext.</th>
@@ -97,7 +97,6 @@
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>{{ llamada.codigoModuloFk }}</td>
-                                                                            <td>{{ llamada.descripcion }}</td>
                                                                             <td>
                                                                                 {{ llamada.nombreContacto }}
                                                                             <td>{{ llamada.telefono }}</td>
@@ -145,6 +144,11 @@
                                                                                     {#</a>#}
                                                                                 {#{% endif %}#}
                                                                             {#</td>#}
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td><h6>Descripción:</h6></td>
+                                                                            <td colspan="12">{{ llamada.descripcion }}</td>
                                                                         </tr>
                                                                     {% endif %}
                                                                 {% endfor %}
