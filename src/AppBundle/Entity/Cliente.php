@@ -49,12 +49,20 @@ class Cliente
      */
 
     private $llamadasClienteRel;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Caso", mappedBy="clienteRel")
+     */
+
+    private $casosClienteRel;
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->llamadasClienteRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->casosClienteRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -171,5 +179,39 @@ class Cliente
     public function getLlamadasClienteRel()
     {
         return $this->llamadasClienteRel;
+    }
+
+    /**
+     * Add casosClienteRel
+     *
+     * @param \AppBundle\Entity\Caso $casosClienteRel
+     *
+     * @return Cliente
+     */
+    public function addCasosClienteRel(\AppBundle\Entity\Caso $casosClienteRel)
+    {
+        $this->casosClienteRel[] = $casosClienteRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove casosClienteRel
+     *
+     * @param \AppBundle\Entity\Caso $casosClienteRel
+     */
+    public function removeCasosClienteRel(\AppBundle\Entity\Caso $casosClienteRel)
+    {
+        $this->casosClienteRel->removeElement($casosClienteRel);
+    }
+
+    /**
+     * Get casosClienteRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCasosClienteRel()
+    {
+        return $this->casosClienteRel;
     }
 }

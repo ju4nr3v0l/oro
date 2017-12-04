@@ -1,10 +1,15 @@
 <?php
 /**
- * Created by Alejandro Vera Carrasquilla.
- * User: Avera
- * Date: 24/11/17
- * Time: 03:30 PM
+ * Created by PhpStorm.
+ * User: avera
+ * Date: 4/12/17
+ * Time: 11:47 AM
  */
+
+namespace AppBundle\Forms\Type;
+
+
+
 
 namespace AppBundle\Forms\Type;
 
@@ -21,8 +26,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 
-
-class FormTypeLlamada extends AbstractType{
+class FormTypeCaso extends AbstractType{
 
     /**
      * @param FormBuilderInterface $builder
@@ -31,19 +35,19 @@ class FormTypeLlamada extends AbstractType{
     public function buildForm (FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add ('nombreContacto', TextType::class,array(
+            ->add ('asunto', TextType::class,array(
                 'attr' => array(
-                    'id' => '_nombreContacto',
-                    'name' => '_nombreContacto'
+                    'id' => '_asunto',
+                    'name' => '_asunto'
                 )
             ))
-            ->add('categoriaRel', EntityType::class, array(
-                'class' => 'AppBundle:LlamadaCategoria',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.nombre', 'ASC');},
-                'choice_label' => 'nombre',
-                'required' => true))
+            ->add ('correo', TextType::class,array(
+                'attr' => array(
+                    'id' => '_correo',
+                    'name' => '_correo',
+                    'required' => 'true'
+                )
+            ))
             ->add ('telefono', IntegerType::class,array(
                 'attr' => array(
                     'id' => '_telefono',
@@ -65,20 +69,12 @@ class FormTypeLlamada extends AbstractType{
                     'class' => 'form-control'
                 )
             ))
-
             ->add('clienteRel', EntityType::class, array(
                 'class' => 'AppBundle:Cliente',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.nombreComercial', 'ASC');},
                 'choice_label' => 'nombreComercial',
-                'required' => true))
-            ->add('moduloRel', EntityType::class, array(
-                'class' => 'AppBundle:Modulo',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.codigoModuloPk', 'ASC');},
-                'choice_label' => 'codigoModuloPk',
                 'required' => true))
 //            Botón Guardar
             ->add ('btnGuardar', SubmitType::class, array(
