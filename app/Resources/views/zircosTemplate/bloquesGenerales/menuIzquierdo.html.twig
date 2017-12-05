@@ -57,15 +57,13 @@
                     </ul>
                 </li>
 
-                {#<li class="has_sub">#}
-                    {#<a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-invert-colors"></i> <span> User Interface </span> <span class="menu-arrow"></span></a>#}
-                    {#<ul class="list-unstyled">#}
-                        {#<li><a href="#">Buttons</a></li>#}
-                        {#<li><a href="#">Typography</a></li>#}
-                        {#<li><a href="#">Panel</a></li>#}
-                        {#<li><a href="#">Portlets</a></li>#}
-                    {#</ul>#}
-                {#</li>#}
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-invert-colors"></i> <span> Casos (Incidencias) </span> <span class="menu-arrow"></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ path('listadoCasos') }}">Listado General</a></li>
+                        <li><a href="{{ path('registrarCaso') }}">Nuevo Caso</a></li>
+                    </ul>
+                </li>
 
                 {#<li class="has_sub">#}
                     {#<a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-layers"></i><span> Admin UI </span> <span class="menu-arrow"></span></a>#}

@@ -36,6 +36,7 @@
                                         <table class="table table table-hover m-0 table-oro">
                                             <thead>
                                             <tr>
+                                                <th>Fecha</th>
                                                 <th>Asunto</th>
                                                 <th>Cliente</th>
                                                 <th>Correo</th>
@@ -44,36 +45,30 @@
                                                 <th>Ext.</th>
                                                 <th>Categoría</th>
                                                 <th>Gestión</th>
+                                                <th>Gestiona</th>
                                                 <th>Solución</th>
+                                                <th>Soluciona</th>
                                                 <th>Atendido</th>
                                                 <th>Solucionado</th>
                                                 <th>Acción</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            {#{{form_start(form) }}#}
+                                            {{form_start(form) }}
                                             {% for caso in casos %}
 
                                                 <tr>
                                                     <td>{{ caso.fechaRegistro|date('y-m-d H:i') }}</td>
+                                                    <td>{{ caso.asunto }}</td>
                                                     <td>
                                                         <h5 class="m-0">{{ caso.clienteRel.nombreComercial }}</h5>
                                                     </td>
                                                     <td>{{ caso.correo }}</td>
-                                                    <td></td>
+                                                    <td>{{ caso.contacto }}</td>
                                                     <td>{{ caso.telefono }}</td>
                                                     <td>{{ caso.extension }}</td>
                                                     <td>
-                                                        {% if caso.codigoCategoriaCasoFk == 0 %}
-                                                            <span class="label label-danger">SIN CATEGORÍA</span>
-                                                        {% elseif llamada.codigoCategoriaCasoFk == 1 %}
-                                                            <span class="label label-default">{{ caso.categoriaRel.nombre }}</span>
-                                                        {% elseif llamada.codigoCategoriaCasoFk == 2 %}
-                                                            <span class="label label-info">{{ caso.categoriaRel.nombre }}</span>
-                                                        {% elseif llamada.codigoCategoriaCasoFk == 3 %}
-                                                            <span class="label label-orange">{{ caso.categoriaRel.nombre }}</span>
-                                                        {% endif %}
-
+                                                        <span class="label" style="background-color: {{ caso.categoriaRel.color }}">{{ caso.categoriaRel.nombre }}</span>
                                                     </td>
                                                     <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-m-d H:i') }}{%  endif %}</td>
                                                     <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-m-d H:i') }}{%  endif %}</td>
@@ -81,22 +76,22 @@
                                                     <td>{{ caso.codigoUsuarioAtiendeFk }}</td>
                                                     <td>{{ caso.codigoUsuarioSolucionaFk }}</td>
                                                     <td>
-                                                    {% if caso.estadoAtendido %}
-                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" disabled value="{{ caso.codigoCasoPk }}" title="{{ caso.codigoUsuarioAtiendeFk}}">
-                                                    <i class="glyphicon glyphicon-thumbs-up"></i></button>
-                                                    {% else %}
-                                                    <button class="btn btn-danger btn-xs" type="submit" name="llamadaAtender"  value="{{ caso.codigoCasoPk }}">
-                                                    <i class="glyphicon glyphicon-thumbs-down"></i></button>
-                                                    {% endif %}
+                                                        {% if caso.estadoAtendido %}
+                                                            <button class="btn btn-success btn-xs" type="submit" name="casoAtender" disabled value="{{ caso.codigoCasoPk }}" title="{{ caso.codigoUsuarioAtiendeFk}}">
+                                                            <i class="glyphicon glyphicon-thumbs-up"></i></button>
+                                                        {% else %}
+                                                            <button class="btn btn-danger btn-xs" type="submit" name="casoAtender"  value="{{ caso.codigoCasoPk }}">
+                                                            <i class="glyphicon glyphicon-thumbs-down"></i></button>
+                                                        {% endif %}
                                                     </td>
                                                     <td>
-                                                    {% if caso.estadoSolucionado == false and caso.estadoAtendido or caso.estadoAtendido == false and caso.estadoSolucionado == false %}
-                                                    <button class="btn btn-danger btn-xs" type="submit" name="llamadaSolucionar" value="{{ caso.codigoCasoPk }}" {% if caso.estadoAtendido == false %} disabled {% endif %} >
-                                                    <i class="glyphicon glyphicon-thumbs-down"></i></button>
-                                                    {% else %}
-                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaSolucionar" disabled value="{{ caso.codigoCasoPk }}"  title="{{caso.codigoUsuarioSolucionaFk}}">
-                                                    <i class="glyphicon glyphicon-thumbs-up"></i></button>
-                                                    {% endif %}
+                                                        {% if caso.estadoSolucionado == false and caso.estadoAtendido or caso.estadoAtendido == false and caso.estadoSolucionado == false %}
+                                                            <button class="btn btn-danger btn-xs" type="submit" name="casoSolucionar" value="{{ caso.codigoCasoPk }}" {% if caso.estadoAtendido == false %} disabled {% endif %} >
+                                                            <i class="glyphicon glyphicon-thumbs-down"></i></button>
+                                                        {% else %}
+                                                            <button class="btn btn-success btn-xs" type="submit" name="casoSolucionar" disabled value="{{ caso.codigoCasoPk }}"  title="{{caso.codigoUsuarioSolucionaFk}}">
+                                                            <i class="glyphicon glyphicon-thumbs-up"></i></button>
+                                                        {% endif %}
                                                     </td>
                                                     <td>
                                                         {% if caso.estadoSolucionado == false and caso.estadoAtendido == false%}
@@ -116,7 +111,7 @@
                                                     <td colspan="13">{{ caso.descripcion }}</td>
                                                 </tr>
                                             {% endfor %}
-                                            {#{{ form_end(form) }}#}
+                                            {{ form_end(form) }}
                                             </tbody>
                                         </table>
 

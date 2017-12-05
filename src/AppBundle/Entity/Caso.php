@@ -93,7 +93,7 @@ class Caso
     /**
      * @var string
      *
-     * @ORM\Column(name="codigo_categoria_caso_fk", type="string", length=50 ,nullable= TRUE)
+     * @ORM\Column(name="codigo_categoria_caso_fk", type="string", length=50 )
      */
     private $codigoCategoriaCasoFk;
 
@@ -137,6 +137,12 @@ class Caso
      * @ORM\JoinColumn(name="codigo_cliente_fk", referencedColumnName="codigo_cliente_pk")
      */
     private $clienteRel;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="CasoCategoria", inversedBy="casosCategoriaRel")
+    * @ORM\JoinColumn(name="codigo_categoria_caso_fk", referencedColumnName="codigo_categoria_caso_pk")
+    */
+    private $categoriaRel;
 
     /**
      * Get codigoCasoPk
@@ -194,6 +200,30 @@ class Caso
     public function getCorreo()
     {
         return $this->correo;
+    }
+
+    /**
+     * Set contacto
+     *
+     * @param string $contacto
+     *
+     * @return Caso
+     */
+    public function setContacto($contacto)
+    {
+        $this->contacto = $contacto;
+
+        return $this;
+    }
+
+    /**
+     * Get contacto
+     *
+     * @return string
+     */
+    public function getContacto()
+    {
+        return $this->contacto;
     }
 
     /**
@@ -509,26 +539,26 @@ class Caso
     }
 
     /**
-     * Set contacto
+     * Set categoriaRel
      *
-     * @param string $contacto
+     * @param \AppBundle\Entity\CasoCategoria $categoriaRel
      *
      * @return Caso
      */
-    public function setContacto($contacto)
+    public function setCategoriaRel(\AppBundle\Entity\CasoCategoria $categoriaRel = null)
     {
-        $this->contacto = $contacto;
+        $this->categoriaRel = $categoriaRel;
 
         return $this;
     }
 
     /**
-     * Get contacto
+     * Get categoriaRel
      *
-     * @return string
+     * @return \AppBundle\Entity\CasoCategoria
      */
-    public function getContacto()
+    public function getCategoriaRel()
     {
-        return $this->contacto;
+        return $this->categoriaRel;
     }
 }
