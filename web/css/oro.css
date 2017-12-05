@@ -1,3 +1,8 @@
 .table-oro{
-    font-size: smaller;
+    font-size: x-small;
+    padding: 0px;
+}
+
+.table-oro>td,th,   tr {
+    padding: 0px;
 }
