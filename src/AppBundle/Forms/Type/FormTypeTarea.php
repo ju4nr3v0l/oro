@@ -40,10 +40,11 @@ class FormTypeTarea extends AbstractType{
 
             ->add('codigoUsuarioAsignaFk', EntityType::class, array(
                 'class' => 'AppBundle:Usuario',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c')
-                        ->orderBy('c.nombres', 'ASC');},
-                'choice_label' => 'nombres',
+
+//                'query_builder' => function (EntityRepository $er) {
+//                    return $er->createQueryBuilder('c')
+//                        ->orderBy('c.nombres', 'ASC');},
+                'choice_label' => 'codigoUsuarioPk',
                 'required' => false)
             )
 

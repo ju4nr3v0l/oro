@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block bodyAtt %}class="fixed-left"{% endblock %}
+
+{% block body %}
+
+
+    <div id="wrapper">
+        {{ include('zircosTemplate/bloquesGenerales/menuEncabezado.html.twig') }}
+
+        {{ include('zircosTemplate/bloquesGenerales/menuIzquierdo.html.twig') }}
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+                <div class="container">
+                    {% block content %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title" style="padding-right: 10px;"><i class="glyphicon glyphicon-th-list"></i> Registro de Tareas </h4>
+                                    <span class="label label-danger">Sin asignar: {{ sinAsignar}}</span>
+                                    <span class="label label-danger">Sin terminar: {{ sinTerminar }}</span>
+                                    <a href="{{ path('registrarTarea') }}">
+                                        <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Nueva</button>
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-box">
+                                    <div class="table-responsive">
+                                        <table class="table table table-hover m-0 table-oro">
+
+                                            <thead>
+                                            <tr>
+                                                <th>Registra</th>
+                                                <th>Fecha Registro</th>
+                                                <th>Tipo</th>
+                                                <th>Fecha de asignación</th>
+                                                <th>Asignado</th>
+                                                <th>Fecha de solución</th>
+                                                <th>Estado</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                {{form_start(form) }}
+                                            {% for tarea in tareas %}
+
+                                                <tr>
+                                                    <td>
+                                                        {{ tarea.codigoUsuarioRegistraFk }}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.fechaRegistro|date('d-M-y') }}
+                                                    </td>
+                                                    <td>
+                                                        {% if tarea.codigoTareaTipoFk == 'des' %}
+                                                            <span class="label label-default">Desarrollo</span>
+                                                        {% else %}
+                                                            <span class="label label-info">Soporte</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.fechaGestion|date('d-M-y') }}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.codigoUsuarioAsignaFk }}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.fechaSolucion|date('d-M-y') }}
+                                                    </td>
+                                                    {% if tarea.estadoTerminado == false  %}
+                                                        <td>
+                                                            <button class="btn btn-danger btn-xs" type="submit" name="TareaSolucionar" value="{{ tarea.codigoTareaPk }}" {% if tarea.codigoUsuarioAsignaFk == null%}disabled{% endif %}>
+                                                            <i class="glyphicon glyphicon-thumbs-down"></i></button>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ path('registrarTarea', { 'codigoTarea':  tarea.codigoTareaPk }) }}" {% if tarea.codigoUsuarioAsignaFk != null%}disabled onclick="return false" {% endif %}
+                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                            </a>
+                                                        </td>
+                                                    {% else %}
+                                                        <td>
+                                                            <button class="btn btn-success btn-xs" type="submit" name="TareaSolucionar" disabled ">
+                                                            <i class="glyphicon glyphicon-thumbs-up"></i></button>
+                                                        </td>
+                                                        <td>
+                                                            <a href="#" disabled
+                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                            </a>
+                                                        </td>
+                                                    {% endif %}
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td><h6>Descripción:</h6></td>
+                                                    <td colspan="13">{{ tarea.descripcion }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            {{ form_end(form) }}
+                                            </tbody>
+                                        </table>
+
+                                    </div> <!-- table-responsive -->
+                                </div> <!-- end card -->
+                            </div>
+                            <!-- end col -->
+
+                        </div>
+
+                    {% endblock content %}
+                </div> <!-- container -->
+            </div> <!-- content -->
+        </div>
+        {{ include('zircosTemplate/bloquesGenerales/pie.html.twig') }}
+    </div>
+{% endblock %}

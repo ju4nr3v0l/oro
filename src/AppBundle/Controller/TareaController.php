@@ -33,7 +33,7 @@ class TareaController extends Controller
         $user = $this->getUser(); // trae el usuario actual
         $arTarea = new Tarea(); //instance class
         if($codigoTarea) {
-            $arTarea = $em->getRepository('AppBundle:Llamada')->find($codigoTarea);
+            $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
         } else {
             $arTarea->setEstadoTerminado(false);
 
@@ -46,13 +46,13 @@ class TareaController extends Controller
                 $id =  $user->getCodigoUsuarioPk();
                 $arTarea->setFechaRegistro(new \DateTime('now'));
                 $arTarea->setCodigoUsuarioRegistraFk($id);
-                if($form["codigoUsuarioAsignaFk"]->getData() != null && $form["codigoUsuarioAsignaFk"]->getData() != $arTarea->getCodigoUsuarioAsignaFk()){
-                    $arTarea->setFechaGestion(new \DateTime('now'));
-                }
-            } else if($form["codigoUsuarioAsignaFk"]->getData() != null){
-                $arTarea->setFechaGestion(new \DateTime('now'));
             }
-
+            $arUser = $arTarea->getCodigoUsuarioAsignaFk();
+            if($arUser != null){
+                $arTarea->setFechaGestion(new \DateTime('now'));
+                $arTarea->setCodigoUsuarioAsignaFk($arUser->getCodigoUsuarioPk());
+            }
+            $em->persist($arTarea);
             $em->flush();
             return $this->redirect($this->generateUrl('listaTareaGeneral'));
         }
@@ -72,43 +72,80 @@ class TareaController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $arTarea = $em->getRepository('AppBundle:Tarea')->findAll(); // consulta todas las llamadas por fecha descendente
-        // en index pagina con datos generales de la app
-        return $this->render('AppBundle:Tarea:listarUsuario.html.twig', [
-            'tareas' => $arTarea,
-        ]);
-    }
-
-
-
-    /**
-     * @Route("/tarea/lista/usuario/{codigoUsuarioFk}", name="listaTareaUsuario")
-     */
-    public function listaUsuario(Request $request){
-
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
-        $id =  $user->getCodigoUsuarioPk();
-        $arTarea= $em->getRepository('AppBundle:Tarea')->findBy(array('codigoUsuarioAsignaFk' => $id),array('fechaGestion' => 'DESC'));// consulta llamadas por usuario logueado
+        $arTarea = $em->getRepository('AppBundle:Tarea')->findBy([],array('fechaRegistro' => 'DESC'));
+        $sinTerminar=0;
+        $sinAsignar=0;
+        foreach ($arTarea as $key => $value){
+            if($value->getCodigoUsuarioAsignaFk()==null){
+                  $sinAsignar++;
+            }else if(!$value->getEstadoTerminado()){
+                $sinTerminar++;
+            }
+        }
         $form = $this::createFormBuilder()->getForm(); // form para manejar actualizacion de estado de llamadas
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las llamadas
             if($request->request->has('TareaSolucionar')) {
                 $codigoTarea= $request->request->get('TareaSolucionar');
                 $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
-
+                if(!$arTarea->getEstadoTerminado()){
                     $arTarea->setEstadoTerminado(true);
                     $arTarea->setFechaSolucion(new \DateTime('now'));
                     $em->persist($arTarea);
                     $em->flush();
-                    return $this->redirect($this->generateUrl('listaTareaUsuario'));
+                }
+                return $this->redirect($this->generateUrl('listaTareaGeneral'));
+            }
+        }
+
+        // en index pagina con datos generales de la app
+        return $this->render('AppBundle:Tarea:listar.html.twig', [
+            'tareas' => $arTarea,
+            'sinTerminar'=>$sinTerminar,
+            'sinAsignar'=>$sinAsignar,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/tarea/lista/usuario", name="listaTareaUsuario")
+     */
+    public function listaUsuario(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $arTarea= $em->getRepository('AppBundle:Tarea')->findBy(array('codigoUsuarioAsignaFk' => $user->getCodigoUsuarioPk()),array('fechaGestion' => 'DESC'));// consulta llamadas por usuario logueado
+        $form = $this::createFormBuilder()->getForm(); // form para manejar actualizacion de estado de llamadas
+        $form->handleRequest($request);
+        $sinTerminar=0;
+
+        foreach ($arTarea as $key => $value){
+            if(!$value->getEstadoTerminado()){
+                $sinTerminar++;
+            }
+        }
+        if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las llamadas
+            if($request->request->has('TareaSolucionar')) {
+                $codigoTarea= $request->request->get('TareaSolucionar');
+                $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
+                if(!$arTarea->getEstadoTerminado()){
+                    $arTarea->setEstadoTerminado(true);
+                    $arTarea->setFechaSolucion(new \DateTime('now'));
+                    $em->persist($arTarea);
+                    $em->flush();
+                }
+
+                return $this->redirect($this->generateUrl('listaTareaUsuario'));
 
             }
         }
 
 
-        return $this->render('AppBundle:Llamada:listarUsuario.html.twig', [
+        return $this->render('AppBundle:Tarea:listarUsuario.html.twig', [
             'tareas' => $arTarea,
+            'sinTerminar'=>$sinTerminar,
             'form' => $form->createView(),
         ]);
 

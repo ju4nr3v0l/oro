@@ -21,7 +21,8 @@ class Tarea
     /**
      * @var int
      * @ORM\Id
-     * @ORM\Column(name="codigo_tarea_pk", type="integer", unique=true)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_tarea_pk", type="integer", unique=true )
      */
     private $codigoTareaPk;
 
