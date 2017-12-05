@@ -12,8 +12,8 @@ use AppBundle\Forms\Type\FormTypeTarea;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Tarea;
-use AppBundle\Entity\TareaTipo;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Service\TareaSevice;
 
 
 
