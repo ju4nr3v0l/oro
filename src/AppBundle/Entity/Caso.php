@@ -44,6 +44,13 @@ class Caso
     /**
      * @var string
      *
+     * @ORM\Column(name="contacto", type="string", length=100)
+     */
+    private $contacto;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="telefono", type="string", length=20)
      */
     private $telefono;
@@ -499,5 +506,29 @@ class Caso
     public function getClienteRel()
     {
         return $this->clienteRel;
+    }
+
+    /**
+     * Set contacto
+     *
+     * @param string $contacto
+     *
+     * @return Caso
+     */
+    public function setContacto($contacto)
+    {
+        $this->contacto = $contacto;
+
+        return $this;
+    }
+
+    /**
+     * Get contacto
+     *
+     * @return string
+     */
+    public function getContacto()
+    {
+        return $this->contacto;
     }
 }

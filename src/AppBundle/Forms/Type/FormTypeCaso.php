@@ -48,6 +48,13 @@ class FormTypeCaso extends AbstractType{
                     'required' => 'true'
                 )
             ))
+            ->add ('contacto', TextType::class,array(
+                'attr' => array(
+                    'id' => '_contacto',
+                    'name' => '_contacto',
+                    'required' => 'true'
+                )
+            ))
             ->add ('telefono', IntegerType::class,array(
                 'attr' => array(
                     'id' => '_telefono',
