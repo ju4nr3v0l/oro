@@ -28,26 +28,52 @@ class Rol
      */
     private $nombre;
 
-
+//
 //    /**
 //     *
-//     * ORM\OneToMany(targetEntity="Usuario", mappedBy="usuariosRol")
+//     * ORM\OneToMany(targetEntity="Usuario", mappedBy="rolRel")
 //     */
 //
-//    private $rolRel;
-
+//    private $usuarioRolRel;
     /**
-     * Set codigoRolPk
-     *
-     * @param integer $codigoRolPk
-     *
-     * @return Rol
+     * Constructor
      */
-    public function setCodigoRolPk($codigoRolPk)
+    public function __construct()
     {
-        $this->codigoRolPk = $codigoRolPk;
+        $this->usuarioRolRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    /**
+     * Add usuarioRolRel
+     *
+     * @param \AppBundle\Entity\Usuario $usuarioRolRel
+     *
+     * @return usuarioRolRel
+     */
+    public function addusuarioRolRel(\AppBundle\Entity\Usuario $usuarioRolRel)
+    {
+        $this->usuarioRolRel[] = $usuarioRolRel;
 
         return $this;
+    }
+
+    /**
+     * Remove usuarioRolRel
+     *
+     * @param \AppBundle\Entity\Usuario $usuarioRolRel
+     */
+    public function removeUsuarioRolRel(\AppBundle\Entity\Usuario $usuarioRolRel)
+    {
+        $this->usuarioRolRel->removeElement($usuarioRolRel);
+    }
+
+    /**
+     * Get usuarioRolRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsuarioRolRel()
+    {
+        return $this->usuarioRolRel;
     }
 
     /**

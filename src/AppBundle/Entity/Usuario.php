@@ -17,7 +17,7 @@ class Usuario implements UserInterface, \Serializable
 
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="codigo_usuario_pk",type="string")
      * @ORM\Id
      */
     private $codigoUsuarioPk;
@@ -53,22 +53,22 @@ class Usuario implements UserInterface, \Serializable
     private $token;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(name="codigo_cliente_fk", type="integer", nullable=true)
      */
-    private $codigoClientePk;
+    private $codigoClienteFk;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(name="codigo_rol_fk", type="integer", nullable=true)
      */
-    private $codigoRol;
+    private $codigoRolFk;
 
 
 
 //    /**
-//     * @ORM\ManyToOne(targetEntity="Rol", inversedBy="rolRel")
-//     * @ORM\JoinColumn(name="codigoRol", referencedColumnName="codigoRolPk")
+//     * @ORM\ManyToOne(targetEntity="Rol", inversedBy="usuarioRolRel")
+//     * @ORM\JoinColumn(name="codigo_rol_fk", referencedColumnName="codigo_rol_pk")
 //     */
-//    private $usuariosRol;
+     private $rolRel;
 
 
 
@@ -100,7 +100,8 @@ class Usuario implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return ['ROLE_USER', 'ROLE_ADMIN'];
+
+        return array('ROLE_USER');
     }
 
     public function getPassword()
@@ -123,10 +124,23 @@ class Usuario implements UserInterface, \Serializable
 
 
     /**
-     * Inicio de los metodos de la clase propia Usuario
+     * Set codigoUsuarioPk
      *
+     * @param string $codigoUsuarioPk
      *
-     * @return mixed
+     * @return Usuario
+     */
+    public function setCodigoUsuarioPk($codigoUsuarioPk)
+    {
+        $this->codigoUsuarioPk = $codigoUsuarioPk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoUsuarioPk
+     *
+     * @return string
      */
     public function getCodigoUsuarioPk()
     {
@@ -134,15 +148,23 @@ class Usuario implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $codigoUsuarioPk
+     * Set correo
+     *
+     * @param string $correo
+     *
+     * @return Usuario
      */
-    public function setCodigoUsuarioPk($codigoUsuarioPk)
+    public function setCorreo($correo)
     {
-        $this->codigoUsuarioPk = $codigoUsuarioPk;
+        $this->correo = $correo;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get correo
+     *
+     * @return string
      */
     public function getCorreo()
     {
@@ -150,15 +172,23 @@ class Usuario implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $correo
+     * Set nombres
+     *
+     * @param string $nombres
+     *
+     * @return Usuario
      */
-    public function setCorreo($correo)
+    public function setNombres($nombres)
     {
-        $this->correo = $correo;
+        $this->nombres = $nombres;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get nombres
+     *
+     * @return string
      */
     public function getNombres()
     {
@@ -166,15 +196,23 @@ class Usuario implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $nombres
+     * Set apellidos
+     *
+     * @param string $apellidos
+     *
+     * @return Usuario
      */
-    public function setNombres($nombres)
+    public function setApellidos($apellidos)
     {
-        $this->nombres = $nombres;
+        $this->apellidos = $apellidos;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get apellidos
+     *
+     * @return string
      */
     public function getApellidos()
     {
@@ -182,15 +220,23 @@ class Usuario implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $apellidos
+     * Set clave
+     *
+     * @param string $clave
+     *
+     * @return Usuario
      */
-    public function setApellidos($apellidos)
+    public function setClave($clave)
     {
-        $this->apellidos = $apellidos;
+        $this->clave = $clave;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get clave
+     *
+     * @return string
      */
     public function getClave()
     {
@@ -198,15 +244,23 @@ class Usuario implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $clave
+     * Set verificado
+     *
+     * @param boolean $verificado
+     *
+     * @return Usuario
      */
-    public function setClave($clave)
+    public function setVerificado($verificado)
     {
-        $this->clave = $clave;
+        $this->verificado = $verificado;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get verificado
+     *
+     * @return boolean
      */
     public function getVerificado()
     {
@@ -214,15 +268,23 @@ class Usuario implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $verificado
+     * Set token
+     *
+     * @param string $token
+     *
+     * @return Usuario
      */
-    public function setVerificado($verificado)
+    public function setToken($token)
     {
-        $this->verificado = $verificado;
+        $this->token = $token;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * Get token
+     *
+     * @return string
      */
     public function getToken()
     {
@@ -230,117 +292,74 @@ class Usuario implements UserInterface, \Serializable
     }
 
     /**
-     * @param mixed $token
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCodigoClientePk()
-    {
-        return $this->codigoClientePk;
-    }
-
-    /**
-     * @param mixed $codigoClientePk
-     */
-    public function setCodigoClientePk($codigoClientePk)
-    {
-        $this->codigoClientePk = $codigoClientePk;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCodigoRol()
-    {
-        return array($this->roles);
-    }
-
-    /**
-     * @param mixed $codigoRol
-     */
-    public function setCodigoRol($codigoRol)
-    {
-        $this->codigoRol = $codigoRol;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param mixed $plainPassword
-     */
-    public function setPlainPassword($plainPassword)
-    {
-        $this->plainPassword = $plainPassword;
-    }
-
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->usuariosRol = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add usuariosRol
+     * Set codigoClienteFk
      *
-     * @param \AppBundle\Entity\Rol $usuariosRol
+     * @param integer $codigoClienteFk
      *
      * @return Usuario
      */
-    public function addUsuariosRol(\AppBundle\Entity\Rol $usuariosRol)
+    public function setCodigoClienteFk($codigoClienteFk)
     {
-        $this->usuariosRol[] = $usuariosRol;
+        $this->codigoClienteFk = $codigoClienteFk;
 
         return $this;
     }
 
     /**
-     * Remove usuariosRol
+     * Get codigoClienteFk
      *
-     * @param \AppBundle\Entity\Rol $usuariosRol
+     * @return integer
      */
-    public function removeUsuariosRol(\AppBundle\Entity\Rol $usuariosRol)
+    public function getCodigoClienteFk()
     {
-        $this->usuariosRol->removeElement($usuariosRol);
+        return $this->codigoClienteFk;
     }
 
     /**
-     * Get usuariosRol
+     * Set codigoRolFk
      *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsuariosRol()
-    {
-        return array($this->roles);
-        //return $this->usuariosRol;
-    }
-
-    /**
-     * Set usuariosRol
-     *
-     * @param \AppBundle\Entity\Rol $usuariosRol
+     * @param integer $codigoRolFk
      *
      * @return Usuario
      */
-    public function setUsuariosRol(\AppBundle\Entity\Rol $usuariosRol = null)
+    public function setCodigoRolFk($codigoRolFk)
     {
-        $this->usuariosRol = $usuariosRol;
+        $this->codigoRolFk = $codigoRolFk;
 
         return $this;
+    }
+
+    /**
+     * Get codigoRolFk
+     *
+     * @return integer
+     */
+    public function getCodigoRolFk()
+    {
+        return $this->codigoRolFk;
+    }
+
+    /**
+     * Set rolRel
+     *
+     * @param \AppBundle\Entity\Rol $rolRel
+     *
+     * @return Usuario
+     */
+    public function setRolRel(\AppBundle\Entity\Rol $rolRel = null)
+    {
+        $this->rolRel = $rolRel;
+
+        return $this;
+    }
+
+    /**
+     * Get rolRel
+     *
+     * @return \AppBundle\Entity\Rol
+     */
+    public function getRolRel()
+    {
+        return $this->rolRel;
     }
 }
