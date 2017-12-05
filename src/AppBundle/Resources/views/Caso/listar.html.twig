@@ -58,7 +58,7 @@
                                             {% for caso in casos %}
 
                                                 <tr>
-                                                    <td class="table-oro-td">{{ caso.fechaRegistro|date('y-m-d H:i') }}</td>
+                                                    <td class="table-oro-td">{{ caso.fechaRegistro|date('y-M-d') }}</td>
                                                     <td class="table-oro-td">{{ caso.asunto }}</td>
                                                     <td class="table-oro-td">
                                                         <h5 class="m-0">{{ caso.clienteRel.nombreComercial }}</h5>
@@ -70,8 +70,8 @@
                                                     <td>
                                                         <span class="label" style="background-color: {{ caso.categoriaRel.color }}">{{ caso.categoriaRel.nombre }}</span>
                                                     </td>
-                                                    <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-m-d H:i') }}{%  endif %}</td>
-                                                    <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-m-d H:i') }}{%  endif %}</td>
+                                                    <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>
+                                                    <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>
 
                                                     <td>{{ caso.codigoUsuarioAtiendeFk }}</td>
                                                     <td>{{ caso.codigoUsuarioSolucionaFk }}</td>

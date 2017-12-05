@@ -25,6 +25,7 @@ class TareaController extends Controller
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
         $user = $this->getUser(); // trae el usuario actual
         $arTarea = new Tarea(); //instance class
+        $arTarea->setCodigoTareaTipoFk('');
         if($codigoTarea) {
             $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
         } else {
