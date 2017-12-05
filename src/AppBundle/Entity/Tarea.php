@@ -78,7 +78,7 @@ class Tarea
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=800, nullable=true)
+     * @ORM\Column(name="descripcion", type="string", length=5000, nullable=true)
      */
     private $descripcion;
 
