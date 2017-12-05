@@ -74,14 +74,14 @@
                                     <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Registro de Llamadas</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table table-hover m-0 table-oro">
+                                        <table class="table table table-hover m-0">
                                             <thead>
                                             <tr>
                                                 <th>Fecha</th>
                                                 <th>Cliente</th>
                                                 <th>Categoría</th>
                                                 <th>Módulo</th>
-                                                {#<th>Descripción</th>#}
+                                                <th>Descripción</th>
                                                 <th>Contacto</th>
                                                 <th>Teléfono</th>
                                                 <th>Ext.</th>
@@ -99,7 +99,7 @@
                                             {% for llamada in llamadas %}
 
                                                 <tr>
-                                                    <td>{{ llamada.fechaRegistro|date('y-m-d H:i') }}</td>
+                                                    <td><h6>{{ llamada.fechaRegistro|date('y-m-d H:i') }}</h6></td>
                                                     <td>
                                                         <h5 class="m-0">{{ llamada.clienteRel.nombreComercial }}</h5>
                                                     </td>
@@ -113,16 +113,16 @@
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 3 %}
                                                             <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
                                                         {% endif %}
-                                                        
+
                                                     </td>
-                                                    <td>{{ llamada.codigoModuloFk }}</td>
+                                                    <td><h6>{{ llamada.codigoModuloFk }}</h6></td>
                                                     <td>
-                                                        {{ llamada.nombreContacto }}
+                                                        <h6>{{ llamada.nombreContacto }}</h6>
                                                     </td>
-                                                    <td>{{ llamada.telefono }}</td>
-                                                    <td>{{  llamada.extension }}</td>
-                                                    <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
-                                                    <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
+                                                    <td><h6>{{ llamada.telefono }}</h6></td>
+                                                    <td><h6>{{ llamada.extension }}</h6></td>
+                                                    <td><h6>{{ llamada.codigoUsuarioRecibeFk }}</h6></td>
+                                                    <td><h6>{{ llamada.codigoUsuarioAtiendeFk }}</h6></td>
                                                     <td>{% if llamada.fechaGestion != null %}{{ llamada.fechaGestion|date('y-m-d H:i') }}{%  endif %}</td>
                                                     <td>{% if llamada.fechaSolucion!= null %}{{ llamada.fechaSolucion|date('y-m-d H:i') }}{%  endif %}</td>
                                                     <td>
@@ -158,8 +158,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td></td>
-                                                    <td><h6>Descripción:</h6></td>
-                                                    <td colspan="13">{{ llamada.descripcion }}</td>
+                                                    <td colspan="11">{{ llamada.descripcion }}</td>
                                                 </tr>
                                             {% endfor %}
                                             {{ form_end(form) }}
