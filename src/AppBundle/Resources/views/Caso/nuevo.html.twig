@@ -17,10 +17,8 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title"><i class="mdi mdi-phone-incoming"></i> Nuevo Caso</h4>
-                                    {#<a href="{{ path('listadoLlamadas') }}">#}
-                                    {#<button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-backspace"></span> Volver a todas</button>#}
-                                    {#</a>#}
+                                    <h4 class="page-title"><i class="mdi mdi-phone-incoming"></i> Nuevo Caso (Incidente).</h4>
+
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
@@ -28,7 +26,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card-box">
-                                    <h4 class="m-t-0 header-title"><b>Datos del Caso (Incidente).</b></h4>
+                                    <h4 class="m-t-0 header-title"><b>Datos del Caso.</b></h4>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -55,7 +53,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-2 control-label" for="_telefono">Teléfono:</label>
+                                                <label class="col-md-2 control-label" for="_telefono">Correo:</label>
 
                                                 <div class="col-md-4">
                                                     {{ form_widget(form.correo,{'attr':{'data-parsley-type':'text','data-parsley-maxlength':'15'}}) }}

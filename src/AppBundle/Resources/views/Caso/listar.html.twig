@@ -58,13 +58,13 @@
                                             {% for caso in casos %}
 
                                                 <tr>
-                                                    <td>{{ caso.fechaRegistro|date('y-m-d H:i') }}</td>
-                                                    <td>{{ caso.asunto }}</td>
-                                                    <td>
+                                                    <td class="table-oro-td">{{ caso.fechaRegistro|date('y-m-d H:i') }}</td>
+                                                    <td class="table-oro-td">{{ caso.asunto }}</td>
+                                                    <td class="table-oro-td">
                                                         <h5 class="m-0">{{ caso.clienteRel.nombreComercial }}</h5>
                                                     </td>
-                                                    <td>{{ caso.correo }}</td>
-                                                    <td>{{ caso.contacto }}</td>
+                                                    <td class="table-oro-td">{{ caso.correo }}</td>
+                                                    <td class="table-oro-td">{{ caso.contacto }}</td>
                                                     <td>{{ caso.telefono }}</td>
                                                     <td>{{ caso.extension }}</td>
                                                     <td>
