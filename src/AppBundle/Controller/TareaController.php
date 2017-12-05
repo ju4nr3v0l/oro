@@ -13,12 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Tarea;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Service\TareaSevice;
-
-
-
-
-
 
 class TareaController extends Controller
 {
@@ -26,8 +20,7 @@ class TareaController extends Controller
     /**
      * @Route("/tarea/nuevo/{codigoTarea}", requirements={"codigoTarea":"\d+"}, name="registrarTarea")
      */
-    public function nuevo(Request $request, $codigoTarea = null)
-    {
+    public function nuevo(Request $request, $codigoTarea = null){
 
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
         $user = $this->getUser(); // trae el usuario actual
@@ -68,8 +61,7 @@ class TareaController extends Controller
     /**
      * @Route("/tarea/lista", name="listaTareaGeneral")
      */
-    public function listaGeneral(Request $request)
-    {
+    public function listaGeneral(Request $request){
 
         $em = $this->getDoctrine()->getManager();
         $arTarea = $em->getRepository('AppBundle:Tarea')->findBy([],array('fechaRegistro' => 'DESC'));

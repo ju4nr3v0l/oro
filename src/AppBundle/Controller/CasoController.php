@@ -16,24 +16,17 @@ use Symfony\Component\Form\Form;
 
 class CasoController extends Controller
 {
-    /**
-     * @Route("/nuevo/", name="inicio")
-     */
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
 
     /**
      * @Route("/caso/nuevo/{codigoCaso}", requirements={"codigoCaso":"\d+"}, name="registrarCaso")
      */
     public function nuevo(Request $request, $codigoCaso = null) {
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
-//        $user = $this->getUser(); // trae el usuario actual
+//      $user = $this->getUser(); // trae el usuario actual
         $arCaso = new Caso(); //instance class
 
         if($codigoCaso) {
-            $arllamada = $em->getRepository('AppBundle:Caso')->find($codigoCaso);
+            $arCaso = $em->getRepository('AppBundle:Caso')->find($codigoCaso);
         } else {
             $arCaso->setEstadoAtendido(false);
             $arCaso->setEstadoSolucionado(false);
