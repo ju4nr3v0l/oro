@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
-.table-oro>td,th,   tr {
+.table-oro > tr > td {
     padding: 0px;
+}
+
+.table-oro > th {
+    padding: 50px;
 }
