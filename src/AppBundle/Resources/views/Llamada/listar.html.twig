@@ -28,47 +28,6 @@
                             </div>
                         </div>
                         <div class="row">
-
-                            {#<div class="col-md-2">#}
-                                {#<div class="card-box">#}
-                                    {#<h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-account-multiple"></i> Contactos</h4>#}
-                                    {#<div class="form-group">#}
-                                        {#<label class="control-label text-muted">Buscar Cliente | Contacto</label>#}
-                                        {#<p class="text-muted m-b-15 font-13">#}
-                                            {#Escriba el nombre del contacto. (Se agrupará por Cliente).#}
-                                        {#</p>#}
-                                        {#<input type="text" name="country" id="autocomplete" class="form-control" autocomplete="on">#}
-                                    {#</div>#}
-                                    {#<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;">#}
-                                        {#<div class="inbox-widget slimscroll-alt" style="min-height: 302px; overflow: hidden; width: auto; height: 250px;">#}
-                                            {#<div class="inbox-item">#}
-                                                {#<div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-1.jpg') }}" class="img-circle" alt=""></div>#}
-                                                {#<p class="inbox-item-author">Juan Jose Berrio</p>#}
-                                                {#<p class="inbox-item-text"><span class="label label-info">Segurcol</span></p>#}
-                                            {#</div>#}
-                                            {#<div class="inbox-item">#}
-                                                {#<div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-2.jpg') }}" class="img-circle" alt=""></div>#}
-                                                {#<p class="inbox-item-author">Alejandro Vera Carrasquilla</p>#}
-                                                {#<p class="inbox-item-text"><span class="label label-info">Segurcol</span></p>#}
-                                            {#</div>#}
-                                            {#<div class="inbox-item">#}
-                                                {#<div class="inbox-item-img"><img src="{{ asset('zircosTemplate/assets/images/users/avatar-3.jpg') }}" class="img-circle" alt=""></div>#}
-                                                {#<p class="inbox-item-author">Estaban Padilla</p>#}
-                                                {#<p class="inbox-item-text"><span class="label label-info">Atlas</span></p>#}
-                                            {#</div>#}
-                                        {#</div>#}
-                                        {#<div class="slimScrollBar" style="background: rgb(152, 166, 173); width: 5px; position: absolute; top: 131px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 170.794px;">#}
-
-                                        {#</div>#}
-                                        {#<div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">#}
-
-                                        {#</div>#}
-                                    {#</div>#}
-
-                                {#</div> <!-- end card -->#}
-                            {#</div>#}
-                            {#<!-- end col -->#}
-
                             <div class="col-md-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Registro de Llamadas</h4>
@@ -81,7 +40,6 @@
                                                 <th>Cliente</th>
                                                 <th>Categoría</th>
                                                 <th>Módulo</th>
-                                                <th>Descripción</th>
                                                 <th>Contacto</th>
                                                 <th>Teléfono</th>
                                                 <th>Ext.</th>
@@ -158,7 +116,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td></td>
-                                                    <td colspan="11">{{ llamada.descripcion }}</td>
+                                                    <td><h6>Descripción</h6></td>
+                                                    <td colspan="12">{{ llamada.descripcion }}</td>
                                                 </tr>
                                             {% endfor %}
                                             {{ form_end(form) }}

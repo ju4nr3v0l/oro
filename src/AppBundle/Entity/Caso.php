@@ -44,6 +44,13 @@ class Caso
     /**
      * @var string
      *
+     * @ORM\Column(name="contacto", type="string", length=100)
+     */
+    private $contacto;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="telefono", type="string", length=20)
      */
     private $telefono;
@@ -86,7 +93,7 @@ class Caso
     /**
      * @var string
      *
-     * @ORM\Column(name="codigo_categoria_caso_fk", type="string", length=50 ,nullable= TRUE)
+     * @ORM\Column(name="codigo_categoria_caso_fk", type="string", length=50 )
      */
     private $codigoCategoriaCasoFk;
 
@@ -130,6 +137,12 @@ class Caso
      * @ORM\JoinColumn(name="codigo_cliente_fk", referencedColumnName="codigo_cliente_pk")
      */
     private $clienteRel;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="CasoCategoria", inversedBy="casosCategoriaRel")
+    * @ORM\JoinColumn(name="codigo_categoria_caso_fk", referencedColumnName="codigo_categoria_caso_pk")
+    */
+    private $categoriaRel;
 
     /**
      * Get codigoCasoPk
@@ -187,6 +200,30 @@ class Caso
     public function getCorreo()
     {
         return $this->correo;
+    }
+
+    /**
+     * Set contacto
+     *
+     * @param string $contacto
+     *
+     * @return Caso
+     */
+    public function setContacto($contacto)
+    {
+        $this->contacto = $contacto;
+
+        return $this;
+    }
+
+    /**
+     * Get contacto
+     *
+     * @return string
+     */
+    public function getContacto()
+    {
+        return $this->contacto;
     }
 
     /**
@@ -499,5 +536,29 @@ class Caso
     public function getClienteRel()
     {
         return $this->clienteRel;
+    }
+
+    /**
+     * Set categoriaRel
+     *
+     * @param \AppBundle\Entity\CasoCategoria $categoriaRel
+     *
+     * @return Caso
+     */
+    public function setCategoriaRel(\AppBundle\Entity\CasoCategoria $categoriaRel = null)
+    {
+        $this->categoriaRel = $categoriaRel;
+
+        return $this;
+    }
+
+    /**
+     * Get categoriaRel
+     *
+     * @return \AppBundle\Entity\CasoCategoria
+     */
+    public function getCategoriaRel()
+    {
+        return $this->categoriaRel;
     }
 }

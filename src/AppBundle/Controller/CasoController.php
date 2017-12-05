@@ -29,7 +29,7 @@ class CasoController extends Controller
      */
     public function nuevo(Request $request, $codigoCaso = null) {
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
-        $user = $this->getUser(); // trae el usuario actual
+//        $user = $this->getUser(); // trae el usuario actual
         $arCaso = new Caso(); //instance class
 
         if($codigoCaso) {
@@ -43,7 +43,7 @@ class CasoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $arCaso->setCodigoUsuarioAtiendeFk($user->getCodigoUsuarioPk());
+//            $arCaso->setCodigoUsuarioAtiendeFk($user->getCodigoUsuarioPk());
             if(!$codigoCaso) {
                 $arCaso->setFechaRegistro(new \DateTime('now'));
             }
@@ -63,14 +63,43 @@ class CasoController extends Controller
      */
     public function lista(Request $request) {
         $em = $this->getDoctrine()->getManager();
+        $arCaso = $em->getRepository('AppBundle:Caso')->findAll();
 
-        $arCaso = $em->getRepository('AppBundle:Caso')->findAll();// consulta llamadas por
+        $user = $this->getUser();
 
+        $form = $this::createFormBuilder()->getForm();//form para manejar los cambios de estado
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las llamadas
+            if($request->request->has('casoAtender')) {
+                $codigoCaso = $request->request->get('casoAtender');
+                $arCaso = $em->getRepository('AppBundle:Caso')->find($codigoCaso);
+                if(!$arCaso->getEstadoAtendido()){
+                    $arCaso->setEstadoAtendido(true);
+                    $arCaso->setCodigoUsuarioAtiendeFk($user->getCodigoUsuarioPk());
+                    $arCaso->setFechaGestion(new \DateTime('now'));
+                    $em->persist($arCaso);
+                }
+            }
+
+            if($request->request->has('casoSolucionar')) {
+                $codigoCaso = $request->request->get('casoSolucionar');
+                $arCaso = $em->getRepository('AppBundle:Caso')->find($codigoCaso);
+                if(!$arCaso->getEstadoSolucionado()){
+                    $arCaso->setEstadoSolucionado(true);
+                    $arCaso->setCodigoUsuarioSolucionaFk($user->getCodigoUsuarioPk());
+                    $arCaso->setFechaSolucion(new \DateTime('now'));
+                    $em->persist($arCaso);
+                }
+            }
+            $em->flush();
+            return $this->redirect($this->generateUrl('listadoCasos'));
+        }
 //        dump($arCaso);
 //        die();
 
         return $this->render('AppBundle:Caso:listar.html.twig', [
-            'casos' => $arCaso
+            'casos' => $arCaso,
+            'form' => $form->createView()
         ]);
     }
 
