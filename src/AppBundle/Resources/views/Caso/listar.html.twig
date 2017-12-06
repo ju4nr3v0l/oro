@@ -44,6 +44,7 @@
                                                 <th>Teléfono</th>
                                                 <th>Ext.</th>
                                                 <th>Categoría</th>
+                                                <th>Prioridad</th>
                                                 <th>Gestión</th>
                                                 <th>Gestiona</th>
                                                 <th>Solución</th>
@@ -69,6 +70,9 @@
                                                     <td>{{ caso.extension }}</td>
                                                     <td>
                                                         <span class="label" style="background-color: {{ caso.categoriaRel.color }}">{{ caso.categoriaRel.nombre }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="label" style="background-color: {{ caso.prioridadRel.color }}">{{ caso.prioridadRel.nombre }}</span>
                                                     </td>
                                                     <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>
                                                     <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>

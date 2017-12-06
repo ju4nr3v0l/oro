@@ -48,8 +48,12 @@
                                                     {{ form_widget(form.clienteRel) }}
                                                 </div>
                                                 <label class="col-md-1 control-label" for="_telefono">Categoría:</label>
-                                                <div class="col-md-5">
+                                                <div class="col-md-2">
                                                     {{ form_widget(form.categoriaRel) }}
+                                                </div>
+                                                <label class="col-md-1 control-label" for="_telefono">Prioridad:</label>
+                                                <div class="col-md-2">
+                                                    {{ form_widget(form.prioridadRel) }}
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -61,11 +65,11 @@
                                                 <label class="col-md-1 control-label" for="_telefono">Teléfono:</label>
 
                                                 <div class="col-md-2">
-                                                    {{ form_widget(form.telefono,{'attr':{'data-parsley-type':'number','data-parsley-maxlength':'15'}}) }}
+                                                    {{ form_widget(form.telefono,{'attr':{'data-parsley-type':'number','data-parsley-maxlength':'12'}}) }}
                                                 </div>
                                                 <label class="col-md-1 control-label" for="_telefono">Extensión:</label>
                                                 <div class="col-md-2">
-                                                    {{ form_widget(form.extension,{'attr':{'data-parsley-type':'number','data-parsley-maxlength':'6'}}) }}
+                                                    {{ form_widget(form.extension,{'attr':{'data-parsley-type':'number','data-parsley-maxlength':'5'}}) }}
                                                 </div>
                                             </div>
                                             <div class="form-group">
