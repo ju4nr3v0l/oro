@@ -57,6 +57,14 @@ class FormTypeTarea extends AbstractType{
                 )
             ))
 
+            ->add ('comentario', TextareaType::class,array(
+                'attr' => array(
+                    'id' => '_comentario',
+                    'name' => '_comentario',
+                    'class' => 'form-control'
+                )
+            ))
+
 //            Botón Guardar
             ->add ('btnGuardar', SubmitType::class, array(
                 'attr' => array(

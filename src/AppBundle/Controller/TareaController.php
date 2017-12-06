@@ -68,11 +68,14 @@ class TareaController extends Controller
         $arTarea = $em->getRepository('AppBundle:Tarea')->findBy([],array('fechaRegistro' => 'DESC'));
         $sinTerminar=0;
         $sinAsignar=0;
+        $sinVerificar = 0;
         foreach ($arTarea as $key => $value){
             if($value->getCodigoUsuarioAsignaFk()==null){
                   $sinAsignar++;
             }else if(!$value->getEstadoTerminado()){
                 $sinTerminar++;
+            } else if($value->getEstadoTerminado() && !$value->getEstadoVerificado()){
+                $sinVerificar++;
             }
         }
         $form = $this::createFormBuilder()->getForm(); // form para manejar actualizacion de estado de llamadas
@@ -84,11 +87,19 @@ class TareaController extends Controller
                 if(!$arTarea->getEstadoTerminado()){
                     $arTarea->setEstadoTerminado(true);
                     $arTarea->setFechaSolucion(new \DateTime('now'));
-                    $em->persist($arTarea);
-                    $em->flush();
                 }
-                return $this->redirect($this->generateUrl('listaTareaGeneral'));
             }
+            if($request->request->has('TareaVerificar')){
+                $codigoTarea= $request->request->get('TareaVerificar');
+                $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
+                if(!$arTarea->getEstadoVerificado()){
+                    $arTarea->setFechaVerificado(new \DateTime('now'));
+                    $arTarea->setEstadoVerificado(true);
+                }
+            }
+            $em->persist($arTarea);
+            $em->flush();
+            return $this->redirect($this->generateUrl('listaTareaGeneral'));
         }
 
         // en index pagina con datos generales de la app
@@ -96,6 +107,7 @@ class TareaController extends Controller
             'tareas' => $arTarea,
             'sinTerminar'=>$sinTerminar,
             'sinAsignar'=>$sinAsignar,
+            'sinVerificar'=>$sinVerificar,
             'form' => $form->createView(),
         ]);
     }
@@ -113,10 +125,12 @@ class TareaController extends Controller
         $form = $this::createFormBuilder()->getForm(); // form para manejar actualizacion de estado de llamadas
         $form->handleRequest($request);
         $sinTerminar=0;
-
+        $sinVerificar = 0;
         foreach ($arTarea as $key => $value){
             if(!$value->getEstadoTerminado()){
                 $sinTerminar++;
+            } else if(!$value->getEstadoVerificado()){
+                $sinVerificar++;
             }
         }
         if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las llamadas
@@ -139,7 +153,31 @@ class TareaController extends Controller
         return $this->render('AppBundle:Tarea:listarUsuario.html.twig', [
             'tareas' => $arTarea,
             'sinTerminar'=>$sinTerminar,
+            'sinVerificar'=>$sinVerificar,
             'form' => $form->createView(),
+        ]);
+
+
+    }
+
+
+    /**
+     * @Route("/tarea/comentario/registrar/{codigoTarea}",requirements={"codigoTarea":"\d+"}, name="registrarComentario")
+     */
+    public function registrarComentario(Request $request, $codigoTarea=null){
+
+        $em = $this->getDoctrine()->getManager(); // instancia el entity manager
+        $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
+        $form = $this->createForm(FormTypeTarea::class, $arTarea); //create form
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $em->persist($arTarea);
+            $em->flush();
+            echo "<script>window.opener.location.reload();window.close()</script>";
+        }
+
+        return $this->render('AppBundle:Tarea:comentario.html.twig', [
+            'form'=>$form->createView(),
         ]);
 
 

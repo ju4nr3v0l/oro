@@ -48,11 +48,25 @@ class Tarea
     private $fechaRegistro;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_verificado", type="datetime", nullable=true)
+     */
+    private $fechaVerificado;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="estado_terminado", type="boolean", nullable=true)
      */
     private $estadoTerminado;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="estado_verificado", type="boolean", nullable=true)
+     */
+    private $estadoVerificado;
 
     /**
      * @var string
@@ -83,24 +97,17 @@ class Tarea
     private $descripcion;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="comentario", type="string", length=5000, nullable=true)
+     */
+    private $comentario;
+
+    /**
      * @ORM\ManyToOne(targetEntity="TareaTipo", inversedBy="tareasTareaTipoRel")
      * @ORM\JoinColumn(name="codigo_tarea_tipo_fk", referencedColumnName="codigo_tarea_tipo_pk")
      */
     private $tareaTipoRel;
-
-    /**
-     * Set codigoTareaPk
-     *
-     * @param integer $codigoTareaPk
-     *
-     * @return Tarea
-     */
-    public function setCodigoTareaPk($codigoTareaPk)
-    {
-        $this->codigoTareaPk = $codigoTareaPk;
-
-        return $this;
-    }
 
     /**
      * Get codigoTareaPk
@@ -185,6 +192,30 @@ class Tarea
     }
 
     /**
+     * Set fechaVerificado
+     *
+     * @param \DateTime $fechaVerificado
+     *
+     * @return Tarea
+     */
+    public function setFechaVerificado($fechaVerificado)
+    {
+        $this->fechaVerificado = $fechaVerificado;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaVerificado
+     *
+     * @return \DateTime
+     */
+    public function getFechaVerificado()
+    {
+        return $this->fechaVerificado;
+    }
+
+    /**
      * Set estadoTerminado
      *
      * @param boolean $estadoTerminado
@@ -206,6 +237,30 @@ class Tarea
     public function getEstadoTerminado()
     {
         return $this->estadoTerminado;
+    }
+
+    /**
+     * Set estadoVerificado
+     *
+     * @param boolean $estadoVerificado
+     *
+     * @return Tarea
+     */
+    public function setEstadoVerificado($estadoVerificado)
+    {
+        $this->estadoVerificado = $estadoVerificado;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoVerificado
+     *
+     * @return boolean
+     */
+    public function getEstadoVerificado()
+    {
+        return $this->estadoVerificado;
     }
 
     /**
@@ -302,6 +357,30 @@ class Tarea
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set comentario
+     *
+     * @param string $comentario
+     *
+     * @return Tarea
+     */
+    public function setComentario($comentario)
+    {
+        $this->comentario = $comentario;
+
+        return $this;
+    }
+
+    /**
+     * Get comentario
+     *
+     * @return string
+     */
+    public function getComentario()
+    {
+        return $this->comentario;
     }
 
     /**
