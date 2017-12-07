@@ -140,12 +140,23 @@ class TareaController extends Controller
                     $arTarea->setEstadoTerminado(true);
                     $arTarea->setFechaSolucion(new \DateTime('now'));
                     $em->persist($arTarea);
-                    $em->flush();
+
                 }
 
-                return $this->redirect($this->generateUrl('listaTareaUsuario'));
+
 
             }
+            if($request->request->has('TareaVerificar')){
+                $codigoTarea= $request->request->get('TareaVerificar');
+                $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
+                if(!$arTarea->getEstadoVerificado()){
+                    $arTarea->setFechaVerificado(new \DateTime('now'));
+                    $arTarea->setEstadoVerificado(true);
+                }
+            }
+
+            $em->flush();
+            return $this->redirect($this->generateUrl('listaTareaUsuario'));
         }
 
 
