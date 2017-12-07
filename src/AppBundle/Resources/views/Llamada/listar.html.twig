@@ -45,12 +45,12 @@
                                                 <th>Ext.</th>
                                                 <th>Descripción</th>
                                                 <th>Recibe</th>
-                                                <th>Gestiona</th>
-                                                <th>Gestión</th>
-                                                <th>Solución</th>
-                                                <th>Atendido</th>
-                                                <th>Solucionado</th>
-                                                <th>Acción</th>
+                                                {#<th>Gestiona</th>#}
+                                                {#<th>Gestión</th>#}
+                                                {#<th>Solución</th>#}
+                                                {#<th>Atendido</th>#}
+                                                {#<th>Solucionado</th>#}
+                                                {#<th>Acción</th>#}
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -79,9 +79,9 @@
                                                     <td>{{ llamada.extension }}</td>
                                                     <td>{{ llamada.descripcion }}</td>
                                                     <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
-                                                    <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
-                                                    <td>{% if llamada.fechaGestion != null %}{{ llamada.fechaGestion|date('y-m-d H:i') }}{%  endif %}</td>
-                                                    <td>{% if llamada.fechaSolucion!= null %}{{ llamada.fechaSolucion|date('y-m-d H:i') }}{%  endif %}</td>
+                                                    {#<td>{{ llamada.codigoUsuarioAtiendeFk }}</td>#}
+                                                    {#<td>{% if llamada.fechaGestion != null %}{{ llamada.fechaGestion|date('y-m-d H:i') }}{%  endif %}</td>#}
+                                                    {#<td>{% if llamada.fechaSolucion!= null %}{{ llamada.fechaSolucion|date('y-m-d H:i') }}{%  endif %}</td>#}
                                                     <td>
 
                                                         {% if llamada.estadoAtendido %}
