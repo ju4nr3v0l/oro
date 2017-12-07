@@ -83,6 +83,13 @@ class FormTypeCaso extends AbstractType{
                         ->orderBy('c.nombreComercial', 'ASC');},
                 'choice_label' => 'nombreComercial',
                 'required' => true))
+            ->add('prioridadRel', EntityType::class, array(
+                'class' => 'AppBundle:Prioridad',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.nombre', 'ASC');},
+                'choice_label' => 'nombre',
+                'required' => true))
             ->add('categoriaRel', EntityType::class, array(
                 'class' => 'AppBundle:CasoCategoria',
                 'query_builder' => function (EntityRepository $er) {

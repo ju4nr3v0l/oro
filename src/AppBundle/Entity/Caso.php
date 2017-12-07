@@ -100,6 +100,13 @@ class Caso
     /**
      * @var string
      *
+     * @ORM\Column(name="codigo_prioridad_fk", type="string", length=50, nullable= TRUE)
+     */
+    private $codigoPrioridadFk;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="codigo_usuario_atiende_fk", type="string", length=50 ,nullable= TRUE)
      */
     private $codigoUsuarioAtiendeFk;
@@ -143,6 +150,12 @@ class Caso
     * @ORM\JoinColumn(name="codigo_categoria_caso_fk", referencedColumnName="codigo_categoria_caso_pk")
     */
     private $categoriaRel;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Prioridad", inversedBy="casosPrioridadRel")
+     * @ORM\JoinColumn(name="codigo_prioridad_fk", referencedColumnName="codigo_prioridad_pk")
+     */
+    private $prioridadRel;
 
     /**
      * Get codigoCasoPk
@@ -395,6 +408,30 @@ class Caso
     }
 
     /**
+     * Set codigoPrioridadFk
+     *
+     * @param string $codigoPrioridadFk
+     *
+     * @return Caso
+     */
+    public function setCodigoPrioridadFk($codigoPrioridadFk)
+    {
+        $this->codigoPrioridadFk = $codigoPrioridadFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoPrioridadFk
+     *
+     * @return string
+     */
+    public function getCodigoPrioridadFk()
+    {
+        return $this->codigoPrioridadFk;
+    }
+
+    /**
      * Set codigoUsuarioAtiendeFk
      *
      * @param string $codigoUsuarioAtiendeFk
@@ -560,5 +597,29 @@ class Caso
     public function getCategoriaRel()
     {
         return $this->categoriaRel;
+    }
+
+    /**
+     * Set prioridadRel
+     *
+     * @param \AppBundle\Entity\Prioridad $prioridadRel
+     *
+     * @return Caso
+     */
+    public function setPrioridadRel(\AppBundle\Entity\Prioridad $prioridadRel = null)
+    {
+        $this->prioridadRel = $prioridadRel;
+
+        return $this;
+    }
+
+    /**
+     * Get prioridadRel
+     *
+     * @return \AppBundle\Entity\Prioridad
+     */
+    public function getPrioridadRel()
+    {
+        return $this->prioridadRel;
     }
 }
