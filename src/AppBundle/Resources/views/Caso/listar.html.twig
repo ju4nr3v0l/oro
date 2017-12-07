@@ -49,7 +49,7 @@
                                                     {#<th>Gestión</th>#}
                                                     <th>Gestiona</th>
                                                     {#<th>Solución</th>#}
-                                                    <th>Soluciona</th>
+                                                    {#<th>Soluciona</th>#}
                                                     <th>At</th>
                                                     <th>So</th>
                                                     <th>Ed</th>
@@ -66,7 +66,7 @@
                                                 </td>
                                                 <td>{{ caso.correo }}</td>
                                                 <td>{{ caso.contacto }}</td>
-                                                <td>{{ caso.telefono }}
+                                                <td>{{ caso.telefono }}<br>
                                                 <small>Ext: {{ caso.extension }}</small>
                                                 </td>
                                                 <td>
@@ -85,7 +85,7 @@
                                                 {#<td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>#}
                                                 <td>{{ caso.codigoUsuarioAtiendeFk }}</td>
                                                 {#<td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>#}
-                                                <td>{{ caso.codigoUsuarioSolucionaFk }}</td>
+                                                {#<td>{{ caso.codigoUsuarioSolucionaFk }}</td>#}
                                                 <td>
                                                     {% if caso.estadoAtendido %}
                                                         <button class="btn btn-success btn-xs" type="submit" name="casoAtender" disabled value="{{ caso.codigoCasoPk }}" title="{{ caso.codigoUsuarioAtiendeFk}}">

@@ -42,7 +42,6 @@
                                                 <th>Módulo</th>
                                                 <th>Contacto</th>
                                                 <th>Teléfono</th>
-                                                <th>Ext.</th>
                                                 <th>Descripción</th>
                                                 <th>Recibe</th>
                                                 {#<th>Gestiona</th>#}
@@ -75,8 +74,8 @@
                                                     </td>
                                                     <td>{{ llamada.codigoModuloFk }}</td>
                                                     <td>{{ llamada.nombreContacto }}</td>
-                                                    <td>{{ llamada.telefono }}</td>
-                                                    <td>{{ llamada.extension }}</td>
+                                                    <td>{{ llamada.telefono }}<br>
+                                                    <small>Ext. {{ llamada.extension }}</small></td>
                                                     <td>{{ llamada.descripcion }}</td>
                                                     <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
                                                     {#<td>{{ llamada.codigoUsuarioAtiendeFk }}</td>#}

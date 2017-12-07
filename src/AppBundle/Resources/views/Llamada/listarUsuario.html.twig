@@ -66,15 +66,13 @@
                                                                     <th>Módulo</th>
                                                                     <th>Contacto</th>
                                                                     <th>Teléfono</th>
-                                                                    <th>Ext.</th>
                                                                     <th>Descripción</th>
                                                                     <th>Recibe</th>
-                                                                    <th>Gestiona</th>
-                                                                    <th>Gestión</th>
-                                                                    <th>Solución</th>
-                                                                    <th>Atendido</th>
-                                                                    <th>Solucionado</th>
-                                                                </tr>
+                                                                    {#<th>Gestiona</th>#}
+                                                                    {#<th>Gestión</th>#}
+                                                                    {#<th>Solución</th>#}
+                                                                    <th>At</th>
+                                                                    <th>So</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -100,13 +98,13 @@
                                                                             <td>{{ llamada.codigoModuloFk }}</td>
                                                                             <td>
                                                                                 {{ llamada.nombreContacto }}
-                                                                            <td>{{ llamada.telefono }}</td>
-                                                                            <td>{{ llamada.extension }}</td>
+                                                                            <td>{{ llamada.telefono }}<br>
+                                                                                <small>Ext. {{ llamada.extension }}</small></td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
-                                                                            <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
-                                                                            <td>{{ llamada.fechaGestion|date('y-m-d H:i') }}</td>
-                                                                            <td>{{ llamada.fechaSolucion|date('y-m-d H:i') }}</td>
+                                                                            {#<td>{{ llamada.codigoUsuarioAtiendeFk }}</td>#}
+                                                                            {#<td>{{ llamada.fechaGestion|date('y-m-d H:i') }}</td>#}
+                                                                            {#<td>{{ llamada.fechaSolucion|date('y-m-d H:i') }}</td>#}
                                                                             <td>
                                                                                 {% if llamada.estadoAtendido %}
                                                                                     <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" disabled value="{{ llamada.codigoLlamadaPk }}">
