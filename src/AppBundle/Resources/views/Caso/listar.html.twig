@@ -73,7 +73,7 @@
                                                 </td>
                                                 <td>{{ caso.descripcion }}</td>
                                                 <td>
-                                                    <span class="label" style="background-color: {% if caso.prioridadRel is defined or caso.prioridadRel is not null %}{{ caso.prioridadRel.color }} {% else %}#efefef{% endif %} }}">
+                                                    <span class="label" style="background-color: {% if caso.prioridadRel.color != null %} {{ caso.prioridadRel.color }} {% endif %};">
                                                         {% if caso.prioridadRel is defined or caso.prioridadRel is not null %}
                                                             {{ caso.prioridadRel.nombre }}
                                                         {% else %}
@@ -82,9 +82,8 @@
                                                     </span>
                                                 </td>
                                                 <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>
-                                                <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>
-
                                                 <td>{{ caso.codigoUsuarioAtiendeFk }}</td>
+                                                <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>
                                                 <td>{{ caso.codigoUsuarioSolucionaFk }}</td>
                                                 <td>
                                                     {% if caso.estadoAtendido %}
