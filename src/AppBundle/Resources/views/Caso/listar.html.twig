@@ -76,6 +76,8 @@
                                                     <span class="label" style="background-color: {% if caso.prioridadRel is defined or caso.prioridadRel is not null %}{{ caso.prioridadRel.color }} {% else %}#efefef{% endif %} }}">
                                                         {% if caso.prioridadRel is defined or caso.prioridadRel is not null %}
                                                             {{ caso.prioridadRel.nombre }}
+                                                        {% else %}
+                                                            Sin prioridad
                                                         {% endif %}
                                                     </span>
                                                 </td>
