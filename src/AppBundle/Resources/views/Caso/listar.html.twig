@@ -73,7 +73,11 @@
                                                 </td>
                                                 <td>{{ caso.descripcion }}</td>
                                                 <td>
-                                                    <span class="label" style="background-color: {{ caso.prioridadRel.color }}">{{ caso.prioridadRel.nombre }}</span>
+                                                    <span class="label" style="background-color: {% if caso.prioridadRel is defined or caso.prioridadRel is not null %}{{ caso.prioridadRel.color }} {% else %}#efefef{% endif %} }}">
+                                                        {% if caso.prioridadRel is defined or caso.prioridadRel is not null %}
+                                                            {{ caso.prioridadRel.nombre }}
+                                                        {% endif %}
+                                                    </span>
                                                 </td>
                                                 <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>
                                                 <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>
