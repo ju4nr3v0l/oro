@@ -25,7 +25,6 @@ class TareaController extends Controller
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
         $user = $this->getUser(); // trae el usuario actual
         $arTarea = new Tarea(); //instance class
-        $arTarea->setCodigoTareaTipoFk('');
         if($codigoTarea) {
             $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
         } else {
@@ -168,9 +167,18 @@ class TareaController extends Controller
 
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
         $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
+        $user =  $em->getRepository('AppBundle:Usuario')->find($arTarea->getCodigoUsuarioAsignaFk());
+        $arTarea->setCodigoUsuarioAsignaFk($user);
+        $descripcion= $arTarea->getDescripcion();
+        $tareaTipo= $arTarea->getTareaTipoRel();
         $form = $this->createForm(FormTypeTarea::class, $arTarea); //create form
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
+            $idUser = $user->getCodigoUsuarioPk();
+            $arTarea->setCodigoUsuarioAsignaFk($idUser);
+            $arTarea->setDescripcion($descripcion);
+            $arTarea->setTareaTipoRel($tareaTipo);
             $em->persist($arTarea);
             $em->flush();
             echo "<script>window.opener.location.reload();window.close()</script>";
