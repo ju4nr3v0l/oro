@@ -37,17 +37,17 @@
                                             <thead>
                                             <tr>
                                                 <th>Registra</th>
-                                                <th>Fecha Registro</th>
+                                                <th>Registro</th>
                                                 <th>Tipo</th>
-                                                <th>Fecha de asignación</th>
+                                                <th>Asignación</th>
                                                 <th>Asignado</th>
-                                                <th>Fecha de solución</th>
-                                                <th>Fecha verificación</th>
+                                                <th>Solución</th>
+                                                <th>Verificación</th>
                                                 <th>Descripción</th>
-                                                <th>Solucionado</th>
-                                                <th>Verificado</th>
-                                                <th>Editar</th>
-                                                <th>Comentar</th>
+                                                <th>So</th>
+                                                <th>Ve</th>
+                                                <th>Ed</th>
+                                                <th>Co</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -109,7 +109,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                               class="btn btn-info waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
                                                             </a>
                                                         </td>
                                                     {% elseif tarea.estadoVerificado == false %}
@@ -128,7 +128,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                               class="btn btn-info waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
                                                             </a>
                                                         </td>
                                                     {% else %}
@@ -147,7 +147,7 @@
                                                         </td>
                                                         <td>
                                                             <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                               class="btn btn-info waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
                                                             </a>
                                                         </td>
 
