@@ -42,17 +42,17 @@
                                                     <th>Correo</th>
                                                     <th>Contacto</th>
                                                     <th>Teléfono</th>
-                                                    <th>Ext.</th>
+                                                    {#<th>Ext.</th>#}
                                                     <th>Categoría</th>
                                                     <th>Descripción</th>
                                                     <th>Prioridad</th>
-                                                    <th>Gestión</th>
+                                                    {#<th>Gestión</th>#}
                                                     <th>Gestiona</th>
-                                                    <th>Solución</th>
+                                                    {#<th>Solución</th>#}
                                                     <th>Soluciona</th>
-                                                    <th>Atendido</th>
-                                                    <th>Solucionado</th>
-                                                    <th>Acción</th>
+                                                    <th>At</th>
+                                                    <th>So</th>
+                                                    <th>Ed</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -66,8 +66,9 @@
                                                 </td>
                                                 <td>{{ caso.correo }}</td>
                                                 <td>{{ caso.contacto }}</td>
-                                                <td>{{ caso.telefono }}</td>
-                                                <td>{{ caso.extension }}</td>
+                                                <td>{{ caso.telefono }}
+                                                <small>Ext: {{ caso.extension }}</small>
+                                                </td>
                                                 <td>
                                                     <span class="label" style="background-color: {{ caso.categoriaRel.color }}">{{ caso.categoriaRel.nombre }}</span>
                                                 </td>
@@ -81,9 +82,9 @@
                                                         {% endif %}
                                                     </span>
                                                 </td>
-                                                <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>
+                                                {#<td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>#}
                                                 <td>{{ caso.codigoUsuarioAtiendeFk }}</td>
-                                                <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>
+                                                {#<td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>#}
                                                 <td>{{ caso.codigoUsuarioSolucionaFk }}</td>
                                                 <td>
                                                     {% if caso.estadoAtendido %}
@@ -117,7 +118,6 @@
                                             </tr>
                                             {% endfor %}
                                             {{ form_end(form) }}
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div> <!-- end card -->
