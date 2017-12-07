@@ -56,7 +56,7 @@
                                                         <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Registro de Llamadas</h4>
 
                                                         <div class="table-responsive">
-                                                            <table class="table table-condensed table-responsive table-hover m-0">
+                                                            <table class="table table-hover m-0 table-oro">
                                                                 <thead>
                                                                 <tr>
                                                                 <tr>
@@ -88,11 +88,11 @@
                                                                                 {% if llamada.codigoCategoriaLlamadaFk == 0 %}
                                                                                     <span class="label label-danger">SIN CATEGORÍA</span>
                                                                                 {% elseif llamada.codigoCategoriaLlamadaFk == 1 %}
-                                                                                    <span class="label label-default">{{ llamada.categoriaRel.nombre }}</span>
+                                                                                    <span class="label label-default">{{ llamada.categoriaRel.codigoCategoriaLlamadaPk }}</span>
                                                                                 {% elseif llamada.codigoCategoriaLlamadaFk == 2 %}
-                                                                                    <span class="label label-info">{{ llamada.categoriaRel.nombre }}</span>
+                                                                                    <span class="label label-info">{{ llamada.categoriaRel.codigoCategoriaLlamadaPk }}</span>
                                                                                 {% elseif llamada.codigoCategoriaLlamadaFk == 3 %}
-                                                                                    <span class="label label-orange">{{ llamada.categoriaRel.nombre }}</span>
+                                                                                    <span class="label label-orange">{{ llamada.categoriaRel.codigoCategoriaLlamadaPk }}</span>
                                                                                 {% endif %}
                                                                             </td>
                                                                             <td>{{ llamada.codigoModuloFk }}</td>
@@ -151,7 +151,6 @@
                                                                     <th>Descripción</th>
                                                                     <th>Contacto</th>
                                                                     <th>Teléfono</th>
-                                                                    <th>Ext.</th>
                                                                     <th>Recibe</th>
                                                                     <th>Gestiona</th>
                                                                     <th>Gestión</th>
@@ -167,7 +166,7 @@
                                                                         <tr>
                                                                             <td>{{ llamada.fechaRegistro|date('y-m-d H:i') }}</td>
                                                                             <td>
-                                                                                <h5 class="m-0">{{ llamada.clienteRel.nombreComercial }}</h5>
+                                                                                <strong>{{ llamada.clienteRel.nombreComercial }}</strong>
                                                                             </td>
                                                                             <td>
                                                                                 {% if llamada.codigoCategoriaLlamadaFk == 0 %}
@@ -183,8 +182,7 @@
                                                                             <td>{% if llamada.moduloRel is defined %}{{ llamada.moduloRel.codigoModuloPk }}{% endif %}</td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>{{ llamada.nombreContacto }}</td>
-                                                                            <td>{{ llamada.telefono }}</td>
-                                                                            <td>{{ llamada.extension }}</td>
+                                                                            <td>{{ llamada.telefono }} - ({{ llamada.extension }})</td>
                                                                             <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
                                                                             <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
                                                                             <td>{{ llamada.fechaGestion|date('y-m-d H:i') }}</td>
