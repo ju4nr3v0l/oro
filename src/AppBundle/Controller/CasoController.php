@@ -64,15 +64,22 @@ class CasoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $this->listar ($em);
 
+        $session = new Session();
+
+        $propiedades = array(
+            'class' => 'AppBundle:Cliente',
+            'choice_label' => 'nombreComercial',
+            'required' => false,
+            'empty_data' => '',
+            'placeholder' => 'Todos',
+            'data' =>'');
+
+        if($session->get('filtroCasosCliente')){
+            $propiedades['data'] = $em->getReference('AppBundle:Cliente', $session->get('filtroCasosCliente'));
+        }
+
         $formFiltro = $this::createFormBuilder ()
-            ->add('clienteRel', EntityType::class, array(
-                    'class' => 'AppBundle:Cliente',
-                    'choice_label' => 'nombreComercial',
-                    'required' => false,
-                    'empty_data' => '',
-                    'placeholder' => 'Todos',
-                    'data' =>'')
-            )
+            ->add('clienteRel', EntityType::class,$propiedades)
             ->add ('btnFiltrar', SubmitType::class, array (
                 'label' => 'Filtrar',
                 'attr' => array (
