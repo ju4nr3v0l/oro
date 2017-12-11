@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Caso;
+use AppBundle\Entity\Cliente;
 use AppBundle\Forms\Type\FormTypeCaso;
+use Doctrine\DBAL\Types\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
@@ -14,9 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CasoController extends Controller
 {
+
+    var $strDqlLista = '';
 
     /**
      * @Route("/caso/nuevo/{codigoCaso}", requirements={"codigoCaso":"\d+"}, name="registrarCaso")
@@ -55,9 +60,41 @@ class CasoController extends Controller
     /**
      * @Route("/caso/lista", name="listadoCasos")
      */
-    public function lista(Request $request) {
+    public function lista(Request $request, Request $requestFiltro) {
         $em = $this->getDoctrine()->getManager();
-        $arCaso = $em->getRepository('AppBundle:Caso')->findAll();
+        $this->listar ($em);
+
+        $formFiltro = $this::createFormBuilder ()
+            ->add('clienteRel', EntityType::class, array(
+                    'class' => 'AppBundle:Cliente',
+                    'choice_label' => 'nombreComercial',
+                    'required' => false,
+                    'empty_data' => '',
+                    'placeholder' => 'Todos',
+                    'data' =>'')
+            )
+            ->add ('btnFiltrar', SubmitType::class, array (
+                'label' => 'Filtrar',
+                'attr' => array (
+                    'class' => 'btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5'
+                )
+            ))
+            ->getForm();
+
+
+        $formFiltro->handleRequest($requestFiltro);
+
+
+
+        if($formFiltro->isSubmitted() && $formFiltro->isValid()){
+            $this->filtrar($formFiltro);
+            $this->listar($em);
+        }
+
+        $dql = $em->createQuery($this->strDqlLista);
+        $arCaso = $dql->getResult();
+
+        //Listado General Sin Filtro
 
         $user = $this->getUser();
 
@@ -88,30 +125,27 @@ class CasoController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('listadoCasos'));
         }
-//        dump($arCaso);
-//        die();
-
-        $filtroForm = $this::filtroCasoCliente ();
 
         return $this->render('AppBundle:Caso:listar.html.twig', [
             'casos' => $arCaso,
             'form' => $form->createView(),
-            'filtroForm' => $filtroForm->createView ()
+            'formFiltro' => $formFiltro->createView ()
         ]);
     }
 
-    private function filtroCasoCliente(){
-        $form = $this->createFormBuilder ()
-            ->add('casoCliente', EntityType::class, array(
-                'class' => 'AppBundle:Cliente',
-                'choice_label' => 'nombreComercial',
-                'required' => true))
-            ->add ('btnFiltrar',SubmitType::class, array (
-                'label' => 'Filtrar',
-                'attr' => array('class' => 'btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5')
-            ))
-            ->getForm ();
+    private function filtrar($formFiltro){
+        $session = new Session();
+        $filtro = $formFiltro->get('clienteRel')->getData();
+        if($filtro){
+            $session->set('filtroCasosCliente',$filtro->getCodigoClientePk());
+        }else {
+            $session->set ('filtroCasosCliente', null);
+        }
+    }
 
-        return $form;
+    private function listar($em){
+        $session = new Session();
+//                $arCaso = $em->getRepository ('AppBundle:Caso')->findBy(array("codigoClienteFk" => $cliente),array());
+        $this->strDqlLista = $em->getRepository('AppBundle:Caso')->filtroDQL ($session->get('filtroCasosCliente'));
     }
 }
