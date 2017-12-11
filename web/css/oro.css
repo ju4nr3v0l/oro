@@ -1,5 +1,5 @@
 .table-oro{
-    font-size: smaller;
+    font-size: x-small;
     padding: 0px;
 }
 
@@ -11,10 +11,4 @@
     vertical-align: middle!important;
     font-size: 12px;
     text-align: left;
-}
-#submit-filtro{
-    margin: 5px!important;
-}
-#submit-filtro > button{
-    float: right!important;
 }
