@@ -3,10 +3,12 @@
     padding: 0px;
 }
 
-/*.table-oro>tbody>tr>td {*/
-    /*padding: 4px;*/
-/*}*/
-
-/*.table-oro > th {*/
-    /*padding: 50px;*/
-/*}*/
+.table-oro>tbody>tr>td {
+    padding: 4px;
+}
+#tarea-table>tbody>tr>td, #tarea-table > thead> tr{
+    padding: 2px!important;
+    vertical-align: middle!important;
+    font-size: 12px;
+    text-align: left;
+}

@@ -32,7 +32,7 @@
                             <div class="col-md-12">
                                 <div class="card-box">
                                     <div class="table-responsive">
-                                        <table class="table table-hover m-0 table-oro">
+                                        <table id="tarea-table" class="table table table-hover m-0 table-oro">
 
                                             <thead>
                                             <tr>
@@ -44,10 +44,7 @@
                                                 <th>Solución</th>
                                                 <th>Verificación</th>
                                                 <th>Descripción</th>
-                                                <th>So</th>
-                                                <th>Ve</th>
-                                                <th>Ed</th>
-                                                <th>Co</th>
+                                                <th>Comentario</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -93,73 +90,64 @@
                                                     <td>
                                                         {{ tarea.descripcion }}
                                                     </td>
+                                                    <td>
+                                                        {{ tarea.comentario}}
+                                                    </td>
+                                                    <td>
                                                     {% if tarea.estadoTerminado == false  %}
-                                                        <td>
+
                                                             <button class="btn btn-danger btn-xs" type="submit" name="TareaSolucionar" value="{{ tarea.codigoTareaPk }}" {% if tarea.codigoUsuarioAsignaFk == null%}disabled{% endif %}>
                                                             <i class="glyphicon glyphicon-thumbs-down"></i></button>
-                                                        </td>
-                                                        <td>
+
+
                                                             <button class="btn btn-danger btn-xs" type="submit" name="TareaVerificar" value="{{ tarea.codigoTareaPk }}" disabled>
                                                                 <i class="glyphicon glyphicon-thumbs-down"></i></button>
-                                                        </td>
-                                                        <td>
+
                                                             <a href="{{ path('registrarTarea', { 'codigoTarea':  tarea.codigoTareaPk }) }}" {% if tarea.codigoUsuarioAsignaFk != null%}disabled onclick="return false" {% endif %}
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
-                                                        <td>
+
                                                             <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
-                                                               class="btn btn-info waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
+
                                                     {% elseif tarea.estadoVerificado == false %}
-                                                        <td>
+
                                                             <button class="btn btn-success btn-xs" type="submit" name="TareaSolucionar" disabled >
                                                             <i class="glyphicon glyphicon-thumbs-up"></i></button>
-                                                        </td>
-                                                        <td>
+
                                                             <button class="btn btn-danger btn-xs" type="submit" name="TareaVerificar" value="{{ tarea.codigoTareaPk }}" >
                                                                 <i class="glyphicon glyphicon-thumbs-down"></i></button>
-                                                        </td>
-                                                        <td>
+
                                                             <a href="#" disabled
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
-                                                        <td>
+
                                                             <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
-                                                               class="btn btn-info waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
+
                                                     {% else %}
-                                                        <td>
+
                                                             <button class="btn btn-success btn-xs" type="submit" name="TareaSolucionar" disabled >
                                                             <i class="glyphicon glyphicon-thumbs-up"></i></button>
-                                                        </td>
-                                                        <td>
+
+
                                                             <button class="btn btn-success btn-xs" type="submit" name="TareaVerificar" disabled >
                                                                 <i class="glyphicon glyphicon-thumbs-up"></i></button>
-                                                        </td>
-                                                        <td>
+
+
                                                             <a href="#" disabled
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
-                                                        <td>
+
                                                             <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
-                                                               class="btn btn-info waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
+
 
                                                     {% endif %}
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td><h6>Comentario:</h6></td>
-                                                    <td colspan="13">{{ tarea.comentario}}</td>
-                                                </tr>
+                                                    </td>
                                             {% endfor %}
                                             {{ form_end(form) }}
                                             </tbody>
