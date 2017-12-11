@@ -33,7 +33,7 @@
                                     <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Listado de Casos (Incidencias)</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table-condensed table-responsive table-hover m-0">
+                                        <table class="table table-hover m-0 table-oro">
                                             <thead>
                                                 <tr>
                                                     <th>Fecha</th>
@@ -42,34 +42,33 @@
                                                     <th>Correo</th>
                                                     <th>Contacto</th>
                                                     <th>Teléfono</th>
-                                                    <th>Ext.</th>
+                                                    {#<th>Ext.</th>#}
                                                     <th>Categoría</th>
                                                     <th>Descripción</th>
                                                     <th>Prioridad</th>
-                                                    <th>Gestión</th>
+                                                    {#<th>Gestión</th>#}
                                                     <th>Gestiona</th>
-                                                    <th>Solución</th>
-                                                    <th>Soluciona</th>
-                                                    <th>Atendido</th>
-                                                    <th>Solucionado</th>
-                                                    <th>Acción</th>
+                                                    {#<th>Solución</th>#}
+                                                    {#<th>Soluciona</th>#}
+                                                    <th>At</th>
+                                                    <th>So</th>
+                                                    <th>Ed</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {{form_start(form) }}
                                                 {% for caso in casos %}
                                             <tr>
-                                                <td>{{ caso.fechaRegistro|date('y-M-d') }}</td>
+                                                <td>{{ caso.fechaRegistro|date('y-m-d') }}</td>
                                                 <td>{{ caso.asunto }}</td>
                                                 <td>
-                                                    <h5 class="m-0">{{ caso.clienteRel.nombreComercial }}</h5>
+                                                    <strong>{{ caso.clienteRel.nombreComercial }}</strong>
                                                 </td>
                                                 <td>{{ caso.correo }}</td>
                                                 <td>{{ caso.contacto }}</td>
-                                                <td>{{ caso.telefono }}</td>
-                                                <td>{{ caso.extension }}</td>
+                                                <td>{{ caso.telefono }} - ({{ caso.extension }})</td>
                                                 <td>
-                                                    <span class="label" style="background-color: {{ caso.categoriaRel.color }}">{{ caso.categoriaRel.nombre }}</span>
+                                                    <span class="label" style="background-color: {{ caso.categoriaRel.color }}">{{ caso.categoriaRel.codigoCategoriaCasoPk }}</span>
                                                 </td>
                                                 <td>{{ caso.descripcion }}</td>
                                                 <td>
@@ -81,10 +80,10 @@
                                                         {% endif %}
                                                     </span>
                                                 </td>
-                                                <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-M-d') }}{%  endif %}</td>
+                                                {#<td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-m-d') }}{%  endif %}</td>#}
                                                 <td>{{ caso.codigoUsuarioAtiendeFk }}</td>
-                                                <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-M-d') }}{%  endif %}</td>
-                                                <td>{{ caso.codigoUsuarioSolucionaFk }}</td>
+                                                {#<td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-m-d') }}{%  endif %}</td>#}
+                                                {#<td>{{ caso.codigoUsuarioSolucionaFk }}</td>#}
                                                 <td>
                                                     {% if caso.estadoAtendido %}
                                                         <button class="btn btn-success btn-xs" type="submit" name="casoAtender" disabled value="{{ caso.codigoCasoPk }}" title="{{ caso.codigoUsuarioAtiendeFk}}">
@@ -117,7 +116,6 @@
                                             </tr>
                                             {% endfor %}
                                             {{ form_end(form) }}
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div> <!-- end card -->
