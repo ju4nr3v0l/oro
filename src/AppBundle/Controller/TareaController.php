@@ -9,6 +9,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Forms\Type\FormTypeTarea;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Tarea;
@@ -64,8 +66,51 @@ class TareaController extends Controller
     public function listaGeneral(Request $request){
 
         $em = $this->getDoctrine()->getManager();
-        $arTarea = $em->getRepository('AppBundle:Tarea')->findBy([],array('fechaRegistro' => 'DESC'));
-        $sinTerminar=0;
+	    $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => 'false', "estadoVerificado" => NULL), array('fechaRegistro' => 'DESC'));
+        $formFiltro = $this::createFormBuilder()
+           ->add(
+            'filter',
+             ChoiceType::class, array(
+                        'choices' => array(
+                        'Sin resolver' => 'sinResolver',
+                        'Resueltos' => 'resueltos',
+                        'Todos' => 'all'
+                   ),
+                   'required' => false,
+	                'label' => 'Filtro'
+                )
+            )
+           ->add ('btnFiltrar', SubmitType::class, array(
+
+	        'attr' => array(
+		        'id' => '_btnFiltrar',
+		        'name' => '_btnFiltrar'
+	            ),
+	        'label' => 'Filtrar',
+
+        ))
+        ->getForm();
+        $formFiltro->handleRequest($request);
+		if($formFiltro->isSubmitted()){
+
+			$filtro = $formFiltro->get('filter')->getData();
+
+			if($filtro){
+				if($filtro== 'all'){
+					$arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => null), array('fechaRegistro' => 'DESC'));
+				} else if($filtro == 'sinResolver'){
+					$arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoTerminado" => false), array('fechaRegistro' => 'DESC'));
+				} else{
+					$arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoTerminado" => true, "estadoVerificado" => null), array('fechaRegistro' => 'DESC'));
+				}
+
+			}
+
+
+
+		}
+
+		$sinTerminar=0;
         $sinAsignar=0;
         $sinVerificar = 0;
         foreach ($arTarea as $key => $value){
@@ -108,6 +153,7 @@ class TareaController extends Controller
             'sinAsignar'=>$sinAsignar,
             'sinVerificar'=>$sinVerificar,
             'form' => $form->createView(),
+	        'formFiltro' => $formFiltro->createView(),
         ]);
     }
 
@@ -200,6 +246,20 @@ class TareaController extends Controller
         ]);
 
 
+    }
+
+    /**
+     * @Route("/tarea/lista/historico", name="listaTareaHistorico")
+     */
+    public function listaHistorico(Request $request){
+
+        $em = $this->getDoctrine()->getManager();
+        $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array('estadoVerificado' => 'true'), array('fechaRegistro' => 'DESC'));
+
+        // en index pagina con datos generales de la app
+        return $this->render('AppBundle:Tarea:listarHistorico.html.twig', [
+            'tareas' => $arTarea,
+        ]);
     }
 
 }
