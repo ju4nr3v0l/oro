@@ -38,7 +38,7 @@
                                             <tr>
                                                 <th>Fecha</th>
                                                 <th>Cliente</th>
-                                                <th>Categoría</th>
+                                                <th>Cat.</th>
                                                 <th>Módulo</th>
                                                 <th>Contacto</th>
                                                 <th>Teléfono</th>
@@ -63,13 +63,13 @@
                                                     </td>
                                                     <td>
                                                         {% if llamada.codigoCategoriaLlamadaFk == 0 %}
-                                                            <span class="label label-danger">SIN CATEGORÍA</span>
+                                                            <span class="label label-danger">N/A</span>
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 1 %}
-                                                            <span class="label label-default">{{ llamada.categoriaRel.codigoCategoriaLlamadaPk }}</span>
+                                                            <span class="label label-default">{{ llamada.categoriaRel.nombre[:3] }}</span>
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 2 %}
-                                                            <span class="label label-info">{{ llamada.categoriaRel.codigoCategoriaLlamadaPk }}</span>
+                                                            <span class="label label-info">{{ llamada.categoriaRel.nombre[:3] }}</span>
                                                         {% elseif llamada.codigoCategoriaLlamadaFk == 3 %}
-                                                            <span class="label label-orange">{{ llamada.categoriaRel.codigoCategoriaLlamadaPk }}</span>
+                                                            <span class="label label-orange">{{ llamada.categoriaRel.nombre[:3] }}</span>
                                                         {% endif %}
                                                     </td>
                                                     <td>{{ llamada.codigoModuloFk }}</td>
