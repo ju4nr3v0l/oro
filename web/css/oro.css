@@ -17,3 +17,9 @@
     font-size: 12px;
     text-align: left;
 }
+#submit-filtro{
+    margin: 5px!important;
+}
+#submit-filtro > button{
+    float: right!important;
+}
