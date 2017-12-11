@@ -4,7 +4,6 @@
 
 {% block body %}
 
-
     <div id="wrapper">
         {{ include('zircosTemplate/bloquesGenerales/menuEncabezado.html.twig') }}
 
@@ -33,7 +32,17 @@
                                     <h4 class="header-title m-t-0 m-b-30"><i class="mdi mdi-phone-in-talk"></i> Listado de Casos (Incidencias)</h4>
 
                                     <div class="table-responsive">
+                                        {{form_start(form) }}
+                                        <div class="card-box">
+                                            <div class="col-sm-11">
+                                                {{ form_widget(formFiltro.clienteRel) }}
+                                            </div>
+                                            <div>
+                                                {{ form_widget(formFiltro.btnFiltrar) }}
+                                            </div>
+                                        </div>
                                         <table class="table table-hover m-0 table-oro">
+
                                             <thead>
                                                 <tr>
                                                     <th>Fecha</th>
@@ -56,7 +65,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{form_start(form) }}
                                                 {% for caso in casos %}
                                             <tr>
                                                 <td>{{ caso.fechaRegistro|date('y-m-d') }}</td>

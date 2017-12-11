@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class CasoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function filtroDQL($codigoClientePk = 0) {
+        $dql   = "SELECT e, d FROM AppBundle:Caso d JOIN d.clienteRel e WHERE d.codigoClienteFk <> 0";
+        if ($codigoClientePk <> 0){
+           $dql .= " AND e.codigoClientePk =" . $codigoClientePk;
+        }
+        $dql .= " ORDER BY d.fechaRegistro ASC";
+
+        return $dql;
+    }
 }

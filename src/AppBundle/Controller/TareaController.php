@@ -105,9 +105,6 @@ class TareaController extends Controller
 				}
 
 			}
-
-
-
 		}
 
 		$sinTerminar=0;
