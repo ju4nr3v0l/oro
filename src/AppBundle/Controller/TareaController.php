@@ -63,7 +63,7 @@ class TareaController extends Controller
     /**
      * @Route("/tarea/lista", name="listaTareaGeneral")
      */
-    public function listaGeneral(Request $request){
+    public function listaGeneral(Request $request, Request $request2){
 
         $em = $this->getDoctrine()->getManager();
 	    $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => 'false', "estadoVerificado" => NULL), array('fechaRegistro' => 'DESC'));
@@ -90,7 +90,7 @@ class TareaController extends Controller
 
         ))
         ->getForm();
-        $formFiltro->handleRequest($request);
+        $formFiltro->handleRequest($request2);
 		if($formFiltro->isSubmitted()){
 
 			$filtro = $formFiltro->get('filter')->getData();
