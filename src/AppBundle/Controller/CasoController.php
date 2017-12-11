@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Caso;
 use AppBundle\Forms\Type\FormTypeCaso;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -90,10 +91,27 @@ class CasoController extends Controller
 //        dump($arCaso);
 //        die();
 
+        $filtroForm = $this::filtroCasoCliente ();
+
         return $this->render('AppBundle:Caso:listar.html.twig', [
             'casos' => $arCaso,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'filtroForm' => $filtroForm->createView ()
         ]);
     }
 
+    private function filtroCasoCliente(){
+        $form = $this->createFormBuilder ()
+            ->add('casoCliente', EntityType::class, array(
+                'class' => 'AppBundle:Cliente',
+                'choice_label' => 'nombreComercial',
+                'required' => true))
+            ->add ('btnFiltrar',SubmitType::class, array (
+                'label' => 'Filtrar',
+                'attr' => array('class' => 'btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5')
+            ))
+            ->getForm ();
+
+        return $form;
+    }
 }

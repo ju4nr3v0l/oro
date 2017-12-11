@@ -10,4 +10,10 @@ namespace AppBundle\Repository;
  */
 class CasoRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function filtroDQL($codigoClientePk = 0) {
+        $dql   = "SELECT d, e FROM BrasaRecursoHumanoBundle:RhuDotacion d JOIN d.empleadoRel e WHERE d.codigoDotacionPk <> 0";
+
+        $dql .= " ORDER BY d.codigoDotacionPk DESC";
+        return $dql;
+    }
 }
