@@ -51,14 +51,14 @@
                                                     <th>Correo</th>
                                                     <th>Contacto</th>
                                                     <th>Teléfono</th>
-                                                    <th>Ext.</th>
+                                                    {#<th>Ext.</th>#}
                                                     <th>Categoría</th>
                                                     <th>Descripción</th>
                                                     <th>Prioridad</th>
-                                                    <th>Gestión</th>
+                                                    {#<th>Gestión</th>#}
                                                     <th>Gestiona</th>
-                                                    <th>Solución</th>
-                                                    <th>Soluciona</th>
+                                                    {#<th>Solución</th>#}
+                                                    {#<th>Soluciona</th>#}
                                                     <th>At</th>
                                                     <th>So</th>
                                                     <th>Ed</th>
@@ -88,10 +88,10 @@
                                                         {% endif %}
                                                     </span>
                                                 </td>
-                                                <td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-m-d') }}{%  endif %}</td>
+                                                {#<td>{% if caso.fechaGestion != null %}{{ caso.fechaGestion|date('y-m-d') }}{%  endif %}</td>#}
                                                 <td>{{ caso.codigoUsuarioAtiendeFk }}</td>
-                                                <td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-m-d') }}{%  endif %}</td>
-                                                <td>{{ caso.codigoUsuarioSolucionaFk }}</td>
+                                                {#<td>{% if caso.fechaSolucion!= null %}{{ caso.fechaSolucion|date('y-m-d') }}{%  endif %}</td>#}
+                                                {#<td>{{ caso.codigoUsuarioSolucionaFk }}</td>#}
                                                 <td>
                                                     {% if caso.estadoAtendido %}
                                                         <button class="btn btn-success btn-xs" type="submit" name="casoAtender" disabled value="{{ caso.codigoCasoPk }}" title="{{ caso.codigoUsuarioAtiendeFk}}">
