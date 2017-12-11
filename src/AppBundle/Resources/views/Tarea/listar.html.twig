@@ -57,21 +57,17 @@
                                                     </td>
                                                     <td>
                                                         {% if tarea.fechaRegistro != null %}
-                                                            {{ tarea.fechaRegistro|date('y-M-d') }}
+                                                            {{ tarea.fechaRegistro|date('y-m-d') }}
                                                         {% endif %}
                                                     </td>
                                                     <td>
-                                                        {% if tarea.codigoTareaTipoFk == 'des' %}
-                                                            <span class="label label-default">Desarrollo</span>
-                                                        {% elseif tarea.codigoTareaTipoFk == 'sop' %}
-                                                            <span class="label label-info">Soporte</span>
-                                                        {% else %}
-                                                            <span class="label label-primary">Q.A.</span>
-                                                        {% endif %}
+                                                            {% if tarea.tareaTipoRel != null %}
+                                                                <span class="label label-default">{{ tarea.tareaTipoRel.codigoTareaTipoPk }}</span>
+                                                            {% endif %}
                                                     </td>
                                                     <td>
                                                         {% if tarea.fechaGestion != null %}
-                                                            {{ tarea.fechaGestion|date('y-M-d') }}
+                                                            {{ tarea.fechaGestion|date('y-m-d') }}
                                                         {% endif %}
                                                     </td>
                                                     <td>
@@ -79,12 +75,12 @@
                                                     </td>
                                                     <td>
                                                         {% if tarea.fechaSolucion != null %}
-                                                                {{ tarea.fechaSolucion|date('y-M-d') }}
+                                                                {{ tarea.fechaSolucion|date('y-m-d') }}
                                                         {% endif %}
                                                     </td>
                                                     <td>
                                                         {% if tarea.fechaVerificado != null %}
-                                                            {{ tarea.fechaVerificado|date('y-M-d') }}
+                                                            {{ tarea.fechaVerificado|date('y-m-d') }}
                                                         {% endif %}
                                                     </td>
                                                     <td>
