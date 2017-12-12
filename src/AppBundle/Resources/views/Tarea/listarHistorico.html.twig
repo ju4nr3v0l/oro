@@ -17,7 +17,8 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title" style="padding-right: 10px;"><i class="glyphicon glyphicon-th-list"></i> Histórico</h4>
+                                    <h4 class="page-title" style="padding-right: 10px;"><i class="glyphicon glyphicon-th-list"></i> Tareas </h4>
+
 
                                     <a href="{{ path('registrarTarea') }}">
                                         <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Nueva</button>
@@ -26,6 +27,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
@@ -35,60 +37,63 @@
                                             <thead>
                                             <tr>
                                                 <th>Registra</th>
-                                                <th>Fecha Registro</th>
+                                                <th>Fecha</th>
                                                 <th>Tipo</th>
-                                                <th>Fecha de asignación</th>
+                                                <th>Fecha asignación</th>
                                                 <th>Asignado</th>
-                                                <th>Fecha de solución</th>
+                                                <th>Fecha solución</th>
                                                 <th>Fecha verificación</th>
                                                 <th>Descripción</th>
                                                 <th>Comentario</th>
+                                               
                                             </tr>
                                             </thead>
                                             <tbody>
-
+                                         }
                                             {% for tarea in tareas %}
 
-                                            <tr>
-                                                <td>
-                                                    {{ tarea.codigoUsuarioRegistraFk }}
-                                                </td>
-                                                <td>
-                                                    {% if tarea.fechaRegistro != null %}
-                                                        {{ tarea.fechaRegistro|date('y-m-d') }}
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {% if tarea.tareaTipoRel != null %}
-                                                        <span class="label label-default">{{ tarea.tareaTipoRel.codigoTareaTipoPk }}</span>
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {% if tarea.fechaGestion != null %}
-                                                        {{ tarea.fechaGestion|date('y-m-d') }}
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {{ tarea.codigoUsuarioAsignaFk }}
-                                                </td>
-                                                <td>
-                                                    {% if tarea.fechaSolucion != null %}
-                                                        {{ tarea.fechaSolucion|date('y-m-d') }}
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {% if tarea.fechaVerificado != null %}
-                                                        {{ tarea.fechaVerificado|date('y-m-d') }}
-                                                    {% endif %}
-                                                </td>
-                                                <td>
-                                                    {{ tarea.descripcion }}
-                                                </td>
-                                                <td>
-                                                    {{ tarea.comentario}}
-                                                </td>
+                                                <tr>
+                                                    <td>
+                                                        {{ tarea.codigoUsuarioRegistraFk }}
+                                                    </td>
+                                                    <td>
+                                                        {% if tarea.fechaRegistro != null %}
+                                                            {{ tarea.fechaRegistro|date('y-m-d') }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if tarea.tareaTipoRel != null %}
+                                                            <span class="label label-default">{{ tarea.tareaTipoRel.codigoTareaTipoPk }}</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if tarea.fechaGestion != null %}
+                                                            {{ tarea.fechaGestion|date('y-m-d') }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.codigoUsuarioAsignaFk }}
+                                                    </td>
+                                                    <td>
+                                                        {% if tarea.fechaSolucion != null %}
+                                                            {{ tarea.fechaSolucion|date('y-m-d') }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if tarea.fechaVerificado != null %}
+                                                            {{ tarea.fechaVerificado|date('y-m-d') }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.descripcion }}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.comentario}}
+                                                    </td>
 
-                                                {% endfor %}
+
+                                                </tr>
+                                            {% endfor %}
 
                                             </tbody>
                                         </table>

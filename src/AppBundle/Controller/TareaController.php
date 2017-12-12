@@ -251,7 +251,7 @@ class TareaController extends Controller
     public function listaHistorico(Request $request){
 
         $em = $this->getDoctrine()->getManager();
-        $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array('estadoVerificado' => 'true'), array('fechaRegistro' => 'DESC'));
+        $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array('estadoVerificado' => true), array('fechaRegistro' => 'DESC'));
 
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Tarea:listarHistorico.html.twig', [
