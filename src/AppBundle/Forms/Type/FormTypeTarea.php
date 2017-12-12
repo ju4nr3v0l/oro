@@ -60,12 +60,13 @@ class FormTypeTarea extends AbstractType{
                     'id' => '_comentario',
                     'name' => '_comentario',
                     'class' => 'form-control',
-                    'required'=>'false'
+                    'required'=>false
                 )
             ))
 	        ->add('caso', TextType::class, array(
 	        	'attr'=>array(),
-		        'label' => 'Caso'
+		        'label' => 'Caso',
+		        'required' => false
 	        ))
 
 //            Botón Guardar
