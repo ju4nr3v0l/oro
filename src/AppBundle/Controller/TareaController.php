@@ -209,8 +209,6 @@ class TareaController extends Controller
             'sinVerificar'=>$sinVerificar,
             'form' => $form->createView(),
         ]);
-
-
     }
 
 
