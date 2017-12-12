@@ -103,6 +103,13 @@ class Tarea
      */
     private $comentario;
 
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="caso", type="string", length=10, nullable=true)
+	 */
+	private $caso;
+
     /**
      * @ORM\ManyToOne(targetEntity="TareaTipo", inversedBy="tareasTareaTipoRel")
      * @ORM\JoinColumn(name="codigo_tarea_tipo_fk", referencedColumnName="codigo_tarea_tipo_pk")
@@ -405,5 +412,29 @@ class Tarea
     public function getTareaTipoRel()
     {
         return $this->tareaTipoRel;
+    }
+
+    /**
+     * Set caso
+     *
+     * @param string $caso
+     *
+     * @return Tarea
+     */
+    public function setCaso($caso)
+    {
+        $this->caso = $caso;
+
+        return $this;
+    }
+
+    /**
+     * Get caso
+     *
+     * @return string
+     */
+    public function getCaso()
+    {
+        return $this->caso;
     }
 }

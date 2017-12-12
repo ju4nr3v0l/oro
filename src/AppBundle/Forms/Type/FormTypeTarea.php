@@ -63,6 +63,10 @@ class FormTypeTarea extends AbstractType{
                     'required'=>'false'
                 )
             ))
+	        ->add('caso', TextType::class, array(
+	        	'attr'=>array(),
+		        'label' => 'Caso'
+	        ))
 
 //            Botón Guardar
             ->add ('btnGuardar', SubmitType::class, array(
