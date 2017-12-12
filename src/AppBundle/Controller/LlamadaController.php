@@ -132,6 +132,19 @@ class LlamadaController extends Controller {
 
     }
 
+    /**
+     * @Route("/llamada/lista/reporte", name="listadoLlamadasReporte")
+     */
+    public function listaReporte(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array(), array('fechaRegistro' => 'DESC'));
+        return $this->render('AppBundle:Llamada:listarGeneral.html.twig', [
+            'llamadas' => $arLlamadas,
+            'user' => $user
+        ]);
+    }
 
     public function getUser(){
 
