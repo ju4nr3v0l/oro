@@ -53,7 +53,7 @@ class LlamadaRepository extends \Doctrine\ORM\EntityRepository
         if ($codigoClientePk <> 0){
             $dql .= " AND e.codigoClientePk =" . $codigoClientePk;
         }
-        $dql .= " ORDER BY d.fechaRegistro ASC";
+        $dql .= " ORDER BY d.fechaRegistro DESC";
 
         return $dql;
     }
