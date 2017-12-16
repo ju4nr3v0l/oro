@@ -10,4 +10,5 @@ namespace AppBundle\Repository;
  */
 class TareaRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

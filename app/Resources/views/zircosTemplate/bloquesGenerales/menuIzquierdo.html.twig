@@ -43,15 +43,19 @@
                         <li class="has_sub">
                             <a href="{{ path('listaTareaGeneral') }}" class="waves-effect">
                                 <i class="glyphicon glyphicon-th-large"></i>
-                                {#<span class="label label-success pull-right">2</span>#}
                                 <span> Listar tareas</span>
                             </a>
                         </li>
                         <li class="has_sub">
                             <a href="{{ path('listaTareaUsuario') }}" class="waves-effect">
                                 <i class="glyphicon glyphicon-th"></i>
-                                {#<span class="label label-success pull-right">2</span>#}
                                 <span> Mis tareas</span>
+                            </a>
+                        </li>
+                        <li class="has_sub">
+                            <a href="{{ path('listaTareaHistorico') }}" class="waves-effect">
+                                <i class="glyphicon glyphicon-time"></i>
+                                <span>Histórico</span>
                             </a>
                         </li>
                     </ul>
@@ -60,8 +64,15 @@
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-invert-colors"></i> <span> Casos (Incidencias) </span> <span class="menu-arrow"></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="{{ path('listadoCasos') }}">Listado General</a></li>
-                        <li><a href="{{ path('registrarCaso') }}">Nuevo Caso</a></li>
+                        <li><a href="{{ path('listadoCasos') }}">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                                <span>Listado General</span>
+                            </a></li>
+                        <li><a href="{{ path('registrarCaso') }}">
+                                <i class="glyphicon glyphicon-inbox"></i>
+                                <span>Nuevo Caso</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

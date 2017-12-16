@@ -17,9 +17,10 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title" style="padding-right: 10px;"><i class="glyphicon glyphicon-th-list"></i>Tareas </h4>
+                                    <h4 class="page-title" style="padding-right: 10px;"><i class="glyphicon glyphicon-th-list"></i> Tareas </h4>
                                     <span class="label label-danger">Sin asignar: {{ sinAsignar}}</span>
                                     <span class="label label-danger">Sin terminar: {{ sinTerminar }}</span>
+                                    <span class="label label-danger">Sin verificar: {{ sinVerificar }}</span>
                                     <a href="{{ path('registrarTarea') }}">
                                         <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Nueva</button>
                                     </a>
@@ -28,21 +29,39 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-6 col-md-6"></div>
+                            <div class="col-6 col-md-6">
+                                {{form_start(formFiltro) }}
+                                {{ form_widget(formFiltro.filter) }}
+                                <div class="col-12 col-md-12" id="submit-filtro">
+                                    {{ form_widget(formFiltro.btnFiltrar) }}
+                                </div>
+                                {{ form_end(formFiltro) }}
+
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
                                     <div class="table-responsive">
-                                        <table class="table table table-hover m-0 table-oro">
+                                        <table id="tarea-table" class="table table table-hover m-0 table-oro">
 
                                             <thead>
                                             <tr>
                                                 <th>Registra</th>
-                                                <th>Fecha Registro</th>
+                                                <th>Fecha</th>
                                                 <th>Tipo</th>
-                                                <th>Fecha de asignación</th>
+                                                <th>Fecha asignación</th>
                                                 <th>Asignado</th>
-                                                <th>Fecha de solución</th>
-                                                <th>Estado</th>
-                                                <th>Acción</th>
+                                                <th>Fecha solución</th>
+                                                <th>Fecha verificación</th>
+                                                <th>Descripción</th>
+                                                <th>Caso</th>
+                                                <th>Comentario</th>
+                                                <th>Res</th>
+                                                <th>Ver</th>
+                                                <th>Edt</th>
+                                                <th>Com</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -54,52 +73,107 @@
                                                         {{ tarea.codigoUsuarioRegistraFk }}
                                                     </td>
                                                     <td>
-                                                        {{ tarea.fechaRegistro|date('y-M-d') }}
-                                                    </td>
-                                                    <td>
-                                                        {% if tarea.codigoTareaTipoFk == 'des' %}
-                                                            <span class="label label-default">Desarrollo</span>
-                                                        {% else %}
-                                                            <span class="label label-info">Soporte</span>
+                                                        {% if tarea.fechaRegistro != null %}
+                                                            {{ tarea.fechaRegistro|date('y-m-d') }}
                                                         {% endif %}
                                                     </td>
                                                     <td>
-                                                        {{ tarea.fechaGestion|date('y-M-d') }}
+                                                            {% if tarea.tareaTipoRel != null %}
+                                                                <span class="label label-default">{{ tarea.tareaTipoRel.codigoTareaTipoPk }}</span>
+                                                            {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if tarea.fechaGestion != null %}
+                                                            {{ tarea.fechaGestion|date('y-m-d') }}
+                                                        {% endif %}
                                                     </td>
                                                     <td>
                                                         {{ tarea.codigoUsuarioAsignaFk }}
                                                     </td>
                                                     <td>
-                                                        {{ tarea.fechaSolucion|date('y-M-d') }}
+                                                        {% if tarea.fechaSolucion != null %}
+                                                                {{ tarea.fechaSolucion|date('y-m-d') }}
+                                                        {% endif %}
                                                     </td>
+                                                    <td>
+                                                        {% if tarea.fechaVerificado != null %}
+                                                            {{ tarea.fechaVerificado|date('y-m-d') }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.descripcion }}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.caso}}
+                                                    </td>
+                                                    <td>
+                                                        {{ tarea.comentario}}
+                                                    </td>
+
                                                     {% if tarea.estadoTerminado == false  %}
-                                                        <td>
+                                                    <td>
                                                             <button class="btn btn-danger btn-xs" type="submit" name="TareaSolucionar" value="{{ tarea.codigoTareaPk }}" {% if tarea.codigoUsuarioAsignaFk == null%}disabled{% endif %}>
                                                             <i class="glyphicon glyphicon-thumbs-down"></i></button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="{{ path('registrarTarea', { 'codigoTarea':  tarea.codigoTareaPk }) }}" {% if tarea.codigoUsuarioAsignaFk != null%}disabled onclick="return false" {% endif %}
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                    </td>
+                                                    <td>
+
+                                                            <button class="btn btn-danger btn-xs" type="submit" name="TareaVerificar" value="{{ tarea.codigoTareaPk }}" disabled>
+                                                                <i class="glyphicon glyphicon-thumbs-down"></i></button>
+                                                    </td>
+                                                    <td>
+                                                            <a href="{{ path('registrarTarea', { 'codigoTarea':  tarea.codigoTareaPk }) }}"
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
-                                                    {% else %}
-                                                        <td>
-                                                            <button class="btn btn-success btn-xs" type="submit" name="TareaSolucionar" disabled ">
+                                                    </td>
+                                                    <td>
+                                                            <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                            </a>
+                                                    </td>
+
+                                                    {% elseif tarea.estadoVerificado == false %}
+                                                    <td>
+                                                            <button class="btn btn-success btn-xs" type="submit" name="TareaSolucionar" disabled >
                                                             <i class="glyphicon glyphicon-thumbs-up"></i></button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="#" disabled
-                                                               class="btn btn-purple waves-effect waves-light btn-xs m-b-5"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                    </td>
+                                                    <td>
+                                                            <button class="btn btn-danger btn-xs" type="submit" name="TareaVerificar" value="{{ tarea.codigoTareaPk }}" >
+                                                                <i class="glyphicon glyphicon-thumbs-down"></i></button>
+                                                    </td>
+                                                    <td>
+                                                            <a href="#"
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
                                                             </a>
-                                                        </td>
+                                                    </td>
+                                                    <td>
+                                                            <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                            </a>
+                                                    </td>
+
+                                                    {% else %}
+                                                    <td>
+                                                            <button class="btn btn-success btn-xs" type="submit" name="TareaSolucionar" disabled >
+                                                            <i class="glyphicon glyphicon-thumbs-up"></i></button>
+                                                    </td>
+                                                    <td>
+
+                                                            <button class="btn btn-success btn-xs" type="submit" name="TareaVerificar" disabled >
+                                                                <i class="glyphicon glyphicon-thumbs-up"></i></button>
+                                                    </td>
+                                                    <td>
+
+                                                            <a href="#"
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pencil" style="padding: 3px;"></i>
+                                                            </a>
+                                                    </td>
+                                                    <td>
+                                                            <a href="javascript:abrirVentana('{{ path('registrarComentario', { 'codigoTarea':  tarea.codigoTareaPk }) }}','Agregar comentario',600, 900)"
+                                                               class="btn btn-purple waves-effect waves-light btn-xs"><i class="glyphicon glyphicon-pushpin" style="padding: 3px;"></i>
+                                                            </a>
+                                                    </td>
+
                                                     {% endif %}
-
-
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td><h6>Descripción:</h6></td>
-                                                    <td colspan="13">{{ tarea.descripcion }}</td>
                                                 </tr>
                                             {% endfor %}
                                             {{ form_end(form) }}

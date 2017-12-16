@@ -41,6 +41,16 @@
                                                     {{ form_widget(form.codigoUsuarioAsignaFk) }}
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label" for="_telefono">Caso: </label>
+                                                <div class="col-md-5">
+                                                    {{ form_widget(form.caso) }}
+                                                </div>
+                                                <label class="col-md-2 control-label" for="_telefono"></label>
+                                                <div class="col-md-3">
+
+                                                </div>
+                                            </div>
                                            <div class="form-group">
                                                 <label class="col-md-2 control-label">Descripción:</label>
                                                 <div class="col-md-10">
@@ -54,8 +64,9 @@
                                                     <a href="{{ path('listaTareaGeneral') }}" class="btn btn-default btn-bordered waves-effect w-md m-b-5" style="float: right;">CANCELAR</a>
                                                 </div>
                                             </div>
-                                            {{ form_rest(form) }}
-                                            {{ form_end(form) }}
+                                            {{ form_widget(form._token) }}
+
+                                            {{ form_end(form, {'render_rest': false}) }}
                                         </div>
                                     </div>
                                 </div>

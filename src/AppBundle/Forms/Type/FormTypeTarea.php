@@ -41,10 +41,6 @@ class FormTypeTarea extends AbstractType{
 
             ->add('codigoUsuarioAsignaFk', EntityType::class, array(
                 'class' => 'AppBundle:Usuario',
-
-//                'query_builder' => function (EntityRepository $er) {
-//                    return $er->createQueryBuilder('c')
-//                        ->orderBy('c.nombres', 'ASC');},
                 'choice_label' => 'codigoUsuarioPk',
                 'required' => false)
             )
@@ -53,9 +49,25 @@ class FormTypeTarea extends AbstractType{
                 'attr' => array(
                     'id' => '_descripcion',
                     'name' => '_descripcion',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'required'=>'false'
+
                 )
             ))
+
+            ->add ('comentario', TextareaType::class,array(
+                'attr' => array(
+                    'id' => '_comentario',
+                    'name' => '_comentario',
+                    'class' => 'form-control',
+                    'required'=>false
+                )
+            ))
+	        ->add('caso', TextType::class, array(
+	        	'attr'=>array(),
+		        'label' => 'Caso',
+		        'required' => false
+	        ))
 
 //            Botón Guardar
             ->add ('btnGuardar', SubmitType::class, array(
