@@ -17,6 +17,7 @@ use Symfony\Component\Form\Form;
 class CasoController extends Controller
 {
 
+
     /**
      * @Route("/caso/nuevo/{codigoCaso}", requirements={"codigoCaso":"\d+"}, name="registrarCaso")
      */
