@@ -65,7 +65,7 @@ class FormTypeTarea extends AbstractType{
             ))
 	        ->add('caso', TextType::class, array(
 	        	'attr'=>array(),
-		        'label' => 'Caso',
+		        'label' => 'Caso (Código del caso registrado en REOS)',
 		        'required' => false
 	        ))
 
