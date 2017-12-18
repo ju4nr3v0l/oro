@@ -54,7 +54,7 @@ class Llamada
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=255 ,nullable= TRUE)
+     * @ORM\Column(name="descripcion", type="text" ,nullable= TRUE)
      */
     private $descripcion;
 
