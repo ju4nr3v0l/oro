@@ -31,6 +31,7 @@
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
         "doctrine/doctrine-fixtures-bundle": "^2.2",
+        "hwi/oauth-bundle": "^0.5.3",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
