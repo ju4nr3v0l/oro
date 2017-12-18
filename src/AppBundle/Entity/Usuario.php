@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 
 
 
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Role\Role;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="usuario")
  */
-class Usuario implements UserInterface, \Serializable
+class Usuario implements AdvancedUserInterface, \Serializable
 {
 
 
