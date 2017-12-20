@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Llamada;
 use AppBundle\Entity\Cliente;
+use AppBundle\Entity\NoContestan;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,12 +80,14 @@ class LlamadaController extends Controller {
 	        if($request->request->has('llamadaContestan')) {
 		        $codigoLlamada = $request->request->get('llamadaContestan');
 		        $arLlamada = $em->getRepository('AppBundle:Llamada')->find($codigoLlamada);
+		        $arNoContestan = new NoContestan();
 		        $arLlamada->setEstadoNoContestan(true);
-		        $arLlamada->setEstadoAtendido(true);
-		        $arLlamada->setCodigoUsuarioAtiendeFk($user->getCodigoUsuarioPk());
-		        $arLlamada->setFechaGestion(new \DateTime('now'));
-		        $arLlamada->setFechaNoContestan(new \DateTime('now'));
+				$arNoContestan->setNoContestanRel($arLlamada);
+				$arNoContestan->setCodigoUsuarioFk($user->getCodigoUsuarioPk());
+				$arNoContestan->setFechaNoContestan(new \DateTime('now'));
+
 		        $em->persist($arLlamada);
+		        $em->persist($arNoContestan);
 
 	        }
             

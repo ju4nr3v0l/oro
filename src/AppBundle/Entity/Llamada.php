@@ -79,12 +79,7 @@ class Llamada
      */
     private $fechaSolucion;
 
-	/**
-	 * @var \DateTime
-	 *
-	 * @ORM\Column(name="fecha_no_contestan", type="datetime" ,nullable= TRUE)
-	 */
-	private $fechaNoContestan;
+
 
     /**
      * @var int
@@ -168,7 +163,16 @@ class Llamada
      */
     private $moduloRel;
 
-    /**
+	/**
+	 *
+	 * @ORM\OneToMany(targetEntity="NoContestan", mappedBy="noContestanRel")
+	 */
+
+	private $llamadasNoContestanRel;
+
+
+
+	/**
      * Get codigoLlamadaPk
      *
      * @return integer
@@ -704,5 +708,46 @@ class Llamada
     public function getFechaNoContestan()
     {
         return $this->fechaNoContestan;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->llamadasNoContestanRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add llamadasNoContestanRel
+     *
+     * @param \AppBundle\Entity\NoContestan $llamadasNoContestanRel
+     *
+     * @return Llamada
+     */
+    public function addLlamadasNoContestanRel(\AppBundle\Entity\NoContestan $llamadasNoContestanRel)
+    {
+        $this->llamadasNoContestanRel[] = $llamadasNoContestanRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove llamadasNoContestanRel
+     *
+     * @param \AppBundle\Entity\NoContestan $llamadasNoContestanRel
+     */
+    public function removeLlamadasNoContestanRel(\AppBundle\Entity\NoContestan $llamadasNoContestanRel)
+    {
+        $this->llamadasNoContestanRel->removeElement($llamadasNoContestanRel);
+    }
+
+    /**
+     * Get llamadasNoContestanRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLlamadasNoContestanRel()
+    {
+        return $this->llamadasNoContestanRel;
     }
 }
