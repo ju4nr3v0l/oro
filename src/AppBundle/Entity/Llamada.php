@@ -100,6 +100,13 @@ class Llamada
      */
     private $estadoSolucionado;
 
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="estado_no_contestan", type="boolean" ,nullable= TRUE)
+	 */
+	private $estadoNoContestan;
+
     /**
      * @var int
      *
@@ -618,5 +625,53 @@ class Llamada
     public function getModuloRel()
     {
         return $this->moduloRel;
+    }
+
+    /**
+     * Set estadoContestan
+     *
+     * @param boolean $estadoContestan
+     *
+     * @return Llamada
+     */
+    public function setEstadoContestan($estadoContestan)
+    {
+        $this->estadoContestan = $estadoContestan;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoContestan
+     *
+     * @return boolean
+     */
+    public function getEstadoContestan()
+    {
+        return $this->estadoContestan;
+    }
+
+    /**
+     * Set estadoNoContestan
+     *
+     * @param boolean $estadoNoContestan
+     *
+     * @return Llamada
+     */
+    public function setEstadoNoContestan($estadoNoContestan)
+    {
+        $this->estadoNoContestan = $estadoNoContestan;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoNoContestan
+     *
+     * @return boolean
+     */
+    public function getEstadoNoContestan()
+    {
+        return $this->estadoNoContestan;
     }
 }

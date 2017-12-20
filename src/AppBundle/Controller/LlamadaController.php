@@ -75,6 +75,17 @@ class LlamadaController extends Controller {
                     $em->persist($arLlamada);
                 }
             }
+
+	        if($request->request->has('llamadaContestan')) {
+		        $codigoLlamada = $request->request->get('llamadaContestan');
+		        $arLlamada = $em->getRepository('AppBundle:Llamada')->find($codigoLlamada);
+		        $arLlamada->setEstadoNoContestan(true);
+		        $arLlamada->setEstadoAtendido(true);
+		        $arLlamada->setCodigoUsuarioAtiendeFk($user->getCodigoUsuarioPk());
+		        $arLlamada->setFechaGestion(new \DateTime('now'));
+		        $em->persist($arLlamada);
+
+	        }
             
             if($request->request->has('llamadaSolucionar')) {
                 $codigoLlamada = $request->request->get('llamadaSolucionar');
