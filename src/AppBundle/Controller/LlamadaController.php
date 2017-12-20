@@ -83,6 +83,7 @@ class LlamadaController extends Controller {
 		        $arLlamada->setEstadoAtendido(true);
 		        $arLlamada->setCodigoUsuarioAtiendeFk($user->getCodigoUsuarioPk());
 		        $arLlamada->setFechaGestion(new \DateTime('now'));
+		        $arLlamada->setFechaNoContestan(new \DateTime('now'));
 		        $em->persist($arLlamada);
 
 	        }

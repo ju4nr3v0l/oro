@@ -84,7 +84,7 @@
                                                     <td>
 
                                                         {% if llamada.estadoNoContestan %}
-                                                            <button class="btn btn-danger btn-xs" type="submit" name="llamadaContestan" disabled value="{{ llamada.codigoLlamadaPk }}" >
+                                                            <button class="btn btn-danger btn-xs" type="submit" name="llamadaContestan" disabled value="{{ llamada.codigoLlamadaPk }}" title="{{ llamada.fechaNoContestan|date('y-m-d H:i') }} ">
                                                                 <i class="mdi mdi-phone-missed"></i></button>
                                                         {% elseif llamada.estadoNoContestan == false and llamada.estadoAtendido %}
                                                             <button class="btn btn-primary btn-xs" type="submit" name="llamadaContestan" disabled value="{{ llamada.codigoLlamadaPk }}" >

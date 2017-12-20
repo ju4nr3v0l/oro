@@ -79,6 +79,13 @@ class Llamada
      */
     private $fechaSolucion;
 
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="fecha_no_contestan", type="datetime" ,nullable= TRUE)
+	 */
+	private $fechaNoContestan;
+
     /**
      * @var int
      *
@@ -673,5 +680,29 @@ class Llamada
     public function getEstadoNoContestan()
     {
         return $this->estadoNoContestan;
+    }
+
+    /**
+     * Set fechaNoContestan
+     *
+     * @param \DateTime $fechaNoContestan
+     *
+     * @return Llamada
+     */
+    public function setFechaNoContestan($fechaNoContestan)
+    {
+        $this->fechaNoContestan = $fechaNoContestan;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaNoContestan
+     *
+     * @return \DateTime
+     */
+    public function getFechaNoContestan()
+    {
+        return $this->fechaNoContestan;
     }
 }
