@@ -7,14 +7,20 @@ use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Llamada;
+use AppBundle\Entity\Cliente;
+use AppBundle\Entity\NoContestan;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class LlamadaController extends Controller {
-    
+
+    var $strDqlLista = '';
+
     /**
      * @Route("/llamada/nuevo/{codigoLlamada}", requirements={"codigoLlamada":"\d+"}, name="registrarLlamada")
      */
@@ -70,6 +76,20 @@ class LlamadaController extends Controller {
                     $em->persist($arLlamada);
                 }
             }
+
+	        if($request->request->has('llamadaContestan')) {
+		        $codigoLlamada = $request->request->get('llamadaContestan');
+		        $arLlamada = $em->getRepository('AppBundle:Llamada')->find($codigoLlamada);
+		        $arNoContestan = new NoContestan();
+		        $arLlamada->setEstadoNoContestan(true);
+				$arNoContestan->setNoContestanRel($arLlamada);
+				$arNoContestan->setCodigoUsuarioFk($user->getCodigoUsuarioPk());
+				$arNoContestan->setFechaNoContestan(new \DateTime('now'));
+
+		        $em->persist($arLlamada);
+		        $em->persist($arNoContestan);
+
+	        }
             
             if($request->request->has('llamadaSolucionar')) {
                 $codigoLlamada = $request->request->get('llamadaSolucionar');
@@ -132,6 +152,79 @@ class LlamadaController extends Controller {
 
     }
 
+    /**
+     * @Route("/llamada/lista/reporte", name="listadoLlamadasReporte")
+     */
+    public function listaReporte(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $this->listar ($em);
+
+        $session = new Session();
+
+        $propiedades = array(
+            'class' => 'AppBundle:Cliente',
+            'choice_label' => 'nombreComercial',
+            'required' => false,
+            'empty_data' => '',
+            'placeholder' => 'Todos',
+            'data' =>'');
+
+        if($session->get('filtroLlamadaCliente')){
+            $propiedades['data'] = $em->getReference('AppBundle:Llamada', $session->get('filtroLlamadaCliente'));
+        }
+
+        $formFiltro = $this::createFormBuilder ()
+            ->add('clienteRel', EntityType::class, $propiedades)
+            ->add ('btnFiltrar', SubmitType::class, array (
+                'label' => 'Filtrar',
+                'attr' => array (
+                    'class' => 'btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5'
+                )
+            ))
+            ->getForm();
+
+        $formFiltro->handleRequest($request);
+
+        if($formFiltro->isSubmitted() && $formFiltro->isValid()){
+            $this->filtrar($formFiltro);
+            $this->listar($em);
+        }
+
+        $dql = $em->createQuery($this->strDqlLista);
+        $arLlamadas = $dql->getResult();
+//
+//        dump ($arLlamadas);
+//        die();
+
+        //$arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array(), array('fechaRegistro' => 'DESC'));
+        return $this->render('AppBundle:Llamada:listarGeneral.html.twig', [
+            'llamadas' => $arLlamadas,
+            'user' => $user,
+            'formFiltro' => $formFiltro->createView ()
+        ]);
+    }
+
+    private function filtrar($formFiltro){
+        $session = new Session();
+        $filtro = $formFiltro->get('clienteRel')->getData();
+//
+//        dump($filtro);
+//        die();
+
+        if($filtro){
+            $session->set('filtroLlamadaCliente',$filtro->getCodigoClientePk());
+        }else {
+            $session->set ('filtroLlamadaCliente', null);
+        }
+    }
+
+    private function listar($em){
+        $session = new Session();
+//                $arCaso = $em->getRepository ('AppBundle:Caso')->findBy(array("codigoClienteFk" => $cliente),array());
+        $this->strDqlLista = $em->getRepository('AppBundle:Llamada')->filtroDQL ($session->get('filtroLlamadaCliente'));
+    }
 
     public function getUser(){
 

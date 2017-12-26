@@ -54,7 +54,7 @@ class Llamada
     /**
      * @var string
      *
-     * @ORM\Column(name="descripcion", type="string", length=255 ,nullable= TRUE)
+     * @ORM\Column(name="descripcion", type="text" ,nullable= TRUE)
      */
     private $descripcion;
 
@@ -79,6 +79,8 @@ class Llamada
      */
     private $fechaSolucion;
 
+
+
     /**
      * @var int
      *
@@ -99,6 +101,13 @@ class Llamada
      * @ORM\Column(name="estado_solucionado", type="boolean" ,nullable= TRUE)
      */
     private $estadoSolucionado;
+
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="estado_no_contestan", type="boolean" ,nullable= TRUE)
+	 */
+	private $estadoNoContestan;
 
     /**
      * @var int
@@ -154,7 +163,16 @@ class Llamada
      */
     private $moduloRel;
 
-    /**
+	/**
+	 *
+	 * @ORM\OneToMany(targetEntity="NoContestan", mappedBy="noContestanRel")
+	 */
+
+	private $llamadasNoContestanRel;
+
+
+
+	/**
      * Get codigoLlamadaPk
      *
      * @return integer
@@ -618,5 +636,118 @@ class Llamada
     public function getModuloRel()
     {
         return $this->moduloRel;
+    }
+
+    /**
+     * Set estadoContestan
+     *
+     * @param boolean $estadoContestan
+     *
+     * @return Llamada
+     */
+    public function setEstadoContestan($estadoContestan)
+    {
+        $this->estadoContestan = $estadoContestan;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoContestan
+     *
+     * @return boolean
+     */
+    public function getEstadoContestan()
+    {
+        return $this->estadoContestan;
+    }
+
+    /**
+     * Set estadoNoContestan
+     *
+     * @param boolean $estadoNoContestan
+     *
+     * @return Llamada
+     */
+    public function setEstadoNoContestan($estadoNoContestan)
+    {
+        $this->estadoNoContestan = $estadoNoContestan;
+
+        return $this;
+    }
+
+    /**
+     * Get estadoNoContestan
+     *
+     * @return boolean
+     */
+    public function getEstadoNoContestan()
+    {
+        return $this->estadoNoContestan;
+    }
+
+    /**
+     * Set fechaNoContestan
+     *
+     * @param \DateTime $fechaNoContestan
+     *
+     * @return Llamada
+     */
+    public function setFechaNoContestan($fechaNoContestan)
+    {
+        $this->fechaNoContestan = $fechaNoContestan;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaNoContestan
+     *
+     * @return \DateTime
+     */
+    public function getFechaNoContestan()
+    {
+        return $this->fechaNoContestan;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->llamadasNoContestanRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add llamadasNoContestanRel
+     *
+     * @param \AppBundle\Entity\NoContestan $llamadasNoContestanRel
+     *
+     * @return Llamada
+     */
+    public function addLlamadasNoContestanRel(\AppBundle\Entity\NoContestan $llamadasNoContestanRel)
+    {
+        $this->llamadasNoContestanRel[] = $llamadasNoContestanRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove llamadasNoContestanRel
+     *
+     * @param \AppBundle\Entity\NoContestan $llamadasNoContestanRel
+     */
+    public function removeLlamadasNoContestanRel(\AppBundle\Entity\NoContestan $llamadasNoContestanRel)
+    {
+        $this->llamadasNoContestanRel->removeElement($llamadasNoContestanRel);
+    }
+
+    /**
+     * Get llamadasNoContestanRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLlamadasNoContestanRel()
+    {
+        return $this->llamadasNoContestanRel;
     }
 }

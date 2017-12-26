@@ -14,7 +14,7 @@
             <div class="content">
                 <div class="container">
                     {% block content %}
-                        <div class="row">
+                  <div class="row">
                             <div class="col-xs-12">
                                 <div class="page-title-box">
                                     <h4 class="page-title" style="padding-right: 10px;"><i class="mdi mdi-phone-in-talk"></i> Registro de Llamadas </h4>
@@ -47,6 +47,7 @@
                                                 {#<th>Gestiona</th>#}
                                                 {#<th>Gestión</th>#}
                                                 {#<th>Solución</th>#}
+                                                <th>Nc</th>
                                                 <th>At</th>
                                                 <th>So</th>
                                                 <th>Ed</th>
@@ -80,6 +81,25 @@
                                                     {#<td>{{ llamada.codigoUsuarioAtiendeFk }}</td>#}
                                                     {#<td>{% if llamada.fechaGestion != null %}{{ llamada.fechaGestion|date('y-m-d H:i') }}{%  endif %}</td>#}
                                                     {#<td>{% if llamada.fechaSolucion!= null %}{{ llamada.fechaSolucion|date('y-m-d H:i') }}{%  endif %}</td>#}
+                                                    <td>
+                                                        {% if llamada.estadoAtendido  %}
+                                                            {% set disabled = 'disabled'  %}
+                                                        {% else %}
+                                                            {% set disabled = '' %}
+                                                        {% endif %}
+
+                                                        {% if llamada.estadoNoContestan %}
+                                                            <button class="btn btn-danger btn-xs" type="submit" name="llamadaContestan" {{ disabled }}  value="{{ llamada.codigoLlamadaPk }}" title="{% for noContestan in llamada.llamadasNoContestanRel %}{{ noContestan.fechaNoContestan|date('y-m-d H:i') }}-{{ noContestan.codigoUsuarioFk }}&#10;{% endfor %}">
+                                                                <i class="mdi mdi-phone-missed"></i></button>
+                                                        {% elseif llamada.estadoNoContestan == false and llamada.estadoAtendido %}
+                                                            <button class="btn btn-primary btn-xs" type="submit" name="llamadaContestan" {{ disabled }} value="{{ llamada.codigoLlamadaPk }}" >
+                                                                <i class="mdi mdi-phone-outgoing"></i></button>
+
+                                                        {% else %}
+                                                            <button class="btn btn-primary btn-xs" type="submit" name="llamadaContestan" {{ disabled }} value="{{ llamada.codigoLlamadaPk }}">
+                                                                <i class="mdi mdi-phone-outgoing"></i></button>
+                                                        {% endif %}
+                                                    </td>
                                                     <td>
 
                                                         {% if llamada.estadoAtendido %}

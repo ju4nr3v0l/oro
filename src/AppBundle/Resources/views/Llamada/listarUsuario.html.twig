@@ -27,10 +27,6 @@
                             </div>
                         </div>
                         <div class="row">
-
-                        </div>
-
-                        <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-30">Registro de Llamadas para el usuario:
@@ -59,6 +55,8 @@
                                                             <table class="table table-hover m-0 table-oro">
                                                                 <thead>
                                                                 <tr>
+
+                                                                </tr>
                                                                 <tr>
                                                                     <th>Fecha</th>
                                                                     <th>Cliente</th>
@@ -71,6 +69,7 @@
                                                                     {#<th>Gestiona</th>#}
                                                                     {#<th>Gestión</th>#}
                                                                     {#<th>Solución</th>#}
+                                                                    <th>Nc</th>
                                                                     <th>At</th>
                                                                     <th>So</th>
                                                                 </tr>
@@ -98,13 +97,22 @@
                                                                             <td>{{ llamada.codigoModuloFk }}</td>
                                                                             <td>
                                                                                 {{ llamada.nombreContacto }}
-                                                                            <td>{{ llamada.telefono }}<br>
-                                                                                <small>Ext. {{ llamada.extension }}</small></td>
+                                                                            <td>{{ llamada.telefono }} - ({{ llamada.extension }})</td>
                                                                             <td>{{ llamada.descripcion }}</td>
                                                                             <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
                                                                             {#<td>{{ llamada.codigoUsuarioAtiendeFk }}</td>#}
                                                                             {#<td>{{ llamada.fechaGestion|date('y-m-d H:i') }}</td>#}
                                                                             {#<td>{{ llamada.fechaSolucion|date('y-m-d H:i') }}</td>#}
+                                                                            <td>
+
+                                                                                {% if llamada.estadoNoContestan %}
+                                                                                    <button class="btn btn-success btn-xs" type="submit" name="llamadaContestan" disabled value="{{ llamada.codigoLlamadaPk }}" >
+                                                                                        <i class="mdi mdi-phone-missed"></i></button>
+                                                                                {% else %}
+                                                                                    <button class="btn btn-danger btn-xs" type="submit" name="llamadaContestan"  value="{{ llamada.codigoLlamadaPk }}">
+                                                                                        <i class="mdi mdi-phone-outgoing"></i></button>
+                                                                                {% endif %}
+                                                                            </td>
                                                                             <td>
                                                                                 {% if llamada.estadoAtendido %}
                                                                                     <button class="btn btn-success btn-xs" type="submit" name="llamadaAtender" disabled value="{{ llamada.codigoLlamadaPk }}">
