@@ -66,7 +66,7 @@ class TareaController extends Controller
     public function listaGeneral(Request $request, Request $request2){
 
         $em = $this->getDoctrine()->getManager();
-	    $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => 'false', "estadoVerificado" => NULL), array('fechaRegistro' => 'DESC', 'estadoTerminado' => 'ASC'));
+	    $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => 'false', "estadoVerificado" => NULL), array( 'estadoTerminado' => 'ASC','fechaRegistro' => 'DESC'));
         $formFiltro = $this::createFormBuilder()
            ->add(
             'filter',
