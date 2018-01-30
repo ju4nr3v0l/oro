@@ -21,61 +21,64 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 
 
-class FormTypeTarea extends AbstractType{
+class FormTypeTarea extends AbstractType
+{
 
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm (FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('tareaTipoRel', EntityType::class, array(
                 'class' => 'AppBundle:TareaTipo',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->orderBy('c.nombre', 'ASC');},
+                        ->orderBy('c.nombre', 'ASC');
+                },
                 'choice_label' => 'nombre',
-
-                'required' => false))
-
+                'required' => false
+            ))
             ->add('codigoUsuarioAsignaFk', EntityType::class, array(
                 'class' => 'AppBundle:Usuario',
-                'choice_label' => 'codigoUsuarioPk',
-                'required' => false)
-            )
-
-            ->add ('descripcion', TextareaType::class,array(
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nombres', 'ASC');
+                },
+                'choice_label' => function ($er) {
+                    $nombreCompleto = $er->getNombres() . " " . $er->getApellidos();
+                    return $nombreCompleto;
+                },
+                'required' => false
+            ))
+            ->add('descripcion', TextareaType::class, array(
                 'attr' => array(
                     'id' => '_descripcion',
                     'name' => '_descripcion',
                     'class' => 'form-control',
-                    'required'=>'false'
-
+                    'required' => 'false'
                 )
             ))
-
-            ->add ('comentario', TextareaType::class,array(
+            ->add('comentario', TextareaType::class, array(
                 'attr' => array(
                     'id' => '_comentario',
                     'name' => '_comentario',
                     'class' => 'form-control',
-                    'required'=>false
+                    'required' => false
                 )
             ))
-	        ->add('caso', TextType::class, array(
-	        	'attr'=>array(),
-		        'label' => 'Caso (Código del caso registrado en REOS)',
-		        'required' => false
-	        ))
-
+            ->add('caso', TextType::class, array(
+                'attr' => array(),
+                'label' => 'Caso (Código del caso registrado en REOS)',
+                'required' => false
+            ))
 //            Botón Guardar
-            ->add ('btnGuardar', SubmitType::class, array(
+            ->add('btnGuardar', SubmitType::class, array(
                 'attr' => array(
                     'id' => '_btnGuardar',
                     'name' => '_btnGuardar'
                 ), 'label' => 'GUARDAR'
-            ))
-        ;
+            ));
     }
 }

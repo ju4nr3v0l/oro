@@ -38,14 +38,14 @@ class TareaController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if(!$codigoTarea) {
-                $id =  $user->getCodigoUsuarioPk();
+                $id =  $user->getNombres()." ".$user->getApellidos();
                 $arTarea->setFechaRegistro(new \DateTime('now'));
                 $arTarea->setCodigoUsuarioRegistraFk($id);
             }
             $arUser = $arTarea->getCodigoUsuarioAsignaFk();
             if($arUser != null){
                 $arTarea->setFechaGestion(new \DateTime('now'));
-                $arTarea->setCodigoUsuarioAsignaFk($arUser->getCodigoUsuarioPk());
+                $arTarea->setCodigoUsuarioAsignaFk($arUser->getNombres()." ". $arUser->getApellidos());
             }
             $em->persist($arTarea);
             $em->flush();

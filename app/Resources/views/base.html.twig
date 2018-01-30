@@ -69,6 +69,12 @@
             <script src="{{ asset('zircosTemplate/assets/js/jquery.core.js') }}"></script>
             <script src="{{ asset('zircosTemplate/assets/js/jquery.app.js') }}"></script>
 
+            <script>
+                $(document).ready(function(){
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+            </script>
+
         {% endblock %}
     </body>
 </html>
