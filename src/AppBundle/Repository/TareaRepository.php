@@ -11,4 +11,25 @@ namespace AppBundle\Repository;
 class TareaRepository extends \Doctrine\ORM\EntityRepository
 {
 
+
+    public function listaDql()
+    {
+        $em = $this->getEntityManager();
+
+        $db = $em->createQueryBuilder()->from("AppBundle:Tarea", "t")
+            ->select("t")
+            ->where("t.codigoTareaPk <> 0")
+            ->orderBy("t.estadoTerminado", "ASC")
+        ->getQuery();
+
+        return $db->getResult();
+
+    }
+
 }
+//$qb = $this->em->createQueryBuilder()->from("BrasaTurnoBundle:TurProgramacionImportar", "tpi")
+//    ->select("SUM(tpi.horas) as horasProgramadas", "SUM(tpi.horasDiurnas) as horasDiurnasProgramadas", "SUM(tpi.horasNocturnas) as horasNocturnasProgramadas",
+//        "tpi.horasDiurnasPedidoDetalle", "tpi.horasNocturnasPedidoDetalle", "tpi.horasPedidoDetalle")
+//    ->where("tpi.codigoPedidoDetalleFk = {$codigoPedidoDetalle}")
+//    ->groupBy("tpi.horasPedidoDetalle", "tpi.horasDiurnasPedidoDetalle", "tpi.horasNocturnasPedidoDetalle");
+//$arProgramacionImportar = $qb->getQuery()->getOneOrNullResult();
