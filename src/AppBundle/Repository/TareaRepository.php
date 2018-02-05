@@ -12,16 +12,24 @@ class TareaRepository extends \Doctrine\ORM\EntityRepository
 {
 
 
-    public function listaDql()
+    public function listaDql($estado = "")
     {
         $em = $this->getEntityManager();
         $db = $em->createQueryBuilder()->from("AppBundle:Tarea", "t")
             ->select("t")
-            ->where("t.codigoTareaPk <> 0")
+            ->andwhere("t.codigoTareaPk <> 0")
             ->orderBy("t.estadoTerminado", "ASC")
-        ->getQuery();
+            ->addOrderBy("t.estadoVerificado", "ASC")
+            ->addOrderBy("t.fechaRegistro", "DESC");
+        if ($estado == 0) {
+            $db->andWhere("t.estadoTerminado = 0");
+        }
+        if ($estado == 1) {
+            $db->andWhere("t.estadoTerminado = 1");
+        }
 
-        return $db->getResult();
+
+        return $db->getQuery()->getResult();
 
     }
 

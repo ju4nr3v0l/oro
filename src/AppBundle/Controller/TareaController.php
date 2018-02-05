@@ -15,11 +15,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Tarea;
+use AppBundle\Entity\Usuario;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class TareaController extends Controller
 {
-
+    var $srtDqlLista = "";
 
 
     /**
@@ -28,6 +30,9 @@ class TareaController extends Controller
     public function nuevo(Request $request, $codigoTarea = null)
     {
 
+        /**
+         * @var Usuario $arUser
+        **/
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
         $user = $this->getUser(); // trae el usuario actual
         $arTarea = new Tarea(); //instance class
@@ -49,7 +54,7 @@ class TareaController extends Controller
             $arUser = $arTarea->getCodigoUsuarioAsignaFk();
             if ($arUser != null) {
                 $arTarea->setFechaGestion(new \DateTime('now'));
-                $arTarea->setCodigoUsuarioAsignaFk($arUser->getNombres() . " " . $arUser->getApellidos());
+                $arTarea->setCodigoUsuarioAsignaFk($arUser->getCodigoUsuarioPk());
             }
             $em->persist($arTarea);
             $em->flush();
@@ -63,7 +68,7 @@ class TareaController extends Controller
         );
     }
 
-    var $srtDqlLista = "";
+
 
     /**
      * @Route("/tarea/lista", name="listaTareaGeneral")
@@ -71,15 +76,15 @@ class TareaController extends Controller
     public function listaGeneral(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-//        $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => 'false', "estadoVerificado" => NULL), array('estadoTerminado' => 'ASC', 'fechaRegistro' => 'DESC'));
-        $arTarea = $em->getRepository('AppBundle:Tarea')->findAll();
+        $arTarea = new \AppBundle\Entity\Tarea();
+//        $session = $this->get('session');
+//        $session->set('filtroEstado', 2);
         $formFiltro = $this->formularioFiltro();
         $formFiltro->handleRequest($request);
-        $this->listar();
-        if ($formFiltro->isValid()) {
+
+        if ( $formFiltro->isValid()) {
             if ($formFiltro->get('BtnFiltrar')->isClicked()) {
                 $this->filtrar($formFiltro);
-                $this->listar();
             }
         }
         $form = $this::createFormBuilder()->getForm();
@@ -110,6 +115,7 @@ class TareaController extends Controller
         $sinTerminar = 0;
         $sinAsignar = 0;
         $sinVerificar = 0;
+
         foreach ($arTarea as $key => $value) {
             if ($value->getCodigoUsuarioAsignaFk() == null) {
                 $sinAsignar++;
@@ -120,49 +126,7 @@ class TareaController extends Controller
             }
         }
 
-
-//        $formFiltro = $this::createFormBuilder()
-//           ->add(
-//            'filter',
-//             ChoiceType::class, array(
-//                        'choices' => array(
-//                        'Sin resolver' => 'sinResolver',
-//                        'Resueltos' => 'resueltos',
-//                        'Todos' => 'all'
-//                   ),
-//                   'required' => false,
-//	                'label' => 'Filtro'
-//                )
-//            )
-//           ->add ('btnFiltrar', SubmitType::class, array(
-//
-//	        'attr' => array(
-//		        'id' => '_btnFiltrar',
-//		        'name' => '_btnFiltrar'
-//	            ),
-//	        'label' => 'Filtrar',
-//
-//        ))
-//        ->getForm();
-//        $formFiltro->handleRequest($request2);
-
-
-//		if($formFiltro->isSubmitted()){
-//
-//			$filtro = $formFiltro->get('filter')->getData();
-//
-//			if($filtro){
-//				if($filtro== 'all'){
-//					$arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => null), array('fechaRegistro' => 'DESC'));
-//				} else if($filtro == 'sinResolver'){
-//					$arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoTerminado" => false), array('fechaRegistro' => 'DESC'));
-//				} else{
-//					$arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoTerminado" => true, "estadoVerificado" => null), array('fechaRegistro' => 'DESC'));
-//				}
-//
-//			}
-//		}
-
+        $arTarea = $this->listar();
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Tarea:listar.html.twig', array(
             'tareas' => $arTarea,
@@ -283,13 +247,16 @@ class TareaController extends Controller
 
     private function formularioFiltro()
     {
+        $em = $this->getDoctrine()->getManager();
+        $session = new Session();
+        $estado = "";
+        if($session->get('estado')){
+            $arTarea = $em->getRepository('AppBundle:Tarea')->findAll();
+        }
+;
         $formFiltro = $this::createFormBuilder()
-            ->add('estado', ChoiceType::class, array(
-                'choices' => array(
-                    'Sin resolver' => 'sinResolver',
-                    'Resueltos' => 'resueltos',
-                    'Todos' => 'all'
-                ), 'required' => false, 'label' => 'Filtro'))
+            ->add('estado', ChoiceType::class, array('choices' => array('Todos' => '2', 'Sin resolver' => '0', 'Resueltos' => '1'),
+                 'label' => 'Filtro', 'data' => $session->get('filtroEstado',2)))
             ->add('BtnFiltrar', SubmitType::class, array('label' => 'Filtrar'))
             ->getForm();
 
@@ -299,14 +266,19 @@ class TareaController extends Controller
 
     private function filtrar($formFiltro)
     {
-        $formFiltro->get("estado")->getData();
+        $session = new Session();
+        $session->set('filtroEstado', $formFiltro->get('estado')->getData());
+
     }
 
 
     private function listar()
     {
+        $session = new Session();
         $em = $this->getDoctrine()->getManager();
-        $this->srtDqlLista = $em->getRepository('AppBundle:Tarea')->listaDql();
+        $dql = $this->srtDqlLista = $em->getRepository('AppBundle:Tarea')->listaDql($session->get('filtroEstado'));
+
+        return $dql;
 
     }
 }
