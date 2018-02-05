@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class TareaController extends Controller
 {
 
-    var $srtDqlLista = "";
+
 
     /**
      * @Route("/tarea/nuevo/{codigoTarea}", requirements={"codigoTarea":"\d+"}, name="registrarTarea")
@@ -63,32 +63,64 @@ class TareaController extends Controller
         );
     }
 
+    var $srtDqlLista = "";
 
     /**
      * @Route("/tarea/lista", name="listaTareaGeneral")
      */
     public function listaGeneral(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
-        $form = $this->formularioFiltro();
-        $form->handleRequest($request);
+//        $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => 'false', "estadoVerificado" => NULL), array('estadoTerminado' => 'ASC', 'fechaRegistro' => 'DESC'));
+        $arTarea = $em->getRepository('AppBundle:Tarea')->findAll();
+        $formFiltro = $this->formularioFiltro();
+        $formFiltro->handleRequest($request);
         $this->listar();
-        if($form->isValid())
-        {
-            if($form->get('BtnFiltrar')->isClicked())
-            {
-               $this->filtrar($form);
-               $this->listar();
+        if ($formFiltro->isValid()) {
+            if ($formFiltro->get('BtnFiltrar')->isClicked()) {
+                $this->filtrar($formFiltro);
+                $this->listar();
+            }
+        }
+        $form = $this::createFormBuilder()->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($request->request->has('TareaSolucionar')) {
+                $codigoTarea = $request->request->get('TareaSolucionar');
+                $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
+                if (!$arTarea->getEstadoTerminado()) {
+                    $arTarea->setEstadoTerminado(true);
+                    $arTarea->setFechaSolucion(new \DateTime('now'));
+                }
+            }
+            if ($request->request->has('TareaVerificar')) {
+                $codigoTarea = $request->request->get('TareaVerificar');
+                $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
+                if (!$arTarea->getEstadoVerificado()) {
+                    $arTarea->setFechaVerificado(new \DateTime('now'));
+                    $arTarea->setEstadoVerificado(true);
+                }
+            }
+            $em->persist($arTarea);
+            $em->flush();
+            return $this->redirect($this->generateUrl('listaTareaGeneral'));
+
+        }
+
+        $sinTerminar = 0;
+        $sinAsignar = 0;
+        $sinVerificar = 0;
+        foreach ($arTarea as $key => $value) {
+            if ($value->getCodigoUsuarioAsignaFk() == null) {
+                $sinAsignar++;
+            } else if (!$value->getEstadoTerminado()) {
+                $sinTerminar++;
+            } else if ($value->getEstadoTerminado() && !$value->getEstadoVerificado()) {
+                $sinVerificar++;
             }
         }
 
-//        dump($this);
-//
-//        die();
 
-
-        // $arTarea = $em->getRepository('AppBundle:Tarea')->findBy(array("estadoVerificado" => 'false', "estadoVerificado" => NULL), array( 'estadoTerminado' => 'ASC','fechaRegistro' => 'DESC'));
 //        $formFiltro = $this::createFormBuilder()
 //           ->add(
 //            'filter',
@@ -115,7 +147,6 @@ class TareaController extends Controller
 //        $formFiltro->handleRequest($request2);
 
 
-
 //		if($formFiltro->isSubmitted()){
 //
 //			$filtro = $formFiltro->get('filter')->getData();
@@ -131,56 +162,16 @@ class TareaController extends Controller
 //
 //			}
 //		}
-////
-//		$sinTerminar=0;
-//        $sinAsignar=0;
-//        $sinVerificar = 0;
-//        foreach ($arTarea as $key => $value){
-//            if($value->getCodigoUsuarioAsignaFk()==null){
-//                  $sinAsignar++;
-//            }else if(!$value->getEstadoTerminado()){
-//                $sinTerminar++;
-//            } else if($value->getEstadoTerminado() && !$value->getEstadoVerificado()){
-//                $sinVerificar++;
-//            }
-//        }
-//        $form = $this::createFormBuilder()->getForm(); // form para manejar actualizacion de estado de llamadas
-//        $form->handleRequest($request);
-//        if($form->isSubmitted() && $form->isValid()){ // actualiza el estado de las llamadas
-//            if($request->request->has('TareaSolucionar')) {
-//                $codigoTarea= $request->request->get('TareaSolucionar');
-//                $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
-//                if(!$arTarea->getEstadoTerminado()){
-//                    $arTarea->setEstadoTerminado(true);
-//                    $arTarea->setFechaSolucion(new \DateTime('now'));
-//                }
-//            }
-//            if($request->request->has('TareaVerificar')){
-//                $codigoTarea= $request->request->get('TareaVerificar');
-//                $arTarea = $em->getRepository('AppBundle:Tarea')->find($codigoTarea);
-//                if(!$arTarea->getEstadoVerificado()){
-//                    $arTarea->setFechaVerificado(new \DateTime('now'));
-//                    $arTarea->setEstadoVerificado(true);
-//                }
-//            }
-//            $em->persist($arTarea);
-//            $em->flush();
-//            return $this->redirect($this->generateUrl('listaTareaGeneral'));
-//        }
-
-        $arTarea = $this->srtDqlLista;
 
         // en index pagina con datos generales de la app
         return $this->render('AppBundle:Tarea:listar.html.twig', array(
             'tareas' => $arTarea,
+            'sinTerminar' => $sinTerminar,
+            'sinAsignar' => $sinAsignar,
+            'sinVerificar' => $sinVerificar,
+            'formFiltro' => $formFiltro->createView(),
             'form' => $form->createView()
         ));
-
-//               'sinTerminar'=>$sinTerminar,
-//            'sinAsignar'=>$sinAsignar,
-//            'sinVerificar'=>$sinVerificar,
-//	        'formFiltro' => $formFiltro->createView(),
-
     }
 
 
@@ -294,23 +285,21 @@ class TareaController extends Controller
     {
         $formFiltro = $this::createFormBuilder()
             ->add('estado', ChoiceType::class, array(
-                    'choices' => array(
-                        'Sin resolver' => 'sinResolver',
-                        'Resueltos' => 'resueltos',
-                        'Todos' => 'all'
-                    ), 'required' => false, 'label' => 'Filtro'))
-
+                'choices' => array(
+                    'Sin resolver' => 'sinResolver',
+                    'Resueltos' => 'resueltos',
+                    'Todos' => 'all'
+                ), 'required' => false, 'label' => 'Filtro'))
             ->add('BtnFiltrar', SubmitType::class, array('label' => 'Filtrar'))
-
             ->getForm();
 
         return $formFiltro;
 
     }
 
-    private function filtrar($form)
+    private function filtrar($formFiltro)
     {
-        $form->get("estado")->getData();
+        $formFiltro->get("estado")->getData();
     }
 
 
