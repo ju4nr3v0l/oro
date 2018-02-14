@@ -1,7 +1,4 @@
 {% extends 'base.html.twig' %}
-
-{% block bodyAtt %}class="fixed-left"{% endblock %}
-
 {% block body %}
 
 
@@ -19,7 +16,7 @@
                                 <div class="page-title-box">
                                     <h4 class="page-title" style="padding-right: 10px;"><i
                                                 class="glyphicon glyphicon-th-list"></i> Tareas </h4>
-                                    <span class="label label-danger">Sin asignar: {{ sinAsignar}}</span>
+                                    <span class="label label-danger">Sin asignar: {{ sinAsignar }}</span>
                                     <span class="label label-danger">Sin terminar: {{ sinTerminar }}</span>
                                     <span class="label label-danger">Sin verificar: {{ sinVerificar }}</span>
                                     <a href="{{ path('registrarTarea') }}">
@@ -164,15 +161,19 @@
                                             {{ form_end(form) }}
                                             </tbody>
                                         </table>
-
                                     </div> <!-- table-responsive -->
                                 </div> <!-- end card -->
                             </div>
                             <!-- end col -->
-
                         </div>
 
                     {% endblock content %}
+                    <div class="btn-group" style="float: left">
+                        <div class="btn btn-default ">Tareas <span
+                                    class="badge">{{ tareas.getTotalItemCount }}</span></div>
+                        <div class="btn-group"
+                             style="float: left;margin: 0px;padding-top: 0px">{{ knp_pagination_render(tareas) }}</div>
+                    </div>
                 </div> <!-- container -->
             </div> <!-- content -->
         </div>

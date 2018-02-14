@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class TareaController extends Controller
 {
-    var $srtDqlLista = "";
+    var $strDqlLista = "";
 
 
     /**
@@ -32,7 +32,7 @@ class TareaController extends Controller
 
         /**
          * @var Usuario $arUser
-        **/
+         **/
         $em = $this->getDoctrine()->getManager(); // instancia el entity manager
         $user = $this->getUser(); // trae el usuario actual
         $arTarea = new Tarea(); //instance class
@@ -69,22 +69,23 @@ class TareaController extends Controller
     }
 
 
-
     /**
      * @Route("/tarea/lista", name="listaTareaGeneral")
      */
     public function listaGeneral(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $paginator = $this->get('knp_paginator');
         $arTarea = new \AppBundle\Entity\Tarea();
-//        $session = $this->get('session');
+     //   $session = $this->get('session');
 //        $session->set('filtroEstado', 2);
         $formFiltro = $this->formularioFiltro();
         $formFiltro->handleRequest($request);
-
-        if ( $formFiltro->isValid()) {
+        $this->listar();
+        if ($formFiltro->isValid()) {
             if ($formFiltro->get('BtnFiltrar')->isClicked()) {
                 $this->filtrar($formFiltro);
+                $this->listar();
             }
         }
         $form = $this::createFormBuilder()->getForm();
@@ -126,16 +127,15 @@ class TareaController extends Controller
             }
         }
 
-        $arTarea = $this->listar();
-        // en index pagina con datos generales de la app
-        return $this->render('AppBundle:Tarea:listar.html.twig', array(
+        $arTarea = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1),10);
+        return $this->render('AppBundle:Tarea:listar.html.twig', [
             'tareas' => $arTarea,
             'sinTerminar' => $sinTerminar,
             'sinAsignar' => $sinAsignar,
             'sinVerificar' => $sinVerificar,
             'formFiltro' => $formFiltro->createView(),
             'form' => $form->createView()
-        ));
+        ]);
     }
 
 
@@ -250,13 +250,12 @@ class TareaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = new Session();
         $estado = "";
-        if($session->get('estado')){
+        if ($session->get('estado')) {
             $arTarea = $em->getRepository('AppBundle:Tarea')->findAll();
-        }
-;
+        };
         $formFiltro = $this::createFormBuilder()
             ->add('estado', ChoiceType::class, array('choices' => array('Todos' => '2', 'Sin resolver' => '0', 'Resueltos' => '1'),
-                 'label' => 'Filtro', 'data' => $session->get('filtroEstado',2)))
+                'label' => 'Filtro', 'data' => $session->get('filtroEstado', 2)))
             ->add('BtnFiltrar', SubmitType::class, array('label' => 'Filtrar'))
             ->getForm();
 
@@ -274,11 +273,8 @@ class TareaController extends Controller
 
     private function listar()
     {
-        $session = new Session();
         $em = $this->getDoctrine()->getManager();
-        $dql = $this->srtDqlLista = $em->getRepository('AppBundle:Tarea')->listaDql($session->get('filtroEstado'));
-
-        return $dql;
-
+        $session = new Session();
+        $this->strDqlLista = $em->getRepository('AppBundle:Tarea')->listaDql($session->get('filtroEstado'));
     }
 }

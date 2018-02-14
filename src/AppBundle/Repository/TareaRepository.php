@@ -29,7 +29,7 @@ class TareaRepository extends \Doctrine\ORM\EntityRepository
         }
 
 
-        return $db->getQuery()->getResult();
+        return $db;
 
     }
 

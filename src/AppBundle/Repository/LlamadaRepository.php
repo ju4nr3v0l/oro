@@ -48,13 +48,19 @@ class LlamadaRepository extends \Doctrine\ORM\EntityRepository
         return $atendidasPendientesUsuario;
     }
 
-    public function filtroDQL($codigoClientePk = 0) {
-        $dql   = "SELECT e, d FROM AppBundle:Llamada d JOIN d.clienteRel e WHERE d.codigoClienteFk <> 0";
-        if ($codigoClientePk <> 0){
-            $dql .= " AND e.codigoClientePk =" . $codigoClientePk;
-        }
-        $dql .= " ORDER BY d.fechaRegistro DESC";
+    public function listaDql($codigoClientePk = "")
+        {
+            $em = $this->getEntityManager();
+            $db = $em->createQueryBuilder()->from("AppBundle:Llamada", "l")
+                ->select("l")
+                ->andWhere("l.codigoLlamadaPk <> 0")
+                ->orderBy("l.estadoAtendido", "ASC")
+                ->addOrderBy("l.estadoSolucionado", "ASC");
+            if ($codigoClientePk != "") {
+                $db->andWhere("l.codigoClienteFk = {$codigoClientePk}");
+            }
 
-        return $dql;
-    }
+            return $db;
+
+        }
 }
