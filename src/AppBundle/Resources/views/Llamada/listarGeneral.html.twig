@@ -14,23 +14,28 @@
             <div class="content">
                 <div class="container">
                     {% block content %}
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="page-title-box">
-                                <h4 class="page-title" style="padding-right: 10px;"><i class="glyphicon glyphicon-time"></i> Registro Histórico de Llamadas </h4>
-                                {#<span class="label label-danger">Pendientes: {{ pendientes }}</span>#}
-                                {#<span class="label label-info">Atendidas Pendientes: {{ atendidasPendientes }}</span>#}
-                                <a href="{{ path('registrarLlamada') }}">
-                                    <button class="btn btn-success btn-bordered waves-effect waves-light" style="float: right;"><span class="mdi mdi-plus"></span> Nueva</button>
-                                </a>
-                                <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="page-title-box">
+                                    <h4 class="page-title" style="padding-right: 10px;"><i
+                                                class="glyphicon glyphicon-time"></i> Registro Histórico de Llamadas
+                                    </h4>
+                                    {#<span class="label label-danger">Pendientes: {{ pendientes }}</span>#}
+                                    {#<span class="label label-info">Atendidas Pendientes: {{ atendidasPendientes }}</span>#}
+                                    <a href="{{ path('registrarLlamada') }}">
+                                        <button class="btn btn-success btn-bordered waves-effect waves-light"
+                                                style="float: right;"><span class="mdi mdi-plus"></span> Nueva
+                                        </button>
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30"><i class="glyphicon glyphicon-time"></i> Histórico de Llamadas</h4>
+                                    <h4 class="header-title m-t-0 m-b-30"><i class="glyphicon glyphicon-time"></i>
+                                        Histórico de Llamadas</h4>
 
                                     <div class="table-responsive">
                                         <div class="card-box">
@@ -39,7 +44,7 @@
                                                 {{ form_widget(formFiltro.clienteRel) }}
                                             </div>
                                             <div>
-                                                {{ form_widget(formFiltro.btnFiltrar) }}
+                                                {{ form_widget(formFiltro.BtnFiltrar) }}
                                             </div>
                                             {{ form_end(formFiltro) }}
                                         </div>
@@ -87,8 +92,8 @@
                                                     <td>{{ llamada.descripcion }}</td>
                                                     <td>{{ llamada.codigoUsuarioRecibeFk }}</td>
                                                     <td>{{ llamada.codigoUsuarioAtiendeFk }}</td>
-                                                    <td>{% if llamada.fechaGestion != null %}{{ llamada.fechaGestion|date('y-m-d H:i') }}{%  endif %}</td>
-                                                    <td>{% if llamada.fechaSolucion!= null %}{{ llamada.fechaSolucion|date('y-m-d H:i') }}{%  endif %}</td>
+                                                    <td>{% if llamada.fechaGestion != null %}{{ llamada.fechaGestion|date('y-m-d H:i') }}{% endif %}</td>
+                                                    <td>{% if llamada.fechaSolucion!= null %}{{ llamada.fechaSolucion|date('y-m-d H:i') }}{% endif %}</td>
                                                 </tr>
                                             {% endfor %}
                                             {#{{ form_end(form) }}#}
@@ -98,10 +103,14 @@
                                 </div> <!-- end card -->
                             </div>
                             <!-- end col -->
-
                         </div>
-
                     {% endblock content %}
+                    <div class="btn-group" style="float: left">
+                        <div class="btn btn-default ">Llamadas <span
+                                    class="badge">{{ llamadas.getTotalItemCount }}</span></div>
+                        <div class="btn-group"
+                             style="float: left;margin: 0px;padding-top: 0px">{{ knp_pagination_render(llamadas) }}</div>
+                    </div>
                 </div> <!-- container -->
             </div> <!-- content -->
         </div>

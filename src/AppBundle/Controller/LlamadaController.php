@@ -123,7 +123,7 @@ class LlamadaController extends Controller
             return $this->redirect($this->generateUrl('listadoLlamadas'));
         }
 
-        $arLlamadas = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1),10);
+        $arLlamadas = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1), 10);
         return $this->render('AppBundle:Llamada:listar.html.twig', [
             'llamadas' => $arLlamadas,
             'atendidasPendientes' => $atendidasPendientes,
@@ -175,52 +175,25 @@ class LlamadaController extends Controller
      */
     public function listaReporte(Request $request)
     {
-//
-//        $em = $this->getDoctrine()->getManager();
-//       //$user = $this->getUser();
-//        $session = new Session();
-//
-//        $propiedades = array(
-//            'class' => 'AppBundle:Cliente',
-//            'choice_label' => 'nombreComercial',
-//            'required' => false,
-//            'empty_data' => '',
-//            'placeholder' => 'Todos',
-//            'data' =>'');
-//
-//        if($session->get('filtroLlamadaCliente')){
-//            $propiedades['data'] = $em->getReference('AppBundle:Llamada', $session->get('filtroLlamadaCliente'));
-//        }
-//
-////        $formFiltro = $this->createFormBuilder()
-////            ->add('clienteRel', EntityType::class, $propiedades)
-//            ->add ('btnFiltrar', SubmitType::class, array (
-//                'label' => 'Filtrar',
-//                'attr' => array (
-//                    'class' => 'btn btn-primary btn-bordered waves-effect w-md waves-light m-b-5'
-//                )
-//            ))
-////            ->getForm();
-//
-////        $formFiltro->handleRequest($request);
-//
-////        if($formFiltro->isSubmitted() && $formFiltro->isValid()){
-////            $this->filtrar($formFiltro);
-////            $this->listar($em);
-////        }
-//
-//        $dql = $em->createQuery($this->strDqlLista);
-//        $arLlamadas = $dql->getResult();
-////
-////        dump ($arLlamadas);
-////        die();
-//
-//        //$arLlamadas = $em->getRepository('AppBundle:Llamada')->findBy(array(), array('fechaRegistro' => 'DESC'));
-//        return $this->render('AppBundle:Llamada:listarGeneral.html.twig', [
-//            'llamadas' => $arLlamadas,
-//            'user' => $user,
-//            'formFiltro' => $formFiltro->createView ()
-//        ]);
+
+        $em = $this->getDoctrine()->getManager();
+        $paginator = $this->get('knp_paginator');
+       // $user = $this->getUser();
+        $session = new Session();
+        $formFiltro = $this->formularioFiltro();
+        $formFiltro->handleRequest($request);
+        $this->listar();
+        if ($formFiltro->isSubmitted() && $formFiltro->isValid()) {
+            $this->filtrar($formFiltro);
+            $this->listar();
+        }
+
+        $arLlamadas = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1));
+        return $this->render('AppBundle:Llamada:listarGeneral.html.twig', [
+            'llamadas' => $arLlamadas,
+            //'user' => $user,
+            'formFiltro' => $formFiltro->createView()
+        ]);
     }
 
     private function filtrar($formFiltro)
@@ -237,13 +210,12 @@ class LlamadaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $session = new Session;
-        $arrCliente = array('class' => 'AppBundle:cliente', 'query_builder' => function (EntityRepository $er) {
+        $arrCliente = array('class' => 'AppBundle\Entity\Cliente', 'query_builder' => function (EntityRepository $er) {
             return $er->createQueryBuilder('c')
                 ->orderBy('c.razonSocial', 'ASC');
         },
             'choice_label' => 'nombreComercial',
             'required' => false,
-            'data' => $session->get('clienteRel'),
             'placeholder' => "TODOS");
 
         $formFiltro = $this->createFormBuilder()

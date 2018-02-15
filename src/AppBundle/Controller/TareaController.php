@@ -47,7 +47,7 @@ class TareaController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$codigoTarea) {
-                $id = $user->getNombres() . " " . $user->getApellidos();
+                $id = $user->getCodigoUsuarioPk();
                 $arTarea->setFechaRegistro(new \DateTime('now'));
                 $arTarea->setCodigoUsuarioRegistraFk($id);
             }
