@@ -127,7 +127,7 @@ class TareaController extends Controller
             }
         }
 
-        $arTarea = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1),10);
+        $arTarea = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1),20);
         return $this->render('AppBundle:Tarea:listar.html.twig', [
             'tareas' => $arTarea,
             'sinTerminar' => $sinTerminar,

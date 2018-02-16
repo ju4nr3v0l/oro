@@ -73,6 +73,7 @@ class FormTypeLlamada extends AbstractType{
                         ->orderBy('c.nombreComercial', 'ASC');},
                 'choice_label' => 'nombreComercial',
                 'required' => true))
+
             ->add('moduloRel', EntityType::class, array(
                 'class' => 'AppBundle:Modulo',
                 'query_builder' => function (EntityRepository $er) {
@@ -80,6 +81,7 @@ class FormTypeLlamada extends AbstractType{
                         ->orderBy('c.codigoModuloPk', 'ASC');},
                 'choice_label' => 'codigoModuloPk',
                 'required' => true))
+
 //            Botón Guardar
             ->add ('btnGuardar', SubmitType::class, array(
                 'attr' => array(

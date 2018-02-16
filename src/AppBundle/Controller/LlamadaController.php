@@ -66,7 +66,7 @@ class LlamadaController extends Controller
         $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
         $session = new session;
-//        $session->set('clienteRel',"");
+        $session->set('clienteRel',"");
         /** declara variables auxiliares para organizar el objeto final a devolver*/
         $atendidasPendientes = $em->getRepository('AppBundle:Llamada')->getAtendidasPendientes(); // contador de llamadas atendidas
         $pendientes = $em->getRepository('AppBundle:Llamada')->getPendientes(); // contador de llamadas pendientes
@@ -123,14 +123,13 @@ class LlamadaController extends Controller
             return $this->redirect($this->generateUrl('listadoLlamadas'));
         }
 
-        $arLlamadas = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1), 10);
-        return $this->render('AppBundle:Llamada:listar.html.twig', [
+        $arLlamadas = $paginator->paginate($em->createQuery($this->strDqlLista), $request->query->get('page', 1), 20);
+        return $this->render('AppBundle:Llamada:listar.html.twig', array(
             'llamadas' => $arLlamadas,
             'atendidasPendientes' => $atendidasPendientes,
             'pendientes' => $pendientes,
             'formFiltro' => $formFiltro->createView(),
-            'form' => $form->createView(),
-        ]);
+            'form' => $form->createView()));
     }
 
     /**
