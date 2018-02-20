@@ -75,9 +75,12 @@ class DeprecationErrorHandler
                     }
                 }
             }
-            $path = realpath($path) ?: $path;
+            $realPath = realpath($path);
+            if (false === $realPath && '-' !== $path && 'Standard input code' !== $path) {
+                return true;
+            }
             foreach ($vendors as $vendor) {
-                if (0 === strpos($path, $vendor) && false !== strpbrk(substr($path, strlen($vendor), 1), '/'.DIRECTORY_SEPARATOR)) {
+                if (0 === strpos($realPath, $vendor) && false !== strpbrk(substr($realPath, strlen($vendor), 1), '/'.DIRECTORY_SEPARATOR)) {
                     return true;
                 }
             }
@@ -107,7 +110,7 @@ class DeprecationErrorHandler
 
             $trace = debug_backtrace(true);
             $group = 'other';
-
+            $isVendor = false;
             $isWeak = DeprecationErrorHandler::MODE_WEAK === $mode || (DeprecationErrorHandler::MODE_WEAK_VENDORS === $mode && $isVendor = $inVendors($file));
 
             $i = count($trace);
@@ -121,6 +124,11 @@ class DeprecationErrorHandler
                     $msg = $parsedMsg['deprecation'];
                     $class = $parsedMsg['class'];
                     $method = $parsedMsg['method'];
+                    // If the deprecation has been triggered via
+                    // \Symfony\Bridge\PhpUnit\Legacy\SymfonyTestsListenerTrait::endTest()
+                    // then we need to use the serialized information to determine
+                    // if the error has been triggered from vendor code.
+                    $isWeak = DeprecationErrorHandler::MODE_WEAK === $mode || (DeprecationErrorHandler::MODE_WEAK_VENDORS === $mode && $isVendor = isset($parsedMsg['triggering_file']) && $inVendors($parsedMsg['triggering_file']));
                 } else {
                     $class = isset($trace[$i]['object']) ? get_class($trace[$i]['object']) : $trace[$i]['class'];
                     $method = $trace[$i]['function'];
@@ -223,7 +231,7 @@ class DeprecationErrorHandler
                         uasort($deprecations[$group], $cmp);
 
                         foreach ($deprecations[$group] as $msg => $notices) {
-                            echo "\n", rtrim($msg, '.'), ': ', $notices['count'], "x\n";
+                            echo "\n  ", $notices['count'], 'x: ', $msg, "\n";
 
                             arsort($notices);
 
@@ -261,7 +269,7 @@ class DeprecationErrorHandler
 
                 return $ErrorHandler::handleError($type, $msg, $file, $line, $context);
             }
-            $deprecations[] = array(error_reporting(), $msg);
+            $deprecations[] = array(error_reporting(), $msg, $file);
         });
 
         register_shutdown_function(function () use ($outputFile, &$deprecations) {

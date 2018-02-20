@@ -20,7 +20,6 @@
 namespace Doctrine\DBAL\Platforms;
 
 use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\ColumnDiff;
 use Doctrine\DBAL\Schema\Identifier;
 use Doctrine\DBAL\Schema\Index;
@@ -471,7 +470,7 @@ class DB2Platform extends AbstractPlatform
      */
     public function getIndexDeclarationSQL($name, Index $index)
     {
-        // Inicio declaration in statements like CREATE TABLE is not supported.
+        // Index declaration in statements like CREATE TABLE is not supported.
         throw DBALException::notSupported(__METHOD__);
     }
 
@@ -877,6 +876,6 @@ class DB2Platform extends AbstractPlatform
      */
     protected function getReservedKeywordsClass()
     {
-        return 'Doctrine\DBAL\Platforms\Keywords\DB2Keywords';
+        return Keywords\DB2Keywords::class;
     }
 }

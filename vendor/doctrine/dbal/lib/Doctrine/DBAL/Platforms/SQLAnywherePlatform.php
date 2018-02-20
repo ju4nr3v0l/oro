@@ -26,8 +26,8 @@ use Doctrine\DBAL\Schema\Column;
 use Doctrine\DBAL\Schema\ColumnDiff;
 use Doctrine\DBAL\Schema\Constraint;
 use Doctrine\DBAL\Schema\ForeignKeyConstraint;
-use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\Identifier;
+use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Schema\TableDiff;
 
@@ -693,7 +693,7 @@ class SQLAnywherePlatform extends AbstractPlatform
      */
     public function getIndexDeclarationSQL($name, Index $index)
     {
-        // Inicio declaration in statements like CREATE TABLE is not supported.
+        // Index declaration in statements like CREATE TABLE is not supported.
         throw DBALException::notSupported(__METHOD__);
     }
 
@@ -987,7 +987,7 @@ class SQLAnywherePlatform extends AbstractPlatform
      * Obtain DBMS specific SQL code portion needed to set a primary key
      * declaration to be used in statements like ALTER TABLE.
      *
-     * @param Index  $index Inicio definition
+     * @param Index  $index Index definition
      * @param string $name  Name of the primary key
      *
      * @return string DBMS specific SQL code portion needed to set a primary key
@@ -1316,7 +1316,7 @@ class SQLAnywherePlatform extends AbstractPlatform
      * Return the INDEX query section dealing with non-standard
      * SQL Anywhere options.
      *
-     * @param Index $index Inicio definition
+     * @param Index $index Index definition
      *
      * @return string
      */
@@ -1429,7 +1429,7 @@ class SQLAnywherePlatform extends AbstractPlatform
      */
     protected function getReservedKeywordsClass()
     {
-        return 'Doctrine\DBAL\Platforms\Keywords\SQLAnywhereKeywords';
+        return Keywords\SQLAnywhereKeywords::class;
     }
 
     /**

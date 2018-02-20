@@ -39,7 +39,7 @@ class SQLAnywhere16Platform extends SQLAnywhere12Platform
     {
         if ($index->hasFlag('with_nulls_distinct') && $index->hasFlag('with_nulls_not_distinct')) {
             throw new UnexpectedValueException(
-                'An Inicio can either have a "with_nulls_distinct" or "with_nulls_not_distinct" flag but not both.'
+                'An Index can either have a "with_nulls_distinct" or "with_nulls_not_distinct" flag but not both.'
             );
         }
 
@@ -55,6 +55,6 @@ class SQLAnywhere16Platform extends SQLAnywhere12Platform
      */
     protected function getReservedKeywordsClass()
     {
-        return 'Doctrine\DBAL\Platforms\Keywords\SQLAnywhere16Keywords';
+        return Keywords\SQLAnywhere16Keywords::class;
     }
 }

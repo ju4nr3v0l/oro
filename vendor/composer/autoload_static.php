@@ -10,11 +10,12 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
-        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
-        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
+        '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
+        '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '529777c916088c8501da9ecfcfc26403' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
 
@@ -49,34 +50,64 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
             'Psr\\Link\\' => 9,
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+        ),
+        'N' => 
+        array (
+            'Nelmio\\CorsBundle\\' => 18,
+            'Negotiation\\' => 12,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
         ),
+        'K' => 
+        array (
+            'Knp\\Bundle\\PaginatorBundle\\' => 27,
+        ),
+        'J' => 
+        array (
+            'JMS\\SerializerBundle\\' => 21,
+        ),
         'I' => 
         array (
             'Incenteev\\ParameterHandler\\' => 27,
         ),
+        'H' => 
+        array (
+            'HWI\\Bundle\\OAuthBundle\\' => 23,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+        ),
         'F' => 
         array (
             'Fig\\Link\\' => 9,
+            'FOS\\RestBundle\\' => 15,
         ),
         'D' => 
         array (
+            'Doctrine\\ORM\\' => 13,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
+            'Doctrine\\Common\\DataFixtures\\' => 29,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
+            'Doctrine\\Bundle\\FixturesBundle\\' => 31,
             'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
         ),
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
+        ),
+        'B' => 
+        array (
+            'Buzz\\' => 5,
         ),
         'A' => 
         array (
@@ -173,6 +204,10 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
         array (
             0 => __DIR__ . '/..' . '/psr/link/src',
         ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
@@ -181,17 +216,49 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
+        'Nelmio\\CorsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nelmio/cors-bundle',
+        ),
+        'Negotiation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Knp\\Bundle\\PaginatorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle',
+        ),
+        'JMS\\SerializerBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/serializer-bundle',
         ),
         'Incenteev\\ParameterHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/incenteev/composer-parameter-handler',
         ),
+        'HWI\\Bundle\\OAuthBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hwi/oauth-bundle',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
         'Fig\\Link\\' => 
         array (
             0 => __DIR__ . '/..' . '/fig/link-util/src',
+        ),
+        'FOS\\RestBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofsymfony/rest-bundle',
+        ),
+        'Doctrine\\ORM\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/orm/lib/Doctrine/ORM',
         ),
         'Doctrine\\Instantiator\\' => 
         array (
@@ -200,6 +267,10 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
+        'Doctrine\\Common\\DataFixtures\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/data-fixtures/lib/Doctrine/Common/DataFixtures',
         ),
         'Doctrine\\Common\\Cache\\' => 
         array (
@@ -213,6 +284,10 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
         ),
+        'Doctrine\\Bundle\\FixturesBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/doctrine-fixtures-bundle',
+        ),
         'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-cache-bundle',
@@ -224,6 +299,10 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
         'Composer\\CaBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
+        'Buzz\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib/Buzz',
         ),
         'AppBundle\\' => 
         array (
@@ -246,12 +325,48 @@ class ComposerStaticInite878d48509208061e75a26bac19505e9
                 0 => __DIR__ . '/..' . '/sensiolabs/security-checker',
             ),
         ),
+        'P' => 
+        array (
+            'PhpOption\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
+            ),
+            'PhpCollection' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpcollection/phpcollection/src',
+            ),
+        ),
+        'M' => 
+        array (
+            'Metadata\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/metadata/src',
+            ),
+        ),
+        'K' => 
+        array (
+            'Knp\\Component' => 
+            array (
+                0 => __DIR__ . '/..' . '/knplabs/knp-components/src',
+            ),
+        ),
+        'J' => 
+        array (
+            'JsonpCallbackValidator' => 
+            array (
+                0 => __DIR__ . '/..' . '/willdurand/jsonp-callback-validator/src',
+            ),
+            'JMS\\Serializer' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/serializer/src',
+            ),
+            'JMS\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jms/parser-lib/src',
+            ),
+        ),
         'D' => 
         array (
-            'Doctrine\\ORM\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/orm/lib',
-            ),
             'Doctrine\\DBAL\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/dbal/lib',
