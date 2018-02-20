@@ -85,6 +85,9 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # plantilla links ordenación
         filtration: KnpPaginator/Pagination/filtration.html.twig  # filters template
 
+
+#serializer:
+#    enabled: true
 # Nelmio CORS Configuration
 nelmio_cors:
     defaults:
@@ -101,7 +104,8 @@ fos_rest:
     body_listener: true
     format_listener:
         rules:
-            - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: false }
+            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: true }
+            - { path: ^/, priorities: [ html ], fallback_format: html, prefer_extension: true }
     param_fetcher_listener: true
     view:
         view_response_listener: 'force'
