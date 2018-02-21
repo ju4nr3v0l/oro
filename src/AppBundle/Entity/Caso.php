@@ -51,6 +51,13 @@ class Caso
     /**
      * @var string
      *
+     * @ORM\Column(name="usuario", type="string", length=100, nullable=true)
+     */
+    private $usuario;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="telefono", type="string", length=20)
      */
     private $telefono;
@@ -68,6 +75,20 @@ class Caso
      * @ORM\Column(name="descripcion", type="string", length=5000)
      */
     private $descripcion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="soporte", type="string", length=5000, nullable=true)
+     */
+    private $soporte;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="solucionado", type="string", length=5000, nullable=true)
+     */
+    private $solucionado;
 
     /**
      * @var \DateTime
@@ -96,6 +117,20 @@ class Caso
      * @ORM\Column(name="codigo_categoria_caso_fk", type="string", length=50 )
      */
     private $codigoCategoriaCasoFk;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo_cargo_fk", type="string", length=50 )
+     */
+    private $codigoCargoFk;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codigo_area_fk", type="string", length=50 )
+     */
+    private $codigoAreaFk;
 
     /**
      * @var string
@@ -152,15 +187,28 @@ class Caso
     private $categoriaRel;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Cargo", inversedBy="casosCargoRel")
+     * @ORM\JoinColumn(name="codigo_cargo_fk", referencedColumnName="codigo_cargo_pk")
+     */
+    private $cargoRel;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Area", inversedBy="casosAreaRel")
+     * @ORM\JoinColumn(name="codigo_area_fk", referencedColumnName="codigo_area_pk")
+     */
+    private $areaRel;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Prioridad", inversedBy="casosPrioridadRel")
      * @ORM\JoinColumn(name="codigo_prioridad_fk", referencedColumnName="codigo_prioridad_pk")
      */
     private $prioridadRel;
 
+
     /**
-     * Get codigoCasoPk
+     * Get codigoCasoPk.
      *
-     * @return integer
+     * @return int
      */
     public function getCodigoCasoPk()
     {
@@ -168,7 +216,7 @@ class Caso
     }
 
     /**
-     * Set asunto
+     * Set asunto.
      *
      * @param string $asunto
      *
@@ -182,7 +230,7 @@ class Caso
     }
 
     /**
-     * Get asunto
+     * Get asunto.
      *
      * @return string
      */
@@ -192,7 +240,7 @@ class Caso
     }
 
     /**
-     * Set correo
+     * Set correo.
      *
      * @param string $correo
      *
@@ -206,7 +254,7 @@ class Caso
     }
 
     /**
-     * Get correo
+     * Get correo.
      *
      * @return string
      */
@@ -216,7 +264,7 @@ class Caso
     }
 
     /**
-     * Set contacto
+     * Set contacto.
      *
      * @param string $contacto
      *
@@ -230,7 +278,7 @@ class Caso
     }
 
     /**
-     * Get contacto
+     * Get contacto.
      *
      * @return string
      */
@@ -240,7 +288,31 @@ class Caso
     }
 
     /**
-     * Set telefono
+     * Set usuario.
+     *
+     * @param string|null $usuario
+     *
+     * @return Caso
+     */
+    public function setUsuario($usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario.
+     *
+     * @return string|null
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set telefono.
      *
      * @param string $telefono
      *
@@ -254,7 +326,7 @@ class Caso
     }
 
     /**
-     * Get telefono
+     * Get telefono.
      *
      * @return string
      */
@@ -264,7 +336,7 @@ class Caso
     }
 
     /**
-     * Set extension
+     * Set extension.
      *
      * @param string $extension
      *
@@ -278,7 +350,7 @@ class Caso
     }
 
     /**
-     * Get extension
+     * Get extension.
      *
      * @return string
      */
@@ -288,7 +360,7 @@ class Caso
     }
 
     /**
-     * Set descripcion
+     * Set descripcion.
      *
      * @param string $descripcion
      *
@@ -302,7 +374,7 @@ class Caso
     }
 
     /**
-     * Get descripcion
+     * Get descripcion.
      *
      * @return string
      */
@@ -312,13 +384,61 @@ class Caso
     }
 
     /**
-     * Set fechaRegistro
+     * Set soporte.
      *
-     * @param \DateTime $fechaRegistro
+     * @param string|null $soporte
      *
      * @return Caso
      */
-    public function setFechaRegistro($fechaRegistro)
+    public function setSoporte($soporte = null)
+    {
+        $this->soporte = $soporte;
+
+        return $this;
+    }
+
+    /**
+     * Get soporte.
+     *
+     * @return string|null
+     */
+    public function getSoporte()
+    {
+        return $this->soporte;
+    }
+
+    /**
+     * Set solucionado.
+     *
+     * @param string|null $solucionado
+     *
+     * @return Caso
+     */
+    public function setSolucionado($solucionado = null)
+    {
+        $this->solucionado = $solucionado;
+
+        return $this;
+    }
+
+    /**
+     * Get solucionado.
+     *
+     * @return string|null
+     */
+    public function getSolucionado()
+    {
+        return $this->solucionado;
+    }
+
+    /**
+     * Set fechaRegistro.
+     *
+     * @param \DateTime|null $fechaRegistro
+     *
+     * @return Caso
+     */
+    public function setFechaRegistro($fechaRegistro = null)
     {
         $this->fechaRegistro = $fechaRegistro;
 
@@ -326,9 +446,9 @@ class Caso
     }
 
     /**
-     * Get fechaRegistro
+     * Get fechaRegistro.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getFechaRegistro()
     {
@@ -336,13 +456,13 @@ class Caso
     }
 
     /**
-     * Set fechaGestion
+     * Set fechaGestion.
      *
-     * @param \DateTime $fechaGestion
+     * @param \DateTime|null $fechaGestion
      *
      * @return Caso
      */
-    public function setFechaGestion($fechaGestion)
+    public function setFechaGestion($fechaGestion = null)
     {
         $this->fechaGestion = $fechaGestion;
 
@@ -350,9 +470,9 @@ class Caso
     }
 
     /**
-     * Get fechaGestion
+     * Get fechaGestion.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getFechaGestion()
     {
@@ -360,13 +480,13 @@ class Caso
     }
 
     /**
-     * Set fechaSolucion
+     * Set fechaSolucion.
      *
-     * @param \DateTime $fechaSolucion
+     * @param \DateTime|null $fechaSolucion
      *
      * @return Caso
      */
-    public function setFechaSolucion($fechaSolucion)
+    public function setFechaSolucion($fechaSolucion = null)
     {
         $this->fechaSolucion = $fechaSolucion;
 
@@ -374,9 +494,9 @@ class Caso
     }
 
     /**
-     * Get fechaSolucion
+     * Get fechaSolucion.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getFechaSolucion()
     {
@@ -384,7 +504,7 @@ class Caso
     }
 
     /**
-     * Set codigoCategoriaCasoFk
+     * Set codigoCategoriaCasoFk.
      *
      * @param string $codigoCategoriaCasoFk
      *
@@ -398,7 +518,7 @@ class Caso
     }
 
     /**
-     * Get codigoCategoriaCasoFk
+     * Get codigoCategoriaCasoFk.
      *
      * @return string
      */
@@ -408,13 +528,61 @@ class Caso
     }
 
     /**
-     * Set codigoPrioridadFk
+     * Set codigoCargoFk.
      *
-     * @param string $codigoPrioridadFk
+     * @param string $codigoCargoFk
      *
      * @return Caso
      */
-    public function setCodigoPrioridadFk($codigoPrioridadFk)
+    public function setCodigoCargoFk($codigoCargoFk)
+    {
+        $this->codigoCargoFk = $codigoCargoFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoCargoFk.
+     *
+     * @return string
+     */
+    public function getCodigoCargoFk()
+    {
+        return $this->codigoCargoFk;
+    }
+
+    /**
+     * Set codigoAreaFk.
+     *
+     * @param string $codigoAreaFk
+     *
+     * @return Caso
+     */
+    public function setCodigoAreaFk($codigoAreaFk)
+    {
+        $this->codigoAreaFk = $codigoAreaFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoAreaFk.
+     *
+     * @return string
+     */
+    public function getCodigoAreaFk()
+    {
+        return $this->codigoAreaFk;
+    }
+
+    /**
+     * Set codigoPrioridadFk.
+     *
+     * @param string|null $codigoPrioridadFk
+     *
+     * @return Caso
+     */
+    public function setCodigoPrioridadFk($codigoPrioridadFk = null)
     {
         $this->codigoPrioridadFk = $codigoPrioridadFk;
 
@@ -422,9 +590,9 @@ class Caso
     }
 
     /**
-     * Get codigoPrioridadFk
+     * Get codigoPrioridadFk.
      *
-     * @return string
+     * @return string|null
      */
     public function getCodigoPrioridadFk()
     {
@@ -432,13 +600,13 @@ class Caso
     }
 
     /**
-     * Set codigoUsuarioAtiendeFk
+     * Set codigoUsuarioAtiendeFk.
      *
-     * @param string $codigoUsuarioAtiendeFk
+     * @param string|null $codigoUsuarioAtiendeFk
      *
      * @return Caso
      */
-    public function setCodigoUsuarioAtiendeFk($codigoUsuarioAtiendeFk)
+    public function setCodigoUsuarioAtiendeFk($codigoUsuarioAtiendeFk = null)
     {
         $this->codigoUsuarioAtiendeFk = $codigoUsuarioAtiendeFk;
 
@@ -446,9 +614,9 @@ class Caso
     }
 
     /**
-     * Get codigoUsuarioAtiendeFk
+     * Get codigoUsuarioAtiendeFk.
      *
-     * @return string
+     * @return string|null
      */
     public function getCodigoUsuarioAtiendeFk()
     {
@@ -456,13 +624,13 @@ class Caso
     }
 
     /**
-     * Set codigoUsuarioSolucionaFk
+     * Set codigoUsuarioSolucionaFk.
      *
-     * @param string $codigoUsuarioSolucionaFk
+     * @param string|null $codigoUsuarioSolucionaFk
      *
      * @return Caso
      */
-    public function setCodigoUsuarioSolucionaFk($codigoUsuarioSolucionaFk)
+    public function setCodigoUsuarioSolucionaFk($codigoUsuarioSolucionaFk = null)
     {
         $this->codigoUsuarioSolucionaFk = $codigoUsuarioSolucionaFk;
 
@@ -470,9 +638,9 @@ class Caso
     }
 
     /**
-     * Get codigoUsuarioSolucionaFk
+     * Get codigoUsuarioSolucionaFk.
      *
-     * @return string
+     * @return string|null
      */
     public function getCodigoUsuarioSolucionaFk()
     {
@@ -480,13 +648,13 @@ class Caso
     }
 
     /**
-     * Set estadoAtendido
+     * Set estadoAtendido.
      *
-     * @param boolean $estadoAtendido
+     * @param bool|null $estadoAtendido
      *
      * @return Caso
      */
-    public function setEstadoAtendido($estadoAtendido)
+    public function setEstadoAtendido($estadoAtendido = null)
     {
         $this->estadoAtendido = $estadoAtendido;
 
@@ -494,9 +662,9 @@ class Caso
     }
 
     /**
-     * Get estadoAtendido
+     * Get estadoAtendido.
      *
-     * @return boolean
+     * @return bool|null
      */
     public function getEstadoAtendido()
     {
@@ -504,13 +672,13 @@ class Caso
     }
 
     /**
-     * Set estadoSolucionado
+     * Set estadoSolucionado.
      *
-     * @param boolean $estadoSolucionado
+     * @param bool|null $estadoSolucionado
      *
      * @return Caso
      */
-    public function setEstadoSolucionado($estadoSolucionado)
+    public function setEstadoSolucionado($estadoSolucionado = null)
     {
         $this->estadoSolucionado = $estadoSolucionado;
 
@@ -518,9 +686,9 @@ class Caso
     }
 
     /**
-     * Get estadoSolucionado
+     * Get estadoSolucionado.
      *
-     * @return boolean
+     * @return bool|null
      */
     public function getEstadoSolucionado()
     {
@@ -528,13 +696,13 @@ class Caso
     }
 
     /**
-     * Set codigoClienteFk
+     * Set codigoClienteFk.
      *
-     * @param integer $codigoClienteFk
+     * @param int|null $codigoClienteFk
      *
      * @return Caso
      */
-    public function setCodigoClienteFk($codigoClienteFk)
+    public function setCodigoClienteFk($codigoClienteFk = null)
     {
         $this->codigoClienteFk = $codigoClienteFk;
 
@@ -542,9 +710,9 @@ class Caso
     }
 
     /**
-     * Get codigoClienteFk
+     * Get codigoClienteFk.
      *
-     * @return integer
+     * @return int|null
      */
     public function getCodigoClienteFk()
     {
@@ -552,9 +720,9 @@ class Caso
     }
 
     /**
-     * Set clienteRel
+     * Set clienteRel.
      *
-     * @param \AppBundle\Entity\Cliente $clienteRel
+     * @param \AppBundle\Entity\Cliente|null $clienteRel
      *
      * @return Caso
      */
@@ -566,9 +734,9 @@ class Caso
     }
 
     /**
-     * Get clienteRel
+     * Get clienteRel.
      *
-     * @return \AppBundle\Entity\Cliente
+     * @return \AppBundle\Entity\Cliente|null
      */
     public function getClienteRel()
     {
@@ -576,9 +744,9 @@ class Caso
     }
 
     /**
-     * Set categoriaRel
+     * Set categoriaRel.
      *
-     * @param \AppBundle\Entity\CasoCategoria $categoriaRel
+     * @param \AppBundle\Entity\CasoCategoria|null $categoriaRel
      *
      * @return Caso
      */
@@ -590,9 +758,9 @@ class Caso
     }
 
     /**
-     * Get categoriaRel
+     * Get categoriaRel.
      *
-     * @return \AppBundle\Entity\CasoCategoria
+     * @return \AppBundle\Entity\CasoCategoria|null
      */
     public function getCategoriaRel()
     {
@@ -600,9 +768,57 @@ class Caso
     }
 
     /**
-     * Set prioridadRel
+     * Set cargoRel.
      *
-     * @param \AppBundle\Entity\Prioridad $prioridadRel
+     * @param \AppBundle\Entity\Cargo|null $cargoRel
+     *
+     * @return Caso
+     */
+    public function setCargoRel(\AppBundle\Entity\Cargo $cargoRel = null)
+    {
+        $this->cargoRel = $cargoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get cargoRel.
+     *
+     * @return \AppBundle\Entity\Cargo|null
+     */
+    public function getCargoRel()
+    {
+        return $this->cargoRel;
+    }
+
+    /**
+     * Set areaRel.
+     *
+     * @param \AppBundle\Entity\Area|null $areaRel
+     *
+     * @return Caso
+     */
+    public function setAreaRel(\AppBundle\Entity\Area $areaRel = null)
+    {
+        $this->areaRel = $areaRel;
+
+        return $this;
+    }
+
+    /**
+     * Get areaRel.
+     *
+     * @return \AppBundle\Entity\Area|null
+     */
+    public function getAreaRel()
+    {
+        return $this->areaRel;
+    }
+
+    /**
+     * Set prioridadRel.
+     *
+     * @param \AppBundle\Entity\Prioridad|null $prioridadRel
      *
      * @return Caso
      */
@@ -614,9 +830,9 @@ class Caso
     }
 
     /**
-     * Get prioridadRel
+     * Get prioridadRel.
      *
-     * @return \AppBundle\Entity\Prioridad
+     * @return \AppBundle\Entity\Prioridad|null
      */
     public function getPrioridadRel()
     {
