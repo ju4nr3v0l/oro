@@ -15,14 +15,14 @@ class Cargo
     /**
      * @var string
      * @ORM\Id
-     * @ORM\Column(name="codigo_cargo_pk", type="string",length=50)
+     * @ORM\Column(name="codigo_cargo_pk", type="string",length=50, nullable=true)
      */
     private $codigoCargoPk;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=true)
      */
     private $nombre;
 

@@ -15,14 +15,14 @@ class Area
     /**
      * @var string
      * @ORM\Id
-     * @ORM\Column(name="codigo_area_pk", type="string",length=50)
+     * @ORM\Column(name="codigo_area_pk", type="string",length=50, nullable=true)
      */
     private $codigoAreaPk;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="string", length=255)
+     * @ORM\Column(name="nombre", type="string", length=255, nullable=true)
      */
     private $nombre;
 

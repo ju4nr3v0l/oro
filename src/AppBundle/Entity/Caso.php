@@ -121,14 +121,14 @@ class Caso
     /**
      * @var string
      *
-     * @ORM\Column(name="codigo_cargo_fk", type="string", length=50 )
+     * @ORM\Column(name="codigo_cargo_fk", type="string", length=50, nullable=true)
      */
     private $codigoCargoFk;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="codigo_area_fk", type="string", length=50 )
+     * @ORM\Column(name="codigo_area_fk", type="string", length=50, nullable=true)
      */
     private $codigoAreaFk;
 
