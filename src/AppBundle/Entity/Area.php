@@ -14,7 +14,7 @@ class Area
 {
     /**
      * @var string
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigo_area_pk", type="string",length=50)
      */
     private $codigoAreaPk;

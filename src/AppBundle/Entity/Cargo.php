@@ -14,7 +14,7 @@ class Cargo
 {
     /**
      * @var string
-     *
+     * @ORM\Id
      * @ORM\Column(name="codigo_cargo_pk", type="string",length=50)
      */
     private $codigoCargoPk;
