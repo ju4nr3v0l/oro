@@ -44,24 +44,7 @@ class CasoApiController extends FOSRestController {
 	}
 
 	/**
-	 * @Rest\Get("/api/filtro/cliente/casos/{codigoCliente}", requirements={"codigoCliente" = "\d+"}, defaults={"codigoCliente" = 0} )
-	 */
-	public function filtroCliente( Request $request, $codigoCliente ) {
-
-		if($codigoCliente == 0){ // acá logica para traer todos los casos de un cliente
-			$restresult = null;
-		} else {
-			$restresult = null;
-		}
-
-		if ($restresult === null) {
-			return new View("No hay casos", Response::HTTP_NOT_FOUND);
-		}
-		return $restresult;
-	}
-
-	/**
-	 * @Rest\Get("/api/filtro/cliente/casos/{idCliente}/{estado}", requirements={"idCliente" = "\d+"}, defaults={"idCliente" = 0, "estado" = 0} )
+	 * @Rest\Get("/api/filtro/cliente/casos/{codigoCliente}/{estado}", requirements={"codigoCliente" = "\d+"}, defaults={"codigoCliente" = 0, "estado" = 0} )
 	 */
 	public function filtroClienteEstados( Request $request, $codigoCliente, $estado ) {
 
@@ -76,22 +59,4 @@ class CasoApiController extends FOSRestController {
 		}
 		return $restresult;
 	}
-
-	/**
-	 * @Rest\Get("/api/filtro/cliente/casos/{estado}", defaults={"estadp" = 0} )
-	 */
-	public function filtroEstados( Request $request, $idCliente, $estado ) {
-
-		if($estado == 0){ // acá logica para traer todos los casos de un cliente
-			$restresult = null;
-		} else {
-			$restresult = null;
-		}
-
-		if ($restresult === null) {
-			return new View("No hay casos", Response::HTTP_NOT_FOUND);
-		}
-		return $restresult;
-	}
-
 }
