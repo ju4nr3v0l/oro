@@ -86,9 +86,9 @@ class Caso
     /**
      * @var string
      *
-     * @ORM\Column(name="solucionado", type="string", length=5000, nullable=true)
+     * @ORM\Column(name="solucion", type="string", length=5000, nullable=true)
      */
-    private $solucionado;
+    private $solucion;
 
     /**
      * @var \DateTime
@@ -408,27 +408,27 @@ class Caso
     }
 
     /**
-     * Set solucionado.
+     * Set solucion.
      *
-     * @param string|null $solucionado
+     * @param string|null $solucion
      *
      * @return Caso
      */
-    public function setSolucionado($solucionado = null)
+    public function setSolucion($solucion = null)
     {
-        $this->solucionado = $solucionado;
+        $this->solucion = $solucion;
 
         return $this;
     }
 
     /**
-     * Get solucionado.
+     * Get solucion.
      *
      * @return string|null
      */
-    public function getSolucionado()
+    public function getSolucion()
     {
-        return $this->solucionado;
+        return $this->solucion;
     }
 
     /**
@@ -530,11 +530,11 @@ class Caso
     /**
      * Set codigoCargoFk.
      *
-     * @param string $codigoCargoFk
+     * @param string|null $codigoCargoFk
      *
      * @return Caso
      */
-    public function setCodigoCargoFk($codigoCargoFk)
+    public function setCodigoCargoFk($codigoCargoFk = null)
     {
         $this->codigoCargoFk = $codigoCargoFk;
 
@@ -544,7 +544,7 @@ class Caso
     /**
      * Get codigoCargoFk.
      *
-     * @return string
+     * @return string|null
      */
     public function getCodigoCargoFk()
     {
@@ -554,11 +554,11 @@ class Caso
     /**
      * Set codigoAreaFk.
      *
-     * @param string $codigoAreaFk
+     * @param string|null $codigoAreaFk
      *
      * @return Caso
      */
-    public function setCodigoAreaFk($codigoAreaFk)
+    public function setCodigoAreaFk($codigoAreaFk = null)
     {
         $this->codigoAreaFk = $codigoAreaFk;
 
@@ -568,7 +568,7 @@ class Caso
     /**
      * Get codigoAreaFk.
      *
-     * @return string
+     * @return string|null
      */
     public function getCodigoAreaFk()
     {
