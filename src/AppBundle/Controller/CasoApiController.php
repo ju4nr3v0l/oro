@@ -27,7 +27,7 @@ class CasoApiController extends FOSRestController {
 	}
 
 	/**
-	 * @Rest\Get("/api/nuevo/casos/{codigoCaso}", requirements={"codigoCaso" = "\d+"}, defaults={"codigoCaso" = 0} )
+	 * @Rest\Post("/api/nuevo/casos/{codigoCaso}", requirements={"codigoCaso" = "\d+"}, defaults={"codigoCaso" = 0} )
 	 */
 	public function nuevo( Request $request, $codigoCaso ) {
 
