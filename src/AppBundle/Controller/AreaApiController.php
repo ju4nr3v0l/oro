@@ -14,6 +14,8 @@ class AreaApiController extends FOSRestController {
 	 */
 	public function lista( Request $request) {
 
+		set_time_limit(0);
+		ini_set("memory_limit", -1);
 
 		$restresult = $this->getDoctrine()->getRepository('AppBundle:Area')->findAll();
 
