@@ -2,7 +2,6 @@
 
 namespace AppBundle\Repository;
 
-use Doctrine\ORM\Query\AST\Functions;
 /**
  * LlamadaRepository
  *
