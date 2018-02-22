@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Caso;
 
 class CasoApiController extends FOSRestController {
 
@@ -29,22 +31,58 @@ class CasoApiController extends FOSRestController {
 	}
 
 	/**
-	 * @Rest\Post("/api/nuevo/casos/{caso}",  defaults={"caso" = null} )
+	 * @Rest\Post("/api/nuevo/casos")
 	 */
 	// crear nuevo caso de un cliente
-	public function nuevo( Request $request, $caso ) {
+	public function nuevo( Request $request) {
+		$em = $this->getDoctrine()->getManager(); // instancia el entity manager
+		$data = json_decode($request->getContent(),true);
+		if($data != null){
+			//captura datos del post
+			$asunto = $data['asunto'];
+			$correo = $data['correo'];
+			$contacto = $data['contacto'];
+			$telefono = $data['telefono'];
+			$extension = $data['extension'];
+			$descripcion = $data['descripcion'];
+			$codigoCategoriaCasoFk = $data['codigo_categoria_caso_fk'];
+			$codigoPrioridadFk = $data['codigo_prioridad_fk'];
+			$codigoClienteFk = $data['codigo_cliente_fk'];
+			$codigoAreaFk =  $data['codigo_area_fk'];
+			$codigoCargoFk = $data['codigo_cargo_fk'];
 
-		if($caso == null){ // acá logica para capturar y crear nuevo caso
-			return new View("No hay ningun caso en la petición", Response::HTTP_NOT_FOUND);
-		} else { // logica para crear un caso
+			//consulta las entidades a relacionar
+			$arCliente = $this->getDoctrine()->getRepository('AppBundle:Cliente')->find($codigoClienteFk);
+			$arCategoria = $this->getDoctrine()->getRepository('AppBundle:CasoCategoria')->find($codigoCategoriaCasoFk);
+			$arPrioridad = $this->getDoctrine()->getRepository('AppBundle:Prioridad')->find($codigoPrioridadFk);
+			$arArea = $this->getDoctrine()->getRepository('AppBundle:Area')->find($codigoAreaFk);
+			$arCargo= $this->getDoctrine()->getRepository('AppBundle:Cargo')->find($codigoCargoFk);
 
-			$restresult = null;
+			//crea objeto tipo caso y setea las propiedades del post
+			$arCaso = new Caso();
+			$arCaso->setDescripcion($descripcion);
+			$arCaso->setAsunto($asunto);
+			$arCaso->setCorreo($correo);
+			$arCaso->setContacto($contacto);
+			$arCaso->setTelefono($telefono);
+			$arCaso->setExtension($extension);
+			$arCaso->setFechaRegistro(new \DateTime('now'));
+			$arCaso->setCodigoCategoriaCasoFk($codigoCategoriaCasoFk);
+			$arCaso->setCodigoPrioridadFk($codigoPrioridadFk);
+			$arCaso->setEstadoAtendido(false);
+			$arCaso->setEstadoSolucionado(false);
+			$arCaso->setClienteRel($arCliente);
+			$arCaso->setCategoriaRel($arCategoria);
+			$arCaso->setPrioridadRel($arPrioridad);
+			$arCaso->setAreaRel($arArea);
+			$arCaso->setCargoRel($arCargo);
+
+			$em->persist($arCaso);
+			$em->flush();
+
+			return true;
 		}
 
-		if ($restresult === null) {
-			return new View("No hay casos", Response::HTTP_NOT_FOUND);
-		}
-		return $restresult;
 	}
 
 	/**
