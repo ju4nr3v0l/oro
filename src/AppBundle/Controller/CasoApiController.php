@@ -12,6 +12,8 @@ class CasoApiController extends FOSRestController {
 	/**
 	 * @Rest\Get("/api/lista/casos/{codigoCliente}/{codigoCaso}", requirements={"codigoCaso" = "\d+","codigoCliente" = "\d+"}, defaults={"codigoCaso" = 0,"codigoCliente" = 0} )
 	 */
+
+	// listar los casos de un cliente al logueo
 	public function lista( Request $request, $codigoCaso, $codigoCliente ) {
 
 		if($codigoCaso == 0){
@@ -27,12 +29,32 @@ class CasoApiController extends FOSRestController {
 	}
 
 	/**
-	 * @Rest\Post("/api/nuevo/casos/{codigoCaso}", requirements={"codigoCaso" = "\d+"}, defaults={"codigoCaso" = 0} )
+	 * @Rest\Post("/api/nuevo/casos/{caso}",  defaults={"caso" = null} )
 	 */
-	public function nuevo( Request $request, $codigoCaso ) {
+	// crear nuevo caso de un cliente
+	public function nuevo( Request $request, $caso ) {
 
-		if($codigoCaso == 0){ // acá logica para capturar y crear nuevo caso
-				$restresult = null;
+		if($caso == null){ // acá logica para capturar y crear nuevo caso
+			return new View("No hay ningun caso en la petición", Response::HTTP_NOT_FOUND);
+		} else { // logica para crear un caso
+
+			$restresult = null;
+		}
+
+		if ($restresult === null) {
+			return new View("No hay casos", Response::HTTP_NOT_FOUND);
+		}
+		return $restresult;
+	}
+
+	/**
+	 * @Rest\Post("/api/editar/casos/{caso}",  defaults={"caso" = null} )
+	 */
+	// editar el caso
+	public function editar( Request $request, $caso ) {
+
+		if($caso == null){ // acá logica para capturar y editar nuevo caso
+			return new View("No hay ningun caso en la petición", Response::HTTP_NOT_FOUND);
 		} else { // logica para editar un caso
 			$restresult = null;
 		}
