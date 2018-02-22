@@ -17,7 +17,7 @@ class CasoApiController extends FOSRestController {
 
 	// listar los casos de un cliente al logueo
 	public function lista( Request $request, $codigoCaso, $codigoCliente ) {
-
+		ob_clean();
 		set_time_limit(0);
         ini_set("memory_limit", -1);
 

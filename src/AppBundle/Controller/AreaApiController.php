@@ -13,7 +13,7 @@ class AreaApiController extends FOSRestController {
 	 * @Rest\Get("/api/lista/area")
 	 */
 	public function lista( Request $request) {
-
+		ob_clean();
 		set_time_limit(0);
 		ini_set("memory_limit", -1);
 
