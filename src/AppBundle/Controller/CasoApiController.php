@@ -18,6 +18,9 @@ class CasoApiController extends FOSRestController {
 	// listar los casos de un cliente al logueo
 	public function lista( Request $request, $codigoCaso, $codigoCliente ) {
 
+		set_time_limit(0);
+        ini_set("memory_limit", -1);
+
 		if($codigoCaso == 0){
 			$restresult = $this->getDoctrine()->getRepository('AppBundle:Caso')->findBy(array('codigoClienteFk' => $codigoCliente));
 		} else {
