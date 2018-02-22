@@ -37,14 +37,14 @@ class Caso
     /**
      * @var string
      *
-     * @ORM\Column(name="correo", type="string", length=50)
+     * @ORM\Column(name="correo", type="string", length=200)
      */
     private $correo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contacto", type="string", length=100)
+     * @ORM\Column(name="contacto", type="string", length=200)
      */
     private $contacto;
 
@@ -58,14 +58,14 @@ class Caso
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", length=20)
+     * @ORM\Column(name="telefono", type="string", length=100)
      */
     private $telefono;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="extension", type="string", length=5)
+     * @ORM\Column(name="extension", type="string", length=50)
      */
     private $extension;
 
